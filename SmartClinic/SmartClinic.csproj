@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="doctor.ico" />
+    <None Remove="patient.png" />
+    <None Remove="rx.png" />
+    <None Remove="search.png" />
+    <None Remove="settings.png" />
+    <None Remove="stat.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="doctor.ico" />
+    <Content Include="patient.png" />
+    <Content Include="rx.png" />
+    <Content Include="search.png" />
+    <Content Include="settings.png" />
+    <Content Include="stat.png" />
+  </ItemGroup>
+
+</Project>
