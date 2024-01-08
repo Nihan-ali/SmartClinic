@@ -1,4 +1,13 @@
 ﻿
 
 FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\MainWindow.xaml;;
+FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\View\UserControls\Footer.xaml;;
+FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\View\UserControls\header.xaml;;
+FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\View\UserControls\MenuBar.xaml;;
+FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\View\UserControls\title.xaml;;
+FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\View\UserControls\searchMenu.xaml;;
+FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\View\UserControls\patientInfo.xaml;;
+FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\View\UserControls\savePrint.xaml;;
+FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\View\UserControls\treatment.xaml;;
+FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\View\UserControls\medicine.xaml;;
 
