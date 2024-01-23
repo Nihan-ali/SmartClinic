@@ -39,3 +39,8 @@ E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\User
 E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\treatment.baml
 E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\medicine.g.cs
 E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\medicine.baml
+E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\App.baml
+E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\History.g.cs
+E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\History.baml
+E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\TreatmentPlanPopup.g.cs
+E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\TreatmentPlanPopup.baml

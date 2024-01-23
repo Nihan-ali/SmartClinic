@@ -24,5 +24,27 @@ namespace SmartClinic.View.UserControls
         {
             InitializeComponent();
         }
+
+        
+
+        private void Rx_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Advices_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void FollowUp_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SpecialNotes_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

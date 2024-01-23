@@ -13,6 +13,9 @@
     <Compile Update="View\UserControls\header.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\UserControls\History.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\UserControls\medicine.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -34,6 +37,9 @@
     <Compile Update="View\UserControls\treatment.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\UserControls\TreatmentPlanPopup.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
@@ -43,6 +49,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\header.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserControls\History.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\medicine.xaml">
@@ -64,6 +73,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\treatment.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserControls\TreatmentPlanPopup.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

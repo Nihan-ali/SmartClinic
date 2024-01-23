@@ -16,19 +16,19 @@
 
         <!-- Name Label and Add Patient Button -->
         <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="10">
-            <Label Content="Name:" VerticalAlignment="Center"/>
+            <Label Content="Name :" VerticalAlignment="Center" FontWeight="Bold"/>
             <Button Content="+ Add Patient" Foreground="Blue" FontWeight="Bold" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center"/>
         </StackPanel>
 
         <!-- Today's Date -->
         <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-            <Label Content="Date: " VerticalAlignment="Center"/>
+            <Label Content="Date : " VerticalAlignment="Center" FontWeight="Bold"/>
             <TextBlock Grid.Column="1" Text="{Binding TodayDate}" VerticalAlignment="Center"/>
         </StackPanel>
 
         <!-- Patient's Age -->
         <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
-            <Label Content="Age: " VerticalAlignment="Center"/>
+            <Label Content="Age : " VerticalAlignment="Center" FontWeight="Bold"/>
             <TextBlock Grid.Column="2" Text="age here" VerticalAlignment="Center"/>
         </StackPanel>
 

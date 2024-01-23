@@ -12,11 +12,11 @@
             <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
         <Grid>
-            <Button Content="Save" Background="#FF28BF6F" FontSize="13" FontWeight="Bold" Opacity="0.895" Foreground="#FFF5EAEA" ScrollViewer.CanContentScroll="True" OpacityMask="#FF257A8A"/>
+            <Button Content="Save" Style="{StaticResource SaveButtonStyle}"/>
         </Grid>
         <Grid Grid.Column="1">
             <Rectangle Fill="LightGreen"/>
-            <Button Content="Save &amp; Print" FontSize="13" Background="#FF28BF6F" FontWeight="Bold" Opacity="0.895" Foreground="#FFF5EAEA"/>
+            <Button Content="Save &amp; Print" Style="{StaticResource SaveButtonStyle}" />
         </Grid>
 
     </Grid>

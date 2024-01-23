@@ -9,6 +9,7 @@
         Title="Doctor Rx"
         WindowState="Maximized"
         Icon="doctor.ico" 
+        MouseDown="MainWindow_MouseDown"
         Height="{x:Static SystemParameters.PrimaryScreenHeight}" 
         Width="{x:Static SystemParameters.PrimaryScreenWidth}"
         >
@@ -26,6 +27,7 @@
                 </Grid.ColumnDefinitions>
                 <UserControls:MenuBar/>
                 <Grid Grid.Column="1">
+                    
                     <Grid.RowDefinitions>
                         <RowDefinition x:Name="searching" Height="4*"/>
                         <RowDefinition Height="96*"/>
@@ -53,7 +55,7 @@
                                 <ColumnDefinition Width="20*"/>
                                 <ColumnDefinition Width="80*"/>
                             </Grid.ColumnDefinitions>
-                            <UserControls:treatment/>
+                            <UserControls:History/>
 
                             <Grid Grid.Column="1">
                                 <UserControls:medicine/>
