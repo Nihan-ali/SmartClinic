@@ -41,6 +41,11 @@ namespace SmartClinic.View.UserControls
                 searchPatientTextBox.Foreground = Brushes.Gray; // Change the color to the placeholder color
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
     
 }
