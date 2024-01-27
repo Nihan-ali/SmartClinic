@@ -17,26 +17,22 @@ namespace SmartClinic.View.UserControls
 
         private void ChiefComplaintButton_Click(object sender, RoutedEventArgs e)
         {
-            chiefComplaintPopup.IsOpen = true;
+            ChiefComplaintPopup.IsOpen = true;
         }
 
         private void ChiefComplaintOkButton_Click(object sender, RoutedEventArgs e)
         {
-            string chiefComplaintText = chiefComplaintTextBox.Text;
-            ChiefComplaints.Add(chiefComplaintText);
-            chiefComplaintPopup.IsOpen = false;
+           
         }
 
         private void RemoveChiefComplaint_Click(object sender, RoutedEventArgs e)
         {
-            Button removeButton = (Button)sender;
-            string selectedChiefComplaint = removeButton.DataContext as string;
-            ChiefComplaints.Remove(selectedChiefComplaint);
+            
         }
 
         private void ChiefComplaintCancel_Click(object sender, RoutedEventArgs e)
         {
-            chiefComplaintPopup.IsOpen = false;
+            
         }
         private void TreatmentPlanButton_Click(object sender, RoutedEventArgs e)
         {

@@ -1,5 +1,6 @@
 ﻿// DatabaseHelper.cs
 using System;
+using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
 
@@ -21,12 +22,24 @@ namespace SmartClinic
 
             if (!File.Exists(databaseFilePath))
             {
+                SQLiteConnection.CreateFile(databaseFilePath); // Create an empty database file
+
                 using (var connection = new SQLiteConnection(ConnectionString))
                 {
                     connection.Open();
-                    using (var command = new SQLiteCommand("CREATE TABLE IF NOT EXISTS PatientInfo (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Age INTEGER);", connection))
+
+                    // Check if the "Medicine" table exists
+                    using (var checkCommand = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type='table' AND name='Medicine';", connection))
                     {
-                        command.ExecuteNonQuery();
+                        var result = checkCommand.ExecuteScalar();
+                        if (result == null || result == DBNull.Value)
+                        {
+                            // Create the "Medicine" table if it doesn't exist
+                            using (var createCommand = new SQLiteCommand("CREATE TABLE Medicine ( ID INTEGER PRIMARY KEY AUTOINCREMENT,  ManufacturerName TEXT NOT NULL, BrandName TEXT NOT NULL,  GenericName TEXT NOT NULL,  Strength TEXT,   DosageDescription TEXT,    RetailPrice DECIMAL(10, 2),   UseFor TEXT,DAR TEXT);", connection))
+                            {
+                                createCommand.ExecuteNonQuery();
+                            }
+                        }
                     }
                 }
 
@@ -38,28 +51,106 @@ namespace SmartClinic
             }
         }
 
-        public static void InsertPatient(string name, int age)
+        public static List<Medicine> SearchMedicines(string searchTerm, MedicineSearchCriteria searchCriteria)
         {
             try
             {
-                using (var connection = new SQLiteConnection(ConnectionString))
+                using (var connection = GetConnection())
                 {
                     connection.Open();
-                    using (var command = new SQLiteCommand("INSERT INTO PatientInfo (Name, Age) VALUES (@Name, @Age);", connection))
+
+                    string query = string.Empty;
+
+                    switch (searchCriteria)
                     {
-                        command.Parameters.AddWithValue("@Name", name);
-                        command.Parameters.AddWithValue("@Age", age);
-                        command.ExecuteNonQuery();
+                        case MedicineSearchCriteria.BrandName:
+                            query = "SELECT * FROM Medicine WHERE BrandName LIKE @SearchTerm";
+                            break;
+                        case MedicineSearchCriteria.GenericName:
+                            query = "SELECT * FROM Medicine WHERE GenericName LIKE @SearchTerm";
+                            break;
+                            // Add more cases if needed
                     }
 
-                    Console.WriteLine($"Patient '{name}' inserted successfully.");
+                    using (var command = new SQLiteCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@SearchTerm", $"%{searchTerm}%");
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<Medicine> medicines = new List<Medicine>();
+
+                            while (reader.Read())
+                            {
+                                Medicine medicine = new Medicine
+                                {
+                                    Id = Convert.ToInt32(reader["Id"]),
+                                    BrandName = reader["BrandName"].ToString(),
+                                    GenericName = reader["GenericName"].ToString(),
+                                };
+
+                                medicines.Add(medicine);
+                            }
+
+                            return medicines;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error inserting patient: {ex}");
+                Console.WriteLine($"Error searching medicines: {ex}");
                 throw;
             }
         }
+
+        public static SQLiteConnection GetConnection()
+        {
+            return new SQLiteConnection(ConnectionString);
+        }
+
+        public enum MedicineSearchCriteria
+        {
+            BrandName,
+            GenericName,
+            // Add more criteria if needed
+        }
+
+        public static List<Medicine> GetInitialMedicines()
+        {
+            List<Medicine> initialMedicines = new List<Medicine>();
+
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                using (var command = new SQLiteCommand("SELECT * FROM Medicine LIMIT 15;", connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Medicine medicine = new Medicine
+                            {
+                                Id = Convert.ToInt32(reader["Id"]),
+                                BrandName = reader["BrandName"].ToString(),
+                                GenericName = reader["GenericName"].ToString(),
+                            };
+
+                            initialMedicines.Add(medicine);
+                        }
+                    }
+                }
+            }
+
+            return initialMedicines;
+        }
+    }
+
+    public class Medicine
+    {
+        public int Id { get; set; }
+        public string BrandName { get; set; }
+        public string GenericName { get; set; }
+        // Add more properties as needed
     }
 }

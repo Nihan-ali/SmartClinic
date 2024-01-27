@@ -26,14 +26,7 @@ namespace SmartClinic
         {
             InitializeComponent();
             
-            try
-            {
-                DatabaseHelper.InsertPatient("nihan", 25);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+           
 
 
             DataContext = this;

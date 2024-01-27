@@ -60,3 +60,7 @@ E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\runtimes\
 E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\SmartClinic.csproj.AssemblyReference.cache
 E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\SmartClinic.csproj.CopyComplete
+E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MedicineSearchWindow.baml
+E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MedicineSearchWindow.g.cs
+E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\ChiefComplaintPopup.g.cs
+E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\ChiefComplaintPopup.baml

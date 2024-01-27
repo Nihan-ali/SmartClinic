@@ -25,12 +25,16 @@ namespace SmartClinic.View.UserControls
             InitializeComponent();
         }
 
-        
 
+
+        // MainWindow.xaml.cs
         private void Rx_Click(object sender, RoutedEventArgs e)
         {
-
+            MedicineSearchWindow searchWindow = new MedicineSearchWindow();
+            searchWindow.ShowDialog();
+            // Handle the selected medicine from the search window as needed
         }
+
 
         private void Advices_Click(object sender, RoutedEventArgs e)
         {

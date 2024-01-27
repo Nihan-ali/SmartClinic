@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="View\UserControls\ChiefComplaintPopup.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\UserControls\Footer.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -17,6 +20,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\medicine.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\UserControls\MedicineSearchWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\MenuBar.xaml.cs">
@@ -45,6 +51,9 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\UserControls\ChiefComplaintPopup.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\UserControls\Footer.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -55,6 +64,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\medicine.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserControls\MedicineSearchWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\MenuBar.xaml">
