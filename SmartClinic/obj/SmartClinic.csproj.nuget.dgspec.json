@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Web_Dev\\DesktopApp\\SmartClinic\\SmartClinic\\SmartClinic.csproj": {}
+    "D:\\AcademicProject\\SmartClinic\\SmartClinic\\SmartClinic.csproj": {}
   },
   "projects": {
-    "E:\\Web_Dev\\DesktopApp\\SmartClinic\\SmartClinic\\SmartClinic.csproj": {
+    "D:\\AcademicProject\\SmartClinic\\SmartClinic\\SmartClinic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Web_Dev\\DesktopApp\\SmartClinic\\SmartClinic\\SmartClinic.csproj",
+        "projectUniqueName": "D:\\AcademicProject\\SmartClinic\\SmartClinic\\SmartClinic.csproj",
         "projectName": "SmartClinic",
-        "projectPath": "E:\\Web_Dev\\DesktopApp\\SmartClinic\\SmartClinic\\SmartClinic.csproj",
-        "packagesPath": "C:\\Users\\Nihan Ali\\.nuget\\packages\\",
-        "outputPath": "E:\\Web_Dev\\DesktopApp\\SmartClinic\\SmartClinic\\obj\\",
+        "projectPath": "D:\\AcademicProject\\SmartClinic\\SmartClinic\\SmartClinic.csproj",
+        "packagesPath": "C:\\Users\\moshi\\.nuget\\packages\\",
+        "outputPath": "D:\\AcademicProject\\SmartClinic\\SmartClinic\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Nihan Ali\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\moshi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -39,11 +34,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -74,7 +64,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -12,7 +12,7 @@
             <Button Name="rx" Margin="15,15" Background="{x:Null}" BorderBrush="{x:Null}">
                 <Image Source="../../rx.png" Height="20" Width="20"/>
             </Button>
-            <Button Name="patients" Margin="15,15" Background="{x:Null}" BorderBrush="{x:Null}">
+            <Button Name="patients" Margin="15,15" Background="{x:Null}" BorderBrush="{x:Null}" Click="PatientsButton_Click">
                 <Image Source="../../patient.png" Height="20" Width="20"/>
             </Button>
             <Button Name="settings" Margin="15,15" Background="{x:Null}" BorderBrush="{x:Null}">
