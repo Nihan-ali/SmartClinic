@@ -1,6 +1,8 @@
 ﻿// DatabaseHelper.cs
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+
 using System.Data.SQLite;
 using System.IO;
 
@@ -87,6 +89,8 @@ namespace SmartClinic
                                     Id = Convert.ToInt32(reader["Id"]),
                                     BrandName = reader["BrandName"].ToString(),
                                     GenericName = reader["GenericName"].ToString(),
+                                    DosageDescription = reader["DosageDescription"].ToString(),
+                                    Strength = reader["Strength"].ToString(),
                                 };
 
                                 medicines.Add(medicine);
@@ -134,6 +138,8 @@ namespace SmartClinic
                                 Id = Convert.ToInt32(reader["Id"]),
                                 BrandName = reader["BrandName"].ToString(),
                                 GenericName = reader["GenericName"].ToString(),
+                                DosageDescription = reader["DosageDescription"].ToString(),
+                                Strength = reader["Strength"].ToString(),
                             };
 
                             initialMedicines.Add(medicine);
@@ -146,11 +152,39 @@ namespace SmartClinic
         }
     }
 
-    public class Medicine
+    // Replace the existing Medicine class definition in DatabaseHelper with this one
+    public class Medicine : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private bool isSelected;
+
         public int Id { get; set; }
         public string BrandName { get; set; }
         public string GenericName { get; set; }
-        // Add more properties as needed
+        public string Strength { get; set; }
+        public string DosageDescription { get; set; }
+
+        // New property to combine GenericName and DosageDescription
+        public string DisplayText => $"{GenericName} - {DosageDescription}";
+
+        public bool IsSelected
+        {
+            get { return isSelected; }
+            set
+            {
+                if (isSelected != value)
+                {
+                    isSelected = value;
+                    OnPropertyChanged(nameof(IsSelected));
+                }
+            }
+        }
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
+
 }

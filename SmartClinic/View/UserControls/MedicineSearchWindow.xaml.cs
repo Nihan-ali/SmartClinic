@@ -1,32 +1,39 @@
-﻿// MedicineSearchWindow.xaml.cs
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace SmartClinic
 {
     public partial class MedicineSearchWindow : Window
     {
-        private ObservableCollection<Medicine> medicines;
+        private ObservableCollection<Medicine> searchedMedicines;
+        private ObservableCollection<Medicine> selectedMedicines;
 
         public MedicineSearchWindow()
         {
             InitializeComponent();
-            medicines = new ObservableCollection<Medicine>();
-            InitializeListView();
+            searchedMedicines = new ObservableCollection<Medicine>();
+            selectedMedicines = new ObservableCollection<Medicine>();
+            InitializeMedicineListView();
         }
 
-        private void InitializeListView()
+        private void InitializeMedicineListView()
         {
-            // Fetch and display the initial 15 medicines
+            // For demonstration purposes, you can replace this with actual data retrieval logic
             List<Medicine> initialMedicines = DatabaseHelper.GetInitialMedicines();
             foreach (Medicine medicine in initialMedicines)
             {
-                medicines.Add(medicine);
+                searchedMedicines.Add(medicine);
             }
 
-            // Set the ObservableCollection as the ListView's ItemsSource
-            medicineListView.ItemsSource = medicines;
+            // Set the ObservableCollection as the DataGrid's ItemsSource
+            //medicineDataGrid.ItemsSource = searchedMedicines;
+
+            // Set the ObservableCollection as the ItemsControl's ItemsSource
+            medicineItemsControl.ItemsSource = searchedMedicines;
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
@@ -34,28 +41,99 @@ namespace SmartClinic
             string searchTerm = searchTextBox.Text;
             DatabaseHelper.MedicineSearchCriteria searchCriteria = (DatabaseHelper.MedicineSearchCriteria)searchComboBox.SelectedIndex;
 
-            medicines.Clear();
+            searchedMedicines.Clear();
             List<Medicine> searchResults = DatabaseHelper.SearchMedicines(searchTerm, searchCriteria);
             foreach (Medicine result in searchResults)
             {
-                medicines.Add(result);
+                searchedMedicines.Add(result);
             }
         }
 
-        // Event handler for searchTextBox.TextChanged
-        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        // MedicineSearchWindow.xaml.cs
+        private void SearchTextBox_TextChanged(object sender, RoutedEventArgs e)
         {
             string searchTerm = searchTextBox.Text;
             DatabaseHelper.MedicineSearchCriteria searchCriteria = (DatabaseHelper.MedicineSearchCriteria)searchComboBox.SelectedIndex;
 
-            medicines.Clear();
+            // Filter the medicines based on the search term and criteria
             List<Medicine> searchResults = DatabaseHelper.SearchMedicines(searchTerm, searchCriteria);
-            foreach (Medicine result in searchResults)
+
+            // Update the Popup content with the filtered results
+            searchResultsListBox.ItemsSource = searchResults;
+
+            // Open or close the Popup based on whether there are search results
+            if (searchResults.Count > 0)
             {
-                medicines.Add(result);
+                searchResultsPopup.IsOpen = true;
+            }
+            else
+            {
+                searchResultsPopup.IsOpen = false;
+            }
+        }
+
+        private void ToggleButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is ToggleButton toggleButton)
+            {
+                // Retrieve the associated Medicine object from DataContext
+                if (toggleButton.DataContext is Medicine selectedMedicine)
+                {
+                    // Toggle the IsSelected property
+                    selectedMedicine.IsSelected = toggleButton.IsChecked == true;
+
+                    // Update the selected medicines collection
+                    if (selectedMedicine.IsSelected)
+                    {
+                        if (!selectedMedicines.Contains(selectedMedicine))
+                        {
+                            selectedMedicines.Add(selectedMedicine);
+                        }
+                    }
+                    else
+                    {
+                        selectedMedicines.Remove(selectedMedicine);
+                    }
+
+                    // Update the selected medicines ListView
+                    UpdateSelectedMedicinesListView();
+                }
             }
         }
 
 
+
+        private void MedicineDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Handle selection changes, add selected medicine to the selectedMedicines list
+            foreach (Medicine selectedItem in e.AddedItems)
+            {
+                if (!selectedMedicines.Any(m => m.Id == selectedItem.Id))
+                {
+                    selectedMedicines.Add(selectedItem);
+                }
+            }
+
+            // Update the selected medicines ListView
+            UpdateSelectedMedicinesListView();
+        }
+
+        private void UpdateSelectedMedicinesListView()
+        {
+            selectedMedicinesListView.ItemsSource = null;
+            selectedMedicinesListView.ItemsSource = selectedMedicines;
+        }
+
+        private void MedicineButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void MedicineGroupButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+        // Add other methods or event handlers as needed
     }
 }
