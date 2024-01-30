@@ -84,13 +84,14 @@ namespace SmartClinic
 
                             while (reader.Read())
                             {
-                                Medicine medicine = new Medicine
+                                Medicine medicine = new Medicine(
+                                   reader["GenericName"].ToString(),
+                                   reader["DosageDescription"].ToString()
+                               )
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
                                     BrandName = reader["BrandName"].ToString(),
-                                    GenericName = reader["GenericName"].ToString(),
-                                    DosageDescription = reader["DosageDescription"].ToString(),
-                                    Strength = reader["Strength"].ToString(),
+                                    Strength = reader["Strength"].ToString()
                                 };
 
                                 medicines.Add(medicine);
@@ -133,16 +134,17 @@ namespace SmartClinic
                     {
                         while (reader.Read())
                         {
-                            Medicine medicine = new Medicine
-                            {
-                                Id = Convert.ToInt32(reader["Id"]),
-                                BrandName = reader["BrandName"].ToString(),
-                                GenericName = reader["GenericName"].ToString(),
-                                DosageDescription = reader["DosageDescription"].ToString(),
-                                Strength = reader["Strength"].ToString(),
-                            };
+                            Medicine medicine = new Medicine(
+                             reader["GenericName"].ToString(),
+                             reader["DosageDescription"].ToString()
+                         )
+                                    {
+                                        Id = Convert.ToInt32(reader["Id"]),
+                                        BrandName = reader["BrandName"].ToString(),
+                                        Strength = reader["Strength"].ToString()
+                                    };
 
-                            initialMedicines.Add(medicine);
+                                    initialMedicines.Add(medicine);
                         }
                     }
                 }
@@ -165,8 +167,17 @@ namespace SmartClinic
         public string Strength { get; set; }
         public string DosageDescription { get; set; }
 
-        // New property to combine GenericName and DosageDescription
+        // Constructor to set GenericName and DosageDescription
+        public Medicine(string genericName, string dosageDescription)
+        {
+            GenericName = genericName;
+            DosageDescription = dosageDescription;
+        }
+
+        // Calculated property
         public string DisplayText => $"{GenericName} - {DosageDescription}";
+
+        public string AdditionalText => $"Take this 3 times";
 
         public bool IsSelected
         {
@@ -186,5 +197,7 @@ namespace SmartClinic
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
+
+
 
 }

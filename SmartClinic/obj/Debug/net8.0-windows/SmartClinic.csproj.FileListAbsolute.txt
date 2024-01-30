@@ -64,3 +64,5 @@ E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\User
 E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MedicineSearchWindow.g.cs
 E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\ChiefComplaintPopup.g.cs
 E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\ChiefComplaintPopup.baml
+E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\DetailsWindow.g.cs
+E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\DetailsWindow.baml

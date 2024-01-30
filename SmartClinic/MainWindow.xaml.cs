@@ -51,8 +51,9 @@ namespace SmartClinic
             position.Y <= treatmentPlanPopup.VerticalOffset + treatmentPlanPopup.ActualHeight;
         }
 
-
-
-
+        public static implicit operator MainWindow(MedicineSearchWindow v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

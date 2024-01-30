@@ -10,6 +10,9 @@
     <Compile Update="View\UserControls\ChiefComplaintPopup.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\UserControls\DetailsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\UserControls\Footer.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -52,6 +55,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\ChiefComplaintPopup.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserControls\DetailsWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\Footer.xaml">

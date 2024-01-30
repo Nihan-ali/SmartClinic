@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SmartClinic.View.UserControls;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -132,6 +133,34 @@ namespace SmartClinic
         {
 
         }
+        private void SearchResultsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (searchResultsListBox.SelectedItem != null)
+            {
+                Medicine selectedMedicine = (Medicine)searchResultsListBox.SelectedItem;
+
+                // In your main window code
+                DetailsWindow detailsWindow = new DetailsWindow(selectedMedicine);
+                detailsWindow.ParentMainWindow = this;
+                detailsWindow.Show();
+            }
+        }
+        public void AddToSelectedMedicines(Medicine newMedicine)
+        {
+            // Add the new medicine to the selectedMedicines collection
+            selectedMedicines.Add(newMedicine);
+
+            // Update the selectedMedicinesListView
+            UpdateSelectedMedicinesListView();
+        }
+
+
+        private void addToRx_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
 
 
         // Add other methods or event handlers as needed
