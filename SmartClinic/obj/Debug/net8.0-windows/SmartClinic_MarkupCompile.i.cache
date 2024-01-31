@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 H:\MED\CSE350\SmartClinic\App.xaml
-15-650770894
+191831680568
 61230279792
-21-1977118867
+261773266328
 203-832903219
-MainWindow.xaml;View\UserControls\ChiefComplaintPopup.xaml;View\UserControls\DetailsWindow.xaml;View\UserControls\Footer.xaml;View\UserControls\header.xaml;View\UserControls\History.xaml;View\UserControls\medicine.xaml;View\UserControls\MedicineSearchWindow.xaml;View\UserControls\MenuBar.xaml;View\UserControls\patientInfo.xaml;View\UserControls\savePrint.xaml;View\UserControls\searchMenu.xaml;View\UserControls\title.xaml;View\UserControls\treatment.xaml;View\UserControls\TreatmentPlanPopup.xaml;
+MainWindow.xaml;View\UserControls\ChiefComplaintPopup.xaml;View\UserControls\DetailsWindow.xaml;View\UserControls\DiagnosisPopup.xaml;View\UserControls\Footer.xaml;View\UserControls\header.xaml;View\UserControls\History.xaml;View\UserControls\HistoryPopup.xaml;View\UserControls\InvestigationPopup.xaml;View\UserControls\medicine.xaml;View\UserControls\MedicineSearchWindow.xaml;View\UserControls\MenuBar.xaml;View\UserControls\OnExaminationPopup.xaml;View\UserControls\patientInfo.xaml;View\UserControls\savePrint.xaml;View\UserControls\searchMenu.xaml;View\UserControls\title.xaml;View\UserControls\treatment.xaml;View\UserControls\TreatmentPlanPopup.xaml;
 
-True
+False
 
