@@ -6,12 +6,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 
+
 namespace SmartClinic
 {
     public partial class MedicineSearchWindow : Window
     {
         private ObservableCollection<Medicine> searchedMedicines;
         private ObservableCollection<Medicine> selectedMedicines;
+        public ObservableCollection<Medicine> SelectedMedicines => selectedMedicines;
 
         public MedicineSearchWindow()
         {
@@ -140,6 +142,7 @@ namespace SmartClinic
                 Medicine selectedMedicine = (Medicine)searchResultsListBox.SelectedItem;
 
                 // In your main window code
+                searchResultsPopup.IsOpen = false;
                 DetailsWindow detailsWindow = new DetailsWindow(selectedMedicine);
                 detailsWindow.ParentMainWindow = this;
                 detailsWindow.Show();
@@ -157,8 +160,37 @@ namespace SmartClinic
 
         private void addToRx_Click(object sender, RoutedEventArgs e)
         {
+            // Get the selected medicine from the searchResultsListBox
+            Medicine selectedMedicine = (Medicine)searchResultsListBox.SelectedItem;
 
+            // Check if a medicine is selected
+            if (selectedMedicine != null)
+            {
+                // Create an instance of the medicine UserControl
+                medicine medicineUserControl = new medicine();
+
+                // Add the selected medicine to the list in the medicine UserControl
+                medicineUserControl.AddToSelectedMedicines(selectedMedicine);
+
+                // Close the MedicineSearchWindow
+                this.Close();
+            }
+            else
+            {
+                this.Close();
+                // Optionally, display a message or take any other actions if no medicine is selected
+            }
         }
+        private void selectedMedicinesListView_Loaded(object sender, RoutedEventArgs e)
+        {
+            // You may not need to manually set AlternationIndex in the code-behind.
+            // The AlternationCount="{Binding Path=Items.Count, RelativeSource={RelativeSource Self}}"
+            // in XAML should automatically assign serial numbers based on the item index.
+        }
+
+
+
+
 
 
 

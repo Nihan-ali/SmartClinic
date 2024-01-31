@@ -5,7 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SmartClinic.View.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:converters="clr-namespace:SmartClinic.View.UserControls">
+
+
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="80*"/>
@@ -14,9 +17,45 @@
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
         <Grid>
-            <Button x:Name="Rx" HorizontalAlignment="Left" Content="Rx +" Margin="15,25" VerticalAlignment="Top" Background="{x:Null}" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="Rx_Click"/>
+            <StackPanel>
+                <Button x:Name="Rx" HorizontalAlignment="Left" Content="Rx +" Margin="15,25" VerticalAlignment="Top" Background="{x:Null}" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="Rx_Click"/>
 
+                <ListView x:Name="selectedMedicinesListView" Background="White" Margin="10" BorderBrush="{x:Null}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="LightGray" Margin="5" Padding="5">
+                                <Grid>
+                                    <!-- Serial Number and DisplayText in the same line -->
+                                    <TextBlock x:Name="serialNumberTextBlock" VerticalAlignment="Center" FontWeight="Bold">
+                                    </TextBlock>
+
+                                    <!-- Medicine Information -->
+                                    <StackPanel Margin="10,0" Width="700">
+                                        <!-- First line with DisplayText -->
+                                        <TextBlock Text="{Binding DisplayText}" FontWeight="Bold" Margin="0,5,0,2"/>
+
+                                        <!-- Second line with generic text -->
+                                        <TextBlock Text="{Binding AdditionalText}" FontStyle="Italic" Foreground="Gray"/>
+                                    </StackPanel>
+
+                                    <!-- Remove Button 'x' -->
+                                    <Button Content="x" Background="Transparent" Foreground="Red" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Top" BorderBrush="{x:Null}" Click="RemoveButton_Click"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <EventSetter Event="Loaded" Handler="ListViewItem_Loaded"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </StackPanel>
         </Grid>
+
+
+
+
         <Grid Grid.Row="1">
             <Button x:Name="Advices" Content="Advices+" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15" Background="{x:Null}" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="Advices_Click"/>
         </Grid>
@@ -26,8 +65,5 @@
         <Grid Grid.Row="3">
             <Button x:Name="SpecialNotes" HorizontalAlignment="Left" Content="Special Notes +" VerticalAlignment="Top" Margin="15"  Background="{x:Null}" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="SpecialNotes_Click"/>
         </Grid>
-
-
-
     </Grid>
 </UserControl>

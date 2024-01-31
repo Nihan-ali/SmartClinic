@@ -13,7 +13,7 @@
         Height="{x:Static SystemParameters.PrimaryScreenHeight}" 
         Width="{x:Static SystemParameters.PrimaryScreenWidth}"
         >
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible">
+    <!--<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible">-->
         <Grid>
             
             
@@ -37,7 +37,8 @@
                     <Grid >
                         <UserControls:searchMenu/>
                     </Grid>
-                    <Grid Grid.Row="1">
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <Grid Grid.Row="1" Background="AliceBlue" Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition x:Name="name" Height="7*"/>
                             <RowDefinition x:Name="patient" Height="4*"/>
@@ -65,7 +66,7 @@
                             <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,0,0"/>
                         </Grid>
                         <Border Grid.Row="2" BorderBrush="Black" BorderThickness="0,1,0,0"/>
-                        <Grid x:Name="save" Grid.Row="3">
+                        <Grid x:Name="save" Grid.Row="3" Height="25">
                             <UserControls:savePrint/>
                         </Grid>
                         <Grid x:Name="fotter" Grid.Row="4">
@@ -73,12 +74,13 @@
 
                         </Grid>
                     </Grid>
+                    </ScrollViewer>
 
                 </Grid>
 
             </Grid>
         </Grid>
 
-    </ScrollViewer>
+    <!--</ScrollViewer>-->
 </Window>
     

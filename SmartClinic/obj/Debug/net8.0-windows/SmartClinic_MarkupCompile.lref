@@ -1,7 +1,8 @@
-﻿
+﻿E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
 FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\App.xaml;;
 FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\MainWindow.xaml;;
 FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\View\UserControls\ChiefComplaintPopup.xaml;;
+FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\View\UserControls\DetailsWindow.xaml;;
 FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\View\UserControls\Footer.xaml;;
 FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\View\UserControls\header.xaml;;
 FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\View\UserControls\History.xaml;;
@@ -13,5 +14,4 @@ FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\View\UserControls\searchMenu.xaml
 FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\View\UserControls\title.xaml;;
 FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\View\UserControls\treatment.xaml;;
 FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\View\UserControls\TreatmentPlanPopup.xaml;;
-FE:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\View\UserControls\DetailsWindow.xaml;;
 

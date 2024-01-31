@@ -179,6 +179,7 @@ namespace SmartClinic
 
         public string AdditionalText => $"Take this 3 times";
 
+
         public bool IsSelected
         {
             get { return isSelected; }
