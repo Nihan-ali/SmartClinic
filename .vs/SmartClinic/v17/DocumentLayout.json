@@ -120,8 +120,7 @@
               "RelativeToolTip": "SmartClinic\\View\\UserControls\\patientsUsercontrol.xaml.cs",
               "ViewState": "AQIAADEAAAAAAAAAAAAmwDwAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-01-31T15:28:05.39Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-01-31T15:28:05.39Z"
             },
             {
               "$type": "Document",
@@ -132,8 +131,7 @@
               "ToolTip": "E:\\Web_Dev\\DesktopApp\\SmartClinic\\SmartClinic\\View\\UserControls\\patientsUsercontrol.xaml",
               "RelativeToolTip": "SmartClinic\\View\\UserControls\\patientsUsercontrol.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-01-31T15:20:26.315Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-01-31T15:20:26.315Z"
             },
             {
               "$type": "Document",
@@ -144,8 +142,7 @@
               "ToolTip": "E:\\Web_Dev\\DesktopApp\\SmartClinic\\SmartClinic\\View\\UserControls\\PatientList.xaml",
               "RelativeToolTip": "SmartClinic\\View\\UserControls\\PatientList.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-01-31T15:15:11.831Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-01-31T15:15:11.831Z"
             },
             {
               "$type": "Document",
@@ -156,8 +153,7 @@
               "ToolTip": "E:\\Web_Dev\\DesktopApp\\SmartClinic\\SmartClinic\\MainWindow.xaml",
               "RelativeToolTip": "SmartClinic\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-01-26T18:22:14.56Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-01-26T18:22:14.56Z"
             },
             {
               "$type": "Document",
@@ -168,8 +164,7 @@
               "ToolTip": "E:\\Web_Dev\\DesktopApp\\SmartClinic\\SmartClinic\\View\\UserControls\\MenuBar.xaml",
               "RelativeToolTip": "SmartClinic\\View\\UserControls\\MenuBar.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-01-31T05:45:59.774Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-01-31T05:45:59.774Z"
             },
             {
               "$type": "Document",
@@ -181,8 +176,7 @@
               "RelativeToolTip": "SmartClinic\\MainWindow.xaml.cs",
               "ViewState": "AQIAADcAAAAAAAAAAAAAAEMAAABOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-01-26T19:21:17.668Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-01-26T19:21:17.668Z"
             },
             {
               "$type": "Document",
@@ -192,14 +186,10 @@
               "RelativeDocumentMoniker": "SmartClinic\\DatabaseHelper.cs",
               "ToolTip": "E:\\Web_Dev\\DesktopApp\\SmartClinic\\SmartClinic\\DatabaseHelper.cs",
               "RelativeToolTip": "SmartClinic\\DatabaseHelper.cs",
-              "ViewState": "AQIAAEEAAAAAAAAAAAAqwEoAAABCAAAA",
+              "ViewState": "AQIAAEQAAAAAAAAAAAAAAA4AAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-01-30T19:21:22.412Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{fabf9319-47eb-497e-b8f6-d9f73fba5f55}"
             },
             {
               "$type": "Document",
@@ -210,8 +200,7 @@
               "ToolTip": "E:\\Web_Dev\\DesktopApp\\SmartClinic\\SmartClinic\\View\\UserControls\\RxUsercontrol.xaml",
               "RelativeToolTip": "SmartClinic\\View\\UserControls\\RxUsercontrol.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-01-31T14:48:26.551Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-01-31T14:48:26.551Z"
             },
             {
               "$type": "Document",
@@ -234,8 +223,7 @@
               "ToolTip": "E:\\Web_Dev\\DesktopApp\\SmartClinic\\SmartClinic\\View\\UserControls\\medicine.xaml",
               "RelativeToolTip": "SmartClinic\\View\\UserControls\\medicine.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-01-30T16:51:43.755Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-01-30T16:51:43.755Z"
             },
             {
               "$type": "Document",
@@ -280,8 +268,7 @@
               "ToolTip": "E:\\Web_Dev\\DesktopApp\\SmartClinic\\SmartClinic\\View\\UserControls\\History.xaml",
               "RelativeToolTip": "SmartClinic\\View\\UserControls\\History.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-01-30T18:51:11.993Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-01-30T18:51:11.993Z"
             },
             {
               "$type": "Document",
@@ -292,8 +279,7 @@
               "ToolTip": "E:\\Web_Dev\\DesktopApp\\SmartClinic\\SmartClinic\\App.xaml",
               "RelativeToolTip": "SmartClinic\\App.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-01-30T18:13:47.978Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-01-30T18:13:47.978Z"
             },
             {
               "$type": "Document",
@@ -304,8 +290,7 @@
               "ToolTip": "E:\\Web_Dev\\DesktopApp\\SmartClinic\\SmartClinic\\View\\UserControls\\savePrint.xaml",
               "RelativeToolTip": "SmartClinic\\View\\UserControls\\savePrint.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-01-30T18:41:25.423Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-01-30T18:41:25.423Z"
             },
             {
               "$type": "Document",
@@ -339,8 +324,7 @@
               "ToolTip": "E:\\Web_Dev\\DesktopApp\\SmartClinic\\SmartClinic\\View\\UserControls\\header.xaml",
               "RelativeToolTip": "SmartClinic\\View\\UserControls\\header.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-01-26T19:06:32.279Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-01-26T19:06:32.279Z"
             },
             {
               "$type": "Document",
