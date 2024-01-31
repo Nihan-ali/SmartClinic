@@ -1,11 +1,26 @@
 ﻿// DatabaseHelper.cs
+using SmartClinic.View.UserControls;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.IO;
+using static SmartClinic.PatientList;
 
 namespace SmartClinic
 {
+    public class PatientInfo
+    {
+        public int Id { get; set; }
+        public string PatientName { get; set; }
+        public int Age { get; set; }
+        public string BloodGroup { get; set; }
+        public string Address { get; set; }
+        public string PhoneNumber { get; set; }
+    }
+
+
     public class DatabaseHelper
     {
         private const string DatabaseFileName = "patientInfo.db";
@@ -41,7 +56,20 @@ namespace SmartClinic
                             }
                         }
                     }
+                    using (var checkCommand = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type='table' AND name='Patient';", connection))
+                    {
+                        var result = checkCommand.ExecuteScalar();
+                        if (result == null || result == DBNull.Value)
+                        {
+                            // Create the "Medicine" table if it doesn't exist
+                            using (var createCommand = new SQLiteCommand("CREATE TABLE Patient ( ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL, Age TEXT ,  Phone TEXT,  Address TEXT, Blood TEXT);", connection))
+                            {
+                                createCommand.ExecuteNonQuery();
+                            }
+                        }
+                    }
                 }
+
 
                 Console.WriteLine($"Database file created at: {databaseFilePath}");
             }
@@ -50,6 +78,92 @@ namespace SmartClinic
                 Console.WriteLine($"Database file already exists at: {databaseFilePath}");
             }
         }
+
+        public static void AddPatientIntoDB(string Name, string Age, string phone, string Address, string Blood)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    string insertQuery = "INSERT INTO Patient (Name, Age, Phone, Address, Blood) VALUES (@Name, @Age, @Phone, @Address, @Blood)";
+
+                    using (var command = new SQLiteCommand(insertQuery, connection))
+                    {
+                        // Add parameters to prevent SQL injection
+                     //   command.Parameters.AddWithValue("@ID", 1);
+                        command.Parameters.AddWithValue("@Name", Name);
+                        command.Parameters.AddWithValue("@Age", Age);
+                        command.Parameters.AddWithValue("@Phone", phone);
+                        command.Parameters.AddWithValue("@Address", Address);
+                        command.Parameters.AddWithValue("@Blood", Blood);
+
+                        // Execute the query
+                        command.ExecuteNonQuery();
+
+                        Console.WriteLine("Patient added successfully to the database.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+        public static List<PatientInfo> GetAllPatients()
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT * FROM PatientInfo;", connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<PatientInfo> patients = new List<PatientInfo>();
+
+                            while (reader.Read())
+                            {
+                                PatientInfo patient = new PatientInfo
+                                {
+                                    Id = Convert.ToInt32(reader["Id"]),
+                                    PatientName = reader["PatientName"].ToString(),
+                                    Age = Convert.ToInt32(reader["Age"]),
+                                    BloodGroup = reader["BloodGroup"].ToString(),
+                                    Address = reader["Address"].ToString(),
+                                    PhoneNumber = reader["PhoneNumber"].ToString()
+                                };
+
+                                patients.Add(patient);
+                            }
+
+                            return patients;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error getting all patients: {ex}");
+                throw;
+            }
+        }
+
+
+        // Modify your constructor to call the LoadPatientsFromDatabase function
+        // Add this function to your PatientList class
+
+
+        // Modify your constructor to call the LoadPatientsFromDatabase function
+
+
+
+
+
+
 
         public static List<Medicine> SearchMedicines(string searchTerm, MedicineSearchCriteria searchCriteria)
         {

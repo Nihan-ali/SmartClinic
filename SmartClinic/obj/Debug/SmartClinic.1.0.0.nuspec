@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>SmartClinic</id>
+    <version>1.0.0</version>
+    <authors>SmartClinic</authors>
+    <description>Package Description</description>
+    <repository type="git" commit="cb1bdd0c0ea0ca84c83e5a02674372262b507ef2" />
+    <dependencies>
+      <group targetFramework="net8.0-windows7.0">
+        <dependency id="System.Data.SQLite" version="1.0.118" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net8.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
+      </group>
+    </frameworkReferences>
+    <contentFiles>
+      <files include="any/net8.0-windows7.0/doctor.ico" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/patient.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/rx.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/search.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/settings.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/stat.png" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="D:\AcademicProject\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\SmartClinic.runtimeconfig.json" target="lib\net8.0-windows7.0\SmartClinic.runtimeconfig.json" />
+    <file src="D:\AcademicProject\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\SmartClinic.dll" target="lib\net8.0-windows7.0\SmartClinic.dll" />
+    <file src="D:\AcademicProject\SmartClinic\SmartClinic\doctor.ico" target="content\doctor.ico" />
+    <file src="D:\AcademicProject\SmartClinic\SmartClinic\doctor.ico" target="contentFiles\any\net8.0-windows7.0\doctor.ico" />
+    <file src="D:\AcademicProject\SmartClinic\SmartClinic\patient.png" target="content\patient.png" />
+    <file src="D:\AcademicProject\SmartClinic\SmartClinic\patient.png" target="contentFiles\any\net8.0-windows7.0\patient.png" />
+    <file src="D:\AcademicProject\SmartClinic\SmartClinic\rx.png" target="content\rx.png" />
+    <file src="D:\AcademicProject\SmartClinic\SmartClinic\rx.png" target="contentFiles\any\net8.0-windows7.0\rx.png" />
+    <file src="D:\AcademicProject\SmartClinic\SmartClinic\search.png" target="content\search.png" />
+    <file src="D:\AcademicProject\SmartClinic\SmartClinic\search.png" target="contentFiles\any\net8.0-windows7.0\search.png" />
+    <file src="D:\AcademicProject\SmartClinic\SmartClinic\settings.png" target="content\settings.png" />
+    <file src="D:\AcademicProject\SmartClinic\SmartClinic\settings.png" target="contentFiles\any\net8.0-windows7.0\settings.png" />
+    <file src="D:\AcademicProject\SmartClinic\SmartClinic\stat.png" target="content\stat.png" />
+    <file src="D:\AcademicProject\SmartClinic\SmartClinic\stat.png" target="contentFiles\any\net8.0-windows7.0\stat.png" />
+  </files>
+</package>

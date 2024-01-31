@@ -9,17 +9,94 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 
+
 namespace SmartClinic
 {
     /// <summary>
     /// Interaction logic for PatientList.xaml
     /// </summary>
+    /// 
+    public class Patient : INotifyPropertyChanged
+    {
+        private string _name = string.Empty;
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private DateTime _lastVisited;
+        public DateTime LastVisited
+        {
+            get { return _lastVisited; }
+            set
+            {
+                _lastVisited = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _phone = string.Empty;
+        public string Phone
+        {
+            get { return _phone; }
+            set
+            {
+                _phone = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _serialNumber = string.Empty;
+        public string SerialNumber
+        {
+            get { return _serialNumber; }
+            set
+            {
+                _serialNumber = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int _age;
+        public int Age
+        {
+            get { return _age; }
+            set
+            {
+                _age = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _address = string.Empty;
+        public string Address
+        {
+            get { return _address; }
+            set
+            {
+                _address = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
     public partial class PatientList : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-        private ObservableCollection<Patient> _patients = new ObservableCollection<Patient>();
+        private List<Patient> _patients = new List<Patient>();
 
-        public ObservableCollection<Patient> Patients
+        public List<Patient> Patients
         {
             get { return _patients; }
             set
@@ -29,14 +106,15 @@ namespace SmartClinic
             }
         }
 
+
         public PatientList()
         {
             InitializeComponent();
             DataContext = this;
 
             // Initialize the Patients collection with sample data
-            Patients.Add(new Patient { Name = "John Doe", LastVisited = DateTime.Now.AddDays(-10), Phone = "123-456-7890", SerialNumber = "001", Age = 30, Address = "123 Main St" });
-            Patients.Add(new Patient { Name = "Jane Doe", LastVisited = DateTime.Now.AddDays(-5), Phone = "987-654-3210", SerialNumber = "002", Age = 25, Address = "456 Oak St" });
+            //Patients.Add(new Patient { Name = "John Doe", LastVisited = DateTime.Now.AddDays(-10), Phone = "123-456-7890", SerialNumber = "001", Age = 30, Address = "123 Main St" });
+            //Patients.Add(new Patient { Name = "Jane Doe", LastVisited = DateTime.Now.AddDays(-5), Phone = "987-654-3210", SerialNumber = "002", Age = 25, Address = "456 Oak St" });
             // Add more patients as needed
         }
         private void PatientList_MouseDown(object sender, MouseButtonEventArgs e)
@@ -106,82 +184,17 @@ namespace SmartClinic
                 MessageBox.Show($"Selected Patient: {selectedPatient.Name}", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-    
 
-        public class Patient : INotifyPropertyChanged
+
+        private void SearchBox_KeyDown(object sender, KeyEventArgs e)
         {
-            private string _name = string.Empty;
-            public string Name
-            {
-                get { return _name; }
-                set
-                {
-                    _name = value;
-                    OnPropertyChanged();
-                }
-            }
-
-            private DateTime _lastVisited;
-            public DateTime LastVisited
-            {
-                get { return _lastVisited; }
-                set
-                {
-                    _lastVisited = value;
-                    OnPropertyChanged();
-                }
-            }
-
-            private string _phone = string.Empty;
-            public string Phone
-            {
-                get { return _phone; }
-                set
-                {
-                    _phone = value;
-                    OnPropertyChanged();
-                }
-            }
-
-            private string _serialNumber = string.Empty;
-            public string SerialNumber
-            {
-                get { return _serialNumber; }
-                set
-                {
-                    _serialNumber = value;
-                    OnPropertyChanged();
-                }
-            }
-
-            private int _age;
-            public int Age
-            {
-                get { return _age; }
-                set
-                {
-                    _age = value;
-                    OnPropertyChanged();
-                }
-            }
-
-            private string _address = string.Empty;
-            public string Address
-            {
-                get { return _address; }
-                set
-                {
-                    _address = value;
-                    OnPropertyChanged();
-                }
-            }
-
-            public event PropertyChangedEventHandler? PropertyChanged;
-
-            protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            }
+            ;
         }
+
+
+
+
+
+       
     }
 }

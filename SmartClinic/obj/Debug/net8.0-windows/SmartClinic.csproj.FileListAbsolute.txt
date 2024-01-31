@@ -134,3 +134,5 @@ D:\AcademicProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\AddPatient.b
 D:\AcademicProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\AddPatient.g.cs
 D:\AcademicProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\PatientList.g.cs
 D:\AcademicProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\PatientList.baml
+D:\AcademicProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\SearchResultWindow.g.cs
+D:\AcademicProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\SearchResultWindow.baml
