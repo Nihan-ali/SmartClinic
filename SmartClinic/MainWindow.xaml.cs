@@ -32,6 +32,7 @@ namespace SmartClinic
             DataContext = this;
             TodayDate = DateTime.Now.ToString("dd-MM-yyyy");
             treatmentPlanPopup = new Popup();
+            contentControl.Content = new View.UserControls.RxUsercontrol();
         }
         // MainWindow.xaml.cs
         private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
@@ -55,5 +56,29 @@ namespace SmartClinic
         {
             throw new NotImplementedException();
         }
+        private void RxButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Set content to RxUserControl
+            contentControl.Content = new View.UserControls.RxUsercontrol();
+        }
+
+        private void PatientButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Set content to PatientUserControl
+            contentControl.Content = new View.UserControls.PatientsUserControl();
+        }
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Set content to SettingsUserControl
+            //contentControl.Content = new UserControls.SettingsUserControl();
+        }
+
+        private void StatButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Set content to StatUserControl
+            //contentControl.Content = new UserControls.StatUserControl();
+        }
+
     }
 }

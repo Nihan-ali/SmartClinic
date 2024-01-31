@@ -27,8 +27,25 @@
                     <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="96*"/>
                 </Grid.ColumnDefinitions>
-                <UserControls:MenuBar/>
-                <Grid Grid.Column="1">
+            <Grid>
+                <Rectangle Fill="#FF332646"/>
+                <StackPanel>
+                    <Button Name="rx" Margin="15,15" Background="{x:Null}" BorderBrush="{x:Null}" Click="RxButton_Click">
+                        <Image Source="rx.png" Height="20" Width="20"/>
+                    </Button>
+                    <Button Name="patients" Margin="15,15" Background="{x:Null}" BorderBrush="{x:Null}" Click="PatientButton_Click">
+                        <Image Source="patient.png" Height="20" Width="20"/>
+                    </Button>
+                    <Button Name="settings" Margin="15,15" Background="{x:Null}" BorderBrush="{x:Null}" Click="SettingsButton_Click">
+                        <Image Source="settings.png" Height="20" Width="20"/>
+                    </Button>
+                    <Button Name="stat" Margin="15,15" Background="{x:Null}" BorderBrush="{x:Null}" Click="StatButton_Click">
+                        <Image Source="stat.png" Height="20" Width="20"/>
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+            <Grid Grid.Column="1">
                     
                     <Grid.RowDefinitions>
                         <RowDefinition x:Name="searching" Height="4*"/>
@@ -38,43 +55,10 @@
                         <UserControls:searchMenu/>
                     </Grid>
                 <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <Grid Grid.Row="1" Background="AliceBlue" Margin="10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition x:Name="name" Height="7*"/>
-                            <RowDefinition x:Name="patient" Height="4*"/>
-                            <RowDefinition Height="80*"/>
-                            <RowDefinition Height="4*"/>
-                            <RowDefinition Height="5*"/>
-                        </Grid.RowDefinitions>
-                        <UserControls:title/>
-
-                        <Grid Grid.Row="1">
-
-                            <UserControls:patientInfo/>
-                        </Grid>
-                        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,1,0,0"/>
-                        <Grid x:Name="prescription" Grid.Row="2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="20*"/>
-                                <ColumnDefinition Width="80*"/>
-                            </Grid.ColumnDefinitions>
-                            <UserControls:History/>
-
-                            <Grid Grid.Column="1">
-                                <UserControls:medicine/>
-                            </Grid>
-                            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,0,0"/>
-                        </Grid>
-                        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="0,1,0,0"/>
-                        <Grid x:Name="save" Grid.Row="3" Height="25">
-                            <UserControls:savePrint/>
-                        </Grid>
-                        <Grid x:Name="fotter" Grid.Row="4">
-                            <UserControls:Footer/>
-
-                        </Grid>
+                    <Grid Grid.Column="1" Background="AliceBlue">
+                        <ContentControl x:Name="contentControl" />
                     </Grid>
-                    </ScrollViewer>
+                </ScrollViewer>
 
                 </Grid>
 

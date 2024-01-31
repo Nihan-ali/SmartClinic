@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 E:\Web_Dev\DesktopApp\SmartClinic\SmartClinic\App.xaml
-15-650770894
+18307988402
 61230279792
-19-761820882
+22-1959214139
 203-1910288871
-MainWindow.xaml;View\UserControls\ChiefComplaintPopup.xaml;View\UserControls\DetailsWindow.xaml;View\UserControls\Footer.xaml;View\UserControls\header.xaml;View\UserControls\History.xaml;View\UserControls\medicine.xaml;View\UserControls\MedicineSearchWindow.xaml;View\UserControls\MenuBar.xaml;View\UserControls\patientInfo.xaml;View\UserControls\savePrint.xaml;View\UserControls\searchMenu.xaml;View\UserControls\title.xaml;View\UserControls\treatment.xaml;View\UserControls\TreatmentPlanPopup.xaml;
+MainWindow.xaml;View\UserControls\ChiefComplaintPopup.xaml;View\UserControls\DetailsWindow.xaml;View\UserControls\Footer.xaml;View\UserControls\header.xaml;View\UserControls\History.xaml;View\UserControls\medicine.xaml;View\UserControls\MedicineSearchWindow.xaml;View\UserControls\MenuBar.xaml;View\UserControls\patientInfo.xaml;View\UserControls\PatientList.xaml;View\UserControls\patientsUsercontrol.xaml;View\UserControls\RxUsercontrol.xaml;View\UserControls\savePrint.xaml;View\UserControls\searchMenu.xaml;View\UserControls\title.xaml;View\UserControls\treatment.xaml;View\UserControls\TreatmentPlanPopup.xaml;
 
 False
 
