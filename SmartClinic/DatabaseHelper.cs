@@ -10,7 +10,7 @@ namespace SmartClinic
 {
     public class DatabaseHelper
     {
-        private const string DatabaseFileName = "test.db";
+        private const string DatabaseFileName = "patientinfo.db";
         private static readonly string ConnectionString = $"Data Source={DatabaseFileName};Version=3;";
 
         static DatabaseHelper()
@@ -43,30 +43,27 @@ namespace SmartClinic
                                 {
                                     // Concatenate all the queries into a single string
                                     string allQueries = @"
-                                CREATE TABLE IF NOT EXISTS Medicine (ID INTEGER PRIMARY KEY AUTOINCREMENT, ManufacturerName TEXT NOT NULL, BrandName TEXT NOT NULL, GenericName TEXT NOT NULL, Strength TEXT, DosageDescription TEXT, RetailPrice DECIMAL(10, 2), UseFor TEXT, DAR TEXT);
-                                CREATE TABLE IF NOT EXISTS Advices (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
-                                CREATE TABLE IF NOT EXISTS FollowUp (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
-                                CREATE TABLE IF NOT EXISTS SpecialNotes (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
+                                                    CREATE TABLE IF NOT EXISTS Medicine (ID INTEGER PRIMARY KEY AUTOINCREMENT, ManufacturerName TEXT NOT NULL, BrandName TEXT NOT NULL, GenericName TEXT NOT NULL, Strength TEXT, DosageDescription TEXT, RetailPrice DECIMAL(10, 2), UseFor TEXT, DAR TEXT);
+                                                    CREATE TABLE IF NOT EXISTS Advices (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
+                                                    CREATE TABLE IF NOT EXISTS FollowUp (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
+                                                    CREATE TABLE IF NOT EXISTS SpecialNotes (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
 
-                                CREATE TABLE IF NOT EXISTS ChiefComplaint (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
-                                CREATE TABLE IF NOT EXISTS History (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
-                                CREATE TABLE IF NOT EXISTS OnExamination (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
-                                CREATE TABLE IF NOT EXISTS Investigation (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
-                                CREATE TABLE IF NOT EXISTS Diagnosis (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
-                                CREATE TABLE IF NOT EXISTS TreatmentPlan (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
+                                                    CREATE TABLE IF NOT EXISTS ChiefComplaint (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
+                                                    CREATE TABLE IF NOT EXISTS History (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
+                                                    CREATE TABLE IF NOT EXISTS OnExamination (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
+                                                    CREATE TABLE IF NOT EXISTS Investigation (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
+                                                    CREATE TABLE IF NOT EXISTS Diagnosis (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
+                                                    CREATE TABLE IF NOT EXISTS TreatmentPlan (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
 
-                                CREATE TABLE IF NOT EXISTS Patient (ID INTEGER PRIMARY KEY AUTOINCREMENT, AGE TEXT, ADDRESS TEXT, MOBILE TEXT,BLOOD TEXT,);
-                                CREATE TABLE IF NOT EXISTS PatientVisit (
-                                                                            ID INTEGER NOT NULL, VISIT TEXT NOT NULL,
-                                                                            MEDICINE TEXT, ADVICE TEXT, FOLLOWUP TEXT, NOTES TEXT,
-                                                                            MEDICINE COMPLAINT, HISTORY TEXT, ONEXAMINATION TEXT, INVESTIGATION TEXT,
-                                                                            MEDICINE DIAGNOSIS, TREATMENTPLAN TEXT,
+                                                    CREATE TABLE IF NOT EXISTS Patient (ID INTEGER PRIMARY KEY AUTOINCREMENT, AGE TEXT, ADDRESS TEXT, MOBILE TEXT,BLOOD TEXT,);
+                                                    CREATE TABLE IF NOT EXISTS PatientVisit (
+                                                                                                ID INTEGER, VISIT DATE,
+                                                                                                MEDICINE TEXT, ADVICE TEXT, FOLLOWUP TEXT, NOTES TEXT,
+                                                                                                COMPLAINT TEXT, HISTORY TEXT, ONEXAMINATION TEXT, INVESTIGATION TEXT,
+                                                                                                DIAGNOSIS TEXT, TREATMENTPLAN TEXT,
 
-                                                                            PRIMARY KEY (ID, VISIT)
-                                                                        );
-
-
-";
+                                                                                                PRIMARY KEY (ID, VISIT)
+                                                                                            );";
 
                                     command.CommandText = allQueries;
 
