@@ -26,11 +26,22 @@ namespace SmartClinic.View.UserControls
             {
                 var selectedPatient = (Patient)e.AddedItems[0];
 
-                // Show the popup with additional information
-                PopupText.Text = $"Selected Patient: {selectedPatient.Name}, Phone: {selectedPatient.Phone}, Address: {selectedPatient.Address}";
-                PatientPopup.IsOpen = true;
+                // Update the MainWindow content with the PatientProfileUserControl
+                UpdateMainWindowContent(selectedPatient);
             }
         }
+
+        private void UpdateMainWindowContent(Patient selectedPatient)
+        {
+            if (Application.Current.MainWindow is MainWindow mainWindow)
+            {
+                if (mainWindow.FindName("contentControl") is ContentControl contentControl)
+                {
+                    contentControl.Content = new View.UserControls.PatientProfileUserControl(selectedPatient);
+                }
+            }
+        }
+
 
 
         private void AddPatientButton_Click(object sender, RoutedEventArgs e)
