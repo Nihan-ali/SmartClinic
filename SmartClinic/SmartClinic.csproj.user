@@ -13,6 +13,12 @@
     <Compile Update="PatientList.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="PatientVisitDetails.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PatientVisits.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="SearchResultWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -64,6 +70,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="PatientList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PatientVisitDetails.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PatientVisits.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="SearchResultWindow.xaml">

@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Data.SQLite;
+
 namespace SmartClinic
 {
     public partial class AddPatient : Window
@@ -20,10 +21,15 @@ namespace SmartClinic
             string phone = phoneTextBox.Text;
             string address = addressTextBox.Text;
             string bloodGroup = (string)((ComboBoxItem)bloodGroupComboBox.SelectedItem).Content;
+
             if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(age) && !string.IsNullOrWhiteSpace(phone)
                 && !string.IsNullOrWhiteSpace(address) && !string.IsNullOrWhiteSpace(bloodGroup))
             {
-                DatabaseHelper.AddPatientIntoDB(name, age, phone,address,bloodGroup);
+                DatabaseHelper.AddPatientIntoDB(name, age, phone, address, bloodGroup);
+
+                // Create an instance of your UserControl
+               
+
                 MessageBox.Show("Data submitted successfully!");
             }
             else
@@ -33,7 +39,15 @@ namespace SmartClinic
 
             // Perform actions with the collected data as needed
         }
+        private void OpenButton_Click(object sender, RoutedEventArgs e)
+        {
+            PatientVisits patientVisitsWindow = new PatientVisits();
+            patientVisitsWindow.Show();
+
+        }
+
     }
 }
+
 
 

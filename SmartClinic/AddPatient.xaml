@@ -81,8 +81,10 @@
         </Grid>
 
         <!-- Sixth Row -->
-        <Button Content="Submit" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Click="SubmitButton_Click" Background="#03A9F4" Foreground="White"/>
+      
+        <Button Content="OpenPatintVisit" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Click="OpenButton_Click" Background="#03A9F4" Foreground="White"/>
         <!-- Blue Button -->
+        <Button Content="Submit" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Click="SubmitButton_Click" Background="#03A9F4" Foreground="White"/>
     </Grid>
 </Window>
 

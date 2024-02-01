@@ -1,0 +1,83 @@
+﻿<!-- PatientVisits.xaml -->
+<Window x:Class="SmartClinic.PatientVisits"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Patient Visits" Height="450" Width="800">
+    <Grid>
+        <!-- First Column (20*), Sub-columns with sizes: 20*, 15*, 17*, 10*, Auto -->
+        <!-- First Column (20*), Sub-columns with sizes: 20*, 15*, 17*, 10*, Auto -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="80*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- First Column: Sub-columns -->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="17*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Add your controls in the sub-columns of the first column here -->
+            <!-- Example: -->
+            <Border Grid.Row="0" Background="LightBlue" Margin="5">
+                <!-- Content for the first sub-column -->
+                <TextBlock Text="First Column 20*"/>
+            </Border>
+
+            <Border Grid.Row="1" Background="LightGreen" Margin="5">
+                <!-- Content for the second sub-column -->
+                <TextBlock Text="Second Column 15*"/>
+            </Border>
+
+            <Border Grid.Row="2" Background="LightYellow" Margin="5">
+                <!-- Content for the third sub-column -->
+                <TextBlock Text="Third Column 17*"/>
+            </Border>
+
+            <Border Grid.Row="3" Background="LightPink" Margin="5">
+                <!-- Content for the fourth sub-column -->
+                <TextBlock Text="Fourth Column 10*"/>
+            </Border>
+
+            <Border Grid.Row="4" Background="LightCoral" Margin="5">
+                <!-- Content for the fifth sub-column -->
+                <TextBlock Text="Fifth Column Auto"/>
+            </Border>
+        </Grid>
+
+        <!-- Second Column (80*), Sub-rows with sizes: 10*, 15*, Auto -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Add your controls in the sub-rows of the second column here -->
+            <!-- Example: -->
+            <Border Grid.Row="0" Background="LightSkyBlue" Margin="5">
+                <!-- Content for the first sub-row -->
+                <TextBlock Text="First Row 10*"/>
+            </Border>
+
+            <Border Grid.Row="1" Background="LightSalmon" Margin="5">
+                <!-- Content for the second sub-row -->
+                <TextBlock Text="Second Row 15*"/>
+            </Border>
+
+            <Border Grid.Row="2" Background="LightGray" Margin="5">
+                <!-- Content for the third sub-row -->
+                <TextBlock Text="Third Row Auto"/>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
+
+
+
+
+

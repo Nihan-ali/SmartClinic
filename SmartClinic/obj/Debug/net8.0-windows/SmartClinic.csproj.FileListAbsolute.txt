@@ -136,3 +136,7 @@ D:\AcademicProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\PatientList.
 D:\AcademicProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\PatientList.baml
 D:\AcademicProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\SearchResultWindow.g.cs
 D:\AcademicProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\SearchResultWindow.baml
+D:\AcademicProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\PatientVisits.g.cs
+D:\AcademicProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\PatientVisits.baml
+D:\AcademicProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\PatientVisitDetails.g.cs
+D:\AcademicProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\PatientVisitDetails.baml
