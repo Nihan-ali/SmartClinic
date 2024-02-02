@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         WindowStartupLocation="CenterScreen"
         Title="Medicine Search" Height="450" Width="680">
+
     <Grid Background="White">
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>

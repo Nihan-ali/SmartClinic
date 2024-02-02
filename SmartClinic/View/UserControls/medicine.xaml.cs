@@ -1,27 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using static SmartClinic.DatabaseHelper;
 
 namespace SmartClinic.View.UserControls
 {
-    /// <summary>
-    /// Interaction logic for medicine.xaml
-    /// </summary>
     public partial class medicine : UserControl
     {
         private List<Medicine> selectedMedicines = new List<Medicine>();
+        private List<Advice> selectedAdvices = new List<Advice>();
+
         public List<Medicine> SelectedMedicines => selectedMedicines;
+        public List<Advice> SelectedAdvices => selectedAdvices;
 
         public medicine()
         {
@@ -37,6 +30,19 @@ namespace SmartClinic.View.UserControls
             UpdateSelectedMedicinesListView();
         }
 
+        public void AddToSelectedAdvices(Advice newAdvice)
+        {
+            // Set the DisplayIndex for the new advice
+            newAdvice.DisplayIndex = selectedAdvices.Count + 1;
+
+            // Add the new advice to the selectedAdvices collection
+            selectedAdvices.Add(newAdvice);
+
+            // Update the selectedAdvicesListView
+            UpdateSelectedAdvicesListView();
+        }
+
+
         private void Rx_Click(object sender, RoutedEventArgs e)
         {
             MedicineSearchWindow searchWindow = new MedicineSearchWindow();
@@ -49,22 +55,55 @@ namespace SmartClinic.View.UserControls
             }
         }
 
+        private void Advices_Click(object sender, RoutedEventArgs e)
+        {
+            AdviceSearchWindow searchWindow = new AdviceSearchWindow();
+            searchWindow.ShowDialog();
+
+            // Handle the selected advices from the search window as needed
+            foreach (var selectedAdvice in searchWindow.SelectedAdvices)
+            {
+                AddToSelectedAdvices(selectedAdvice);
+            }
+        }
+
         private void UpdateSelectedMedicinesListView()
         {
             selectedMedicinesListView.ItemsSource = null;
             selectedMedicinesListView.ItemsSource = selectedMedicines;
         }
+
+        private void UpdateSelectedAdvicesListView()
+        {
+            // Update the selectedAdvicesListView directly from the collection
+            selectedAdvicesListView.ItemsSource = null;
+            selectedAdvicesListView.ItemsSource = selectedAdvices;
+        }
+
+
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button removeButton && removeButton.DataContext is Medicine selectedMedicine)
+            if (sender is Button removeButton)
             {
-                // Remove the selected medicine from the collection
-                selectedMedicines.Remove(selectedMedicine);
+                if (removeButton.DataContext is Medicine selectedMedicine)
+                {
+                    // Remove the selected medicine from the collection
+                    selectedMedicines.Remove(selectedMedicine);
 
-                // Update the selectedMedicinesListView
-                UpdateSelectedMedicinesListView();
+                    // Update the selectedMedicinesListView
+                    UpdateSelectedMedicinesListView();
+                }
+                else if (removeButton.DataContext is Advice selectedAdvice)
+                {
+                    // Remove the selected advice from the collection
+                    selectedAdvices.Remove(selectedAdvice);
+
+                    // Update the selectedAdvicesListView
+                    UpdateSelectedAdvicesListView();
+                }
             }
         }
+
         private void ListViewItem_Loaded(object sender, RoutedEventArgs e)
         {
             ListViewItem item = sender as ListViewItem;
@@ -97,17 +136,12 @@ namespace SmartClinic.View.UserControls
         }
 
 
-        private void Advices_Click(object sender, RoutedEventArgs e)
+        private void SpecialNotes_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
         private void FollowUp_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void SpecialNotes_Click(object sender, RoutedEventArgs e)
         {
 
         }

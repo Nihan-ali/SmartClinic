@@ -22,40 +22,62 @@ namespace SmartClinic
 
             if (!File.Exists(databaseFilePath))
             {
-                SQLiteConnection.CreateFile(databaseFilePath); // Create an empty database file
-
-                using (var connection = new SQLiteConnection(ConnectionString))
+                try
                 {
-                    connection.Open();
+                    SQLiteConnection.CreateFile(databaseFilePath); // Create an empty database file
 
-                    // Check if the "Medicine" table exists
-                    using (var checkCommand = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type='table' AND name='Medicine';", connection))
+                    using (var connection = new SQLiteConnection(ConnectionString))
                     {
-                        var result = checkCommand.ExecuteScalar();
-                        if (result == null || result == DBNull.Value)
-                        {
-                            // Create the "Medicine" table if it doesn't exist
-                            using (var createCommand = new SQLiteCommand("CREATE TABLE Medicine ( ID INTEGER PRIMARY KEY AUTOINCREMENT,  ManufacturerName TEXT NOT NULL, BrandName TEXT NOT NULL,  GenericName TEXT NOT NULL,  Strength TEXT,   DosageDescription TEXT,    RetailPrice DECIMAL(10, 2),   UseFor TEXT,DAR TEXT);", connection))
-                            {
-                                createCommand.ExecuteNonQuery();
-                            }
-                        }
-                    }
+                        connection.Open();
 
-                    // Create the "Patient" table if it doesn't exist
-                    using (var checkPatientCommand = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type='table' AND name='Patient';", connection))
-                    {
-                        var patientResult = checkPatientCommand.ExecuteScalar();
-                        if (patientResult == null || patientResult == DBNull.Value)
+                        // Check if the "Medicine" table exists
+                        using (var checkCommand = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type='table' AND name='Medicine';", connection))
                         {
-                            using (var createPatientCommand = new SQLiteCommand("CREATE TABLE Patient (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL, Age TEXT, Phone TEXT, Address TEXT, Blood TEXT);", connection))
+                            var result = checkCommand.ExecuteScalar();
+                            if (result == null || result == DBNull.Value)
                             {
-                                createPatientCommand.ExecuteNonQuery();
+                                // Create the "Medicine" table if it doesn't exist
+                                using (var command = new SQLiteCommand(connection))
+                                {
+                                    // Concatenate all the queries into a single string
+                                    string allQueries = @"
+                                                    CREATE TABLE IF NOT EXISTS Medicine (ID INTEGER PRIMARY KEY AUTOINCREMENT, ManufacturerName TEXT NOT NULL, BrandName TEXT NOT NULL, GenericName TEXT NOT NULL, Strength TEXT, MedicineType TEXT, DosageDescription TEXT);
+                                                    CREATE TABLE IF NOT EXISTS Advices (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
+                                                    CREATE TABLE IF NOT EXISTS FollowUp (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
+                                                    CREATE TABLE IF NOT EXISTS SpecialNotes (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
+
+                                                    CREATE TABLE IF NOT EXISTS ChiefComplaint (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
+                                                    CREATE TABLE IF NOT EXISTS History (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
+                                                    CREATE TABLE IF NOT EXISTS OnExamination (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
+                                                    CREATE TABLE IF NOT EXISTS Investigation (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
+                                                    CREATE TABLE IF NOT EXISTS Diagnosis (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
+                                                    CREATE TABLE IF NOT EXISTS TreatmentPlan (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
+
+                                                    CREATE TABLE IF NOT EXISTS Patient (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT,  Age TEXT, Address TEXT, Phone TEXT,Blood TEXT);
+                                                    CREATE TABLE IF NOT EXISTS PatientVisit (
+                                                                                                ID INTEGER, VISIT DATE,
+                                                                                                MEDICINE TEXT, ADVICE TEXT, FOLLOWUP TEXT, NOTES TEXT,
+                                                                                                COMPLAINT TEXT, HISTORY TEXT, ONEXAMINATION TEXT, INVESTIGATION TEXT,
+                                                                                                DIAGNOSIS TEXT, TREATMENTPLAN TEXT,
+
+                                                                                                PRIMARY KEY (ID, VISIT)
+                                                                                            );";
+
+                                    command.CommandText = allQueries;
+
+                                    // Execute the concatenated queries
+                                    command.ExecuteNonQuery();
+                                }
+                                ImportMed.Import();
                             }
                         }
                     }
 
                     Console.WriteLine($"Database file created at: {databaseFilePath}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error creating the database file: {ex.Message}");
                 }
             }
             else
@@ -233,7 +255,79 @@ namespace SmartClinic
 
             return initialMedicines;
         }
+        public static List<Advice> GetInitialAdvices()
+        {
+            List<Advice> initialAdvices = new List<Advice>();
+
+            using (SQLiteConnection connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT Content, Occurrence FROM Advices ORDER BY Occurrence DESC LIMIT 20";
+
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Advice advice = new Advice
+                        {
+                            Content = reader["Content"].ToString(),
+                            Occurrence = Convert.ToInt32(reader["Occurrence"])
+                        };
+
+                        initialAdvices.Add(advice);
+                    }
+                }
+            }
+
+            return initialAdvices;
+        }
+        public static List<Advice> SearchAdvices(string keyword)
+        {
+            List<Advice> searchResults = new List<Advice>();
+
+            using (SQLiteConnection connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT Content, Occurrence FROM Advices WHERE Content LIKE @keyword ORDER BY Occurrence";
+
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@keyword", $"%{keyword}%");
+
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Advice advice = new Advice
+                            {
+                                Content = reader["Content"].ToString(),
+                                Occurrence = Convert.ToInt32(reader["Occurrence"])
+                            };
+
+                            searchResults.Add(advice);
+                        }
+                    }
+                }
+            }
+
+            return searchResults;
+        }
+
+
+        public class Advice
+        {
+            public string Content { get; set; }
+            public int Occurrence { get; set; }
+            public int DisplayIndex { get; set; }
+        }
+
     }
+
+
+
 
     public class Patient : INotifyPropertyChanged
 {
