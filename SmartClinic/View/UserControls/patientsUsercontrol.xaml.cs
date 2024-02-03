@@ -18,6 +18,8 @@ namespace SmartClinic.View.UserControls
 
             // Set the ItemsSource of the ListBox to the Patients collection
             PatientsListBox.ItemsSource = Patients;
+            Console.WriteLine(PatientsListBox.ItemsSource);
+            Console.WriteLine("mostahid");
         }
 
         private void PatientsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -47,6 +49,12 @@ namespace SmartClinic.View.UserControls
         private void AddPatientButton_Click(object sender, RoutedEventArgs e)
         {
             // Handle add patient button click
+            AddPatient AddPatientWindow = new AddPatient();
+            // AddPatientWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            AddPatientWindow.Left = (SystemParameters.PrimaryScreenWidth - AddPatientWindow.Width) / 2;
+            AddPatientWindow.Top = (SystemParameters.PrimaryScreenHeight - AddPatientWindow.Height) / 2;
+            AddPatientWindow.Show();
+
         }
 
         private void OnSearchTextBoxGotFocus(object sender, RoutedEventArgs e)
