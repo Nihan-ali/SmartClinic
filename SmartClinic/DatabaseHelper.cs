@@ -187,14 +187,15 @@ namespace SmartClinic
 
                             while (reader.Read())
                             {
-                                Medicine medicine = new Medicine(
-                                   reader["GenericName"].ToString(),
-                                   reader["DosageDescription"].ToString()
-                               )
+                                Medicine medicine = new Medicine
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
                                     BrandName = reader["BrandName"].ToString(),
-                                    Strength = reader["Strength"].ToString()
+                                    GenericName = reader["GenericName"].ToString(),
+                                    Strength = reader["Strength"].ToString(),
+                                    ManufacturerName = reader["ManufacturerName"].ToString(),
+                                    DosageDescription = reader["DosageDescription"].ToString(),
+                                    MedicineType = reader["MedicineType"].ToString()
                                 };
 
                                 medicines.Add(medicine);
@@ -231,20 +232,22 @@ namespace SmartClinic
             using (var connection = GetConnection())
             {
                 connection.Open();
-                using (var command = new SQLiteCommand("SELECT * FROM Medicine LIMIT 15;", connection))
+                using (var command = new SQLiteCommand("SELECT * FROM Medicine LIMIT 45;", connection))
                 {
                     using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            Medicine medicine = new Medicine(
-                             reader["GenericName"].ToString(),
-                             reader["DosageDescription"].ToString()
-                         )
+
+                            Medicine medicine = new Medicine
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
                                 BrandName = reader["BrandName"].ToString(),
-                                Strength = reader["Strength"].ToString()
+                                GenericName = reader["GenericName"].ToString(),
+                                Strength = reader["Strength"].ToString(),
+                                ManufacturerName = reader["ManufacturerName"].ToString(),
+                                DosageDescription = reader["DosageDescription"].ToString(),
+                                MedicineType = reader["MedicineType"].ToString()
                             };
 
                             initialMedicines.Add(medicine);
@@ -372,13 +375,11 @@ namespace SmartClinic
         public string BrandName { get; set; }
         public string GenericName { get; set; }
         public string Strength { get; set; }
+        public string ManufacturerName { get; set; }
+        public string MedicineType { get; set; }
         public string DosageDescription { get; set; }
+        public string note{ get; set; }
 
-        public Medicine(string genericName, string dosageDescription)
-        {
-            GenericName = genericName;
-            DosageDescription = dosageDescription;
-        }
 
         public string DisplayText => $"{GenericName} - {DosageDescription}";
 
