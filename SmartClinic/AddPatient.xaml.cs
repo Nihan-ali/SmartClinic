@@ -1,21 +1,21 @@
-﻿using System.Windows;
+﻿using SmartClinic.View.UserControls;
+using System.Windows;
 using System.Windows.Controls;
-using System.Data.SQLite;
 
 namespace SmartClinic
 {
     public partial class AddPatient : Window
     {
-        public AddPatient()
+        private patientInfo _patientInfoUserControl;
+
+        public AddPatient(patientInfo patientInfoUserControl)
         {
             InitializeComponent();
-           
+            _patientInfoUserControl = patientInfoUserControl;
         }
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
-            // Handle the submit button click event here
-            // You can access the entered data and perform any necessary actions
             string name = nameTextBox.Text;
             string age = ageTextBox.Text;
             string phone = phoneTextBox.Text;
@@ -27,19 +27,14 @@ namespace SmartClinic
             {
                 DatabaseHelper.InsertPatientInfo(name, age, phone, address, bloodGroup);
 
-                // Create an instance of your UserControl
-
-
-                MessageBox.Show("Data submitted successfully!");
+                // Update the patientInfo UserControl
+                _patientInfoUserControl.UpdatePatientInfo(name, age);
+                this.Close();
             }
             else
             {
                 MessageBox.Show("Please fill in all fields.");
             }
-
-            // Perform actions with the collected data as needed
         }
-        
-
     }
 }

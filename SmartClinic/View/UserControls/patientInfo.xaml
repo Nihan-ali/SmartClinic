@@ -17,19 +17,19 @@
         <!-- Name Label and Add Patient Button -->
         <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="10">
             <Label Content="Name :" VerticalAlignment="Center" FontWeight="Bold"/>
-            <Button Content="+ Add Patient" Foreground="Blue" FontWeight="Bold" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center"/>
+            <Button Content="+ Add Patient" Foreground="Blue" FontWeight="Bold" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center" Click="Button_Click"/>
         </StackPanel>
 
         <!-- Today's Date -->
         <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
             <Label Content="Date : " VerticalAlignment="Center" FontWeight="Bold"/>
-            <TextBlock Grid.Column="1" Text="{Binding TodayDate}" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="1" Text="{Binding TodayDate, RelativeSource={RelativeSource AncestorType=UserControl}}" VerticalAlignment="Center"/>
         </StackPanel>
 
         <!-- Patient's Age -->
         <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
             <Label Content="Age : " VerticalAlignment="Center" FontWeight="Bold"/>
-            <TextBlock Grid.Column="2" Text="age here" VerticalAlignment="Center"/>
+            <TextBlock x:Name="ageTextBlock" Grid.Column="2" VerticalAlignment="Center"/>
         </StackPanel>
 
         <!-- Search Patient TextBox and Button -->
@@ -37,9 +37,7 @@
             <Button Name="search" Background="{x:Null}" BorderBrush="{x:Null}">
                 <Image Source="../../search.png" Height="15" Width="15"/>
             </Button>
-            <TextBox x:Name="searchPatientTextBox" Text="Search Patient" Width="200" Margin="0,0,10,0" Foreground="Gray"  GotFocus="OnSearchTextBoxGotFocus" LostFocus="OnSearchTextBoxLostFocus"/>
-
+            <TextBox x:Name="searchPatientTextBox" Text="Search Patient" Width="200" Margin="0,0,10,0" Foreground="Gray" GotFocus="OnSearchTextBoxGotFocus" LostFocus="OnSearchTextBoxLostFocus"/>
         </StackPanel>
-
     </Grid>
 </UserControl>
