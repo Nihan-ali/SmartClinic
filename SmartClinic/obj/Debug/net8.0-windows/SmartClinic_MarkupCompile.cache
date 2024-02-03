@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\
 SmartClinic
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-E:\Web_Dev\350\SmartClinic\SmartClinic\App.xaml
-201878664370
+H:\MED\CSE350\SmartClinic\App.xaml
+22463235685
 61230279792
-27-442251794
-208-149389658
-MainWindow.xaml;View\UserControls\AdviceSearchWindow.xaml;View\UserControls\ChiefComplaintPopup.xaml;View\UserControls\DetailsWindow.xaml;View\UserControls\Footer.xaml;View\UserControls\header.xaml;View\UserControls\History.xaml;View\UserControls\medicine.xaml;View\UserControls\MedicineSearchWindow.xaml;View\UserControls\MenuBar.xaml;View\UserControls\patientInfo.xaml;View\UserControls\PatientList.xaml;View\UserControls\PatientProfileUserControl.xaml;View\UserControls\patientsUsercontrol.xaml;View\UserControls\RxUsercontrol.xaml;View\UserControls\savePrint.xaml;View\UserControls\searchMenu.xaml;View\UserControls\title.xaml;View\UserControls\treatment.xaml;View\UserControls\TreatmentPlanPopup.xaml;
+30572007201
+208513439359
+MainWindow.xaml;View\UserControls\AddPatient.xaml;View\UserControls\AdviceSearchWindow.xaml;View\UserControls\ComplaintSearchWindow.xaml;View\UserControls\DetailsWindow.xaml;View\UserControls\EditComplaintControl.xaml;View\UserControls\Footer.xaml;View\UserControls\header.xaml;View\UserControls\History.xaml;View\UserControls\medicine.xaml;View\UserControls\MedicineSearchWindow.xaml;View\UserControls\MenuBar.xaml;View\UserControls\patientInfo.xaml;View\UserControls\PatientList.xaml;View\UserControls\PatientProfileUserControl.xaml;View\UserControls\patientsUsercontrol.xaml;View\UserControls\RxUsercontrol.xaml;View\UserControls\savePrint.xaml;View\UserControls\searchMenu.xaml;View\UserControls\title.xaml;View\UserControls\treatment.xaml;View\UserControls\TreatmentPlanPopup.xaml;
 
 False
 

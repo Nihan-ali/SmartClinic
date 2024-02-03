@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 H:\MED\CSE350\SmartClinic\App.xaml
-201878664370
+22463235685
 61230279792
-29-1657549779
-198-294894759
-MainWindow.xaml;View\UserControls\AdviceSearchWindow.xaml;View\UserControls\ChiefComplaintPopup.xaml;View\UserControls\DetailsWindow.xaml;View\UserControls\Footer.xaml;View\UserControls\header.xaml;View\UserControls\History.xaml;View\UserControls\medicine.xaml;View\UserControls\MedicineSearchWindow.xaml;View\UserControls\MenuBar.xaml;View\UserControls\patientInfo.xaml;View\UserControls\PatientList.xaml;View\UserControls\PatientProfileUserControl.xaml;View\UserControls\patientsUsercontrol.xaml;View\UserControls\RxUsercontrol.xaml;View\UserControls\savePrint.xaml;View\UserControls\searchMenu.xaml;View\UserControls\title.xaml;View\UserControls\treatment.xaml;View\UserControls\TreatmentPlanPopup.xaml;
+32-643290784
+208513439359
+MainWindow.xaml;View\UserControls\AddPatient.xaml;View\UserControls\AdviceSearchWindow.xaml;View\UserControls\ComplaintSearchWindow.xaml;View\UserControls\DetailsWindow.xaml;View\UserControls\EditComplaintControl.xaml;View\UserControls\Footer.xaml;View\UserControls\header.xaml;View\UserControls\History.xaml;View\UserControls\medicine.xaml;View\UserControls\MedicineSearchWindow.xaml;View\UserControls\MenuBar.xaml;View\UserControls\patientInfo.xaml;View\UserControls\PatientList.xaml;View\UserControls\PatientProfileUserControl.xaml;View\UserControls\patientsUsercontrol.xaml;View\UserControls\RxUsercontrol.xaml;View\UserControls\savePrint.xaml;View\UserControls\searchMenu.xaml;View\UserControls\title.xaml;View\UserControls\treatment.xaml;View\UserControls\TreatmentPlanPopup.xaml;
 
-False
+True
 

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SQLite;
 using System.IO;
+using System.IO.Packaging;
+using System.Net;
+using System.Windows.Controls;
+using System.Xml.Linq;
 
 namespace SmartClinic
 {
@@ -83,6 +87,59 @@ namespace SmartClinic
             else
             {
                 Console.WriteLine($"Database file already exists at: {databaseFilePath}");
+            }
+        }
+
+        public static List<Complaint> GetInitialComplaint()
+        {
+            List<Complaint> initialComplaint = new List<Complaint>();
+
+            using (SQLiteConnection connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT Content, Occurrence FROM ChiefComplaint ORDER BY Occurrence DESC LIMIT 20";
+
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Complaint comp = new Complaint
+                        {
+                            Content = reader["Content"].ToString(),
+                            Occurrence = Convert.ToInt32(reader["Occurrence"])
+                        };
+
+                        initialComplaint.Add(comp);
+                    }
+                }
+            }
+
+            return initialComplaint;
+        }
+
+        public static void AddComplaint(string complaint)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var insertCommand = new SQLiteCommand("INSERT INTO ChiefComplaint (Content, Occurrence) VALUES (@Complaint, @Occurrence);", connection))
+                    {
+                        insertCommand.Parameters.AddWithValue("@Complaint", complaint);
+                        insertCommand.Parameters.AddWithValue("@Occurrence", 0);
+
+                        insertCommand.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error inserting complaint {ex}");
+                throw;
             }
         }
 
@@ -187,14 +244,15 @@ namespace SmartClinic
 
                             while (reader.Read())
                             {
-                                Medicine medicine = new Medicine(
-                                   reader["GenericName"].ToString(),
-                                   reader["DosageDescription"].ToString()
-                               )
+                                Medicine medicine = new Medicine
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
                                     BrandName = reader["BrandName"].ToString(),
-                                    Strength = reader["Strength"].ToString()
+                                    GenericName = reader["GenericName"].ToString(),
+                                    Strength = reader["Strength"].ToString(),
+                                    ManufacturerName = reader["ManufacturerName"].ToString(),
+                                    DosageDescription = reader["DosageDescription"].ToString(),
+                                    MedicineType = reader["MedicineType"].ToString()
                                 };
 
                                 medicines.Add(medicine);
@@ -216,12 +274,10 @@ namespace SmartClinic
         {
             return new SQLiteConnection(ConnectionString);
         }
-
         public enum MedicineSearchCriteria
         {
             BrandName,
             GenericName,
-            // Add more criteria if needed
         }
 
         public static List<Medicine> GetInitialMedicines()
@@ -231,20 +287,22 @@ namespace SmartClinic
             using (var connection = GetConnection())
             {
                 connection.Open();
-                using (var command = new SQLiteCommand("SELECT * FROM Medicine LIMIT 15;", connection))
+                using (var command = new SQLiteCommand("SELECT * FROM Medicine LIMIT 45;", connection))
                 {
                     using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            Medicine medicine = new Medicine(
-                             reader["GenericName"].ToString(),
-                             reader["DosageDescription"].ToString()
-                         )
+
+                            Medicine medicine = new Medicine
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
                                 BrandName = reader["BrandName"].ToString(),
-                                Strength = reader["Strength"].ToString()
+                                GenericName = reader["GenericName"].ToString(),
+                                Strength = reader["Strength"].ToString(),
+                                ManufacturerName = reader["ManufacturerName"].ToString(),
+                                DosageDescription = reader["DosageDescription"].ToString(),
+                                MedicineType = reader["MedicineType"].ToString()
                             };
 
                             initialMedicines.Add(medicine);
@@ -316,90 +374,59 @@ namespace SmartClinic
             return searchResults;
         }
 
-
-        public class Advice
+        public static List<PatientVisit> GetPatientVisitsById(int patientId)
         {
-            public string Content { get; set; }
-            public int Occurrence { get; set; }
-            public int DisplayIndex { get; set; }
-        }
-
-    }
-
-
-
-
-    public class Patient : INotifyPropertyChanged
-{
-    private bool isSelected;
-
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Age { get; set; }
-        public string Phone { get; set; }
-        public string Address { get; set; }
-        public string Blood { get; set; }
-
-        public bool IsSelected
-    {
-        get { return isSelected; }
-        set
-        {
-            if (isSelected != value)
+            try
             {
-                isSelected = value;
-                OnPropertyChanged(nameof(IsSelected));
-            }
-        }
-    }
-
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    protected virtual void OnPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-}
-
-
-    public class Medicine : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private bool isSelected;
-
-        public int Id { get; set; }
-        public string BrandName { get; set; }
-        public string GenericName { get; set; }
-        public string Strength { get; set; }
-        public string DosageDescription { get; set; }
-
-        public Medicine(string genericName, string dosageDescription)
-        {
-            GenericName = genericName;
-            DosageDescription = dosageDescription;
-        }
-
-        public string DisplayText => $"{GenericName} - {DosageDescription}";
-
-        public string AdditionalText => $"Take this 3 times";
-
-        public bool IsSelected
-        {
-            get { return isSelected; }
-            set
-            {
-                if (isSelected != value)
+                using (var connection = GetConnection())
                 {
-                    isSelected = value;
-                    OnPropertyChanged(nameof(IsSelected));
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT * FROM PatientVisit WHERE ID = @PatientId;", connection))
+                    {
+                        command.Parameters.AddWithValue("@PatientId", patientId);
+
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<PatientVisit> patientVisits = new List<PatientVisit>();
+
+                            while (reader.Read())
+                            {
+                                PatientVisit visit = new PatientVisit
+                                {
+                                    Id = Convert.ToInt32(reader["ID"]),
+                                    Visit = Convert.ToDateTime(reader["VISIT"]),
+                                    Medicine = reader["MEDICINE"].ToString(),
+                                    Advice = reader["ADVICE"].ToString(),
+                                    FollowUp = reader["FOLLOWUP"].ToString(),
+                                    Notes = reader["NOTES"].ToString(),
+                                    Complaint = reader["COMPLAINT"].ToString(),
+                                    History = reader["HISTORY"].ToString(),
+                                    OnExamination = reader["ONEXAMINATION"].ToString(),
+                                    Investigation = reader["INVESTIGATION"].ToString(),
+                                    Diagnosis = reader["DIAGNOSIS"].ToString(),
+                                    TreatmentPlan = reader["TREATMENTPLAN"].ToString(),
+                                };
+
+                                patientVisits.Add(visit);
+                            }
+
+                            return patientVisits;
+                        }
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching patient visits: {ex}");
+                throw;
+            }
         }
 
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
-}
+
+    }
+
+
+

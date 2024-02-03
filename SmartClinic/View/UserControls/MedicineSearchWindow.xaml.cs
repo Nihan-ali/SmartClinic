@@ -167,7 +167,7 @@ namespace SmartClinic
             // Check if a medicine is selected
             if (selectedMedicine != null)
             {
-                
+
                 // Create an instance of the medicine UserControl
                 medicine medicineUserControl = new medicine();
 

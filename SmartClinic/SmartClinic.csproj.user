@@ -7,13 +7,19 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="View\UserControls\AddPatient.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\UserControls\AdviceSearchWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\UserControls\ChiefComplaintPopup.xaml.cs">
+    <Compile Update="View\UserControls\ComplaintSearchWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\DetailsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\UserControls\EditComplaintControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\Footer.xaml.cs">
@@ -69,13 +75,19 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\UserControls\AddPatient.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\UserControls\AdviceSearchWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\UserControls\ChiefComplaintPopup.xaml">
+    <Page Update="View\UserControls\ComplaintSearchWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\DetailsWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserControls\EditComplaintControl.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\Footer.xaml">
