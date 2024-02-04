@@ -1,28 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SmartClinic.View.UserControls
 {
-    /// <summary>
-    /// Interaction logic for searchMenu.xaml
-    /// </summary>
     public partial class searchMenu : UserControl
     {
         public searchMenu()
         {
             InitializeComponent();
+
+            // Set the placeholder text and opacity initially
+            searchTextBox.Text = "search here";
+            searchTextBox.Opacity = 0.5;
+        }
+
+        private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            // Clear the placeholder text when the TextBox gets focus
+            if (searchTextBox.Text == "search here")
+            {
+                searchTextBox.Text = "";
+                searchTextBox.Opacity = 1.0;
+            }
+        }
+
+        private void SearchTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            // Restore the placeholder text when the TextBox loses focus and is empty
+            if (string.IsNullOrWhiteSpace(searchTextBox.Text))
+            {
+                searchTextBox.Text = "search here";
+                searchTextBox.Opacity = 0.5;
+            }
         }
     }
 }
+
+

@@ -7,6 +7,10 @@ namespace SmartClinic
     public partial class AddPatient : Window
     {
         private patientInfo _patientInfoUserControl;
+        public AddPatient()
+        {
+            ;
+        }
 
         public AddPatient(patientInfo patientInfoUserControl)
         {
