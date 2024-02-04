@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="1000">
 
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid Background="White" Margin="50,2,50,2" MouseDown="OnGridMouseDown">
+        <Grid Background="White" Margin="50,2,50,2" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -26,11 +26,11 @@
             </Grid>
 
             <!-- Search Section -->
-            <TextBox x:Name="searchPatient" Text="Search from patient" Grid.Row="1" Margin="10" Height="25" BorderBrush="Blue"/>
+            <TextBox x:Name="SearchPatient" Text="Search from patient" Grid.Row="1" Margin="10" Height="25" BorderBrush="Blue" GotFocus="OnSearchTextBoxGotFocus" LostFocus="OnSearchTextBoxLostFocus"/>
 
             <!-- Patient List -->
             <!-- Patient List -->
-            <ListBox x:Name="PatientsListBox" Grid.Row="2" Margin="10" SelectionChanged="PatientsListBox_SelectionChanged" HorizontalContentAlignment="Stretch">
+            <ListBox x:Name="PatientsListBox" Grid.Row="2" Margin="10" SelectionChanged="PatientsListBox_SelectionChanged" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Patients}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="DarkGray" BorderThickness="1" CornerRadius="5" Margin="5" Background="White" HorizontalAlignment="Stretch">
@@ -83,7 +83,7 @@
                                     </TextBlock>
 
                                     <!-- Delete Button -->
-                                    <Button x:Name="Delete" Content="Delete" Margin="10,5" Background="#FF3C5A7D" BorderBrush="{x:Null}" FontWeight="Bold" Foreground="White" Grid.Column="4"/>
+                                    <Button x:Name="Delete" Content="Delete" Margin="10,5" Background="#FF3C5A7D" BorderBrush="{x:Null}" FontWeight="Bold" Foreground="White" Grid.Column="4" Click="Delete_Click"/>
                                 </Grid>
                             </Grid>
                         </Border>

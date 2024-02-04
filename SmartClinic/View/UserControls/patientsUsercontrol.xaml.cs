@@ -18,6 +18,8 @@ namespace SmartClinic.View.UserControls
 
             // Set the ItemsSource of the ListBox to the Patients collection
             PatientsListBox.ItemsSource = Patients;
+            SearchPatient.Text = "search Patient";
+            SearchPatient.Opacity = 0.5;
             Console.WriteLine(PatientsListBox.ItemsSource);
             Console.WriteLine("mostahid");
         }
@@ -60,30 +62,79 @@ namespace SmartClinic.View.UserControls
         private void OnSearchTextBoxGotFocus(object sender, RoutedEventArgs e)
         {
             // Handle search text box got focus
+            if (SearchPatient.Text == "search Patient")
+            {
+                SearchPatient.Text = "";
+                SearchPatient.Opacity = 1.0;
+            }
         }
 
         private void OnSearchTextBoxLostFocus(object sender, RoutedEventArgs e)
         {
             // Handle search text box lost focus
+            if (string.IsNullOrWhiteSpace(SearchPatient.Text))
+            {
+                SearchPatient.Text = "search Patient";
+                SearchPatient.Opacity = 0.5;
+            }
+        }
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the DataContext of the clicked button, which is a Patient object
+            if (sender is FrameworkElement element && element.DataContext is Patient patientToDelete)
+            {
+                // Perform the deletion from the database
+                bool deleted = DeletePatient(patientToDelete.Id);
+
+                if (deleted)
+                {
+                    // Remove the item from the ObservableCollection
+                    Patients.Remove(patientToDelete);
+                }
+                else
+                {
+                    MessageBox.Show("Failed to delete the patient.");
+                }
+            }
         }
 
-        private void SearchBox_KeyDown(object sender, RoutedEventArgs e)
+        private bool DeletePatient(int patientId)
         {
-            // Handle search box key down event
-            // You might want to filter the Patients collection based on the search term
+            // Implement your logic to delete the patient from the database
+            // Return true if deletion is successful, false otherwise
+            try
+            {
+                // Your database deletion logic here...
+                // Example: DatabaseHelper.DeletePatient(patientId);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception
+                MessageBox.Show($"Error deleting patient: {ex.Message}");
+                return false;
+            }
         }
-        private void OnGridMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            // Handle mouse down on the grid or UserControl
-            // This can help maintain focus and close the popup
-            PatientPopup.IsOpen = false;
-        }
-        private void PatientList_MouseDown(object sender, RoutedEventArgs e)
-        {
-            // Handle mouse down event for the entire window
-        }
-
-        // Add other methods as needed...
-
     }
+
+    /*private void SearchBox_KeyDown(object sender, RoutedEventArgs e)
+    {
+        // Handle search box key down event
+        // You might want to filter the Patients collection based on the search term
+    }*/
+   /* private void OnGridMouseDown(object sender, MouseButtonEventArgs e)
+    {
+        // Handle mouse down on the grid or UserControl
+        // This can help maintain focus and close the popup
+      *//*  PatientPopup.IsOpen = false;
+    }*/
+  /*  private void PatientList_MouseDown(object sender, RoutedEventArgs e)
+    {
+        // Handle mouse down event for the entire window';
+        ;
+    }
+*/
+    // Add other methods as needed...
+
+
 }
