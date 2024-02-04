@@ -5,64 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartClinic.View.UserControls"
         mc:Ignorable="d"
-        Title="AdviceSearchWindow" Height="450" Width="800">
+        Title="AdviceSearchWindow" Height="250" Width="800">
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="1" BorderBrush="LightBlue" BorderThickness="0,2,0,0" Margin="10,1,10,1"/>
+
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-            <Label Content="Advices" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18"/>
-            <Border BorderBrush="Blue" BorderThickness="1" CornerRadius="15" Margin="50,2,20,3">
-                <TextBox x:Name="searchTextBox" Width="350" HorizontalAlignment="Left" Margin="20,0,20,0" VerticalAlignment="Center" Background="White" BorderThickness="0" TextChanged="SearchTextBox_TextChanged">
-                    <TextBox.Style>
-                        <Style TargetType="TextBox">
-                            <Setter Property="Padding" Value="8,2"/>
-                            <Setter Property="Foreground" Value="Black"/>
-                            <Setter Property="FontSize" Value="14"/>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#D6ECF8"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
-                </TextBox>
+            <Label Content="Advices" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18"/>
+            <Border BorderBrush="Blue" Width="400" BorderThickness="1" CornerRadius="15" Margin="100,2,20,3">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../search.png" Margin="5,0,0,0" Height="15" Width="15" VerticalAlignment="Center"/>
+                    <TextBox x:Name="searchTextBox" Width="360" HorizontalAlignment="Left" VerticalAlignment="Center" Background="White" BorderThickness="0" KeyDown="EnterPressed" TextChanged="SearchTextBox_TextChanged">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Padding" Value="8,2"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="FontSize" Value="14"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#D6ECF8"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                </StackPanel>
             </Border>
-
-
-
-            <!-- Popup for Search Results -->
-           
         </StackPanel>
 
-        <ListBox Grid.Row="1" Margin="5,5,5,0" BorderBrush="{x:Null}" SelectionMode="Single">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="LightBlue"/>
-                            <Setter Property="Foreground" Value="DarkBlue"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </ListBox.ItemContainerStyle>
-
-            <Button Content="Advices" Background="LightBlue" Height="30" Foreground="Blue" FontWeight="Bold" BorderBrush="{x:Null}"  Width="300"/>
-            <Button Content="Advice Group" Background="White" Height="30" Foreground="Blue" FontWeight="Bold" BorderBrush="{x:Null}"  Width="310"/>
-        </ListBox>
-
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" Background="#FFE8E8E8" Margin="10,0,10,0">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Background="#FFE8E8E8" Margin="10,0,10,10">
             <ItemsControl x:Name="adviceItemsControl" Grid.Row="2" Margin="5">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -81,21 +56,7 @@
             </ItemsControl>
         </ScrollViewer>
 
-        
 
-        <ListView x:Name="selectedAdvicesListView" Grid.Row="3" Background="#FFE8E8E8" Margin="10">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <!-- First line with DisplayText -->
-                        <TextBlock Text="{Binding Content}" Margin="0,0,0,5"/>
-                        <!-- Second line with generic text -->
-                        <!--<TextBlock Text="{Binding AdditionalText}" FontStyle="Italic" Foreground="Gray"/>-->
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
-        <Button x:Name="addToAdvices" Content="Add To Prescription" Grid.Row="4" Background="LightBlue" FontWeight="Bold" Click="addToRx_Click"/>
+        <Button x:Name="addToAdvices" Content="Add To Prescription" Grid.Row="4" Background="LightBlue" FontWeight="Bold" Click="addToAdvice_Click"/>
     </Grid>
 </Window>

@@ -84,5 +84,10 @@ namespace SmartClinic.View.UserControls
             AddPatientWindow.Top = (SystemParameters.PrimaryScreenHeight - AddPatientWindow.Height) / 2;
             AddPatientWindow.Show();
         }
+
+        private void searchPatientTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

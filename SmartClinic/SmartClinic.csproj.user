@@ -19,7 +19,16 @@
     <Compile Update="View\UserControls\DetailsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\UserControls\DiagnosisSearchWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\UserControls\EditComplaintControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\UserControls\ExaminationSearchWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\UserControls\FollowUpSearchWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\Footer.xaml.cs">
@@ -29,6 +38,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\History.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\UserControls\HistorySearchWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\UserControls\InvestigationSearchWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\medicine.xaml.cs">
@@ -61,13 +76,16 @@
     <Compile Update="View\UserControls\searchMenu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\UserControls\SpecialNoteSearchWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\UserControls\title.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\treatment.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\UserControls\TreatmentPlanPopup.xaml.cs">
+    <Compile Update="View\UserControls\TreatmentSearchWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -87,7 +105,16 @@
     <Page Update="View\UserControls\DetailsWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\UserControls\DiagnosisSearchWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\UserControls\EditComplaintControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserControls\ExaminationSearchWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserControls\FollowUpSearchWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\Footer.xaml">
@@ -97,6 +124,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\History.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserControls\HistorySearchWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserControls\InvestigationSearchWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\medicine.xaml">
@@ -129,13 +162,16 @@
     <Page Update="View\UserControls\searchMenu.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\UserControls\SpecialNoteSearchWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\UserControls\title.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\treatment.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\UserControls\TreatmentPlanPopup.xaml">
+    <Page Update="View\UserControls\TreatmentSearchWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

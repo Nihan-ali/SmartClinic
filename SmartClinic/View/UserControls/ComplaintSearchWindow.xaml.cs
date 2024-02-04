@@ -25,6 +25,7 @@ namespace SmartClinic.View.UserControls
 
         public ObservableCollection<Complaint> SelectedComplaints => selectedComplaints;
 
+        
         public ComplaintSearchWindow()
         {
             InitializeComponent();
@@ -45,7 +46,6 @@ namespace SmartClinic.View.UserControls
                 string comp = searchTextBox.Text;
                 Complaint selectedComplaint = new Complaint();
                 selectedComplaint.Content = comp;
-                selectedComplaint.DisplayIndex = SelectedComplaints.Count + 1;
                 SelectedComplaints.Add(selectedComplaint);
                 UpdateSelectedComplaintListView();
                 DatabaseHelper.AddComplaint(comp);
@@ -76,9 +76,6 @@ namespace SmartClinic.View.UserControls
 
             if (toggleButton.IsChecked == true)
             {
-                // Set the DisplayIndex for the selected advice
-                selectedComplaint.DisplayIndex = SelectedComplaints.Count + 1;
-
                 SelectedComplaints.Add(selectedComplaint);
             }
             else
@@ -100,33 +97,10 @@ namespace SmartClinic.View.UserControls
 
         private void addToComplaint_Click(object sender, RoutedEventArgs e)
         {
-            Complaint selectedComplaint = (Complaint)selectedComplaintListView.SelectedItem;
-            //MessageBox.Show(selectedComplaint.Note);
-
-            // Check if an Complaint is selected
-            if (selectedComplaint != null)
-            {
-                // Add the selected Complaint to the ObservableCollection
-                selectedComplaints.Add(selectedComplaint);
-
-                // Update the ListView directly from the collection
-                UpdateSelectedComplaintListView();
-
-                // Create an instance of the medicine UserControl
-                History complaintUserControl = new History();
-
-                // Add the selected Complaint to the list in the medicine UserControl
-                complaintUserControl.AddToSelectedComplaints(selectedComplaint);
-
-                // Close the ComplaintSearchWindow
-                this.Close();
-            }
-            else
-            {
-                // Optionally, display a message or take any other actions if no Complaint is selected
-                this.Close();
-            }
+            this.Close();
+            DatabaseHelper.IncreaseComplaintOccurrence(selectedComplaints);           
         }
+
 
         private void RemoveComplaintFromWindow(object sender, RoutedEventArgs e)
         {

@@ -224,7 +224,6 @@ H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\savePrint.g
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\searchMenu.g.cs
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\title.g.cs
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\treatment.g.cs
-H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\TreatmentPlanPopup.g.cs
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\App.g.cs
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\SmartClinic_Content.g.cs
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
@@ -247,7 +246,6 @@ H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\savePrint.b
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\searchMenu.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\title.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\treatment.baml
-H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\TreatmentPlanPopup.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\SmartClinic.g.resources
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\SmartClinic.GeneratedMSBuildEditorConfig.editorconfig
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\SmartClinic.AssemblyInfoInputs.cache
@@ -266,3 +264,17 @@ H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\EditComplai
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\EditComplaintControl.g.cs
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\AddPatient.g.cs
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\AddPatient.baml
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\HistorySearchWindow.g.cs
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\HistorySearchWindow.baml
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\ExaminationSearchWindow.g.cs
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\ExaminationSearchWindow.baml
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\InvestigationSearchWindow.g.cs
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\InvestigationSearchWindow.baml
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\DiagnosisSearchWindow.g.cs
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\TreatmentSearchWindow.g.cs
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\DiagnosisSearchWindow.baml
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\TreatmentSearchWindow.baml
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\FollowUpSearchWindow.g.cs
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\SpecialNoteSearchWindow.g.cs
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\FollowUpSearchWindow.baml
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\SpecialNoteSearchWindow.baml

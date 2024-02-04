@@ -12,9 +12,14 @@ namespace SmartClinic.View.UserControls
     {
         private List<Medicine> selectedMedicines = new List<Medicine>();
         private List<Advice> selectedAdvices = new List<Advice>();
+        private List<FollowUp> selectedFollowUps = new List<FollowUp>();
+        private List<SpecialNote> selectedSpecialNotes = new List<SpecialNote>();
 
         public List<Medicine> SelectedMedicines => selectedMedicines;
         public List<Advice> SelectedAdvices => selectedAdvices;
+        public List<FollowUp> SelectedFollowUps => selectedFollowUps;
+        public List<SpecialNote> SelectedSpecialNotes => selectedSpecialNotes;
+
 
         public medicine()
         {
@@ -29,17 +34,17 @@ namespace SmartClinic.View.UserControls
             // Update the selectedMedicinesListView
             UpdateSelectedMedicinesListView();
         }
-
         public void AddToSelectedAdvices(Advice newAdvice)
         {
-            // Set the DisplayIndex for the new advice
-            newAdvice.DisplayIndex = selectedAdvices.Count + 1;
-
-            // Add the new advice to the selectedAdvices collection
             selectedAdvices.Add(newAdvice);
-
-            // Update the selectedAdvicesListView
-            UpdateSelectedAdvicesListView();
+        }
+        public void AddToSelectedFollowUps(FollowUp newFollowUp)
+        {
+            selectedFollowUps.Add(newFollowUp);
+        }
+        public void AddToSelectedSpecialNotes(SpecialNote newSpecialNote)
+        {
+            selectedSpecialNotes.Add(newSpecialNote);
         }
 
 
@@ -54,7 +59,6 @@ namespace SmartClinic.View.UserControls
                 AddToSelectedMedicines(selectedMedicine);
             }
         }
-
         private void Advices_Click(object sender, RoutedEventArgs e)
         {
             AdviceSearchWindow searchWindow = new AdviceSearchWindow();
@@ -66,18 +70,40 @@ namespace SmartClinic.View.UserControls
                 AddToSelectedAdvices(selectedAdvice);
             }
         }
+        private void AddFollowUp_Click(object sender, RoutedEventArgs e)
+        {
+            FollowUpSearchWindow followUpWindow = new FollowUpSearchWindow();
+            followUpWindow.ShowDialog();
+            foreach (var selectedFollowUp in followUpWindow.SelectedFollowUps)
+            {
+                AddToSelectedFollowUps(selectedFollowUp);
+            }
+        }
+        private void AddSpecialNote_Click(object sender, RoutedEventArgs e)
+        {
+            SpecialNoteSearchWindow notewindow = new SpecialNoteSearchWindow();
+            notewindow.ShowDialog();
+            foreach (var selectedNote in notewindow.SelectedSpecialNotes)
+            {
+                AddToSelectedSpecialNotes(selectedNote);
+            }
+        }
 
         private void UpdateSelectedMedicinesListView()
         {
             selectedMedicinesListView.ItemsSource = null;
             selectedMedicinesListView.ItemsSource = selectedMedicines;
         }
-
         private void UpdateSelectedAdvicesListView()
         {
             // Update the selectedAdvicesListView directly from the collection
             selectedAdvicesListView.ItemsSource = null;
             selectedAdvicesListView.ItemsSource = selectedAdvices;
+        }
+        private void UpdateSelectedFollowUpsListView()
+        {
+            selectedFollowUpListView.ItemsSource = null;
+            selectedFollowUpListView.ItemsSource = selectedFollowUps;
         }
 
 
@@ -95,11 +121,17 @@ namespace SmartClinic.View.UserControls
                 }
                 else if (removeButton.DataContext is Advice selectedAdvice)
                 {
-                    // Remove the selected advice from the collection
                     selectedAdvices.Remove(selectedAdvice);
+                }
 
-                    // Update the selectedAdvicesListView
-                    UpdateSelectedAdvicesListView();
+                else if (removeButton.DataContext is FollowUp selectedFollowUp)
+                {
+                    selectedFollowUps.Remove(selectedFollowUp);
+                }
+
+                else if (removeButton.DataContext is SpecialNote selectedNote)
+                {
+                    selectedSpecialNotes.Remove(selectedNote);
                 }
             }
         }

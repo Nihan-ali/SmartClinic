@@ -15,7 +15,9 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
+        
         <Border Grid.Row="1" BorderBrush="LightBlue" BorderThickness="0,2,0,0" Margin="10,1,10,1"/>
+        
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
             <Label Content="Chief Complaints" Margin="10 0 0 0" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18"/>
             <Border BorderBrush="Blue" Width="340" BorderThickness="1" CornerRadius="15" Padding="0 0 20 0" Margin="50,2,20,3">
@@ -37,9 +39,6 @@
                     </TextBox>
                 </StackPanel>
             </Border>
-
-
-
         </StackPanel>
 
 
@@ -90,12 +89,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
-
-
-
-
-
         <Button x:Name="addToComplaint" Content="Add To Prescription" Grid.Row="3" Background="LightBlue" FontWeight="Bold" Click="addToComplaint_Click"/>
     </Grid>
 </Window>

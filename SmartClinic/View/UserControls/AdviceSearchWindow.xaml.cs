@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Media;
+using System.Windows.Input;
+
+
 using static SmartClinic.DatabaseHelper;
 
 namespace SmartClinic.View.UserControls
@@ -51,6 +52,19 @@ namespace SmartClinic.View.UserControls
             SearchAdvices(searchTextBox.Text);
         }
 
+        private void EnterPressed(object sender, KeyEventArgs e)
+        {
+            if (Key.Enter == e.Key)
+            {
+                string advice = searchTextBox.Text;
+                Advice selectedAdvice = new Advice();
+                selectedAdvice.Content = advice;
+                SelectedAdvices.Add(selectedAdvice);
+                DatabaseHelper.AddAdvice(advice);
+                searchTextBox.Text = "";
+            }
+        }
+
         private void ToggleButton_Click(object sender, RoutedEventArgs e)
         {
             ToggleButton toggleButton = sender as ToggleButton;
@@ -58,77 +72,26 @@ namespace SmartClinic.View.UserControls
 
             if (toggleButton.IsChecked == true)
             {
-                // Set the DisplayIndex for the selected advice
-                selectedAdvice.DisplayIndex = selectedAdvices.Count + 1;
-
-                // Add the selected advice to the selectedAdvices collection
                 selectedAdvices.Add(selectedAdvice);
             }
             else
             {
-                // Remove the advice if unchecked
                 selectedAdvices.Remove(selectedAdvice);
             }
 
-            UpdateSelectedAdvicesListView();
-        }
-
-        private void UpdateSelectedAdvicesListView()
-        {
-            // Set the ItemsSource to the new collection
-            selectedAdvicesListView.ItemsSource = null;  // Set it to null first
-            selectedAdvicesListView.ItemsSource = selectedAdvices;
         }
 
 
         public void AddToSelectedAdvices(Advice newAdvice)
         {
-            // Add the new advice to the selected advices collection
             selectedAdvices.Add(newAdvice);
-
-            // Update the selected advices ListView
-            UpdateSelectedAdvicesListView();
         }
 
-        private void addToRx_Click(object sender, RoutedEventArgs e)
+        private void addToAdvice_Click(object sender, RoutedEventArgs e)
         {
-            // Get the selected advice from the selectedAdvicesListView
-            Advice selectedAdvice = (Advice)selectedAdvicesListView.SelectedItem;
-
-            // Check if an advice is selected
-            if (selectedAdvice != null)
-            {
-                // Add the selected advice to the ObservableCollection
-                selectedAdvices.Add(selectedAdvice);
-
-                // Update the ListView directly from the collection
-                UpdateSelectedAdvicesListView();
-
-                // Create an instance of the medicine UserControl
-                medicine medicineUserControl = new medicine();
-
-                // Add the selected advice to the list in the medicine UserControl
-                medicineUserControl.AddToSelectedAdvices(selectedAdvice);
-
-                // Close the AdviceSearchWindow
-                this.Close();
-            }
-            else
-            {
-                // Optionally, display a message or take any other actions if no advice is selected
-                this.Close();
-            }
+            this.Close();
+            DatabaseHelper.IncreaseAdviceOccurrence(selectedAdvices);
         }
-        
 
-
-
-
-        private void selectedMedicinesListView_Loaded(object sender, RoutedEventArgs e)
-        {
-            // You may not need to manually set AlternationIndex in the code-behind.
-            // The AlternationCount="{Binding Path=Items.Count, RelativeSource={RelativeSource Self}}"
-            // in XAML should automatically assign serial numbers based on the item index.
-        }
     }
 }

@@ -1,0 +1,60 @@
+﻿<Window x:Class="SmartClinic.View.UserControls.FollowUpSearchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SmartClinic.View.UserControls"
+        mc:Ignorable="d"
+        Title="FollowUpSearchWindow" Height="250" Width="800">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="1" BorderBrush="LightBlue" BorderThickness="0,2,0,0" Margin="10,1,10,1"/>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <Label Content="Follow-Up" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18"/>
+            <Border BorderBrush="Blue" Width="400" BorderThickness="1" CornerRadius="15" Margin="100,2,20,3">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../search.png" Margin="5,0,0,0" Height="15" Width="15" VerticalAlignment="Center"/>
+                    <TextBox x:Name="searchTextBox" Width="360" HorizontalAlignment="Left" VerticalAlignment="Center" Background="White" BorderThickness="0" KeyDown="EnterPressed" TextChanged="SearchTextBox_TextChanged">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Padding" Value="8,2"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="FontSize" Value="14"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#D6ECF8"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Background="#FFE8E8E8" Margin="10,0,10,10">
+            <ItemsControl x:Name="followUpItemsControl" Grid.Row="2" Margin="5">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ToggleButton Content="{Binding Content}" Margin="3" 
+                  IsChecked="{Binding IsSelected, Mode=TwoWay}" 
+                  Foreground="#FF4545B5" HorizontalAlignment="Center" Background="White"
+                  FontWeight="DemiBold" BorderBrush="{x:Null}" Height="27" Padding="5" 
+                  Click="ToggleButton_Click"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <Button x:Name="addToFollowUp" Content="Add To Prescription" Grid.Row="4" Background="LightBlue" FontWeight="Bold" Click="addToFollowUp_Click"/>
+    </Grid>
+</Window>

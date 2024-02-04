@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
+using System.Windows;
 
 namespace SmartClinic
 {
@@ -13,7 +16,6 @@ namespace SmartClinic
     {
         public string Content { get; set; }
         public int Occurrence { get; set; }
-        public int DisplayIndex { get; set; }
     }
 
     public class Complaint
@@ -21,8 +23,55 @@ namespace SmartClinic
         public string Content { get; set; }
         public string Note { get; set; }
         public int Occurrence { get; set; }
-        public int DisplayIndex { get; set; }
     }
+
+    public class history
+    {
+        public string Content { get; set; }
+        public string Note { get; set; }
+        public int Occurrence { get; set; }
+    }
+
+    public class Examination
+    {
+        public string Content { get; set; }
+        public string Note { get; set; }
+        public int Occurrence { get; set; }
+    }
+
+    public class Investigation
+    {
+        public string Content { get; set; }
+        public string Note { get; set; }
+        public int Occurrence { get; set; }
+    }
+
+    public class Diagnosis
+    {
+        public string Content { get; set; }
+        public string Note { get; set; }
+        public int Occurrence { get; set; }
+    }
+
+    public class Treatment
+    {
+        public string Content { get; set; }
+        public string Note { get; set; }
+        public int Occurrence { get; set; }
+    }
+
+    public class FollowUp
+    {
+        public string Content { get; set; }
+        public int Occurrence { get; set; }
+    }
+
+    public class SpecialNote
+    {
+        public string Content { get; set; }
+        public int Occurrence { get; set; }
+    }
+
 
     public class Medicine : INotifyPropertyChanged
     {
@@ -107,6 +156,24 @@ namespace SmartClinic
         public string Investigation { get; set; }
         public string Diagnosis { get; set; }
         public string TreatmentPlan { get; set; }
+    }
+
+    public class IsNullOrEmptyConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is string stringValue)
+            {
+                return string.IsNullOrEmpty(stringValue);
+            }
+
+            return true; // Default to true if not a string
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

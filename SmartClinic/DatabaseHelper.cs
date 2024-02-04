@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.SQLite;
 using System.IO;
@@ -7,6 +8,7 @@ using System.IO.Packaging;
 using System.Net;
 using System.Windows.Controls;
 using System.Xml.Linq;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace SmartClinic
 {
@@ -90,6 +92,7 @@ namespace SmartClinic
             }
         }
 
+
         public static List<Complaint> GetInitialComplaint()
         {
             List<Complaint> initialComplaint = new List<Complaint>();
@@ -98,7 +101,7 @@ namespace SmartClinic
             {
                 connection.Open();
 
-                string query = "SELECT Content, Occurrence FROM ChiefComplaint ORDER BY Occurrence DESC LIMIT 20";
+                string query = "SELECT Content, Occurrence FROM ChiefComplaint ORDER BY Occurrence DESC LIMIT 50";
 
                 using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 using (SQLiteDataReader reader = command.ExecuteReader())
@@ -118,167 +121,147 @@ namespace SmartClinic
 
             return initialComplaint;
         }
-
-        public static void AddComplaint(string complaint)
+        public static List<history> GetInitialHistory()
         {
-            try
+            List<history> initialHistory = new List<history>();
+
+            using (SQLiteConnection connection = new SQLiteConnection(ConnectionString))
             {
-                using (var connection = GetConnection())
+                connection.Open();
+
+                string query = "SELECT Content, Occurrence FROM History ORDER BY Occurrence DESC LIMIT 50";
+
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                using (SQLiteDataReader reader = command.ExecuteReader())
                 {
-                    connection.Open();
-
-                    using (var insertCommand = new SQLiteCommand("INSERT INTO ChiefComplaint (Content, Occurrence) VALUES (@Complaint, @Occurrence);", connection))
+                    while (reader.Read())
                     {
-                        insertCommand.Parameters.AddWithValue("@Complaint", complaint);
-                        insertCommand.Parameters.AddWithValue("@Occurrence", 0);
-
-                        insertCommand.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error inserting complaint {ex}");
-                throw;
-            }
-        }
-
-        public static void InsertPatientInfo(string name, string age, string phone, string address, string blood)
-        {
-            try
-            {
-                using (var connection = GetConnection())
-                {
-                    connection.Open();
-
-                    using (var insertCommand = new SQLiteCommand("INSERT INTO Patient (Name, Age, Phone, Address, Blood) VALUES (@Name, @Age, @Phone, @Address, @Blood);", connection))
-                    {
-                        insertCommand.Parameters.AddWithValue("@Name", name);
-                        insertCommand.Parameters.AddWithValue("@Age", age);
-                        insertCommand.Parameters.AddWithValue("@Phone", phone);
-                        insertCommand.Parameters.AddWithValue("@Address", address);
-                        insertCommand.Parameters.AddWithValue("@Blood", blood);
-
-                        insertCommand.ExecuteNonQuery();
-
-                        Console.WriteLine("Patient information inserted successfully.");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error inserting patient information: {ex}");
-                throw;
-            }
-        }
-
-        public static List<Patient> GetAllPatients()
-        {
-            try
-            {
-                using (var connection = GetConnection())
-                {
-                    connection.Open();
-
-                    using (var command = new SQLiteCommand("SELECT * FROM Patient;", connection))
-                    {
-                        using (var reader = command.ExecuteReader())
+                        history historyitem = new history
                         {
-                            List<Patient> patients = new List<Patient>();
+                            Content = reader["Content"].ToString(),
+                            Occurrence = Convert.ToInt32(reader["Occurrence"])
+                        };
 
-                            while (reader.Read())
-                            {
-                                Patient patient = new Patient
-                                {
-                                    Id = Convert.ToInt32(reader["ID"]),
-                                    Name = reader["Name"].ToString(),
-                                    Age = reader["Age"].ToString(),
-                                    Phone = reader["Phone"].ToString(),
-                                    Address = reader["Address"].ToString(),
-                                    Blood = reader["Blood"].ToString()
-                                };
-
-                                patients.Add(patient);
-                            }
-
-                            return patients;
-                        }
+                        initialHistory.Add(historyitem);
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error fetching patient information: {ex}");
-                throw;
-            }
-        }
 
-        public static List<Medicine> SearchMedicines(string searchTerm, MedicineSearchCriteria searchCriteria)
+            return initialHistory;
+        }
+        public static List<Examination> GetInitialExaminations()
         {
-            try
+            List<Examination> initialExaminations = new List<Examination>();
+
+            using (SQLiteConnection connection = new SQLiteConnection(ConnectionString))
             {
-                using (var connection = GetConnection())
+                connection.Open();
+
+                string query = "SELECT Content, Occurrence FROM OnExamination ORDER BY Occurrence DESC LIMIT 50";
+
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                using (SQLiteDataReader reader = command.ExecuteReader())
                 {
-                    connection.Open();
-
-                    string query = string.Empty;
-
-                    switch (searchCriteria)
+                    while (reader.Read())
                     {
-                        case MedicineSearchCriteria.BrandName:
-                            query = "SELECT * FROM Medicine WHERE BrandName LIKE @SearchTerm";
-                            break;
-                        case MedicineSearchCriteria.GenericName:
-                            query = "SELECT * FROM Medicine WHERE GenericName LIKE @SearchTerm";
-                            break;
-                            // Add more cases if needed
-                    }
-
-                    using (var command = new SQLiteCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@SearchTerm", $"%{searchTerm}%");
-
-                        using (var reader = command.ExecuteReader())
+                        Examination examination = new Examination
                         {
-                            List<Medicine> medicines = new List<Medicine>();
+                            Content = reader["Content"].ToString(),
+                            Occurrence = Convert.ToInt32(reader["Occurrence"])
+                        };
 
-                            while (reader.Read())
-                            {
-                                Medicine medicine = new Medicine
-                                {
-                                    Id = Convert.ToInt32(reader["Id"]),
-                                    BrandName = reader["BrandName"].ToString(),
-                                    GenericName = reader["GenericName"].ToString(),
-                                    Strength = reader["Strength"].ToString(),
-                                    ManufacturerName = reader["ManufacturerName"].ToString(),
-                                    DosageDescription = reader["DosageDescription"].ToString(),
-                                    MedicineType = reader["MedicineType"].ToString()
-                                };
-
-                                medicines.Add(medicine);
-                            }
-
-                            return medicines;
-                        }
+                        initialExaminations.Add(examination);
                     }
                 }
             }
-            catch (Exception ex)
+
+            return initialExaminations;
+        }
+        public static List<Investigation> GetInitialInvestigations()
+        {
+            List<Investigation> initialInvestigations = new List<Investigation>();
+
+            using (SQLiteConnection connection = new SQLiteConnection(ConnectionString))
             {
-                Console.WriteLine($"Error searching medicines: {ex}");
-                throw;
+                connection.Open();
+
+                string query = "SELECT Content, Occurrence FROM Investigation ORDER BY Occurrence DESC LIMIT 50";
+
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Investigation investigation = new Investigation
+                        {
+                            Content = reader["Content"].ToString(),
+                            Occurrence = Convert.ToInt32(reader["Occurrence"])
+                        };
+
+                        initialInvestigations.Add(investigation);
+                    }
+                }
             }
+
+            return initialInvestigations;
+        }
+        public static List<Diagnosis> GetInitialDiagnoses()
+        {
+            List<Diagnosis> initialDiagnoses = new List<Diagnosis>();
+
+            using (SQLiteConnection connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT Content, Occurrence FROM Diagnosis ORDER BY Occurrence DESC LIMIT 50";
+
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Diagnosis diagnosis = new Diagnosis
+                        {
+                            Content = reader["Content"].ToString(),
+                            Occurrence = Convert.ToInt32(reader["Occurrence"])
+                        };
+
+                        initialDiagnoses.Add(diagnosis);
+                    }
+                }
+            }
+
+            return initialDiagnoses;
+        }
+        public static List<Treatment> GetInitialTreatments()
+        {
+            List<Treatment> initialTreatments = new List<Treatment>();
+
+            using (SQLiteConnection connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT Content, Occurrence FROM TreatmentPlan ORDER BY Occurrence DESC LIMIT 50";
+
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Treatment treatment = new Treatment
+                        {
+                            Content = reader["Content"].ToString(),
+                            Occurrence = Convert.ToInt32(reader["Occurrence"])
+                        };
+
+                        initialTreatments.Add(treatment);
+                    }
+                }
+            }
+
+            return initialTreatments;
         }
 
-        public static SQLiteConnection GetConnection()
-        {
-            return new SQLiteConnection(ConnectionString);
-        }
-        public enum MedicineSearchCriteria
-        {
-            BrandName,
-            GenericName,
-        }
 
         public static List<Medicine> GetInitialMedicines()
         {
@@ -341,39 +324,104 @@ namespace SmartClinic
 
             return initialAdvices;
         }
-        public static List<Advice> SearchAdvices(string keyword)
+        public static List<FollowUp> GetInitialFollowUps()
         {
-            List<Advice> searchResults = new List<Advice>();
+            List<FollowUp> initialFollowUps = new List<FollowUp>();
 
             using (SQLiteConnection connection = new SQLiteConnection(ConnectionString))
             {
                 connection.Open();
 
-                string query = "SELECT Content, Occurrence FROM Advices WHERE Content LIKE @keyword ORDER BY Occurrence";
+                string query = "SELECT Content, Occurrence FROM FollowUp ORDER BY Occurrence DESC LIMIT 20";
 
                 using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                using (SQLiteDataReader reader = command.ExecuteReader())
                 {
-                    command.Parameters.AddWithValue("@keyword", $"%{keyword}%");
-
-                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    while (reader.Read())
                     {
-                        while (reader.Read())
+                        FollowUp followUp = new FollowUp
                         {
-                            Advice advice = new Advice
-                            {
-                                Content = reader["Content"].ToString(),
-                                Occurrence = Convert.ToInt32(reader["Occurrence"])
-                            };
+                            Content = reader["Content"].ToString(),
+                            Occurrence = Convert.ToInt32(reader["Occurrence"])
+                        };
 
-                            searchResults.Add(advice);
-                        }
+                        initialFollowUps.Add(followUp);
                     }
                 }
             }
 
-            return searchResults;
+            return initialFollowUps;
+        }
+        public static List<SpecialNote> GetInitialSpecialNotes()
+        {
+            List<SpecialNote> initialSpecialNotes = new List<SpecialNote>();
+
+            using (SQLiteConnection connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT Content, Occurrence FROM SpecialNotes ORDER BY Occurrence DESC LIMIT 20";
+
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        SpecialNote specialNote = new SpecialNote
+                        {
+                            Content = reader["Content"].ToString(),
+                            Occurrence = Convert.ToInt32(reader["Occurrence"])
+                        };
+
+                        initialSpecialNotes.Add(specialNote);
+                    }
+                }
+            }
+
+            return initialSpecialNotes;
         }
 
+
+        public static List<Patient> GetAllPatients()
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT * FROM Patient;", connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<Patient> patients = new List<Patient>();
+
+                            while (reader.Read())
+                            {
+                                Patient patient = new Patient
+                                {
+                                    Id = Convert.ToInt32(reader["ID"]),
+                                    Name = reader["Name"].ToString(),
+                                    Age = reader["Age"].ToString(),
+                                    Phone = reader["Phone"].ToString(),
+                                    Address = reader["Address"].ToString(),
+                                    Blood = reader["Blood"].ToString()
+                                };
+
+                                patients.Add(patient);
+                            }
+
+                            return patients;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching patient information: {ex}");
+                throw;
+            }
+        }
         public static List<PatientVisit> GetPatientVisitsById(int patientId)
         {
             try
@@ -422,6 +470,657 @@ namespace SmartClinic
                 Console.WriteLine($"Error fetching patient visits: {ex}");
                 throw;
             }
+        }
+
+
+
+
+        public static void AddComplaint(string complaint)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM ChiefComplaint WHERE Content = @Complaint;", connection))
+                    {
+                        checkCommand.Parameters.AddWithValue("@Complaint", complaint);
+                        int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                        if (count == 0)
+                        {
+                            using (var insertCommand = new SQLiteCommand("INSERT INTO ChiefComplaint (Content, Occurrence) VALUES (@Complaint, @Occurrence);", connection))
+                            {
+                                insertCommand.Parameters.AddWithValue("@Complaint", complaint);
+                                insertCommand.Parameters.AddWithValue("@Occurrence", 1);
+
+                                insertCommand.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error inserting complaint: {ex}");
+                throw;
+            }
+        }
+        public static void AddHistory(string history)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM History WHERE Content = @History;", connection))
+                    {
+                        checkCommand.Parameters.AddWithValue("@History", history);
+                        int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                        if (count == 0)
+                        {
+                            using (var insertCommand = new SQLiteCommand("INSERT INTO History (Content, Occurrence) VALUES (@History, @Occurrence);", connection))
+                            {
+                                insertCommand.Parameters.AddWithValue("@History", history);
+                                insertCommand.Parameters.AddWithValue("@Occurrence", 1);
+
+                                insertCommand.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error inserting history: {ex}");
+                throw;
+            }
+        }
+        public static void AddExamination(string examination)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM OnExamination WHERE Content = @Examination;", connection))
+                    {
+                        checkCommand.Parameters.AddWithValue("@Examination", examination);
+                        int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                        if (count == 0)
+                        {
+                            using (var insertCommand = new SQLiteCommand("INSERT INTO OnExamination (Content, Occurrence) VALUES (@Examination, @Occurrence);", connection))
+                            {
+                                insertCommand.Parameters.AddWithValue("@Examination", examination);
+                                insertCommand.Parameters.AddWithValue("@Occurrence", 1);
+
+                                insertCommand.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error inserting examination: {ex}");
+                throw;
+            }
+        }
+        public static void AddInvestigation(string investigation)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM Investigation WHERE Content = @Investigation;", connection))
+                    {
+                        checkCommand.Parameters.AddWithValue("@Investigation", investigation);
+                        int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                        if (count == 0)
+                        {
+                            using (var insertCommand = new SQLiteCommand("INSERT INTO Investigation (Content, Occurrence) VALUES (@Investigation, @Occurrence);", connection))
+                            {
+                                insertCommand.Parameters.AddWithValue("@Investigation", investigation);
+                                insertCommand.Parameters.AddWithValue("@Occurrence", 1);
+
+                                insertCommand.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error inserting investigation: {ex}");
+                throw;
+            }
+        }
+        public static void AddDiagnosis(string diagnosis)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM Diagnosis WHERE Content = @Diagnosis;", connection))
+                    {
+                        checkCommand.Parameters.AddWithValue("@Diagnosis", diagnosis);
+                        int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                        if (count == 0)
+                        {
+                            using (var insertCommand = new SQLiteCommand("INSERT INTO Diagnosis (Content, Occurrence) VALUES (@Diagnosis, @Occurrence);", connection))
+                            {
+                                insertCommand.Parameters.AddWithValue("@Diagnosis", diagnosis);
+                                insertCommand.Parameters.AddWithValue("@Occurrence", 1);
+
+                                insertCommand.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error inserting diagnosis: {ex}");
+                throw;
+            }
+        }
+        public static void AddTreatment(string treatment)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM TreatmentPlan WHERE Content = @Treatment;", connection))
+                    {
+                        checkCommand.Parameters.AddWithValue("@Treatment", treatment);
+                        int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                        if (count == 0)
+                        {
+                            using (var insertCommand = new SQLiteCommand("INSERT INTO TreatmentPlan (Content, Occurrence) VALUES (@Treatment, @Occurrence);", connection))
+                            {
+                                insertCommand.Parameters.AddWithValue("@Treatment", treatment);
+                                insertCommand.Parameters.AddWithValue("@Occurrence", 1);
+
+                                insertCommand.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error inserting treatment: {ex}");
+                throw;
+            }
+        }
+        public static void AddAdvice(string advice)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM Advices WHERE Content = @Advice;", connection))
+                    {
+                        checkCommand.Parameters.AddWithValue("@Advice", advice);
+                        int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                        if (count == 0)
+                        {
+                            using (var insertCommand = new SQLiteCommand("INSERT INTO Advices (Content, Occurrence) VALUES (@Advice, @Occurrence);", connection))
+                            {
+                                insertCommand.Parameters.AddWithValue("@Advice", advice);
+                                insertCommand.Parameters.AddWithValue("@Occurrence", 1);
+
+                                insertCommand.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error inserting advice: {ex}");
+                throw;
+            }
+        }
+        public static void AddFollowUp(string followUp)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM FollowUp WHERE Content = @FollowUp;", connection))
+                    {
+                        checkCommand.Parameters.AddWithValue("@FollowUp", followUp);
+                        int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                        if (count == 0)
+                        {
+                            using (var insertCommand = new SQLiteCommand("INSERT INTO FollowUp (Content, Occurrence) VALUES (@FollowUp, @Occurrence);", connection))
+                            {
+                                insertCommand.Parameters.AddWithValue("@FollowUp", followUp);
+                                insertCommand.Parameters.AddWithValue("@Occurrence", 1);
+
+                                insertCommand.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error inserting follow-up: {ex}");
+                throw;
+            }
+        }
+        public static void AddSpecialNote(string specialNote)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM SpecialNotes WHERE Content = @SpecialNote;", connection))
+                    {
+                        checkCommand.Parameters.AddWithValue("@SpecialNote", specialNote);
+                        int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                        if (count == 0)
+                        {
+                            using (var insertCommand = new SQLiteCommand("INSERT INTO SpecialNotes (Content, Occurrence) VALUES (@SpecialNote, @Occurrence);", connection))
+                            {
+                                insertCommand.Parameters.AddWithValue("@SpecialNote", specialNote);
+                                insertCommand.Parameters.AddWithValue("@Occurrence", 1);
+
+                                insertCommand.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error inserting special note: {ex}");
+                throw;
+            }
+        }
+
+
+        public static void IncreaseComplaintOccurrence(ObservableCollection<Complaint> complaint)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    foreach (var complaintItem in complaint)
+                    {
+                        using (var updateCommand = new SQLiteCommand("UPDATE ChiefComplaint SET Occurrence = Occurrence + 1 WHERE Content = @Complaint;", connection))
+                        {
+                            updateCommand.Parameters.AddWithValue("@Complaint", complaintItem.Content);
+                            updateCommand.ExecuteNonQuery();
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error increasing complaint occurrence: {ex}");
+                throw;
+            }
+        }
+        public static void IncreaseHistoryOccurrence(ObservableCollection<history> history)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    foreach (var historyItem in history)
+                    {
+                        using (var updateCommand = new SQLiteCommand("UPDATE History SET Occurrence = Occurrence + 1 WHERE Content = @History;", connection))
+                        {
+                            updateCommand.Parameters.AddWithValue("@History", historyItem.Content);
+                            updateCommand.ExecuteNonQuery();
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error increasing history occurrence: {ex}");
+                throw;
+            }
+        }
+        public static void IncreaseExaminationOccurrence(ObservableCollection<Examination> examination)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    foreach (var examinationItem in examination)
+                    {
+                        using (var updateCommand = new SQLiteCommand("UPDATE OnExamination SET Occurrence = Occurrence + 1 WHERE Content = @Examination;", connection))
+                        {
+                            updateCommand.Parameters.AddWithValue("@Examination", examinationItem.Content);
+                            updateCommand.ExecuteNonQuery();
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error increasing examination occurrence: {ex}");
+                throw;
+            }
+        }
+        public static void IncreaseInvestigationOccurrence(ObservableCollection<Investigation> investigation)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    foreach (var investigationItem in investigation)
+                    {
+                        using (var updateCommand = new SQLiteCommand("UPDATE Investigation SET Occurrence = Occurrence + 1 WHERE Content = @Investigation;", connection))
+                        {
+                            updateCommand.Parameters.AddWithValue("@Investigation", investigationItem.Content);
+                            updateCommand.ExecuteNonQuery();
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error increasing investigation occurrence: {ex}");
+                throw;
+            }
+        }
+        public static void IncreaseDiagnosisOccurrence(ObservableCollection<Diagnosis> diagnosis)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    foreach (var diagnosisItem in diagnosis)
+                    {
+                        using (var updateCommand = new SQLiteCommand("UPDATE Diagnosis SET Occurrence = Occurrence + 1 WHERE Content = @Diagnosis;", connection))
+                        {
+                            updateCommand.Parameters.AddWithValue("@Diagnosis", diagnosisItem.Content);
+                            updateCommand.ExecuteNonQuery();
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error increasing diagnosis occurrence: {ex}");
+                throw;
+            }
+        }
+        public static void IncreaseTreatmentOccurrence(ObservableCollection<Treatment> treatment)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    foreach (var treatmentItem in treatment)
+                    {
+                        using (var updateCommand = new SQLiteCommand("UPDATE TreatmentPlan SET Occurrence = Occurrence + 1 WHERE Content = @Treatment;", connection))
+                        {
+                            updateCommand.Parameters.AddWithValue("@Treatment", treatmentItem.Content);
+                            updateCommand.ExecuteNonQuery();
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error increasing treatment occurrence: {ex}");
+                throw;
+            }
+        }
+
+        public static void IncreaseAdviceOccurrence(ObservableCollection<Advice> advice)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    foreach (var adviceItem in advice)
+                    {
+                        using (var updateCommand = new SQLiteCommand("UPDATE Advices SET Occurrence = Occurrence + 1 WHERE Content = @Advice;", connection))
+                        {
+                            updateCommand.Parameters.AddWithValue("@Advice", adviceItem.Content);
+                            updateCommand.ExecuteNonQuery();
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error increasing advice occurrence: {ex}");
+                throw;
+            }
+        }
+        public static void IncreaseFollowUpOccurrence(ObservableCollection<FollowUp> followUp)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    foreach (var followUpItem in followUp)
+                    {
+                        using (var updateCommand = new SQLiteCommand("UPDATE FollowUp SET Occurrence = Occurrence + 1 WHERE Content = @FollowUp;", connection))
+                        {
+                            updateCommand.Parameters.AddWithValue("@FollowUp", followUpItem.Content);
+                            updateCommand.ExecuteNonQuery();
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error increasing follow-up occurrence: {ex}");
+                throw;
+            }
+        }
+        public static void IncreaseSpecialNoteOccurrence(ObservableCollection<SpecialNote> specialNote)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    foreach (var specialNoteItem in specialNote)
+                    {
+                        using (var updateCommand = new SQLiteCommand("UPDATE SpecialNotes SET Occurrence = Occurrence + 1 WHERE Content = @SpecialNote;", connection))
+                        {
+                            updateCommand.Parameters.AddWithValue("@SpecialNote", specialNoteItem.Content);
+                            updateCommand.ExecuteNonQuery();
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error increasing special note occurrence: {ex}");
+                throw;
+            }
+        }
+
+
+
+        public static List<Medicine> SearchMedicines(string searchTerm, MedicineSearchCriteria searchCriteria)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    string query = string.Empty;
+
+                    switch (searchCriteria)
+                    {
+                        case MedicineSearchCriteria.BrandName:
+                            query = "SELECT * FROM Medicine WHERE BrandName LIKE @SearchTerm";
+                            break;
+                        case MedicineSearchCriteria.GenericName:
+                            query = "SELECT * FROM Medicine WHERE GenericName LIKE @SearchTerm";
+                            break;
+                            // Add more cases if needed
+                    }
+
+                    using (var command = new SQLiteCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@SearchTerm", $"%{searchTerm}%");
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<Medicine> medicines = new List<Medicine>();
+
+                            while (reader.Read())
+                            {
+                                Medicine medicine = new Medicine
+                                {
+                                    Id = Convert.ToInt32(reader["Id"]),
+                                    BrandName = reader["BrandName"].ToString(),
+                                    GenericName = reader["GenericName"].ToString(),
+                                    Strength = reader["Strength"].ToString(),
+                                    ManufacturerName = reader["ManufacturerName"].ToString(),
+                                    DosageDescription = reader["DosageDescription"].ToString(),
+                                    MedicineType = reader["MedicineType"].ToString()
+                                };
+
+                                medicines.Add(medicine);
+                            }
+
+                            return medicines;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error searching medicines: {ex}");
+                throw;
+            }
+        }
+        public static List<Advice> SearchAdvices(string keyword)
+        {
+            List<Advice> searchResults = new List<Advice>();
+
+            using (SQLiteConnection connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT Content, Occurrence FROM Advices WHERE Content LIKE @keyword ORDER BY Occurrence";
+
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@keyword", $"%{keyword}%");
+
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Advice advice = new Advice
+                            {
+                                Content = reader["Content"].ToString(),
+                                Occurrence = Convert.ToInt32(reader["Occurrence"])
+                            };
+
+                            searchResults.Add(advice);
+                        }
+                    }
+                }
+            }
+
+            return searchResults;
+        }
+
+
+
+        public static void InsertPatientInfo(string name, string age, string phone, string address, string blood)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var insertCommand = new SQLiteCommand("INSERT INTO Patient (Name, Age, Phone, Address, Blood) VALUES (@Name, @Age, @Phone, @Address, @Blood);", connection))
+                    {
+                        insertCommand.Parameters.AddWithValue("@Name", name);
+                        insertCommand.Parameters.AddWithValue("@Age", age);
+                        insertCommand.Parameters.AddWithValue("@Phone", phone);
+                        insertCommand.Parameters.AddWithValue("@Address", address);
+                        insertCommand.Parameters.AddWithValue("@Blood", blood);
+
+                        insertCommand.ExecuteNonQuery();
+
+                        Console.WriteLine("Patient information inserted successfully.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error inserting patient information: {ex}");
+                throw;
+            }
+        }
+        public static SQLiteConnection GetConnection()
+        {
+            return new SQLiteConnection(ConnectionString);
+        }
+        public enum MedicineSearchCriteria
+        {
+            BrandName,
+            GenericName,
         }
 
     }

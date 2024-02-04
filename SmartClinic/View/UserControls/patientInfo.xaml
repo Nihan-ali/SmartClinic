@@ -37,7 +37,7 @@
             <Button Name="search" Background="{x:Null}" BorderBrush="{x:Null}">
                 <Image Source="../../search.png" Height="15" Width="15"/>
             </Button>
-            <TextBox x:Name="searchPatientTextBox" Text="Search Patient" Width="200" Margin="0,0,10,0" Foreground="Gray" GotFocus="OnSearchTextBoxGotFocus" LostFocus="OnSearchTextBoxLostFocus"/>
+            <TextBox x:Name="searchPatientTextBox" Text="Search Patient" Width="200" Margin="0,0,10,0" Foreground="Gray" GotFocus="OnSearchTextBoxGotFocus" LostFocus="OnSearchTextBoxLostFocus" TextChanged="searchPatientTextBox_TextChanged"/>
         </StackPanel>
     </Grid>
 </UserControl>
