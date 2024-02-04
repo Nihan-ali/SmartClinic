@@ -84,7 +84,7 @@ namespace SmartClinic.View.UserControls
             if (sender is FrameworkElement element && element.DataContext is Patient patientToDelete)
             {
                 // Perform the deletion from the database
-                bool deleted = DeletePatient(patientToDelete.Id);
+                bool deleted = DatabaseHelper.DeletePatient(patientToDelete.Id);
 
                 if (deleted)
                 {
@@ -98,23 +98,8 @@ namespace SmartClinic.View.UserControls
             }
         }
 
-        private bool DeletePatient(int patientId)
-        {
-            // Implement your logic to delete the patient from the database
-            // Return true if deletion is successful, false otherwise
-            try
-            {
-                // Your database deletion logic here...
-                // Example: DatabaseHelper.DeletePatient(patientId);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                // Log or handle the exception
-                MessageBox.Show($"Error deleting patient: {ex.Message}");
-                return false;
-            }
-        }
+
+      
     }
 
     /*private void SearchBox_KeyDown(object sender, RoutedEventArgs e)

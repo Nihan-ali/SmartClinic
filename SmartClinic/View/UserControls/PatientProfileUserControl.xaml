@@ -69,7 +69,7 @@
             </Border>
 
             <Grid Grid.Row="2" Margin="5,15,5,24">
-                <ListBox x:Name="PrescriptionList" Grid.Row="2" Margin="10" SelectionChanged="PrescriptionList_SelectionChanged" HorizontalContentAlignment="Stretch" SelectedItem="{Binding SelectedPatientVisit}">
+                <ListBox x:Name="PrescriptionList" Grid.Row="2" Margin="10" SelectionChanged="PrescriptionList_SelectionChanged" HorizontalContentAlignment="Stretch" SelectedItem="{Binding Patients}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border BorderBrush="DarkGray" BorderThickness="1" CornerRadius="5" Margin="5" Background="White" HorizontalAlignment="Stretch">
@@ -114,3 +114,4 @@
         </Grid>
     </Grid>
 </UserControl>
+    
