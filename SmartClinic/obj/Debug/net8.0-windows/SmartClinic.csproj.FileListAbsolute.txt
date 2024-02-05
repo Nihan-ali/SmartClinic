@@ -168,3 +168,5 @@ E:\Web_Dev\350\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\runtimes\rhel-x6
 E:\Web_Dev\350\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\runtimes\win7-arm\native\libuv.dll
 E:\Web_Dev\350\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\runtimes\win7-x64\native\libuv.dll
 E:\Web_Dev\350\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\runtimes\win7-x86\native\libuv.dll
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\AddPatient.g.cs
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\AddPatient.baml

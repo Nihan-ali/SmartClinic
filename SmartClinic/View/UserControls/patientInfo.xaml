@@ -15,9 +15,9 @@
         </Grid.ColumnDefinitions>
 
         <!-- Name Label and Add Patient Button -->
-        <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="10">
+        <StackPanel x:Name="addPatientPanel" Grid.Column="0" Orientation="Horizontal" Margin="10">
             <Label Content="Name :" VerticalAlignment="Center" FontWeight="Bold"/>
-            <Button Content="+ Add Patient" Foreground="Blue" FontWeight="Bold" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center"/>
+            <Button x:Name="AddPatientButton" Content="+ Add Patient" Foreground="Blue" FontWeight="Bold" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center" Click="AddPatientButton_Click"/>
         </StackPanel>
 
         <!-- Today's Date -->
@@ -27,9 +27,9 @@
         </StackPanel>
 
         <!-- Patient's Age -->
-        <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+        <StackPanel x:Name="patientDetailsPanel" Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
             <Label Content="Age : " VerticalAlignment="Center" FontWeight="Bold"/>
-            <TextBlock Grid.Column="2" Text="age here" VerticalAlignment="Center"/>
+            <TextBlock x:Name="age" Grid.Column="2" Text="" VerticalAlignment="Center"/>
         </StackPanel>
 
         <!-- Search Patient TextBox and Button -->
@@ -38,8 +38,6 @@
                 <Image Source="../../search.png" Height="15" Width="15"/>
             </Button>
             <TextBox x:Name="searchPatientTextBox" Text="Search Patient" Width="200" Margin="0,0,10,0" Foreground="Gray"  GotFocus="OnSearchTextBoxGotFocus" LostFocus="OnSearchTextBoxLostFocus"/>
-
         </StackPanel>
-
     </Grid>
 </UserControl>

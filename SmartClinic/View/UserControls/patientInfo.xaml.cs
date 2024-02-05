@@ -1,35 +1,68 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using static SmartClinic.Patient;
 
 namespace SmartClinic.View.UserControls
 {
-    /// <summary>
-    /// Interaction logic for patientInfo.xaml
-    /// </summary>
     public partial class patientInfo : UserControl
     {
+        private bool isPatientAdded = false;
+
         public patientInfo()
         {
             InitializeComponent();
         }
+
+        private void AddPatientButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Open the AddPatient window
+            AddPatient addPatientWindow = new AddPatient();
+            addPatientWindow.PatientInfoSubmitted += AddPatientWindow_PatientInfoSubmitted;
+            addPatientWindow.ShowDialog();
+        }
+
+        private void AddPatientWindow_PatientInfoSubmitted(object sender, PatientEventArgs e)
+        {
+            // Handle the submitted patient info
+            string patientName = e.NewPatient.Name;
+            string patientAge = e.NewPatient.Age;
+
+            // Update UI with patient details
+            UpdateUIWithPatientDetails(patientName, patientAge);
+        }
+
+        private void UpdateUIWithPatientDetails(string patientName, string patientAge)
+        {
+            if (!isPatientAdded)
+            {
+                // Remove the "+ Add Patient" button from the StackPanel
+                addPatientPanel.Children.Remove(AddPatientButton);
+
+                // Create TextBlocks for patient name and age
+                TextBlock nameLabel = new TextBlock
+                {
+                    Text = patientName,
+                    FontWeight = FontWeights.Bold,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+                age.Text = patientAge;
+
+                // Add the TextBlocks to the StackPanel
+                addPatientPanel.Children.Add(nameLabel);
+
+                isPatientAdded = true;
+            }
+        }
+
+
         private void OnSearchTextBoxGotFocus(object sender, RoutedEventArgs e)
         {
             if (searchPatientTextBox.Text == "Search Patient")
             {
                 searchPatientTextBox.Text = "";
-                searchPatientTextBox.Foreground = Brushes.Black; // Change the color to the regular text color
+                searchPatientTextBox.Foreground = Brushes.Black;
             }
         }
 
@@ -38,14 +71,8 @@ namespace SmartClinic.View.UserControls
             if (string.IsNullOrWhiteSpace(searchPatientTextBox.Text))
             {
                 searchPatientTextBox.Text = "Search Patient";
-                searchPatientTextBox.Foreground = Brushes.Gray; // Change the color to the placeholder color
+                searchPatientTextBox.Foreground = Brushes.Gray;
             }
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
-    
 }

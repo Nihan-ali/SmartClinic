@@ -5,14 +5,101 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartClinic.View.UserControls"
         mc:Ignorable="d"
-        Title="DetailsWindow" Height="450" Width="800">
-    <Grid>
-        <StackPanel Margin="10">
-            <TextBlock x:Name="detailsTextBlock" FontWeight="Bold" FontSize="16" Foreground="#DA2D2727" Margin="0,0,0,10"/>
-            <TextBox x:Name="detailsTextBox" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Height="100" Margin="0,0,0,10"/>
-            <StackPanel Orientation="Horizontal">
-                <Button Content="OK" Width="100" Click="DetailsOkButton_Click"/>
+        Title="DetailsWindow" Height="350" Width="600">
+    <Grid Background="#EEEEEE">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="detailsTextBlock" FontWeight="Bold" FontSize="18" Grid.Row="0"  Margin="0,10,0,10" HorizontalAlignment="Center"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <TextBlock Text="Schedule" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center" Foreground="#3498DB"/>
+                </Grid>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBox x:Name="morningTextBox" Text="1" Width="20" Margin="5" Height="20" TextAlignment="Center" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1"/>
+                    <StackPanel Orientation="Vertical"  Background="#ECF0F1" Margin="5,10">
+                        <Button Content="&#9650;" Click="IncrementMorningButton_Click" Background="#3498DB" Foreground="White" BorderBrush="Transparent"/>
+                        <Button Content="&#9660;" Click="DecrementMorningButton_Click" Background="#3498DB" Foreground="White" BorderBrush="Transparent"/>
+                    </StackPanel>
+                    <TextBlock Text="+" FontWeight="Bold" FontSize="12" TextAlignment="Center" Height="15" Margin="5,0"  RenderTransformOrigin="0.844,0.557"/>
+                    <TextBox x:Name="noonTextBox" TextAlignment="Center" Text="1" Width="20" Margin="5" Height="20" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1"/>
+                    <StackPanel Orientation="Vertical" Background="#ECF0F1" Margin="5,10">
+                        <Button Content="&#9650;"  Click="IncrementNoonButton_Click" Background="#3498DB" Foreground="White" BorderBrush="Transparent"/>
+                        <Button Content="&#9660;"  Click="DecrementNoonButton_Click" Background="#3498DB" Foreground="White" BorderBrush="Transparent"/>
+                    </StackPanel>
+                    <TextBlock Text="+" FontWeight="Bold" FontSize="12" TextAlignment="Center"  Height="15" Margin="5,0"  RenderTransformOrigin="0.844,0.557"/>
+                    <TextBox x:Name="nightTextBox" TextAlignment="Center" Text="1" Width="20" Margin="5" Height="20" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1"/>
+                    <StackPanel Orientation="Vertical" Margin="5,10" Background="#ECF0F1">
+                        <Button Content="&#9650;"  Click="IncrementNightButton_Click" Background="#3498DB" Foreground="White" BorderBrush="Transparent"/>
+                        <Button Content="&#9660;"  Click="DecrementNightButton_Click" Background="#3498DB" Foreground="White" BorderBrush="Transparent"/>
+                    </StackPanel>
+                </StackPanel>
+                <Grid Grid.Row="2">
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,5" HorizontalAlignment="Center">
+                        <CheckBox x:Name="beforeEatingCheckBox" Content="Before Eating" Margin="0,0,10,0" Foreground="#3498DB"/>
+                        <CheckBox x:Name="afterEatingCheckBox" Content="After Eating" Foreground="#3498DB"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Unit" FontWeight="Bold" Grid.Row="0" HorizontalAlignment="Center" FontSize="14" Foreground="#3498DB"/>
+
+                <!-- ComboBox for Different Types of Units -->
+                <ComboBox x:Name="unitComboBox" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="20" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1">
+                    <ComboBoxItem Content="টি " IsSelected="True"/>
+                    <ComboBoxItem Content="ফোঁটা "/>
+                    <ComboBoxItem Content="পিস "/>
+                    <!-- Add more unit options as needed -->
+                </ComboBox>
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Duration" FontWeight="Bold" Grid.Row="0" HorizontalAlignment="Center" FontSize="14" Foreground="#3498DB"/>
+                <Grid Grid.Row="1">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBox x:Name="durationTextBox" Text="7" TextAlignment="Center" Width="20" Margin="5" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1"/>
+                        <StackPanel Orientation="Vertical" Height="auto" Background="#ECF0F1">
+                            <Button Content="&#9650;"  Click="IncrementDurationButton_Click" Background="#3498DB" Foreground="White" BorderBrush="Transparent"/>
+                            <Button Content="&#9660;"  Click="DecrementDurationButton_Click" Background="#3498DB" Foreground="White" BorderBrush="Transparent"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2" Margin="5,20">
+            <StackPanel>
+                <TextBlock Text="Note" FontWeight="Bold" FontSize="14" Foreground="#3498DB"/>
+                <TextBox x:Name="detailsTextBox" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Height="40" Margin="0,5,0,5" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1"/>
+
             </StackPanel>
-        </StackPanel>
+
+        </Grid>
+        <Button Content="OK" Background="#27AE60" Click="DetailsOkButton_Click" Grid.Row="3" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,10,0,0"/>
+
     </Grid>
 </Window>

@@ -155,7 +155,55 @@ namespace SmartClinic
                 throw;
             }
         }
+        public static List<PatientVisit> GetPatientVisitsById(int patientId)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
 
+                    using (var command = new SQLiteCommand("SELECT * FROM PatientVisit WHERE ID = @PatientId;", connection))
+                    {
+                        command.Parameters.AddWithValue("@PatientId", patientId);
+
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<PatientVisit> patientVisits = new List<PatientVisit>();
+
+                            while (reader.Read())
+                            {
+                                PatientVisit visit = new PatientVisit
+                                {
+                                    Id = Convert.ToInt32(reader["ID"]),
+                                    Visit = Convert.ToDateTime(reader["VISIT"]),
+                                    Medicine = reader["MEDICINE"].ToString(),
+                                    Advice = reader["ADVICE"].ToString(),
+                                    FollowUp = reader["FOLLOWUP"].ToString(),
+                                    Notes = reader["NOTES"].ToString(),
+                                    Complaint = reader["COMPLAINT"].ToString(),
+                                    History = reader["HISTORY"].ToString(),
+                                    OnExamination = reader["ONEXAMINATION"].ToString(),
+                                    Investigation = reader["INVESTIGATION"].ToString(),
+                                    Diagnosis = reader["DIAGNOSIS"].ToString(),
+                                    TreatmentPlan = reader["TREATMENTPLAN"].ToString(),
+                                };
+
+                                patientVisits.Add(visit);
+                            }
+
+                            return patientVisits;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching patient visits: {ex}");
+                throw;
+            }
+        }
         public static List<Medicine> SearchMedicines(string searchTerm, MedicineSearchCriteria searchCriteria)
         {
             try
@@ -355,8 +403,12 @@ namespace SmartClinic
             }
         }
     }
+        public class PatientEventArgs : EventArgs
+        {
+            public Patient NewPatient { get; set; }
+        }
 
-    public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
     protected virtual void OnPropertyChanged(string propertyName)
     {
@@ -378,8 +430,29 @@ namespace SmartClinic
         public string ManufacturerName { get; set; }
         public string MedicineType { get; set; }
         public string DosageDescription { get; set; }
-        public string note{ get; set; }
+        public string Note{ get; set; }
+        public string MedicineName
+        {
+            get
+            {
+                // Extract the first 3 letters of MedicineType
+                string typePrefix = MedicineType?.Length >= 3 ? MedicineType.Substring(0, 3) : MedicineType;
 
+                // Remove numeric values from GenericName
+                string brandNameWithoutDigits = new string(BrandName?.Where(char.IsLetter).ToArray());
+
+                // Combine the components to form MedicineName
+                return $"{typePrefix}. {brandNameWithoutDigits} {Strength}";
+            }
+        }
+        public string Type
+        {
+            get
+            {
+                // Get the first 3 letters of MedicineType
+                return MedicineType?.Length >= 3 ? MedicineType.Substring(0, 3) : MedicineType;
+            }
+        }
 
         public string DisplayText => $"{GenericName} - {DosageDescription}";
 
@@ -402,5 +475,20 @@ namespace SmartClinic
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+    }
+    public class PatientVisit
+    {
+        public int Id { get; set; }
+        public DateTime Visit { get; set; }
+        public string Medicine { get; set; }
+        public string Advice { get; set; }
+        public string FollowUp { get; set; }
+        public string Notes { get; set; }
+        public string Complaint { get; set; }
+        public string History { get; set; }
+        public string OnExamination { get; set; }
+        public string Investigation { get; set; }
+        public string Diagnosis { get; set; }
+        public string TreatmentPlan { get; set; }
     }
 }
