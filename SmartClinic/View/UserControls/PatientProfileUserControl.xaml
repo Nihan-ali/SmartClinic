@@ -27,22 +27,22 @@
 
             <!-- Add your controls in the sub-columns of the first column here -->
             <!-- Example: -->
-            <Border Grid.Row="0" Background="#3498DB" Margin="5">
+            <Border Grid.Row="0" Background="#3498DB" Margin="5,5,0,5" BorderBrush="BlanchedAlmond">
                 <!-- Content for the first sub-column -->
                 <TextBlock x:Name="PatientNameTextBlock" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Border>
 
-            <Border Grid.Row="1" Background="#2ECC71" Margin="5,5,5,0" Height="15" VerticalAlignment="Top">
+            <Border Background="#3498DB" Margin="5,45,0,0" Height="25" VerticalAlignment="Top" Grid.RowSpan="2" BorderBrush="BlanchedAlmond">
                 <!-- Content for the second sub-column -->
                 <TextBlock x:Name="IDTextBlock" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Border>
 
-            <Border Grid.Row="2" Background="#F1C40F" Margin="5">
+            <Border Grid.Row="1" Background="#3498DB" Margin="5,20,0,5" Grid.RowSpan="2" BorderBrush="BlanchedAlmond">
                 <!-- Content for the third sub-column -->
                 <TextBlock x:Name="AgeTextBlock" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Border>
 
-            <Border Grid.Row="3" Background="#E74C3C" Margin="5">
+            <Border Grid.Row="3" Background="#3498DB" Margin="5,0,0,0" Height="19" VerticalAlignment="Top" BorderBrush="BlanchedAlmond">
                 <!-- Content for the fourth sub-column -->
                 <TextBlock x:Name="RxTextBlock" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Border>
@@ -88,7 +88,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <!-- Date -->
-                                       
+
 
                                         <TextBlock Grid.Column="0" Margin="10,5" VerticalAlignment="Center">
 <Run Text="Date: "/>
