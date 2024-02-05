@@ -78,7 +78,9 @@
                             <TextBox BorderThickness="2" Width="350" Text="{Binding Note, Mode=TwoWay}" VerticalAlignment="Center" Margin="5,5,80,5"/>
                         </StackPanel>
 
-                        <Button x:Name="deleteInvestigationFromWindow" Grid.Column="2" Content="X" VerticalAlignment="Center" Width="20" Foreground="Red" FontWeight="Bold" Click="RemoveInvestigationFromWindow"/>
+                        <Button x:Name="deleteInvestigationFromWindow" Grid.Column="2" VerticalAlignment="Center" Width="20" Foreground="Red" FontWeight="Bold" Click="RemoveInvestigationFromWindow">
+                            <Image Source="../../circle.png" Width="15" Height="15"/>
+                        </Button>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -45,7 +45,9 @@
 
                                         <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
                                         <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownComplaint"/>
-                                        <Button x:Name="deleteComplaintFromPrescription" Content="X" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveComplaint_Click"/>
+                                        <Button x:Name="deleteComplaintFromPrescription" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveComplaint_Click">
+                                            <Image Source="../../circle.png" Width="15" Height="15"/>
+                                        </Button>
                                     </Grid>
                                 </Border>
 
@@ -104,7 +106,9 @@
 
                                         <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
                                         <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownHistory"/>
-                                        <Button x:Name="deleteHistory" Content="X" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveHistory_Click"/>
+                                        <Button x:Name="deleteHistory" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveHistory_Click">
+                                            <Image Source="../../circle.png" Width="15" Height="15"/>
+                                        </Button>
                                     </Grid>
                                 </Border>
 
@@ -163,7 +167,9 @@
 
                                         <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
                                         <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownExamination"/>
-                                        <Button x:Name="deleteExamination" Content="X" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveExamination_Click"/>
+                                        <Button x:Name="deleteExamination" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveExamination_Click">
+                                            <Image Source="../../circle.png" Width="15" Height="15"/>
+                                        </Button>
                                     </Grid>
                                 </Border>
 
@@ -221,7 +227,9 @@
 
                                         <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
                                         <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownInvestigation"/>
-                                        <Button x:Name="deleteInvestigationFromPrescription" Content="X" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveInvestigation_Click"/>
+                                        <Button x:Name="deleteInvestigationFromPrescription" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveInvestigation_Click">
+                                            <Image Source="../../circle.png" Width="15" Height="15"/>
+                                        </Button>
                                     </Grid>
                                 </Border>
 
@@ -278,7 +286,9 @@
 
                                         <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
                                         <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownDiagnosis"/>
-                                        <Button x:Name="deleteDiagnosisFromPrescription" Content="X" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveDiagnosis_Click"/>
+                                        <Button x:Name="deleteDiagnosisFromPrescription" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveDiagnosis_Click">
+                                            <Image Source="../../circle.png" Width="15" Height="15"/>
+                                        </Button>
                                     </Grid>
                                 </Border>
 
@@ -333,7 +343,9 @@
 
                                         <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
                                         <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownTreatment"/>
-                                        <Button x:Name="deleteTreatmentFromPrescription" Content="X" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveTreatment_Click"/>
+                                        <Button x:Name="deleteTreatmentFromPrescription" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveTreatment_Click">
+                                            <Image Source="../../circle.png" Width="15" Height="15"/>
+                                        </Button>
                                     </Grid>
                                 </Border>
 

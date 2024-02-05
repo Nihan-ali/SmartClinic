@@ -47,6 +47,23 @@ namespace SmartClinic.View.UserControls
             selectedSpecialNotes.Add(newSpecialNote);
         }
 
+        private void UpdateSelectedAdvicesListView()
+        {
+            selectedAdvicesListView.ItemsSource = null;
+            selectedAdvicesListView.ItemsSource = selectedAdvices;
+        }
+
+        private void UpdateSelectedFollowUpsListView()
+        {
+            selectedFollowUpListView.ItemsSource = null;
+            selectedFollowUpListView.ItemsSource = selectedFollowUps;
+        }
+
+        private void UpdateSelectedSpecialNotesListView()
+        {
+            selectedSpecialNoteListView.ItemsSource = null;
+            selectedSpecialNoteListView.ItemsSource = selectedSpecialNotes;
+        }
 
         private void Rx_Click(object sender, RoutedEventArgs e)
         {
@@ -69,6 +86,7 @@ namespace SmartClinic.View.UserControls
             {
                 AddToSelectedAdvices(selectedAdvice);
             }
+            UpdateSelectedAdvicesListView();
         }
         private void AddFollowUp_Click(object sender, RoutedEventArgs e)
         {
@@ -78,6 +96,8 @@ namespace SmartClinic.View.UserControls
             {
                 AddToSelectedFollowUps(selectedFollowUp);
             }
+            UpdateSelectedFollowUpsListView();
+
         }
         private void AddSpecialNote_Click(object sender, RoutedEventArgs e)
         {
@@ -87,23 +107,13 @@ namespace SmartClinic.View.UserControls
             {
                 AddToSelectedSpecialNotes(selectedNote);
             }
+            UpdateSelectedSpecialNotesListView();
         }
 
         private void UpdateSelectedMedicinesListView()
         {
             selectedMedicinesListView.ItemsSource = null;
             selectedMedicinesListView.ItemsSource = selectedMedicines;
-        }
-        private void UpdateSelectedAdvicesListView()
-        {
-            // Update the selectedAdvicesListView directly from the collection
-            selectedAdvicesListView.ItemsSource = null;
-            selectedAdvicesListView.ItemsSource = selectedAdvices;
-        }
-        private void UpdateSelectedFollowUpsListView()
-        {
-            selectedFollowUpListView.ItemsSource = null;
-            selectedFollowUpListView.ItemsSource = selectedFollowUps;
         }
 
 

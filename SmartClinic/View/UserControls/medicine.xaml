@@ -43,7 +43,9 @@
                                         <TextBlock x:Name="serialNumberTextBlock" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Medium"  FontSize="14"/>
                                         <TextBlock x:Name="dotdot" Grid.Column="1" Text=". " HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Medium"  FontSize="14"/>
                                         <TextBlock Text="{Binding MedicineName}" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Medium" FontSize="14" Margin="10,0"/>
-                                        <Button Content="x" Background="Transparent" Foreground="Red" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveButton_Click"/>
+                                        <Button BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveButton_Click">
+                                            <Image Source="../../circle.png" Width="15" Height="15"/>
+                                        </Button>
                                     </Grid>
 
                                     <TextBlock Text="{Binding Note}" Grid.Row="1" Margin="25,5,0,0" FontWeight="Medium" FontSize="10" />
@@ -82,7 +84,9 @@
 
                                         <TextBlock x:Name="dot" Text="." Margin="0,-24,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
                                         <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Medium" FontSize="14" Margin="5,0" />
-                                        <Button Content="x" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveButton_Click"/>
+                                        <Button BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveButton_Click">
+                                            <Image Source="../../circle.png" Width="15" Height="15"/>
+                                        </Button>
                                     </Grid>
                                 </Grid>
                             </Border>
@@ -125,7 +129,9 @@
 
                                         <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
                                         <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0" />
-                                        <Button x:Name="deleteFollowUpFromPrescription" Content="X" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveButton_Click"/>
+                                        <Button x:Name="deleteFollowUpFromPrescription" BorderThickness="0" Background="Transparent" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveButton_Click">
+                                            <Image Source="../../circle.png" Width="15" Height="15"/>
+                                        </Button>
                                     </Grid>
                                 </Border>
                             </Grid>
@@ -164,7 +170,9 @@
 
                                         <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
                                         <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0" />
-                                        <Button x:Name="deleteSpecialNoteFromPrescription" Content="X" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveButton_Click"/>
+                                        <Button x:Name="deleteSpecialNoteFromPrescription" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveButton_Click">
+                                            <Image Source="../../circle.png" Width="15" Height="15"/>
+                                        </Button>
                                     </Grid>
                                 </Border>
                             </Grid>
