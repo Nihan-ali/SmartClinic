@@ -6,88 +6,52 @@
         xmlns:local="clr-namespace:SmartClinic.View.UserControls"
         mc:Ignorable="d"
         Title="AddPatient" Height="450" Width="800">
-    <Grid Background="#E0F2F1">
-        <!-- Light Blue Background -->
+    <Grid Background="#F0F0F0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="12*"/>
-            <RowDefinition Height="12*"/>
-            <RowDefinition Height="12*"/>
-            <RowDefinition Height="30*"/>
-            <RowDefinition Height="12*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- First Row -->
-        <Grid Grid.Row="0" Background="#03A9F4">
-            <!-- Blue Header Background -->
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="16*"/>
-                <ColumnDefinition Width="84*"/>
-            </Grid.ColumnDefinitions>
+        <!-- Header -->
+        <Border Grid.Row="0" Background="#3498DB">
+            <TextBlock Text="Add Patient" Foreground="White" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
 
-            <TextBlock Text="Name:" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Foreground="White"/>
-            <TextBox x:Name="nameTextBox" Grid.Column="1" Margin="5,10,5,10"/>
-        </Grid>
+        <!-- Content -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="20" VerticalAlignment="Center">
+            <StackPanel Margin="0,0,20,0">
+                <TextBlock Text="Name:" Foreground="#333333" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TextBox x:Name="nameTextBox" Width="200" Height="30" Background="#EAEAEA" Foreground="#333333" BorderBrush="#3498DB" BorderThickness="1" Margin="0,0,0,10"/>
 
-        <!-- Second Row -->
-        <Grid Grid.Row="1" Background="#03A9F4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="16*"/>
-                <ColumnDefinition Width="84*"/>
-            </Grid.ColumnDefinitions>
+                <TextBlock Text="Age:" Foreground="#333333" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TextBox x:Name="ageTextBox" Width="200" Height="30" Background="#EAEAEA" Foreground="#333333" BorderBrush="#3498DB" BorderThickness="1" Margin="0,0,0,10"/>
+            </StackPanel>
 
-            <TextBlock Text="Age:" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Foreground="White"/>
-            <TextBox x:Name="ageTextBox" Grid.Column="1" Margin="5,10,5,10"/>
-        </Grid>
+            <StackPanel Margin="0,0,20,0">
+                <TextBlock Text="Phone:" Foreground="#333333" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TextBox x:Name="phoneTextBox" Width="200" Height="30" Background="#EAEAEA" Foreground="#333333" BorderBrush="#3498DB" BorderThickness="1" Margin="0,0,0,10"/>
 
-        <!-- Third Row -->
-        <Grid Grid.Row="2" Background="#03A9F4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="16*"/>
-                <ColumnDefinition Width="84*"/>
-            </Grid.ColumnDefinitions>
+                <TextBlock Text="Blood Group:" Foreground="#333333" FontWeight="Bold" Margin="0,0,0,5"/>
+                <ComboBox x:Name="bloodGroupComboBox" Width="200" Height="30" Background="#EAEAEA" Foreground="#333333" BorderBrush="#3498DB" BorderThickness="1" Margin="0,0,0,10">
+                    <ComboBoxItem>O-</ComboBoxItem>
+                    <ComboBoxItem>O+</ComboBoxItem>
+                    <ComboBoxItem>A+</ComboBoxItem>
+                    <ComboBoxItem>A-</ComboBoxItem>
+                    <ComboBoxItem>B+</ComboBoxItem>
+                    <ComboBoxItem>B-</ComboBoxItem>
+                    <ComboBoxItem>AB+</ComboBoxItem>
+                    <ComboBoxItem>AB-</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
 
-            <TextBlock Text="Phone:" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Foreground="White"/>
-            <TextBox x:Name="phoneTextBox" Grid.Column="1" Margin="5,10,5,10"/>
-        </Grid>
+            <StackPanel>
+                <TextBlock Text="Address:" Foreground="#333333" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TextBox x:Name="addressTextBox" Width="200" Height="80" Background="#EAEAEA" Foreground="#333333" BorderBrush="#3498DB" BorderThickness="1" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Margin="0,0,0,10"/>
+            </StackPanel>
+        </StackPanel>
 
-        <!-- Fourth Row -->
-        <Grid Grid.Row="3" Background="#03A9F4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="16*"/>
-                <ColumnDefinition Width="84*"/>
-            </Grid.ColumnDefinitions>
-
-            <TextBlock Text="Address:" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5" Foreground="White"/>
-            <TextBox x:Name="addressTextBox" Grid.Column="1" Margin="5,0,5,0" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Height="80"/>
-        </Grid>
-
-        <!-- Fifth Row -->
-        <Grid Grid.Row="4" Background="#03A9F4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="112*"/>
-                <ColumnDefinition Width="185*"/>
-                <ColumnDefinition Width="403*"/>
-            </Grid.ColumnDefinitions>
-
-            <TextBlock Text="Blood Group:" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,5,0" Foreground="White"/>
-            <ComboBox x:Name="bloodGroupComboBox" Grid.Column="1" Margin="5,5,5,5" Grid.ColumnSpan="2">
-                <ComboBoxItem>O-</ComboBoxItem>
-                <ComboBoxItem>O+</ComboBoxItem>
-                <ComboBoxItem>A+</ComboBoxItem>
-                <ComboBoxItem>A-</ComboBoxItem>
-                <ComboBoxItem>B+</ComboBoxItem>
-                <ComboBoxItem>B-</ComboBoxItem>
-                <ComboBoxItem>AB+</ComboBoxItem>
-                <ComboBoxItem>AB-</ComboBoxItem>
-            </ComboBox>
-        </Grid>
-
-
-
-
-        <!-- Blue Button -->
-        <Button Content="Submit" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Click="SubmitButton_Click" Background="#03A9F4" Foreground="White"/>
+        <!-- Submit Button -->
+        <Button Content="Submit" Grid.Row="2"   Click="SubmitButton_Click" Background="#3498DB" Foreground="White"/>
     </Grid>
 </Window>

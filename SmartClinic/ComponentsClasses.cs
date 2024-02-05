@@ -86,7 +86,29 @@ namespace SmartClinic
         public string ManufacturerName { get; set; }
         public string MedicineType { get; set; }
         public string DosageDescription { get; set; }
-        public string note { get; set; }
+        public string Note { get; set; }
+        public string MedicineName
+        {
+            get
+            {
+                // Extract the first 3 letters of MedicineType
+                string typePrefix = MedicineType?.Length >= 3 ? MedicineType.Substring(0, 3) : MedicineType;
+
+                // Remove numeric values from GenericName
+                string brandNameWithoutDigits = new string(BrandName?.Where(char.IsLetter).ToArray());
+
+                // Combine the components to form MedicineName
+                return $"{typePrefix}. {brandNameWithoutDigits} {Strength}";
+            }
+        }
+        public string Type
+        {
+            get
+            {
+                // Get the first 3 letters of MedicineType
+                return MedicineType?.Length >= 3 ? MedicineType.Substring(0, 3) : MedicineType;
+            }
+        }
 
         public string DisplayText => $"{GenericName} - {DosageDescription}";
 
@@ -111,36 +133,41 @@ namespace SmartClinic
         }
     }
     public class Patient : INotifyPropertyChanged
+    {
+        private bool isSelected;
+
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Age { get; set; }
+        public string Phone { get; set; }
+        public string Address { get; set; }
+        public string Blood { get; set; }
+
+        public bool IsSelected
         {
-            private bool isSelected;
-
-            public int Id { get; set; }
-            public string Name { get; set; }
-            public string Age { get; set; }
-            public string Phone { get; set; }
-            public string Address { get; set; }
-            public string Blood { get; set; }
-
-            public bool IsSelected
+            get { return isSelected; }
+            set
             {
-                get { return isSelected; }
-                set
+                if (isSelected != value)
                 {
-                    if (isSelected != value)
-                    {
-                        isSelected = value;
-                        OnPropertyChanged(nameof(IsSelected));
-                    }
+                    isSelected = value;
+                    OnPropertyChanged(nameof(IsSelected));
                 }
             }
-
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            protected virtual void OnPropertyChanged(string propertyName)
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            }
         }
+        public class PatientEventArgs : EventArgs
+        {
+            public Patient NewPatient { get; set; }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
 
     public class PatientVisit
     {

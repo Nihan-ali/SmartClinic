@@ -261,8 +261,6 @@ namespace SmartClinic
 
             return initialTreatments;
         }
-
-
         public static List<Medicine> GetInitialMedicines()
         {
             List<Medicine> initialMedicines = new List<Medicine>();
@@ -380,8 +378,6 @@ namespace SmartClinic
 
             return initialSpecialNotes;
         }
-
-
         public static List<Patient> GetAllPatients()
         {
             try
@@ -915,7 +911,6 @@ namespace SmartClinic
                 throw;
             }
         }
-
         public static void IncreaseAdviceOccurrence(ObservableCollection<Advice> advice)
         {
             try
@@ -1084,7 +1079,6 @@ namespace SmartClinic
         }
 
 
-
         public static void InsertPatientInfo(string name, string age, string phone, string address, string blood)
         {
             try
@@ -1113,6 +1107,82 @@ namespace SmartClinic
                 throw;
             }
         }
+
+
+        public static bool DeletePatient(int patientId)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    // Use a parameterized query to avoid SQL injection
+                    string query = "DELETE FROM Patient WHERE ID = @PatientId";
+
+                    using (var command = new SQLiteCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@PatientId", patientId);
+
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            Console.WriteLine("Patient deleted successfully.");
+                            return true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Patient not found or deletion failed.");
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting patient: {ex.Message}");
+                return false;
+            }
+        }
+        public static bool DeletePatientVisitByVisit(int patient_id, DateTime VisitId)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    // Use a parameterized query to avoid SQL injection
+                    string query = "DELETE FROM PatientVisit WHERE ID= @patient_id and visit=@VisitId";
+
+                    using (var command = new SQLiteCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@patient_id", patient_id);
+                        command.Parameters.AddWithValue("@VisitId", VisitId);
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            Console.WriteLine("Visit deleted successfully.");
+                            return true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Visit not found or deletion failed.");
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting visit: {ex.Message}");
+                return false;
+            }
+        }
+
+
         public static SQLiteConnection GetConnection()
         {
             return new SQLiteConnection(ConnectionString);

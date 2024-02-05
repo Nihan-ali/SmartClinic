@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="circle.png" />
     <None Remove="doctor.ico" />
     <None Remove="patient.png" />
     <None Remove="rx.png" />
@@ -33,6 +34,10 @@
 
   <ItemGroup>
     <Folder Include="Files\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="circle.png" />
   </ItemGroup>
 
 </Project>

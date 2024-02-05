@@ -60,19 +60,41 @@ namespace SmartClinic.View.UserControls
 
         // Add this method to your code-behind (PatientProfileUserControl.xaml.cs)
 
-
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            // Use the SelectedPatientVisit property instead of PrescriptionList.SelectedItem
-            if (SelectedPatientVisit != null)
+            try
             {
-                Patients.Remove(SelectedPatientVisit);
+                // Use the SelectedPatientVisit property instead of PrescriptionList.SelectedItem
+                if (SelectedPatientVisit != null)
+                {
+                    // Perform the deletion from the database based on ID
+                    bool deleted = DatabaseHelper.DeletePatientVisitByVisit(SelectedPatientVisit.Id, SelectedPatientVisit.Visit);
+
+                    if (deleted)
+                    {
+                        // Remove the item from the ObservableCollection
+                        Patients.Remove(SelectedPatientVisit);
+
+                        // Set the SelectedItem to null to clear the selection
+                        PrescriptionList.SelectedItem = null;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to delete the visit.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select a visit to delete.");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please select a visit to delete.");
+                MessageBox.Show($"Error deleting visit: {ex.Message}");
             }
         }
+
+
         private void PrescriptionList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Update the SelectedPatientVisit property when selection changes

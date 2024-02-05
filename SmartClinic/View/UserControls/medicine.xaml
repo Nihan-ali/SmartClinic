@@ -18,8 +18,8 @@
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <Grid >
-            <StackPanel Margin="10,10,10,0">
-                <Button x:Name="Rx" Content="Rx +" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Margin="10" Background="Transparent" BorderThickness="0" Click="Rx_Click"/>
+            <StackPanel Margin="30">
+                <Button x:Name="Rx" Content="Rx   + " HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Margin="10" Background="Transparent" BorderThickness="0" Click="Rx_Click"/>
 
                 <ListView x:Name="selectedMedicinesListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
                     <ListView.ItemTemplate>
@@ -42,11 +42,11 @@
 
                                         <TextBlock x:Name="serialNumberTextBlock" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Medium"  FontSize="14"/>
                                         <TextBlock x:Name="dotdot" Grid.Column="1" Text=". " HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Medium"  FontSize="14"/>
-                                        <TextBlock Text="{Binding DisplayText}" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Medium" FontSize="14" Margin="10,0"/>
+                                        <TextBlock Text="{Binding MedicineName}" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Medium" FontSize="14" Margin="10,0"/>
                                         <Button Content="x" Background="Transparent" Foreground="Red" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveButton_Click"/>
                                     </Grid>
 
-                                    <TextBlock Text="{Binding AdditionalText}" Grid.Row="1" Margin="25,5,0,0" FontStyle="Italic" Foreground="Gray"/>
+                                    <TextBlock Text="{Binding Note}" Grid.Row="1" Margin="25,5,0,0" FontWeight="Medium" FontSize="10" />
                                 </Grid>
                             </Border>
                         </DataTemplate>

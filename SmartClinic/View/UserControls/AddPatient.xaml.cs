@@ -1,56 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using static SmartClinic.Patient;
 
 namespace SmartClinic.View.UserControls
 {
-    /// <summary>
-    /// Interaction logic for AddPatient.xaml
-    /// </summary>
     public partial class AddPatient : Window
     {
-        private patientInfo _patientInfoUserControl;
+        // Define an event to signal when patient info is submitted
+        public event EventHandler<PatientEventArgs> PatientInfoSubmitted;
 
-        public AddPatient() { 
-        InitializeComponent();
-        }
-        public AddPatient(patientInfo patientInfoUserControl)
+        public AddPatient()
         {
             InitializeComponent();
-            _patientInfoUserControl = patientInfoUserControl;
         }
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
+            // Get patient info from form elements
             string name = nameTextBox.Text;
             string age = ageTextBox.Text;
             string phone = phoneTextBox.Text;
             string address = addressTextBox.Text;
             string bloodGroup = (string)((ComboBoxItem)bloodGroupComboBox.SelectedItem).Content;
 
-            if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(age) && !string.IsNullOrWhiteSpace(phone)
-                && !string.IsNullOrWhiteSpace(address) && !string.IsNullOrWhiteSpace(bloodGroup))
-            {
-                DatabaseHelper.InsertPatientInfo(name, age, phone, address, bloodGroup);
+            // Validate input (you may add more validation logic)
 
-                // Update the patientInfo UserControl
-                _patientInfoUserControl.UpdatePatientInfo(name, age);
-                this.Close();
-            }
-            else
+            // Create a new Patient object
+            Patient newPatient = new Patient
             {
-                MessageBox.Show("Please fill in all fields.");
-            }
+                Name = name,
+                Age = age,
+                Phone = phone,
+                Address = address,
+                Blood = bloodGroup
+            };
+
+            // Insert patient info into the database
+            DatabaseHelper.InsertPatientInfo(name, age, phone, address, bloodGroup);
+
+            // Raise the event to notify subscribers (e.g., patientInfo UserControl)
+            PatientInfoSubmitted?.Invoke(this, new PatientEventArgs { NewPatient = newPatient });
+
+            // Close the form window
+            Close();
         }
     }
 }

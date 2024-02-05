@@ -83,7 +83,9 @@
                             <TextBox BorderThickness="2" Width="350" Text="{Binding Note, Mode=TwoWay}" VerticalAlignment="Center" Margin="5,5,80,5"/>
                         </StackPanel>
 
-                        <Button x:Name="deleteComplaintFromWindow" Grid.Column="2" Content="X" VerticalAlignment="Center" Width="20" Foreground="Red" FontWeight="Bold" Click="RemoveComplaintFromWindow"/>
+                        <Button BorderThickness="0" x:Name="deleteComplaintFromWindow" Grid.Column="2" VerticalAlignment="Center" Width="20" Foreground="Transparent" FontWeight="Bold" Click="RemoveComplaintFromWindow">
+                            <Image Source="../../circle.png" Height="15" Width="15" ></Image>
+                        </Button>
 
                     </Grid>
                 </DataTemplate>

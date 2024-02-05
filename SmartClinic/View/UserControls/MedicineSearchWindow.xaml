@@ -4,7 +4,7 @@
         WindowStartupLocation="CenterScreen"
         Title="Medicine Search" Height="450" Width="680">
 
-    <Grid Background="White">
+<Grid Background="White">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -55,14 +55,13 @@
                                                     <!-- First line -->
                                                     <Grid>
                                                         <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition/>
-                                                            <ColumnDefinition/>
-                                                            <ColumnDefinition/>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="*"/>
                                                         </Grid.ColumnDefinitions>
-                                                        <TextBlock Text="{Binding MedicineType}" Grid.Column="1" Margin="2" FontWeight="Bold" Foreground="#DA2D2727"/>
-                                                        <TextBlock Text="{Binding BrandName}" Margin="2" FontWeight="Bold" Foreground="#DA2D2727"/>
+                                                        <TextBlock Text="{Binding MedicineName}"  Margin="2" FontWeight="Bold" Foreground="#DA2D2727" HorizontalAlignment="Stretch"/>
+                                                        <TextBlock Text="{Binding BrandName}" Margin="2" Grid.Column="1" FontWeight="Bold" Foreground="#DA2D2727" HorizontalAlignment="Stretch"/>
 
-                                                        <TextBlock Text="{Binding Strength}" Grid.Column="2" Margin="2" FontWeight="Bold" Foreground="#DA2D2727"/>
+                                                        <!--<TextBlock Text="{Binding Strength}" Grid.Column="2" Margin="2" FontWeight="Bold" Foreground="#DA2D2727"/>-->
 
                                                     </Grid>
 
@@ -142,7 +141,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <ToggleButton Content="{Binding BrandName}" Margin="3" 
+                        <ToggleButton Content="{Binding MedicineName}" Margin="3" 
                       IsChecked="{Binding IsSelected, Mode=TwoWay}" 
                       Foreground="#FF4545B5" HorizontalAlignment="Center" Background="White"
                       FontWeight="DemiBold" BorderBrush="{x:Null}" Height="27" Padding="5" 
@@ -161,10 +160,10 @@
                 <DataTemplate>
                     <StackPanel>
                         <!-- First line with DisplayText -->
-                        <TextBlock Text="{Binding DisplayText}" Margin="0,0,0,5"/>
+                        <TextBlock Text="{Binding MedicineName}" Margin="0,0,0,5"/>
 
                         <!-- Second line with generic text -->
-                        <TextBlock Text="{Binding AdditionalText}" FontStyle="Italic" Foreground="Gray"/>
+                        <TextBlock Text="{Binding Note}" FontWeight="Medium" FontSize="10" />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -172,4 +171,5 @@
 
         <Button x:Name="addToRx" Content="Add To Prescription" Grid.Row="4" Background="LightBlue" FontWeight="Bold" Click="addToRx_Click"/>
     </Grid>
+    
 </Window>

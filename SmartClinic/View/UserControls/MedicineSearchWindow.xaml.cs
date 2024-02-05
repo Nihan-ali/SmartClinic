@@ -91,7 +91,9 @@ namespace SmartClinic
                     {
                         if (!selectedMedicines.Contains(selectedMedicine))
                         {
-                            selectedMedicines.Add(selectedMedicine);
+                            DetailsWindow detailsWindow = new DetailsWindow(selectedMedicine);
+                            detailsWindow.ParentMainWindow = this;
+                            detailsWindow.Show();
                         }
                     }
                     else

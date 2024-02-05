@@ -24,5 +24,25 @@ namespace SmartClinic.View.UserControls
         {
             InitializeComponent();
         }
+        private void textBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (menubarbox.Text == "Search Here")
+            {
+                menubarbox.Text = "";
+                menubarbox.Opacity = 0.8;
+                menubarbox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void textBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (menubarbox.Text == "")
+            {
+                menubarbox.Text = "Search Here";
+                menubarbox.Opacity = 0.5;
+                menubarbox.Foreground = Brushes.Gray;
+
+            }
+        }
     }
 }

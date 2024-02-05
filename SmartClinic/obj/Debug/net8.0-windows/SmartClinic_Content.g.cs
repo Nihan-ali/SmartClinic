@@ -14,5 +14,6 @@
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("search.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("settings.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("stat.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("circle.png")]
 
 

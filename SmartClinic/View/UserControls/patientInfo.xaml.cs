@@ -1,69 +1,68 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using static SmartClinic.Patient;
 
 namespace SmartClinic.View.UserControls
 {
-    public partial class patientInfo : UserControl, INotifyPropertyChanged
+    public partial class patientInfo : UserControl
     {
-        private string _todayDate;
-        private string _age;
+        private bool isPatientAdded = false;
 
         public patientInfo()
         {
             InitializeComponent();
-            // Set default values or perform any initialization
-            TodayDate = "YourDefaultTodayDate";
-            Age = "YourDefaultAge";
         }
 
-        public string TodayDate
+        private void AddPatientButton_Click(object sender, RoutedEventArgs e)
         {
-            get { return _todayDate; }
-            set
+            // Open the AddPatient window
+            AddPatient addPatientWindow = new AddPatient();
+            addPatientWindow.PatientInfoSubmitted += AddPatientWindow_PatientInfoSubmitted;
+            addPatientWindow.ShowDialog();
+        }
+
+        private void AddPatientWindow_PatientInfoSubmitted(object sender, PatientEventArgs e)
+        {
+            // Handle the submitted patient info
+            string patientName = e.NewPatient.Name;
+            string patientAge = e.NewPatient.Age;
+
+            // Update UI with patient details
+            UpdateUIWithPatientDetails(patientName, patientAge);
+        }
+
+        private void UpdateUIWithPatientDetails(string patientName, string patientAge)
+        {
+            if (!isPatientAdded)
             {
-                if (_todayDate != value)
+                // Remove the "+ Add Patient" button from the StackPanel
+                addPatientPanel.Children.Remove(AddPatientButton);
+
+                // Create TextBlocks for patient name and age
+                TextBlock nameLabel = new TextBlock
                 {
-                    _todayDate = value;
-                    OnPropertyChanged();
-                }
+                    Text = patientName,
+                    FontWeight = FontWeights.Bold,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+                age.Text = patientAge;
+
+                // Add the TextBlocks to the StackPanel
+                addPatientPanel.Children.Add(nameLabel);
+
+                isPatientAdded = true;
             }
         }
 
-        public string Age
-        {
-            get { return _age; }
-            set
-            {
-                if (_age != value)
-                {
-                    _age = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public void UpdatePatientInfo(string name, string age)
-        {
-            MessageBox.Show(age);
-            Age = age;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         private void OnSearchTextBoxGotFocus(object sender, RoutedEventArgs e)
         {
             if (searchPatientTextBox.Text == "Search Patient")
             {
                 searchPatientTextBox.Text = "";
-                searchPatientTextBox.Foreground = Brushes.Black; // Change the color to the regular text color
+                searchPatientTextBox.Foreground = Brushes.Black;
             }
         }
 
@@ -72,22 +71,8 @@ namespace SmartClinic.View.UserControls
             if (string.IsNullOrWhiteSpace(searchPatientTextBox.Text))
             {
                 searchPatientTextBox.Text = "Search Patient";
-                searchPatientTextBox.Foreground = Brushes.Gray; // Change the color to the placeholder color
+                searchPatientTextBox.Foreground = Brushes.Gray;
             }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            // Pass this instance to the constructor of AddPatient
-            AddPatient AddPatientWindow = new AddPatient(this);
-            AddPatientWindow.Left = (SystemParameters.PrimaryScreenWidth - AddPatientWindow.Width) / 2;
-            AddPatientWindow.Top = (SystemParameters.PrimaryScreenHeight - AddPatientWindow.Height) / 2;
-            AddPatientWindow.Show();
-        }
-
-        private void searchPatientTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }
