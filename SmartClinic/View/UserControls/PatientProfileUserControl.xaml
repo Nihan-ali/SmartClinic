@@ -1,4 +1,4 @@
-﻿ <UserControl x:Class="SmartClinic.View.UserControls.PatientProfileUserControl"
+﻿<UserControl x:Class="SmartClinic.View.UserControls.PatientProfileUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -27,22 +27,22 @@
 
             <!-- Add your controls in the sub-columns of the first column here -->
             <!-- Example: -->
-            <Border Grid.Row="0" Background="#3498DB" Margin="5">
+            <Border Grid.Row="0" Background="#3498DB" Margin="5,5,0,5" BorderBrush="Black">
                 <!-- Content for the first sub-column -->
                 <TextBlock x:Name="PatientNameTextBlock" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Border>
 
-            <Border Grid.Row="1" Background="#2ECC71" Margin="5,5,5,0" Height="15" VerticalAlignment="Top">
+            <Border Background="#3498DB" Margin="5,45,0,5" BorderBrush="Black" Grid.RowSpan="2">
                 <!-- Content for the second sub-column -->
                 <TextBlock x:Name="IDTextBlock" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Border>
 
-            <Border Grid.Row="2" Background="#F1C40F" Margin="5">
+            <Border Grid.Row="1" Background="#3498DB" Margin="5,20,0,5" BorderBrush="Black" Grid.RowSpan="2">
                 <!-- Content for the third sub-column -->
                 <TextBlock x:Name="AgeTextBlock" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Border>
 
-            <Border Grid.Row="3" Background="#E74C3C" Margin="5">
+            <Border Grid.Row="2" Background="#3498DB" Margin="5,25,0,5"  BorderBrush="Black" Grid.RowSpan="2">
                 <!-- Content for the fourth sub-column -->
                 <TextBlock x:Name="RxTextBlock" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Border>
@@ -63,7 +63,7 @@
                 <TextBlock x:Name="RxVisitTextBlock" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
             </Border>
 
-            <Border Grid.Row="1" Background="#2ECC71" Margin="5">
+            <Border Grid.Row="1" Background="#3498DB" Margin="5">
                 <!-- Content for the second sub-row -->
                 <TextBlock x:Name="PastVisitTextBlock" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
             </Border>

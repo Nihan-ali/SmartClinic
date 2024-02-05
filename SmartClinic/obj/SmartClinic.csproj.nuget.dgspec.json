@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "H:\\MED\\CSE350\\SmartClinic\\SmartClinic.csproj": {}
+    "D:\\AcademicProject\\MainProject\\SmartClinic\\SmartClinic\\SmartClinic.csproj": {}
   },
   "projects": {
-    "H:\\MED\\CSE350\\SmartClinic\\SmartClinic.csproj": {
+    "D:\\AcademicProject\\MainProject\\SmartClinic\\SmartClinic\\SmartClinic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "H:\\MED\\CSE350\\SmartClinic\\SmartClinic.csproj",
+        "projectUniqueName": "D:\\AcademicProject\\MainProject\\SmartClinic\\SmartClinic\\SmartClinic.csproj",
         "projectName": "SmartClinic",
-        "projectPath": "H:\\MED\\CSE350\\SmartClinic\\SmartClinic.csproj",
-        "packagesPath": "C:\\Users\\shish\\.nuget\\packages\\",
-        "outputPath": "H:\\MED\\CSE350\\SmartClinic\\obj\\",
+        "projectPath": "D:\\AcademicProject\\MainProject\\SmartClinic\\SmartClinic\\SmartClinic.csproj",
+        "packagesPath": "C:\\Users\\moshi\\.nuget\\packages\\",
+        "outputPath": "D:\\AcademicProject\\MainProject\\SmartClinic\\SmartClinic\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\shish\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\moshi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,9 +34,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "default"
         }
       },
       "frameworks": {
