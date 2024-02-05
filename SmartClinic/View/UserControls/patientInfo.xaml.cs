@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,12 +12,14 @@ namespace SmartClinic.View.UserControls
         private string _todayDate;
         private string _age;
 
+        public ObservableCollection<Patient> PatientVisit{ get; set; }
+
         public patientInfo()
         {
             InitializeComponent();
-            // Set default values or perform any initialization
-            TodayDate = "YourDefaultTodayDate";
-            Age = "YourDefaultAge";
+
+            // Initialize Patients collection by fetching from the database
+           
         }
 
         public string TodayDate
@@ -49,7 +52,22 @@ namespace SmartClinic.View.UserControls
         {
             MessageBox.Show(age);
             Age = age;
-        }
+             
+
+      
+            InitializeComponent();
+
+            // Initialize Patients collection by fetching from the database
+          /*  PatientVisist = new ObservableCollection<Patient>(DatabaseHelper.SearchBy());*/
+
+          /*  // Set the ItemsSource of the ListBox to the Patients collection
+            PatientsListBox.ItemsSource = Patients;
+            SearchPatient.Text = "search Patient";
+            SearchPatient.Opacity = 0.5;
+            Console.WriteLine(PatientsListBox.ItemsSource);
+            Console.WriteLine("mostahid");*/
+        
+    }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -9,7 +9,7 @@ namespace SmartClinic
         private patientInfo _patientInfoUserControl;
         public AddPatient()
         {
-            ;
+            
         }
 
         public AddPatient(patientInfo patientInfoUserControl)
