@@ -17,7 +17,7 @@
 
         <!-- Assuming title, patientInfo, History, medicine, savePrint, and Footer are UserControl classes -->
         <local:title Grid.Row="0"/>
-        <local:patientInfo Grid.Row="1"/>
+        <local:patientInfo x:Name="patientInfoControl" Grid.Row="1"/>
         <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,1,0,0"/>
 
         <Grid x:Name="prescription" Grid.Row="2">

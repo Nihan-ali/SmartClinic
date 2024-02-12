@@ -20,8 +20,6 @@ namespace SmartClinic.View.UserControls
             PatientsListBox.ItemsSource = Patients;
             SearchPatient.Text = "search Patient";
             SearchPatient.Opacity = 0.5;
-            Console.WriteLine(PatientsListBox.ItemsSource);
-            Console.WriteLine("mostahid");
         }
 
         private void PatientsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -37,14 +35,24 @@ namespace SmartClinic.View.UserControls
 
         private void UpdateMainWindowContent(Patient selectedPatient)
         {
-            if (Application.Current.MainWindow is MainWindow mainWindow)
+            try
             {
-                if (mainWindow.FindName("contentControl") is ContentControl contentControl)
+                if (Application.Current.MainWindow is MainWindow mainWindow)
                 {
-                    contentControl.Content = new View.UserControls.PatientProfileUserControl(selectedPatient);
+                    // Pass the mainWindow instance as a second argument
+                    if (mainWindow.contentControl != null)
+                    {
+                        mainWindow.contentControl.Content = new View.UserControls.PatientProfileUserControl(selectedPatient, mainWindow);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating content: {ex.Message}");
+            }
         }
+
+
 
 
 

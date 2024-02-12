@@ -97,7 +97,6 @@ E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\SmartClinic.cspr
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MedicineSearchWindow.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\PatientProfileUserControl.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\MainWindow.g.cs
-E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\ChiefComplaintPopup.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\DetailsWindow.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\Footer.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\header.g.cs
@@ -114,7 +113,6 @@ E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControl
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\searchMenu.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\title.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\treatment.g.cs
-E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\TreatmentPlanPopup.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\App.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\SmartClinic_Content.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
@@ -122,7 +120,6 @@ E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\SmartClinic_Mark
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\SmartClinic_MarkupCompile.lref
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\App.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\MainWindow.baml
-E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\ChiefComplaintPopup.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\DetailsWindow.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\Footer.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\header.baml
@@ -137,7 +134,6 @@ E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControl
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\searchMenu.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\title.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\treatment.baml
-E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\TreatmentPlanPopup.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\SmartClinic.g.resources
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\SmartClinic.GeneratedMSBuildEditorConfig.editorconfig
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\SmartClinic.AssemblyInfoInputs.cache
@@ -278,3 +274,23 @@ H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\FollowUpSea
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\SpecialNoteSearchWindow.g.cs
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\FollowUpSearchWindow.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\SpecialNoteSearchWindow.baml
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\AddPatient.g.cs
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\ComplaintSearchWindow.g.cs
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\DiagnosisSearchWindow.g.cs
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\EditComplaintControl.g.cs
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\ExaminationSearchWindow.g.cs
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\FollowUpSearchWindow.g.cs
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\HistorySearchWindow.g.cs
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\InvestigationSearchWindow.g.cs
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\SpecialNoteSearchWindow.g.cs
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\TreatmentSearchWindow.g.cs
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\AddPatient.baml
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\ComplaintSearchWindow.baml
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\DiagnosisSearchWindow.baml
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\EditComplaintControl.baml
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\ExaminationSearchWindow.baml
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\FollowUpSearchWindow.baml
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\HistorySearchWindow.baml
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\InvestigationSearchWindow.baml
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\SpecialNoteSearchWindow.baml
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\TreatmentSearchWindow.baml
