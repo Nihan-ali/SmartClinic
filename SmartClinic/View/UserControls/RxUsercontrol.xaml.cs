@@ -594,25 +594,44 @@ namespace SmartClinic.View.UserControls
 
         private void PatientSearchStringChanged(object sender, TextChangedEventArgs e)
         {
-
             string searchterm = searchPatientTextBox.Text;
             List<Patient> searchresults = DatabaseHelper.SearchPatients(searchterm);
-            searchResultsPopup.IsOpen = true;
 
-            //if (searchresults.Count > 0)
-            //{
-            //    MessageBox.Show(searchresults.Count.ToString());
-            //    //searchResultsListBox.ItemsSource = searchresults;
-            //    //searchResultsPopup.IsOpen = true;
-            //}
-            //else
-            //{
-            //    //searchResultsPopup.IsOpen = false;
-            //}
-
+            if (searchresults.Count > 0)
+            {
+                // Handle the search results, e.g., update ListBox or other UI elements
+                searchResultsListBox.ItemsSource = searchresults;
+                searchResultsPopup.IsOpen = true;
+            }
+            else
+            {
+                // Close the popup if there are no search results
+                searchResultsPopup.IsOpen = false;
+            }
         }
 
-}
+
+        private void searchResultsPopup_Opened(object sender, EventArgs e)
+        {
+            string searchterm = searchPatientTextBox.Text;
+            List<Patient> searchresults = DatabaseHelper.SearchPatients(searchterm);
+
+            if (searchresults.Count > 0)
+            {
+                // Handle the search results, e.g., update ListBox or other UI elements
+
+                searchResultsListBox.ItemsSource = searchresults;
+                searchResultsPopup.IsOpen = true;
+            }
+            else
+            {
+                // Close the popup if there are no search results
+                searchResultsPopup.IsOpen = false;
+            }
+        }
+
+
+    }
 
 
 
