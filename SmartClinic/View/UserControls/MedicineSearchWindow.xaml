@@ -1,7 +1,7 @@
 ﻿<Window x:Class="SmartClinic.MedicineSearchWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterScreen" Loaded="rx_loaded"
         Title="Medicine Search" Height="450" Width="680">
 
 <Grid Background="White">
@@ -15,22 +15,30 @@
         </Grid.RowDefinitions>
         <Border Grid.Row="1" BorderBrush="LightBlue" BorderThickness="0,2,0,0" Margin="10,1,10,1"/>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-            <Label Content="Rx" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18"/>
+            <Label Margin="10,0,0,0" Content="Rx" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18"/>
             <Border BorderBrush="Blue" BorderThickness="1" CornerRadius="15" Margin="50,2,20,3">
-                <TextBox x:Name="searchTextBox" Width="350" HorizontalAlignment="Left" Margin="20,0,20,5" VerticalAlignment="Center" Background="White" BorderThickness="0" TextChanged="SearchTextBox_TextChanged">
-                    <TextBox.Style>
-                        <Style TargetType="TextBox">
-                            <Setter Property="Padding" Value="8,2"/>
-                            <Setter Property="Foreground" Value="Black"/>
-                            <Setter Property="FontSize" Value="14"/>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#D6ECF8"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
-                </TextBox>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="../../search.png" Width="15" Height="15" Margin="5,2,0,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBox x:Name="searchTextBox" Width="350" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center" Background="White" BorderThickness="0" TextChanged="SearchTextBox_TextChanged">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Padding" Value="8,2"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="FontSize" Value="14"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#D6ECF8"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Image Source="../../create.png" Width="10" Height="10" Margin="2,2,2,0"/>
+                        <Button HorizontalAlignment="Right" Foreground="#3782b0" Click="createMedicine_Click" BorderThickness="0" Content="Create" Margin="0,0,10,0" VerticalAlignment="Center" Background="Transparent"/>
+                    </StackPanel>
+
+                </StackPanel>
             </Border>
 
 
@@ -128,8 +136,8 @@
                 </Style>
             </ListBox.ItemContainerStyle>
 
-            <Button Content="Medicine" Background="LightBlue" Height="30" Foreground="Blue" FontWeight="Bold" BorderBrush="{x:Null}" Click="MedicineButton_Click" Width="300"/>
-            <Button Content="Medicine Group" Background="White" Height="30" Foreground="Blue" FontWeight="Bold" BorderBrush="{x:Null}" Click="MedicineGroupButton_Click" Width="310"/>
+            <Button x:Name="medicinerx" Content="Medicine" Background="LightBlue" Height="30" Foreground="Blue" FontWeight="Bold" BorderBrush="{x:Null}" Click="MedicineButton_Click" Width="300"/>
+            <Button x:Name="medicineGroup" Content="Medicine Group" Background="White" Height="30" Foreground="Blue" FontWeight="Bold" BorderBrush="{x:Null}" Click="MedicineGroupButton_Click" Width="310"/>
         </ListBox>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" Background="#FFE8E8E8" Margin="10,0,10,0">
@@ -141,7 +149,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <ToggleButton Content="{Binding MedicineName}" Margin="3" 
+                        <ToggleButton x:Name="listtogglebutton" Content="{Binding MedicineName}" Margin="3" 
                       IsChecked="{Binding IsSelected, Mode=TwoWay}" 
                       Foreground="#FF4545B5" HorizontalAlignment="Center" Background="White"
                       FontWeight="DemiBold" BorderBrush="{x:Null}" Height="27" Padding="5" 

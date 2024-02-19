@@ -25,10 +25,8 @@ namespace SmartClinic
         public MainWindow()
         {
             InitializeComponent();
-            
+            DatabaseHelper init = new DatabaseHelper();
            
-
-
             DataContext = this;
             TodayDate = DateTime.Now.ToString("dd-MM-yyyy");
             treatmentPlanPopup = new Popup();

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Media;
 
 
 namespace SmartClinic
@@ -13,45 +15,73 @@ namespace SmartClinic
     {
         private ObservableCollection<Medicine> searchedMedicines;
         private ObservableCollection<Medicine> selectedMedicines;
+        private ObservableCollection<MedicineGroup> searchedMedicineGroups;
+        private ObservableCollection<MedicineGroup> selectedMedicineGroups;
         public ObservableCollection<Medicine> SelectedMedicines => selectedMedicines;
+        public ObservableCollection<MedicineGroup> SelectedMedicineGroups => selectedMedicineGroups;
+
+        
 
         public MedicineSearchWindow()
         {
             InitializeComponent();
-            //medicineControl.DataContext = App.SelectedItemsViewModel;
             searchedMedicines = new ObservableCollection<Medicine>();
             selectedMedicines = new ObservableCollection<Medicine>();
+            searchedMedicineGroups = new ObservableCollection<MedicineGroup>();
+            selectedMedicineGroups = new ObservableCollection<MedicineGroup>();
             InitializeMedicineListView();
         }
 
         private void InitializeMedicineListView()
         {
-            // For demonstration purposes, you can replace this with actual data retrieval logic
             List<Medicine> initialMedicines = DatabaseHelper.GetInitialMedicines();
             foreach (Medicine medicine in initialMedicines)
             {
                 searchedMedicines.Add(medicine);
             }
-
-            // Set the ObservableCollection as the DataGrid's ItemsSource
-            //medicineDataGrid.ItemsSource = searchedMedicines;
-
-            // Set the ObservableCollection as the ItemsControl's ItemsSource
+            medicineItemsControl.ItemsSource = null;
             medicineItemsControl.ItemsSource = searchedMedicines;
         }
 
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        private void InitializeMedicineGroupListView()
         {
-            string searchTerm = searchTextBox.Text;
-            DatabaseHelper.MedicineSearchCriteria searchCriteria = (DatabaseHelper.MedicineSearchCriteria)searchComboBox.SelectedIndex;
-
-            searchedMedicines.Clear();
-            List<Medicine> searchResults = DatabaseHelper.SearchMedicines(searchTerm, searchCriteria);
-            foreach (Medicine result in searchResults)
+            List<MedicineGroup> initialMedicineGroups = DatabaseHelper.GetInitialMedicineGroups();
+            foreach (MedicineGroup medicineGroup in initialMedicineGroups)
             {
-                searchedMedicines.Add(result);
+                searchedMedicineGroups.Add(medicineGroup);
+            }
+            medicineItemsControl.ItemsSource = null;
+            medicineItemsControl.ItemsSource = searchedMedicineGroups;
+
+            // Update the ToggleButton bindings
+            UpdateToggleButtonBindings();
+        }
+
+        private void UpdateToggleButtonBindings()
+        {
+            foreach (var item in medicineItemsControl.Items)
+            {
+                MessageBox.Show(item.ToString());
+                var container = medicineItemsControl.ItemContainerGenerator.ContainerFromItem(item) as FrameworkElement;
+                var toggleButton = FindVisualChild<ToggleButton>(container);
+
+                if (toggleButton != null)
+                {
+                    toggleButton.SetBinding(ToggleButton.ContentProperty, new Binding("GroupName") { Source = item });
+                }
             }
         }
+        private void UpdateSelectedMedicinesListView()
+        {
+            selectedMedicinesListView.ItemsSource = null;
+            selectedMedicinesListView.ItemsSource = selectedMedicines;
+        }
+        private void UpdateSelectedMedicineGroupListView()
+        {
+            selectedMedicinesListView.ItemsSource = null;
+            selectedMedicinesListView.ItemsSource = selectedMedicineGroups;
+        }
+
 
         // MedicineSearchWindow.xaml.cs
         private void SearchTextBox_TextChanged(object sender, RoutedEventArgs e)
@@ -59,13 +89,10 @@ namespace SmartClinic
             string searchTerm = searchTextBox.Text;
             DatabaseHelper.MedicineSearchCriteria searchCriteria = (DatabaseHelper.MedicineSearchCriteria)searchComboBox.SelectedIndex;
 
-            // Filter the medicines based on the search term and criteria
             List<Medicine> searchResults = DatabaseHelper.SearchMedicines(searchTerm, searchCriteria);
 
-            // Update the Popup content with the filtered results
             searchResultsListBox.ItemsSource = searchResults;
 
-            // Open or close the Popup based on whether there are search results
             if (searchResults.Count > 0)
             {
                 searchResultsPopup.IsOpen = true;
@@ -80,13 +107,10 @@ namespace SmartClinic
         {
             if (sender is ToggleButton toggleButton)
             {
-                // Retrieve the associated Medicine object from DataContext
                 if (toggleButton.DataContext is Medicine selectedMedicine)
                 {
-                    // Toggle the IsSelected property
                     selectedMedicine.IsSelected = toggleButton.IsChecked == true;
 
-                    // Update the selected medicines collection
                     if (selectedMedicine.IsSelected)
                     {
                         if (!selectedMedicines.Contains(selectedMedicine))
@@ -101,7 +125,6 @@ namespace SmartClinic
                         selectedMedicines.Remove(selectedMedicine);
                     }
 
-                    // Update the selected medicines ListView
                     UpdateSelectedMedicinesListView();
                 }
             }
@@ -109,35 +132,42 @@ namespace SmartClinic
 
 
 
-        private void MedicineDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // Handle selection changes, add selected medicine to the selectedMedicines list
-            foreach (Medicine selectedItem in e.AddedItems)
-            {
-                if (!selectedMedicines.Any(m => m.Id == selectedItem.Id))
-                {
-                    selectedMedicines.Add(selectedItem);
-                }
-            }
-
-            // Update the selected medicines ListView
-            UpdateSelectedMedicinesListView();
-        }
-
-        private void UpdateSelectedMedicinesListView()
-        {
-            selectedMedicinesListView.ItemsSource = null;
-            selectedMedicinesListView.ItemsSource = selectedMedicines;
-        }
-
         private void MedicineButton_Click(object sender, RoutedEventArgs e)
         {
-
+            medicinerx.Background = Brushes.LightBlue;
+            medicineGroup.Background = Brushes.White;
+            InitializeMedicineListView();
         }
+
         private void MedicineGroupButton_Click(object sender, RoutedEventArgs e)
         {
-
+            medicineGroup.Background = Brushes.LightBlue;
+            medicinerx.Background = Brushes.White;
+    
+            InitializeMedicineGroupListView();
         }
+
+        // Helper method to find a child element of a specific type in a visual tree
+        private T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
+        {
+            int childCount = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < childCount; i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                if (child is T typedChild)
+                {
+                    return typedChild;
+                }
+                else
+                {
+                    var result = FindVisualChild<T>(child);
+                    if (result != null)
+                        return result;
+                }
+            }
+            return null;
+        }
+
         private void SearchResultsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (searchResultsListBox.SelectedItem != null)
@@ -153,52 +183,57 @@ namespace SmartClinic
         }
         public void AddToSelectedMedicines(Medicine newMedicine)
         {
-            // Add the new medicine to the selectedMedicines collection
             selectedMedicines.Add(newMedicine);
-
-            // Update the selectedMedicinesListView
             UpdateSelectedMedicinesListView();
+        }
+
+        private void AddToSelectedMedicineGroups(MedicineGroup newMedicineGroup)
+        {
+            selectedMedicineGroups.Add(newMedicineGroup);
+            UpdateSelectedMedicineGroupListView();
         }
 
 
         private void addToRx_Click(object sender, RoutedEventArgs e)
         {
-            // Get the selected medicine from the searchResultsListBox
             Medicine selectedMedicine = (Medicine)searchResultsListBox.SelectedItem;
 
-            // Check if a medicine is selected
-            if (selectedMedicine != null)
-            {
+             if (selectedMedicine != null)
+             {
 
-                // Create an instance of the medicine UserControl
                 medicine medicineUserControl = new medicine();
-
-                // Add the selected medicine to the list in the medicine UserControl
                 medicineUserControl.AddToSelectedMedicines(selectedMedicine);
-
-                // Close the MedicineSearchWindow
                 this.Close();
+             }
+             else
+             {
+                this.Close();
+             }
+        }
+
+
+
+        private void rx_loaded(object sender, RoutedEventArgs e)
+        {
+            searchTextBox.Focus();
+        }
+        private void createMedicine_Click(object sender, RoutedEventArgs e)
+        {
+            if (medicinerx.Background == Brushes.LightBlue)
+            {
+                this.Close();
+                MedicineCreateWindow medicineCreateWindow = new MedicineCreateWindow();
+                // Set the window startup location to center screen
+                medicineCreateWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                medicineCreateWindow.Show();
             }
             else
             {
                 this.Close();
-                // Optionally, display a message or take any other actions if no medicine is selected
+                CreateMedicineGroupWindow createMedicineGroupWindow = new CreateMedicineGroupWindow();
+                createMedicineGroupWindow.Show();
             }
         }
-        private void selectedMedicinesListView_Loaded(object sender, RoutedEventArgs e)
-        {
-            // You may not need to manually set AlternationIndex in the code-behind.
-            // The AlternationCount="{Binding Path=Items.Count, RelativeSource={RelativeSource Self}}"
-            // in XAML should automatically assign serial numbers based on the item index.
-        }
 
-
-
-
-
-
-
-
-        // Add other methods or event handlers as needed
     }
 }

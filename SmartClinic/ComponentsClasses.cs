@@ -72,6 +72,12 @@ namespace SmartClinic
         public int Occurrence { get; set; }
     }
 
+    public class MedicineGroup 
+    {
+        public string GroupName { get; set; }
+        public string MedicineList { get; set; }
+        public int Occurrence { get; set; }
+    }
 
     public class Medicine : INotifyPropertyChanged
     {

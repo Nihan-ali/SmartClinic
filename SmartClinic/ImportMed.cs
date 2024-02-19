@@ -16,25 +16,7 @@ namespace SmartClinic
 
         public static void Import()
         {
-            ImportFile("InsertMe1.txt");
-            SleepInSeconds(2);
-            ImportFile("InsertMe2.txt");
-            SleepInSeconds(2);
-            ImportFile("InsertMe3.txt");
-            SleepInSeconds(2);
-            ImportFile("InsertMe4.txt");
-            SleepInSeconds(2);
-            ImportFile("InsertMe5.txt");
-            SleepInSeconds(2);
-            ImportFile("InsertMe6.txt");
-            SleepInSeconds(2);
-            ImportFile("InsertMe7.txt");
-            SleepInSeconds(2);
-            ImportFile("InsertMe8.txt");
-            SleepInSeconds(2);
-            ImportFile("InsertMe9.txt");
-            SleepInSeconds(2);
-            ImportFile("InsertMe10.txt");
+            ImportFile("hello.txt");
         }
 
         private static void SleepInSeconds(int seconds)

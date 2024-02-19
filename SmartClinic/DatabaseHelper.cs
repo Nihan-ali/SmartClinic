@@ -47,7 +47,9 @@ namespace SmartClinic
                                 {
                                     // Concatenate all the queries into a single string
                                     string allQueries = @"
-                                                    CREATE TABLE IF NOT EXISTS Medicine (ID INTEGER PRIMARY KEY AUTOINCREMENT, ManufacturerName TEXT NOT NULL, BrandName TEXT NOT NULL, GenericName TEXT NOT NULL, Strength TEXT, MedicineType TEXT, DosageDescription TEXT);
+                                                    CREATE TABLE IF NOT EXISTS Medicine (ID INTEGER PRIMARY KEY AUTOINCREMENT, ManufacturerName TEXT, BrandName TEXT, GenericName TEXT, Strength TEXT, MedicineType TEXT,Occurrence INTEGER NOT NULL, DosageDescription TEXT);
+                                                    CREATE TABLE IF NOT EXISTS MedicineGroup(GroupName TEXT, MedicineList TEXT, Occurrence INTEGER NOT NULL);                                                    
+
                                                     CREATE TABLE IF NOT EXISTS Advices (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
                                                     CREATE TABLE IF NOT EXISTS FollowUp (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
                                                     CREATE TABLE IF NOT EXISTS SpecialNotes (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
@@ -59,7 +61,7 @@ namespace SmartClinic
                                                     CREATE TABLE IF NOT EXISTS Diagnosis (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
                                                     CREATE TABLE IF NOT EXISTS TreatmentPlan (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
 
-                                                    CREATE TABLE IF NOT EXISTS Patient (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT,  Age TEXT, Address TEXT, Phone TEXT,Blood TEXT);
+                                                    CREATE TABLE IF NOT EXISTS Patient (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Age TEXT, Address TEXT, Phone TEXT,Blood TEXT);
                                                     CREATE TABLE IF NOT EXISTS PatientVisit (
                                                                                                 ID INTEGER, VISIT DATE,
                                                                                                 MEDICINE TEXT, ADVICE TEXT, FOLLOWUP TEXT, NOTES TEXT,
@@ -68,6 +70,7 @@ namespace SmartClinic
 
                                                                                                 PRIMARY KEY (ID, VISIT)
                                                                                             );";
+                                                    
 
                                     command.CommandText = allQueries;
 
@@ -294,6 +297,33 @@ namespace SmartClinic
 
             return initialMedicines;
         }
+        public static List<MedicineGroup> GetInitialMedicineGroups()
+        {
+            List<MedicineGroup> initialMedicineGroups = new List<MedicineGroup>();
+
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                using (var command = new SQLiteCommand("SELECT * FROM MedicineGroup LIMIT 45;", connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            MedicineGroup medicineGroup = new MedicineGroup
+                            {
+                                GroupName = reader["GroupName"].ToString(),
+                                MedicineList = reader["MedicineList"].ToString()
+                            };
+
+                            initialMedicineGroups.Add(medicineGroup);
+                        }
+                    }
+                }
+            }
+
+            return initialMedicineGroups;
+        }
         public static List<Advice> GetInitialAdvices()
         {
             List<Advice> initialAdvices = new List<Advice>();
@@ -469,7 +499,44 @@ namespace SmartClinic
         }
 
 
+        public static void AddMedicine(string brandName, string manufacturerName, string genericName, string strength, string medicineType)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
 
+                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM Medicine WHERE BrandName = @BrandName AND GenericName = @GenericName AND Strength = @Strength;", connection))
+                    {
+                        checkCommand.Parameters.AddWithValue("@BrandName", brandName);
+                        checkCommand.Parameters.AddWithValue("@GenericName", genericName);
+                        checkCommand.Parameters.AddWithValue("@Strength", strength);
+
+                        int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                        if (count == 0)
+                        {
+                            using (var insertCommand = new SQLiteCommand("INSERT INTO Medicine (BrandName, ManufacturerName, GenericName, Strength, MedicineType, Occurrence) VALUES (@BrandName, @ManufacturerName, @GenericName, @Strength, @MedicineType, @Occurrence);", connection))
+                            {
+                                insertCommand.Parameters.AddWithValue("@BrandName", brandName);
+                                insertCommand.Parameters.AddWithValue("@ManufacturerName", manufacturerName);
+                                insertCommand.Parameters.AddWithValue("@GenericName", genericName);
+                                insertCommand.Parameters.AddWithValue("@Strength", strength);
+                                insertCommand.Parameters.AddWithValue("@MedicineType", medicineType);
+                                insertCommand.Parameters.AddWithValue("@Occurrence", 0);
+                                insertCommand.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error inserting medicine: {ex}");
+                throw;
+            }
+        }
 
         public static void AddComplaint(string complaint)
         {

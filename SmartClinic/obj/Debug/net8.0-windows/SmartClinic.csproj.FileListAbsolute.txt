@@ -278,3 +278,7 @@ H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\FollowUpSea
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\SpecialNoteSearchWindow.g.cs
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\FollowUpSearchWindow.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\SpecialNoteSearchWindow.baml
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MedicineCreateWindow.g.cs
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MedicineCreateWindow.baml
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\CreateMedicineGroupWindow.g.cs
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\CreateMedicineGroupWindow.baml

@@ -1,0 +1,82 @@
+﻿<Window x:Class="SmartClinic.View.UserControls.MedicineCreateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SmartClinic.View.UserControls"
+        mc:Ignorable="d"
+        Title="MedicineCreateWindow" Height="450" Width="680">
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="Border">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="LightGray"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Aqua blue column -->
+        <!--<Border Grid.Column="0" Grid.RowSpan="6" Background="LightGray"/>-->
+
+        <Label Grid.Row="0" Content="Medicine Name" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <Border Grid.Row="0" Grid.Column="1" BorderBrush="Transparent">
+            <TextBox x:Name="MedicineNameTextBox"/>
+        </Border>
+
+        <Label Grid.Row="1" Content="Manufacturer Name" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <Border Grid.Row="1" Grid.Column="1" BorderBrush="Transparent">
+            <TextBox x:Name="ManufacturerNameTextBox"/>
+        </Border>
+
+        <Label Grid.Row="2" Content="Generic Name" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <Border Grid.Row="2" Grid.Column="1" BorderBrush="Transparent">
+            <TextBox x:Name="GenericNameTextBox"/>
+        </Border>
+
+        <Label Grid.Row="3" Content="Strength" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <Border Grid.Row="3" Grid.Column="1" BorderBrush="Transparent">
+            <TextBox x:Name="StrengthTextBox"/>
+        </Border>
+
+        <Label Grid.Row="4" Content="Medicine Type" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <Border Grid.Row="4" Grid.Column="1" BorderBrush="Transparent">
+            <TextBox x:Name="MedicineTypeTextBox"/>
+        </Border>
+
+        <Button x:Name="CreateMedicineButton" Grid.Row="5" Grid.Column="1" Content="Create Medicine" Background="LightBlue" Click="AddMedicineToDB_Click"/>
+        <TextBlock x:Name="MessageTextBlock" Margin="5" Grid.Row="6" Grid.Column="1" Foreground="White"/>
+    </Grid>
+</Window>

@@ -18,8 +18,8 @@
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <Grid >
-            <StackPanel Margin="30">
-                <Button x:Name="Rx" Content="Rx   + " HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Margin="10" Background="Transparent" BorderThickness="0" Click="Rx_Click"/>
+            <StackPanel Margin="10,12,10,0">
+                <Button x:Name="Rx" Content="Rx   + " HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Margin="10" Background="Transparent" BorderBrush="{x:Null}" Click="Rx_Click"/>
 
                 <ListView x:Name="selectedMedicinesListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
                     <ListView.ItemTemplate>

@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("create.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("doctor.ico")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("patient.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("rx.png")]
