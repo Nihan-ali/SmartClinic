@@ -74,13 +74,13 @@
                 <Button Name="search" Background="{x:Null}" BorderBrush="{x:Null}">
                     <Image Source="../../search.png" Height="15" Width="15"/>
                 </Button>
-                <TextBox x:Name="searchPatientTextBox" Text="Search Patient" Width="200" Margin="0,0,10,0" Foreground="Gray" TextChanged="PatientSearchStringChanged" GotFocus="OnSearchTextBoxGotFocus" LostFocus="OnSearchTextBoxLostFocus"/>
+                <TextBox x:Name="searchPatientTextBox" Text="Search Patient" Width="200" Margin="0,0,10,0" Foreground="Gray" TextChanged="PatientSearchStringChanged" />
             </StackPanel>
         </Grid>
 
-        <!--<Popup x:Name="searchResultsPopup" PlacementTarget="{Binding ElementName=searchPatientTextBox}" Placement="Bottom" StaysOpen="False" Width="365" Margin="15" MaxHeight="350">
+        <Popup x:Name="searchResultsPopup" PlacementTarget="{Binding ElementName=searchPatientTextBox}" Placement="Bottom" StaysOpen="False" Width="365" Margin="15" MaxHeight="350">
             <Border BorderThickness="0"  Background="White" BorderBrush="Wheat">
-                <ListView x:Name="searchResultsListBox" Margin="5" ItemsSource="{Binding SearchResults}" BorderThickness="0" SelectionMode="Single">
+                <!--<ListView x:Name="searchResultsListBox" Margin="5"  BorderThickness="0" SelectionMode="Single">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Margin" Value="0,0,0,2"/>
@@ -94,7 +94,7 @@
                                                     <RowDefinition Height="Auto"/>
                                                 </Grid.RowDefinitions>
 
-                                                --><!-- First line --><!--
+                                                 --><!--First line--><!-- 
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="*"/>
@@ -103,11 +103,11 @@
                                                     <TextBlock Text="{Binding Name}"  Margin="2" FontWeight="Bold" Foreground="#DA2D2727" HorizontalAlignment="Stretch"/>
                                                     <TextBlock Text="{Binding Age}" Margin="2" Grid.Column="1" FontWeight="Bold" Foreground="#DA2D2727" HorizontalAlignment="Stretch"/>
 
-                                                    --><!--<TextBlock Text="{Binding Strength}" Grid.Column="2" Margin="2" FontWeight="Bold" Foreground="#DA2D2727"/>--><!--
+                                                    <TextBlock Text="{Binding Blood}" Grid.Column="2" Margin="2" FontWeight="Bold" Foreground="#DA2D2727"/>
 
                                                 </Grid>
 
-                                                --><!-- Second line --><!--
+                                                 --><!--Second line--><!-- 
                                                 <TextBlock Text="{Binding Phone}" Margin="2" FontStyle="Italic" Grid.Row="1" FontWeight="SemiBold" Foreground="#AA2D2727"/>
                                             </Grid>
                                         </Border>
@@ -122,9 +122,9 @@
                             <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
                         </Style>
                     </ListView.ItemContainerStyle>
-                </ListView>
+                </ListView>-->
             </Border>
-        </Popup>-->
+        </Popup>
 
 
         <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,1,0,0"/>

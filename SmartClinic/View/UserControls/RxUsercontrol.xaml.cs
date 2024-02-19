@@ -595,21 +595,21 @@ namespace SmartClinic.View.UserControls
         private void PatientSearchStringChanged(object sender, TextChangedEventArgs e)
         {
 
-            //    string searchTerm = searchPatientTextBox.Text;
-            //    List<Patient> searchResults = DatabaseHelper.SearchPatients(searchTerm);
-            //    if (searchResults != null)
-            //    {
-            //        foreach (Patient patient in searchResults)
-            //        {
-            //            MessageBox.Show(patient.Name);
-            //        }
-            //    }
-            //    //searchResultsListBox.ItemsSource = searchResults;
+            string searchterm = searchPatientTextBox.Text;
+            List<Patient> searchresults = DatabaseHelper.SearchPatients(searchterm);
+            searchResultsPopup.IsOpen = true;
 
-            //    if (searchResults!=null && searchResults.Count > 0)
-            //    {
-            //        searchResultsPopup.IsOpen = true;
-            //    }
+            //if (searchresults.Count > 0)
+            //{
+            //    MessageBox.Show(searchresults.Count.ToString());
+            //    //searchResultsListBox.ItemsSource = searchresults;
+            //    //searchResultsPopup.IsOpen = true;
+            //}
+            //else
+            //{
+            //    //searchResultsPopup.IsOpen = false;
+            //}
+
         }
 
 }

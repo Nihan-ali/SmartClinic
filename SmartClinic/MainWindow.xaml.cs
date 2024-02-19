@@ -29,7 +29,6 @@ namespace SmartClinic
            
             DataContext = this;
             TodayDate = DateTime.Now.ToString("dd-MM-yyyy");
-            treatmentPlanPopup = new Popup();
             contentControl.Content = new View.UserControls.RxUsercontrol();
         }
         // MainWindow.xaml.cs
