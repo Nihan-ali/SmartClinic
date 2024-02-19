@@ -3,16 +3,40 @@
   "WorkspaceRootPath": "E:\\Web_Dev\\350\\SmartClinic\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\patientinfo.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\patientinfo.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\componentsclasses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\componentsclasses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\rxusercontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\rxusercontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\medicinesearchwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\medicinesearchwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\medicinesearchwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\medicinesearchwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\detailswindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\detailswindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\detailswindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\detailswindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\header.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\header.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\patientprofileusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\patientprofileusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\rxusercontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\rxusercontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\patientinfo.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -23,16 +47,12 @@
       "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\addpatient.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\componentsclasses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\componentsclasses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\patientinfo.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\patientinfo.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\rxusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\rxusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\patientprofileusercontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\patientprofileusercontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\patientsusercontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -43,24 +63,12 @@
       "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\menubar.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\detailswindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\detailswindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\medicine.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\medicine.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\medicinesearchwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\medicinesearchwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\medicinesearchwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\medicinesearchwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\advicesearchwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -90,10 +98,6 @@
       "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\history.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\header.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\header.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\header.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\header.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -109,99 +113,161 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "PatientProfileUserControl.xaml.cs",
-              "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\PatientProfileUserControl.xaml.cs",
-              "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\PatientProfileUserControl.xaml.cs",
-              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\PatientProfileUserControl.xaml.cs",
-              "RelativeToolTip": "SmartClinic\\View\\UserControls\\PatientProfileUserControl.xaml.cs",
-              "ViewState": "AQIAAC4AAAAAAAAAAAAmwD4AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-04T21:26:20.034Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "AddPatient.xaml.cs",
-              "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\AddPatient.xaml.cs",
-              "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\AddPatient.xaml.cs",
-              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\AddPatient.xaml.cs",
-              "RelativeToolTip": "SmartClinic\\View\\UserControls\\AddPatient.xaml.cs",
-              "ViewState": "AQIAABsAAAAAAAAAAAAowA8AAAAJAAAA",
+              "Title": "DetailsWindow.xaml.cs",
+              "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\DetailsWindow.xaml.cs",
+              "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\DetailsWindow.xaml.cs",
+              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\DetailsWindow.xaml.cs",
+              "RelativeToolTip": "SmartClinic\\View\\UserControls\\DetailsWindow.xaml.cs",
+              "ViewState": "AQIAACwAAAAAAAAAAAAAADcAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-04T20:07:23.507Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "patientInfo.xaml.cs",
-              "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\patientInfo.xaml.cs",
-              "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\patientInfo.xaml.cs",
-              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\patientInfo.xaml.cs",
-              "RelativeToolTip": "SmartClinic\\View\\UserControls\\patientInfo.xaml.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAIwBkAAAAyAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-04T19:52:36.748Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "RxUsercontrol.xaml.cs",
-              "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\RxUsercontrol.xaml.cs",
-              "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\RxUsercontrol.xaml.cs",
-              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\RxUsercontrol.xaml.cs",
-              "RelativeToolTip": "SmartClinic\\View\\UserControls\\RxUsercontrol.xaml.cs",
-              "ViewState": "AQIAADYAAAAAAAAAAAAcwEUAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-07T19:02:24.641Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "SmartClinic\\MainWindow.xaml.cs",
-              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\MainWindow.xaml.cs",
-              "RelativeToolTip": "SmartClinic\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAF0AAAAAAAAAAAAYwHMAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-01-26T19:21:17.668Z"
+              "WhenOpened": "2024-02-19T06:23:38.654Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ComponentsClasses.cs",
+              "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\ComponentsClasses.cs",
+              "RelativeDocumentMoniker": "SmartClinic\\ComponentsClasses.cs",
+              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\ComponentsClasses.cs*",
+              "RelativeToolTip": "SmartClinic\\ComponentsClasses.cs*",
+              "ViewState": "AQIAAFkAAAAAAAAAAAA0wGAAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-19T06:17:21.747Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "patientInfo.xaml",
               "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\patientInfo.xaml",
               "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\patientInfo.xaml",
               "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\patientInfo.xaml",
               "RelativeToolTip": "SmartClinic\\View\\UserControls\\patientInfo.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-02-04T19:45:52.601Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ComponentsClasses.cs",
-              "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\ComponentsClasses.cs",
-              "RelativeDocumentMoniker": "SmartClinic\\ComponentsClasses.cs",
-              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\ComponentsClasses.cs",
-              "RelativeToolTip": "SmartClinic\\ComponentsClasses.cs",
-              "ViewState": "AQIAABQAAAAAAAAAAAAYwBsAAAARAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-05T20:42:11.784Z"
+              "WhenOpened": "2024-02-04T19:45:52.601Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "header.xaml",
+              "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\header.xaml",
+              "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\header.xaml",
+              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\header.xaml",
+              "RelativeToolTip": "SmartClinic\\View\\UserControls\\header.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-01-26T19:06:32.279Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MedicineSearchWindow.xaml",
+              "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\MedicineSearchWindow.xaml",
+              "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\MedicineSearchWindow.xaml",
+              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\MedicineSearchWindow.xaml",
+              "RelativeToolTip": "SmartClinic\\View\\UserControls\\MedicineSearchWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-01-26T18:32:44.417Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MedicineSearchWindow.xaml.cs",
+              "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\MedicineSearchWindow.xaml.cs",
+              "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\MedicineSearchWindow.xaml.cs",
+              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\MedicineSearchWindow.xaml.cs",
+              "RelativeToolTip": "SmartClinic\\View\\UserControls\\MedicineSearchWindow.xaml.cs",
+              "ViewState": "AQIAAMUAAAAAAAAAAAAiwNwAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-02T15:40:08.269Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "SmartClinic\\MainWindow.xaml.cs",
+              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\MainWindow.xaml.cs",
+              "RelativeToolTip": "SmartClinic\\MainWindow.xaml.cs",
+              "ViewState": "AQIAADEAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-19T06:40:03.115Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "RxUsercontrol.xaml.cs",
+              "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\RxUsercontrol.xaml.cs",
+              "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\RxUsercontrol.xaml.cs",
+              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\RxUsercontrol.xaml.cs",
+              "RelativeToolTip": "SmartClinic\\View\\UserControls\\RxUsercontrol.xaml.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-07T19:02:24.641Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DetailsWindow.xaml",
+              "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\DetailsWindow.xaml",
+              "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\DetailsWindow.xaml",
+              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\DetailsWindow.xaml",
+              "RelativeToolTip": "SmartClinic\\View\\UserControls\\DetailsWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-02-03T09:26:53.309Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "patientInfo.xaml.cs",
+              "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\patientInfo.xaml.cs",
+              "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\patientInfo.xaml.cs",
+              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\patientInfo.xaml.cs",
+              "RelativeToolTip": "SmartClinic\\View\\UserControls\\patientInfo.xaml.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAwAAABIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-04T19:52:36.748Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AddPatient.xaml.cs",
+              "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\AddPatient.xaml.cs",
+              "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\AddPatient.xaml.cs",
+              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\AddPatient.xaml.cs",
+              "RelativeToolTip": "SmartClinic\\View\\UserControls\\AddPatient.xaml.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAgwA8AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-04T20:07:23.507Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PatientProfileUserControl.xaml",
+              "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\PatientProfileUserControl.xaml",
+              "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\PatientProfileUserControl.xaml",
+              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\PatientProfileUserControl.xaml",
+              "RelativeToolTip": "SmartClinic\\View\\UserControls\\PatientProfileUserControl.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-02-12T14:51:21.259Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "RxUsercontrol.xaml",
               "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\RxUsercontrol.xaml",
               "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\RxUsercontrol.xaml",
@@ -212,7 +278,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "patientsUsercontrol.xaml.cs",
               "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\patientsUsercontrol.xaml.cs",
               "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\patientsUsercontrol.xaml.cs",
@@ -224,7 +290,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
               "Title": "MenuBar.xaml",
               "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\MenuBar.xaml",
               "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\MenuBar.xaml",
@@ -235,18 +301,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "DetailsWindow.xaml",
-              "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\DetailsWindow.xaml",
-              "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\DetailsWindow.xaml",
-              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\DetailsWindow.xaml",
-              "RelativeToolTip": "SmartClinic\\View\\UserControls\\DetailsWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-02-03T09:26:53.309Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "medicine.xaml",
               "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\medicine.xaml",
               "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\medicine.xaml",
@@ -257,7 +312,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "DatabaseHelper.cs",
               "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\DatabaseHelper.cs",
               "RelativeDocumentMoniker": "SmartClinic\\DatabaseHelper.cs",
@@ -269,19 +324,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "MedicineSearchWindow.xaml.cs",
-              "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\MedicineSearchWindow.xaml.cs",
-              "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\MedicineSearchWindow.xaml.cs",
-              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\MedicineSearchWindow.xaml.cs",
-              "RelativeToolTip": "SmartClinic\\View\\UserControls\\MedicineSearchWindow.xaml.cs",
-              "ViewState": "AQIAAFsAAAAAAAAAAAAAAGMAAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-02T15:40:08.269Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "AdviceSearchWindow.xaml.cs",
               "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\AdviceSearchWindow.xaml.cs",
               "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\AdviceSearchWindow.xaml.cs",
@@ -293,18 +336,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "MedicineSearchWindow.xaml",
-              "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\MedicineSearchWindow.xaml",
-              "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\MedicineSearchWindow.xaml",
-              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\MedicineSearchWindow.xaml",
-              "RelativeToolTip": "SmartClinic\\View\\UserControls\\MedicineSearchWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-01-26T18:32:44.417Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "medicine.xaml.cs",
               "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\medicine.xaml.cs",
               "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\medicine.xaml.cs",
@@ -316,7 +348,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 21,
               "Title": "SelectedItems.cs",
               "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\SelectedItems.cs",
               "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\SelectedItems.cs",
@@ -328,7 +360,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 20,
               "Title": "ItemContainerGenerator.cs",
               "DocumentMoniker": "C:\\Users\\Nihan Ali\\AppData\\Local\\Temp\\.vsdbgsrc\\29f8927ed25e0098e3c3d463fee0b312caa0a901585c272890cd9d0338e52015\\ItemContainerGenerator.cs",
               "ToolTip": "C:\\Users\\Nihan Ali\\AppData\\Local\\Temp\\.vsdbgsrc\\29f8927ed25e0098e3c3d463fee0b312caa0a901585c272890cd9d0338e52015\\ItemContainerGenerator.cs [Read Only]",
@@ -339,7 +371,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "AdviceSearchWindow.xaml",
               "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\AdviceSearchWindow.xaml",
               "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\AdviceSearchWindow.xaml",
@@ -350,7 +382,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 22,
               "Title": "ImportMed.cs",
               "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\ImportMed.cs",
               "RelativeDocumentMoniker": "SmartClinic\\ImportMed.cs",
@@ -362,7 +394,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 23,
               "Title": "History.xaml",
               "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\History.xaml",
               "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\History.xaml",
@@ -373,18 +405,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "header.xaml",
-              "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\header.xaml",
-              "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\header.xaml",
-              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\header.xaml",
-              "RelativeToolTip": "SmartClinic\\View\\UserControls\\header.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-01-26T19:06:32.279Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "header.xaml.cs",
               "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\header.xaml.cs",
               "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\header.xaml.cs",
@@ -396,7 +417,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\MainWindow.xaml",
               "RelativeDocumentMoniker": "SmartClinic\\MainWindow.xaml",

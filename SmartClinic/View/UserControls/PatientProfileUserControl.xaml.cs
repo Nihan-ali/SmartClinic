@@ -43,30 +43,43 @@ namespace SmartClinic.View.UserControls
             PatientInfoSubmitted += PatientProfileUserControl_PatientInfoSubmitted;
         }
 
+
         private void PatientProfileUserControl_PatientInfoSubmitted(object sender, PatientEventArgs e)
         {
             // Handle the submitted patient info
             newPatient = e.NewPatient;
 
             // Log information to identify the issue
-            Console.WriteLine("Handling PatientInfoSubmitted event. Patient: " + newPatient.Name);
+            //Console.WriteLine("Handling PatientInfoSubmitted event. Patient: " + newPatient.Name);
 
             // Show MessageBox with additional information
-            MessageBox.Show("Handling PatientInfoSubmitted event. Patient: " + newPatient.Name, "Debug Information");
+           // MessageBox.Show("Handling PatientInfoSubmitted event. Patient: " + newPatient.Name, "Debug Information");
 
             // Unsubscribe from the event if needed to avoid multiple invocations
             PatientInfoSubmitted -= PatientProfileUserControl_PatientInfoSubmitted;
 
-            // Open the PatientProfileUserControl with the selected patient
-            // contentControl.Content = new View.UserControls.PatientProfileUserControl(newPatient, mainWindowInstance);
+            // Update the patientInfoControl with the new patient data
+            if (mainWindowInstance != null && mainWindowInstance.contentControl.Content is RxUsercontrol rxUsercontrol)
+            {
+                if (rxUsercontrol.Content is patientInfo patientInfoControl)
+                {
+                    // Update patientInfoControl with the new patient data
+                    patientInfoControl.UpdatePatientInfo(newPatient);
+                }
+                else
+                {
+                    // Log an error or display a message indicating an issue with patientInfoControl
+                    //MessageBox.Show("Error: patientInfoControl is not found in RxUsercontrol.");
+                }
+            }
+            else
+            {
+                // Log an error or display a message indicating an issue with MainWindow or RxUsercontrol
+                //MessageBox.Show("Error: MainWindow or RxUsercontrol is null.");
+            }
         }
 
 
-        public class PrescriptionItem
-        {
-            public DateTime Date { get; set; }
-            public string PrescriptionText { get; set; }
-        }
 
         private void SetDataContext(Patient selectedPatient)
         {
@@ -140,7 +153,7 @@ namespace SmartClinic.View.UserControls
             // Assuming you have an instance of MainWindow called 'mainWindowInstance'
             if (mainWindowInstance != null)
             {
-                RxUsercontrol rxUsercontrol = new View.UserControls.RxUsercontrol(newPatient);
+                RxUsercontrol rxUsercontrol = new RxUsercontrol(newPatient);
 
                 if (rxUsercontrol != null && rxUsercontrol.Content != null)
                 {

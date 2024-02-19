@@ -87,6 +87,14 @@ namespace SmartClinic
         public string MedicineType { get; set; }
         public string DosageDescription { get; set; }
         public string Note { get; set; }
+        public string Schedule { get; set; }
+        public string Unit { get; set; }
+        public int Duration { get; set; }
+        public string MakeNote { get; set; }
+        public int MorningDose { get; set; }
+        public int NoonDose { get; set; }
+        public int NightDose { get; set; }
+        //public int Duration { get; set; }
         public string MedicineName
         {
             get

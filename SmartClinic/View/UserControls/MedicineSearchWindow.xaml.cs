@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -91,9 +92,10 @@ namespace SmartClinic
                     {
                         if (!selectedMedicines.Contains(selectedMedicine))
                         {
-                            DetailsWindow detailsWindow = new DetailsWindow(selectedMedicine);
-                            detailsWindow.ParentMainWindow = this;
-                            detailsWindow.Show();
+                            selectedMedicines.Add(selectedMedicine);
+                            //DetailsWindow detailsWindow = new DetailsWindow(selectedMedicine);
+                            //detailsWindow.ParentMainWindow = this;
+                            //detailsWindow.Show();
                         }
                     }
                     else
@@ -193,6 +195,103 @@ namespace SmartClinic
         }
 
 
+        private void IncrementMorningButton_Click(object sender, RoutedEventArgs e)
+        {
+            IncrementTextBoxValue("MorningDose");
+        }
+
+        private void DecrementMorningButton_Click(object sender, RoutedEventArgs e)
+        {
+            DecrementTextBoxValue("MorningDose");
+        }
+
+        // Similarly for other buttons...
+
+        private void IncrementTextBoxValue(string propertyName)
+        {
+            if (selectedMedicinesListView.SelectedItem is Medicine selectedItem)
+            {
+                // Use reflection to get and set the property value
+                PropertyInfo property = typeof(Medicine).GetProperty(propertyName);
+                if (property != null && property.PropertyType == typeof(int))
+                {
+                    int value = (int)property.GetValue(selectedItem);
+                    value++;
+                    property.SetValue(selectedItem, value);
+                }
+            }
+        }
+
+        private void DecrementTextBoxValue(string propertyName)
+        {
+            if (selectedMedicinesListView.SelectedItem is Medicine selectedItem)
+            {
+                PropertyInfo property = typeof(Medicine).GetProperty(propertyName);
+                if (property != null && property.PropertyType == typeof(int))
+                {
+                    int value = (int)property.GetValue(selectedItem);
+                    if (value > 1)
+                    {
+                        value--;
+                        property.SetValue(selectedItem, value);
+                    }
+                }
+            }
+        }
+
+
+        //private void IncrementNoonButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    IncrementTextBoxValue(noonTextBox);
+        //}
+
+        //private void DecrementNoonButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    DecrementTextBoxValue(noonTextBox);
+        //}
+
+        //private void IncrementNightButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    IncrementTextBoxValue(nightTextBox);
+        //}
+
+        //private void DecrementNightButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    DecrementTextBoxValue(nightTextBox);
+        //}
+
+        //private void IncrementDurationButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    IncrementTextBoxValue(durationTextBox);
+        //}
+
+        //private void DecrementDurationButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    DecrementTextBoxValue(durationTextBox);
+        //}
+
+        //private void IncrementTextBoxValue(TextBox textBox)
+        //{
+        //    int value;
+        //    if (int.TryParse(textBox.Text, out value))
+        //    {
+        //        value++;
+        //        textBox.Text = value.ToString();
+        //    }
+        //}
+
+        //private void DecrementTextBoxValue(TextBox textBox)
+        //{
+        //    int value;
+        //    if (int.TryParse(textBox.Text, out value) && value > 1)
+        //    {
+        //        value--;
+        //        textBox.Text = value.ToString();
+        //    }
+        //}
+
+
+
 
 
 
@@ -201,4 +300,5 @@ namespace SmartClinic
 
         // Add other methods or event handlers as needed
     }
+
 }

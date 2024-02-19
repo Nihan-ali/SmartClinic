@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Xml;
 using static SmartClinic.Patient;
 
 namespace SmartClinic.View.UserControls
@@ -16,17 +15,16 @@ namespace SmartClinic.View.UserControls
         public patientInfo()
         {
             InitializeComponent();
-            RxUsercontrol rxUsercontrol = new RxUsercontrol(); // Create an instance of RxUsercontrol
-            rxUsercontrol.PatientInfoSubmitted += RxUsercontrol_PatientInfoSubmitted;
         }
 
-        private void RxUsercontrol_PatientInfoSubmitted(object sender, PatientEventArgs e)
+        // This method will be called when RxUsercontrol wants to update patient info
+        public void UpdatePatientInfo(Patient patient)
         {
-            // Handle the requested patient info
-            if (e != null && e.NewPatient != null)
+            //MessageBox.Show("message from patientinfo " + patient.Name);
+            if (patient != null)
             {
                 // Update UI with patient details
-                UpdateUIWithPatientDetails(e.NewPatient.Name, e.NewPatient.Age);
+                UpdateUIWithPatientDetails(patient.Name, patient.Age);
             }
         }
 
@@ -40,26 +38,11 @@ namespace SmartClinic.View.UserControls
 
         private void AddPatientWindow_PatientInfoSubmitted(object sender, PatientEventArgs e)
         {
-            if (e != null && e.NewPatient != null)
-            {
-                // Handle the submitted patient info
-                string patientName = e.NewPatient.Name;
-                string patientAge = e.NewPatient.Age;
-                MessageBox.Show("Patient added: " + patientName);
+            // Handle the submitted patient info
+            PatientInfoSubmitted?.Invoke(this, e);
 
-                // Update UI with patient details
-                UpdateUIWithPatientDetails(patientName, patientAge);
-
-                // Raise the PatientInfoRequested event when patient information is requested
-                PatientInfoSubmitted?.Invoke(this, new PatientEventArgs { NewPatient = e.NewPatient });
-            }
-        }
-        public void UpdatePatientInfo(Patient patient)
-        {
-            // Update the name and age fields in your patientInfo UserControl
-            string patientName = patient.Name;
-            string patientAge = patient.Age;
-            UpdateUIWithPatientDetails(patientName, patientAge);
+            // Update UI with patient details
+            UpdateUIWithPatientDetails(e.NewPatient.Name, e.NewPatient.Age);
         }
 
         private void UpdateUIWithPatientDetails(string patientName, string patientAge)
@@ -72,7 +55,7 @@ namespace SmartClinic.View.UserControls
                 // Create TextBlocks for patient name and age
                 TextBlock nameLabel = new TextBlock
                 {
-                    Text = "Name: " + patientName,
+                    Text = patientName,
                     FontWeight = FontWeights.Bold,
                     VerticalAlignment = VerticalAlignment.Center
                 };
@@ -87,7 +70,7 @@ namespace SmartClinic.View.UserControls
                 // Add the TextBlocks to the StackPanel
                 addPatientPanel.Children.Add(nameLabel);
                 //addPatientPanel.Children.Add(ageLabel);
-                age.Text = patientAge;
+                age.Text=patientAge;
                 isPatientAdded = true;
             }
         }

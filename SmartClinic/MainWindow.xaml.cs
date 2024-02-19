@@ -1,40 +1,49 @@
 ﻿using SmartClinic.View.UserControls;
 using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Controls.Primitives;
+using System.Collections.ObjectModel;
 using static SmartClinic.Patient;
+using System.Windows.Controls;
 
 namespace SmartClinic
 {
     public partial class MainWindow : Window
     {
-        private Patient newPatient;
-        private PatientProfileUserControl patientProfileUserControl;
-
         public string TodayDate { get; set; }
-        private Popup treatmentPlanPopup;
 
-        public event EventHandler<PatientEventArgs> PatientInfoSubmitted;
+        private Popup treatmentPlanPopup;
+        private Patient newPatient;
+        private RxUsercontrol rxUserControl;
+        private patientInfo patientInfoControl;
 
         public MainWindow()
         {
             InitializeComponent();
 
+            // Initialize patientInfo and RxUsercontrol
+            patientInfoControl = new patientInfo();
+            //rxUserControl = new RxUsercontrol(newPatient, patientInfoControl);
+            rxUserControl = new RxUsercontrol();
+
             DataContext = this;
             TodayDate = DateTime.Now.ToString("dd-MM-yyyy");
             treatmentPlanPopup = new Popup();
 
-            // Set a default content for contentControl
-            patientProfileUserControl = new PatientProfileUserControl(null, this);
-
-            // Subscribe to the event inside the constructor of MainWindow
-            patientProfileUserControl.PatientInfoSubmitted += PatientProfileUserControl_PatientInfoSubmitted;
-
-            // Set the content to RxUsercontrol initially
-            contentControl.Content = new View.UserControls.RxUsercontrol();
+            // Set the content to RxUsercontrol
+            contentControl.Content = rxUserControl;
         }
+
+        //private void RxUserControl_PrescriptionDataAvailable(object sender, PatientEventArgs e)
+        //{
+        //    // Handle prescription data available event
+        //    newPatient = e.NewPatient;
+
+        //    // Update PatientInfoControl with the provided patient data
+        //    MessageBox.Show("came in main " + newPatient.Name);
+        //    patientInfoControl.UpdatePatientInfo(newPatient);
+        //}
 
         private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -56,7 +65,7 @@ namespace SmartClinic
         private void RxButton_Click(object sender, RoutedEventArgs e)
         {
             // Set content to RxUserControl
-            contentControl.Content = new View.UserControls.RxUsercontrol();
+            contentControl.Content = rxUserControl;
         }
 
         private void PatientButton_Click(object sender, RoutedEventArgs e)
@@ -68,48 +77,13 @@ namespace SmartClinic
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
             // Set content to SettingsUserControl
-            // contentControl.Content = new UserControls.SettingsUserControl();
+            //contentControl.Content = new UserControls.SettingsUserControl();
         }
 
         private void StatButton_Click(object sender, RoutedEventArgs e)
         {
             // Set content to StatUserControl
-            // contentControl.Content = new UserControls.StatUserControl();
-        }
-
-        private void writePrescription_Click(object sender, RoutedEventArgs e)
-        {
-            // Create a new patient for demonstration purposes
-            newPatient = new Patient
-            {
-                Name = "John Doe",
-                Age = "30"
-            };
-            MessageBox.Show("This is being called in main");
-
-            // Invoke the event and pass the new patient information
-            PatientInfoSubmitted?.Invoke(this, new PatientEventArgs { NewPatient = newPatient });
-
-            // Open the RxUserControl with the selected patient
-            contentControl.Content = new View.UserControls.RxUsercontrol(newPatient);
-        }
-
-        // This method is called when PatientProfileUserControl fires the event
-        private void PatientProfileUserControl_PatientInfoSubmitted(object sender, PatientEventArgs e)
-        {
-            // Handle the submitted patient info
-            newPatient = e.NewPatient;
-            MessageBox.Show("Also came here " + newPatient.Name);
-            PatientInfoSubmitted?.Invoke(this, new PatientEventArgs { NewPatient = newPatient });
-
-            // Open the PatientProfileUserControl with the selected patient
-            // contentControl.Content = new PatientProfileUserControl(newPatient, this);
-        }
-
-        private void MainWindow_PatientInfoSubmitted(object sender, PatientEventArgs e)
-        {
-            // Handle the patient information submitted event
-            MessageBox.Show($"Received patient information: {e.NewPatient.Name}, {e.NewPatient.Age}");
+            //contentControl.Content = new UserControls.StatUserControl();
         }
     }
 }
