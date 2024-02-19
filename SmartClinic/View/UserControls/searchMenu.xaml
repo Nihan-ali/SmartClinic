@@ -12,7 +12,7 @@
             <Button x:Name="prescription1" Content="New Prescription" Margin="0,0,10,0" BorderBrush="{x:Null}" Foreground="#FF1A1840" FontWeight="Bold" Background="{x:Null}"/>
             <!-- Add margin to create space between buttons -->
             <Button Content="Print Preview" Margin="0,0,10,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF5556C1" FontSize="10" FontWeight="Bold"/>
-            <TextBox x:Name="menubarbox" Text="Search Here" Height="25" Background="#FFCADAE4" Width="96" Opacity="0.5" SelectionOpacity="-6" VerticalAlignment="Center" SelectionBrush="#FF7E94A5" GotFocus="textBox_GotFocus" LostFocus="textBox_LostFocus"/>
+            <TextBox x:Name="menubarbox" Padding="0,3,0,0" Text="Search Here" Height="25" Background="#FFCADAE4" Width="96" Opacity="0.5" SelectionOpacity="-6" VerticalAlignment="Center" SelectionBrush="#FF7E94A5" GotFocus="textBox_GotFocus" LostFocus="textBox_LostFocus"/>
         </StackPanel>
 
     </Grid>

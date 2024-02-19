@@ -30,11 +30,14 @@ namespace SmartClinic
             searchedMedicineGroups = new ObservableCollection<MedicineGroup>();
             selectedMedicineGroups = new ObservableCollection<MedicineGroup>();
             InitializeMedicineListView();
+            medicinegroupscrollviewer.Visibility = Visibility.Hidden;
+            medicinescrollviewer.Visibility = Visibility.Visible;
         }
 
         private void InitializeMedicineListView()
         {
             List<Medicine> initialMedicines = DatabaseHelper.GetInitialMedicines();
+            searchedMedicines.Clear();
             foreach (Medicine medicine in initialMedicines)
             {
                 searchedMedicines.Add(medicine);
@@ -46,31 +49,15 @@ namespace SmartClinic
         private void InitializeMedicineGroupListView()
         {
             List<MedicineGroup> initialMedicineGroups = DatabaseHelper.GetInitialMedicineGroups();
+            searchedMedicineGroups.Clear();
             foreach (MedicineGroup medicineGroup in initialMedicineGroups)
             {
                 searchedMedicineGroups.Add(medicineGroup);
             }
-            medicineItemsControl.ItemsSource = null;
-            medicineItemsControl.ItemsSource = searchedMedicineGroups;
-
-            // Update the ToggleButton bindings
-            UpdateToggleButtonBindings();
+            medicineGroupItemsControl.ItemsSource = null;
+            medicineGroupItemsControl.ItemsSource = searchedMedicineGroups;
         }
 
-        private void UpdateToggleButtonBindings()
-        {
-            foreach (var item in medicineItemsControl.Items)
-            {
-                MessageBox.Show(item.ToString());
-                var container = medicineItemsControl.ItemContainerGenerator.ContainerFromItem(item) as FrameworkElement;
-                var toggleButton = FindVisualChild<ToggleButton>(container);
-
-                if (toggleButton != null)
-                {
-                    toggleButton.SetBinding(ToggleButton.ContentProperty, new Binding("GroupName") { Source = item });
-                }
-            }
-        }
         private void UpdateSelectedMedicinesListView()
         {
             selectedMedicinesListView.ItemsSource = null;
@@ -136,6 +123,8 @@ namespace SmartClinic
         {
             medicinerx.Background = Brushes.LightBlue;
             medicineGroup.Background = Brushes.White;
+            medicinegroupscrollviewer.Visibility = Visibility.Hidden;
+            medicinescrollviewer.Visibility = Visibility.Visible;
             InitializeMedicineListView();
         }
 
@@ -143,7 +132,8 @@ namespace SmartClinic
         {
             medicineGroup.Background = Brushes.LightBlue;
             medicinerx.Background = Brushes.White;
-    
+            medicinegroupscrollviewer.Visibility = Visibility.Visible;
+            medicinescrollviewer.Visibility = Visibility.Hidden;
             InitializeMedicineGroupListView();
         }
 
@@ -201,8 +191,7 @@ namespace SmartClinic
              if (selectedMedicine != null)
              {
 
-                medicine medicineUserControl = new medicine();
-                medicineUserControl.AddToSelectedMedicines(selectedMedicine);
+                AddToSelectedMedicines(selectedMedicine);
                 this.Close();
              }
              else

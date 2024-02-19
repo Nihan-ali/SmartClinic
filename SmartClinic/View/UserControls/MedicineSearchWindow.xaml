@@ -140,7 +140,7 @@
             <Button x:Name="medicineGroup" Content="Medicine Group" Background="White" Height="30" Foreground="Blue" FontWeight="Bold" BorderBrush="{x:Null}" Click="MedicineGroupButton_Click" Width="310"/>
         </ListBox>
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" Background="#FFE8E8E8" Margin="10,0,10,0">
+        <ScrollViewer x:Name="medicinescrollviewer" VerticalScrollBarVisibility="Auto" Grid.Row="2" Background="#FFE8E8E8" Margin="10,0,10,0">
             <ItemsControl x:Name="medicineItemsControl" Grid.Row="2" Margin="5">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -158,6 +158,25 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+        <ScrollViewer x:Name="medicinegroupscrollviewer" VerticalScrollBarVisibility="Auto" Grid.Row="2" Background="#FFE8E8E8" Margin="10,0,10,0">
+            <ItemsControl x:Name="medicineGroupItemsControl" Grid.Row="2" Margin="5">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ToggleButton x:Name="listtogglebutton" Content="{Binding GroupName}" Margin="3" 
+                      IsChecked="{Binding IsSelected, Mode=TwoWay}" 
+                      Foreground="#FF4545B5" HorizontalAlignment="Center" Background="White"
+                      FontWeight="DemiBold" BorderBrush="{x:Null}" Height="27" Padding="5" 
+                      Click="ToggleButton_Click"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
 
         <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="10">
             <TextBlock Text="Selected Medicines" FontWeight="Bold" Margin="10"/>

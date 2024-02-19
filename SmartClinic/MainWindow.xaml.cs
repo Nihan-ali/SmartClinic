@@ -78,5 +78,9 @@ namespace SmartClinic
             //contentControl.Content = new UserControls.StatUserControl();
         }
 
+        private void searchMenu_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

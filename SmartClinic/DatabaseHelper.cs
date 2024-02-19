@@ -1112,38 +1112,50 @@ namespace SmartClinic
                 throw;
             }
         }
-        public static List<Advice> SearchAdvices(string keyword)
+
+        public static List<Patient> SearchPatients(string searchTerm)
         {
-            List<Advice> searchResults = new List<Advice>();
-
-            using (SQLiteConnection connection = new SQLiteConnection(ConnectionString))
+            try
             {
-                connection.Open();
-
-                string query = "SELECT Content, Occurrence FROM Advices WHERE Content LIKE @keyword ORDER BY Occurrence";
-
-                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                using (var connection = GetConnection())
                 {
-                    command.Parameters.AddWithValue("@keyword", $"%{keyword}%");
+                    connection.Open();
 
-                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    using (var command = new SQLiteCommand("SELECT * FROM Patient WHERE Name LIKE @SearchTerm OR Phone LIKE @SearchTerm;", connection))
                     {
-                        while (reader.Read())
-                        {
-                            Advice advice = new Advice
-                            {
-                                Content = reader["Content"].ToString(),
-                                Occurrence = Convert.ToInt32(reader["Occurrence"])
-                            };
+                        command.Parameters.AddWithValue("@SearchTerm", $"%{searchTerm}%");
 
-                            searchResults.Add(advice);
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<Patient> patients = new List<Patient>();
+
+                            while (reader.Read())
+                            {
+                                Patient patient = new Patient
+                                {
+                                    Id = Convert.ToInt32(reader["ID"]),
+                                    Name = reader["Name"].ToString(),
+                                    Age = reader["Age"].ToString(),
+                                    Phone = reader["Phone"].ToString(),
+                                    Address = reader["Address"].ToString(),
+                                    Blood = reader["Blood"].ToString()
+                                };
+
+                                patients.Add(patient);
+                            }
+
+                            return patients;
                         }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error searching patients: {ex}");
+                throw;
+            }
+        }   
 
-            return searchResults;
-        }
 
 
         public static void InsertPatientInfo(string name, string age, string phone, string address, string blood)

@@ -52,7 +52,7 @@
                         <RowDefinition Height="96*"/>
                     </Grid.RowDefinitions>
                     <Grid >
-                        <UserControls:searchMenu/>
+                        <UserControls:searchMenu Loaded="searchMenu_Loaded"/>
                     </Grid>
                 <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                     <Grid Grid.Column="1" Background="AliceBlue">

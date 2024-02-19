@@ -34,22 +34,13 @@
     <Compile Update="View\UserControls\FollowUpSearchWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\UserControls\Footer.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\UserControls\header.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\UserControls\History.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\HistorySearchWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\InvestigationSearchWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\UserControls\medicine.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\MedicineCreateWindow.xaml.cs">
@@ -59,9 +50,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\MenuBar.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\UserControls\patientInfo.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\PatientList.xaml.cs">
@@ -76,16 +64,10 @@
     <Compile Update="View\UserControls\RxUsercontrol.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\UserControls\savePrint.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\UserControls\searchMenu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\SpecialNoteSearchWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\UserControls\title.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\treatment.xaml.cs">
@@ -126,22 +108,13 @@
     <Page Update="View\UserControls\FollowUpSearchWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\UserControls\Footer.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="View\UserControls\header.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\UserControls\History.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\HistorySearchWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\InvestigationSearchWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\UserControls\medicine.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\MedicineCreateWindow.xaml">
@@ -151,9 +124,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\MenuBar.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\UserControls\patientInfo.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\PatientList.xaml">
@@ -168,16 +138,10 @@
     <Page Update="View\UserControls\RxUsercontrol.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\UserControls\savePrint.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="View\UserControls\searchMenu.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\SpecialNoteSearchWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\UserControls\title.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\treatment.xaml">
