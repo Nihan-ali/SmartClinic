@@ -22,6 +22,7 @@ namespace SmartClinic
             //medicineControl.DataContext = App.SelectedItemsViewModel;
             searchedMedicines = new ObservableCollection<Medicine>();
             selectedMedicines = new ObservableCollection<Medicine>();
+            //DataContext = new Medicine();
             InitializeMedicineListView();
         }
 
@@ -146,11 +147,15 @@ namespace SmartClinic
             {
                 Medicine selectedMedicine = (Medicine)searchResultsListBox.SelectedItem;
 
-                // In your main window code
+                //// In your main window code
                 searchResultsPopup.IsOpen = false;
-                DetailsWindow detailsWindow = new DetailsWindow(selectedMedicine);
-                detailsWindow.ParentMainWindow = this;
-                detailsWindow.Show();
+                //DetailsWindow detailsWindow = new DetailsWindow(selectedMedicine);
+                //detailsWindow.ParentMainWindow = this;
+                //detailsWindow.Show();
+                selectedMedicines.Add(selectedMedicine);
+
+                // Update the selectedMedicinesListView
+                UpdateSelectedMedicinesListView();
             }
         }
         public void AddToSelectedMedicines(Medicine newMedicine)
@@ -197,6 +202,7 @@ namespace SmartClinic
 
         private void IncrementMorningButton_Click(object sender, RoutedEventArgs e)
         {
+            //MessageBox.Show("This is runnig");
             IncrementTextBoxValue("MorningDose");
         }
 
@@ -209,15 +215,20 @@ namespace SmartClinic
 
         private void IncrementTextBoxValue(string propertyName)
         {
+            MessageBox.Show("comes here but not going into the if block");
             if (selectedMedicinesListView.SelectedItem is Medicine selectedItem)
             {
                 // Use reflection to get and set the property value
+                MessageBox.Show("Coming here ");
                 PropertyInfo property = typeof(Medicine).GetProperty(propertyName);
                 if (property != null && property.PropertyType == typeof(int))
                 {
                     int value = (int)property.GetValue(selectedItem);
                     value++;
                     property.SetValue(selectedItem, value);
+
+                    // Manually update the binding source
+                    selectedMedicinesListView.GetBindingExpression(ListView.ItemsSourceProperty)?.UpdateTarget();
                 }
             }
         }

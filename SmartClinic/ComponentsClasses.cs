@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace SmartClinic
 {
@@ -77,7 +78,13 @@ namespace SmartClinic
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private bool isSelected;
+        private int morningDose;
+        private int noonDose;
+        private int nightDose;
+        private bool afterEatingCheckBox;
+        private bool beforeEatingCheckBox;
+        private string details;
+        private string selectedUnit;
 
         public int Id { get; set; }
         public string BrandName { get; set; }
@@ -90,11 +97,137 @@ namespace SmartClinic
         public string Schedule { get; set; }
         public string Unit { get; set; }
         public int Duration { get; set; }
-        public string MakeNote { get; set; }
-        public int MorningDose { get; set; }
-        public int NoonDose { get; set; }
-        public int NightDose { get; set; }
-        //public int Duration { get; set; }
+
+        public int MorningDose
+        {
+            get { return morningDose; }
+            set
+            {
+                if (morningDose != value)
+                {
+                    morningDose = value;
+                    OnPropertyChanged(nameof(MorningDose));
+                    OnPropertyChanged(nameof(MakeNote));
+                }
+            }
+        }
+
+        public int NoonDose
+        {
+            get { return noonDose; }
+            set
+            {
+                if (noonDose != value)
+                {
+                    noonDose = value;
+                    OnPropertyChanged(nameof(NoonDose));
+                    OnPropertyChanged(nameof(MakeNote));
+                }
+            }
+        }
+
+        public int NightDose
+        {
+            get { return nightDose; }
+            set
+            {
+                if (nightDose != value)
+                {
+                    nightDose = value;
+                    OnPropertyChanged(nameof(NightDose));
+                    OnPropertyChanged(nameof(MakeNote));
+                }
+            }
+        }
+
+        public bool AfterEatingCheckBox
+        {
+            get { return afterEatingCheckBox; }
+            set
+            {
+                if (afterEatingCheckBox != value)
+                {
+                    afterEatingCheckBox = value;
+                    OnPropertyChanged(nameof(AfterEatingCheckBox));
+                    OnPropertyChanged(nameof(MakeNote));
+                }
+            }
+        }
+
+        public bool BeforeEatingCheckBox
+        {
+            get { return beforeEatingCheckBox; }
+            set
+            {
+                if (beforeEatingCheckBox != value)
+                {
+                    beforeEatingCheckBox = value;
+                    OnPropertyChanged(nameof(BeforeEatingCheckBox));
+                    OnPropertyChanged(nameof(MakeNote));
+                }
+            }
+        }
+
+        public string Details
+        {
+            get { return details; }
+            set
+            {
+                if (details != value)
+                {
+                    details = value;
+                    OnPropertyChanged(nameof(Details));
+                    OnPropertyChanged(nameof(MakeNote));
+                }
+            }
+        }
+
+
+        private ComboBoxItem selectedUnitItem;
+
+        public ComboBoxItem SelectedUnitItem
+        {
+            get { return selectedUnitItem; }
+            set
+            {
+                if (selectedUnitItem != value)
+                {
+                    selectedUnitItem = value;
+                    OnPropertyChanged(nameof(SelectedUnitItem));
+                    OnPropertyChanged(nameof(SelectedUnit));
+                }
+            }
+        }
+
+        public string SelectedUnit
+        {
+            get { return (SelectedUnitItem?.Content)?.ToString() ?? "piece"; }
+        }
+
+
+
+        public string MakeNote
+        {
+            get
+            {
+                string selectedUnit = (SelectedUnit ?? "piece").ToString();
+
+                // Create a note based on the selected dosage
+                string morningDosage = MorningDose > 0 ? $"সকালে  {MorningDose}  {selectedUnit}" : "";
+                string noonDosage = NoonDose > 0 ? $"দুপুরে  {NoonDose}   {selectedUnit}" : "";
+                string nightDosage = NightDose > 0 ? $"রাতে  {NightDose}   {selectedUnit}" : "";
+                string duration = Duration > 0 ? $"{Duration} দিন " : "";
+                string secheduleText = $"{morningDosage} {noonDosage} {nightDosage}";
+
+                // Check if "After Eating" is selected
+                string afterEatingNote = AfterEatingCheckBox ? " খাবার পরে " : "";
+                string beforeEatingNote = BeforeEatingCheckBox ? " খাবার আগে " : "";
+
+                // Combine all dosages and notes
+                return $"{(secheduleText != null ? secheduleText + " করে " : "")}{afterEatingNote}{beforeEatingNote}{duration}{Note}";
+            }
+        }
+
         public string MedicineName
         {
             get
@@ -109,6 +242,7 @@ namespace SmartClinic
                 return $"{typePrefix}. {brandNameWithoutDigits} {Strength}";
             }
         }
+
         public string Type
         {
             get
@@ -122,24 +256,15 @@ namespace SmartClinic
 
         public string AdditionalText => $"Take this 3 times";
 
-        public bool IsSelected
-        {
-            get { return isSelected; }
-            set
-            {
-                if (isSelected != value)
-                {
-                    isSelected = value;
-                    OnPropertyChanged(nameof(IsSelected));
-                }
-            }
-        }
+        public bool IsSelected { get; set; }
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
+
+
     public class Patient : INotifyPropertyChanged
     {
         private bool isSelected;

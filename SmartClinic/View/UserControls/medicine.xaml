@@ -48,7 +48,7 @@
                                         </Button>
                                     </Grid>
 
-                                    <TextBlock Text="{Binding Note}" Grid.Row="1" Margin="25,5,0,0" FontWeight="Medium" FontSize="10" />
+                                    <TextBlock Text="{Binding MakeNote}" Grid.Row="1" Margin="25,5,0,0" FontWeight="Medium" FontSize="10" />
                                 </Grid>
                             </Border>
                         </DataTemplate>
