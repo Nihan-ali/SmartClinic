@@ -282,5 +282,3 @@ H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MedicineGro
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MedicineGroupName.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\GroupNameWindow.g.cs
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\GroupNameWindow.baml
-H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\demo.g.cs
-H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\demo.baml

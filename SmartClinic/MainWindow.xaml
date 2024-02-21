@@ -9,7 +9,6 @@
         Title="Doctor Rx"
         WindowState="Maximized"
         Icon="doctor.ico" 
-        MouseDown="MainWindow_MouseDown"
         Height="{x:Static SystemParameters.PrimaryScreenHeight}" 
         Width="{x:Static SystemParameters.PrimaryScreenWidth}"
         >

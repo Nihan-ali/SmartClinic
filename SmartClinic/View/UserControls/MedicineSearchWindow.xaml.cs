@@ -343,6 +343,15 @@ namespace SmartClinic
             //return "lol";
         }
 
+        private void DeleteMedicineFromListview_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedMedicinesListView.SelectedItem is Medicine selectedItem)
+            {
+                selectedMedicines.Remove(selectedItem);
+                UpdateSelectedMedicinesListView();
+            }
+        }
+
         private void rx_loaded(object sender, RoutedEventArgs e)
         {
             searchTextBox.Focus();
