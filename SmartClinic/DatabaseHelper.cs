@@ -499,6 +499,50 @@ namespace SmartClinic
             }
         }
 
+        public static int GetPatientVisitsByVisit(string startdate, string enddate)
+        {
+            try
+            {
+                // Prepare the query to count patients within the specified date range
+                string query = "SELECT COUNT(ID) AS TotalPatients " +
+                               "FROM PatientVisit " +
+                               "WHERE VISIT BETWEEN @StartDate AND @EndDate;";
+
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    // Creating a command object with the SQL query and the connection
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                    {
+                        // Adding parameters for start and end dates
+                        command.Parameters.AddWithValue("@StartDate", startdate);
+                        command.Parameters.AddWithValue("@EndDate", enddate);
+
+                        // Executing the query and retrieving the total count of patients
+                        object result = command.ExecuteScalar();
+
+                        // Checking if the result is not null and converting it to an integer
+                        if (result != null && result != DBNull.Value)
+                        {
+                            int totalPatients = Convert.ToInt32(result);
+                            Console.WriteLine($"Total number of patients visiting between {startdate} and {enddate}: " + totalPatients);
+                            return totalPatients;
+                        }
+                        else
+                        {
+                            Console.WriteLine("No patients visited within the specified date range.");
+                            return 0;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving patient visits: {ex}");
+                throw;
+            }
+        }
 
         public static void AddMedicine(string brandName, string manufacturerName, string genericName, string strength, string medicineType)
         {
@@ -535,6 +579,86 @@ namespace SmartClinic
             catch (Exception ex)
             {
                 Console.WriteLine($"Error inserting medicine: {ex}");
+                throw;
+            }
+        }
+
+
+        public static Medicine GetMedicineById(int medicineId)
+        {
+
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT * FROM Medicine WHERE ID = @MedicineId;", connection))
+                    {
+                        command.Parameters.AddWithValue("@MedicineId", medicineId);
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                Medicine medicine = new Medicine
+                                {
+                                    Id = Convert.ToInt32(reader["Id"]),
+                                    BrandName = reader["BrandName"].ToString(),
+                                    GenericName = reader["GenericName"].ToString(),
+                                    Strength = reader["Strength"].ToString(),
+                                    ManufacturerName = reader["ManufacturerName"].ToString(),
+                                    DosageDescription = reader["DosageDescription"].ToString(),
+                                    MedicineType = reader["MedicineType"].ToString()
+                                };
+
+                                return medicine;
+                            }
+                            else
+                            {
+                                return null;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching medicine: {ex}");
+                throw;
+            }
+        }
+
+        public static void AddMedicineGroup(string groupName, string medicineList)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM MedicineGroup WHERE GroupName = @GroupName;", connection))
+                    {
+                        checkCommand.Parameters.AddWithValue("@GroupName", groupName);
+                        int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                        if (count == 0)
+                        {
+                            using (var insertCommand = new SQLiteCommand("INSERT INTO MedicineGroup (GroupName, MedicineList, Occurrence) VALUES (@GroupName, @MedicineList, @Occurrence);", connection))
+                            {
+                                insertCommand.Parameters.AddWithValue("@GroupName", groupName);
+                                insertCommand.Parameters.AddWithValue("@MedicineList", medicineList);
+                                insertCommand.Parameters.AddWithValue("@Occurrence", 1);
+
+                                insertCommand.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error inserting medicine group: {ex}");
                 throw;
             }
         }

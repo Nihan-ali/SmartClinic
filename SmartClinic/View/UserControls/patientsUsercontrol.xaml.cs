@@ -41,10 +41,12 @@ namespace SmartClinic.View.UserControls
             {
                 if (mainWindow.FindName("contentControl") is ContentControl contentControl)
                 {
-                    contentControl.Content = new View.UserControls.PatientProfileUserControl(selectedPatient);
+                    // Provide both parameters when creating the PatientProfileUserControl instance
+                    contentControl.Content = new View.UserControls.PatientProfileUserControl(selectedPatient, mainWindow);
                 }
             }
         }
+
 
 
 

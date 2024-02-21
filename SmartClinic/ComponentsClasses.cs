@@ -81,24 +81,27 @@ namespace SmartClinic
         public int Occurrence { get; set; }
     }
 
-    public class MedicineGroup 
+    public class MedicineGroup
     {
         public string GroupName { get; set; }
         public string MedicineList { get; set; }
         public int Occurrence { get; set; }
+        public bool IsSelected { get; set; }
+
     }
 
     public class Medicine : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private int morningDose;
-        private int noonDose;
-        private int nightDose;
+        private double morningDose;
+        private double noonDose;
+        private double nightDose;
         private bool afterEatingCheckBox;
         private bool beforeEatingCheckBox;
         private string details;
         private string selectedUnit;
+        private string selectedDuration;
 
         public int Id { get; set; }
         public string BrandName { get; set; }
@@ -111,8 +114,11 @@ namespace SmartClinic
         public string Schedule { get; set; }
         public string Unit { get; set; }
         public int Duration { get; set; }
+        public string Details { get; set; }
 
-        public int MorningDose
+
+
+        public double MorningDose
         {
             get { return morningDose; }
             set
@@ -126,7 +132,7 @@ namespace SmartClinic
             }
         }
 
-        public int NoonDose
+        public double NoonDose
         {
             get { return noonDose; }
             set
@@ -140,7 +146,7 @@ namespace SmartClinic
             }
         }
 
-        public int NightDose
+        public double NightDose
         {
             get { return nightDose; }
             set
@@ -182,19 +188,6 @@ namespace SmartClinic
             }
         }
 
-        public string Details
-        {
-            get { return details; }
-            set
-            {
-                if (details != value)
-                {
-                    details = value;
-                    OnPropertyChanged(nameof(Details));
-                    OnPropertyChanged(nameof(MakeNote));
-                }
-            }
-        }
 
 
         private ComboBoxItem selectedUnitItem;
@@ -213,11 +206,30 @@ namespace SmartClinic
             }
         }
 
+        private ComboBoxItem selectedDurationItem;
+        public ComboBoxItem SelectedDurationItem
+        {
+            get { return selectedDurationItem; }
+            set
+            {
+                if (selectedDurationItem != value)
+                {
+                    selectedDurationItem = value;
+                    OnPropertyChanged(nameof(SelectedDurationItem));
+                    OnPropertyChanged(nameof(MakeNote));
+                }
+            }
+        }
+
         public string SelectedUnit
         {
             get { return (SelectedUnitItem?.Content)?.ToString() ?? "piece"; }
         }
 
+        public string SelectedDuration
+        {
+            get { return (SelectedDurationItem?.Content)?.ToString() ?? "day"; }
+        }
 
 
         public string MakeNote
@@ -225,21 +237,47 @@ namespace SmartClinic
             get
             {
                 string selectedUnit = (SelectedUnit ?? "piece").ToString();
+                string selectedDuration = (SelectedDuration ?? "day").ToString();
 
                 // Create a note based on the selected dosage
-                string morningDosage = MorningDose > 0 ? $"সকালে  {MorningDose}  {selectedUnit}" : "";
-                string noonDosage = NoonDose > 0 ? $"দুপুরে  {NoonDose}   {selectedUnit}" : "";
-                string nightDosage = NightDose > 0 ? $"রাতে  {NightDose}   {selectedUnit}" : "";
-                string duration = Duration > 0 ? $"{Duration} দিন " : "";
+                string morningDosage = MorningDose > 0 ? $"সকালে  {FormatDosage(MorningDose)} {selectedUnit}" : "";
+                string noonDosage = NoonDose > 0 ? $"দুপুরে  {FormatDosage(NoonDose)} {selectedUnit}" : "";
+                string nightDosage = NightDose > 0 ? $"রাতে  {FormatDosage(NightDose)} {selectedUnit}" : "";
+                string duration = Duration > 0 ? $"{Duration} {selectedDuration} " : "";
                 string secheduleText = $"{morningDosage} {noonDosage} {nightDosage}";
 
                 // Check if "After Eating" is selected
                 string afterEatingNote = AfterEatingCheckBox ? " খাবার পরে " : "";
                 string beforeEatingNote = BeforeEatingCheckBox ? " খাবার আগে " : "";
 
+                string Note = string.IsNullOrEmpty(Details) ? "" : $" {Details}";
                 // Combine all dosages and notes
                 return $"{(secheduleText != null ? secheduleText + " করে " : "")}{afterEatingNote}{beforeEatingNote}{duration}{Note}";
             }
+        }
+        private string FormatDosage(double dosage)
+        {
+            if (dosage == 0)
+            {
+                return "";
+            }
+
+            int wholePart = (int)dosage;
+            double fractionalPart = dosage - wholePart;
+
+            // Format the fractional part as ½ or ¼
+            string fractionalPartString;
+            if (fractionalPart == 0.5)
+                fractionalPartString = "½";
+            else if (fractionalPart == 0.25)
+                fractionalPartString = "¼";
+            else
+                fractionalPartString = fractionalPart.ToString();
+
+            // Combine the whole part and formatted fractional part
+            string formattedDosage = $"{(wholePart == 0 ? "" : wholePart)}{fractionalPartString}";
+
+            return $"{formattedDosage}";
         }
 
         public string MedicineName
@@ -350,4 +388,3 @@ namespace SmartClinic
     }
 
 }
-

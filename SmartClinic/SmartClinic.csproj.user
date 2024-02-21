@@ -76,6 +76,9 @@
     <Compile Update="View\UserControls\SpecialNoteSearchWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\UserControls\StatUserControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\UserControls\treatment.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -154,6 +157,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\SpecialNoteSearchWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserControls\StatUserControl.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\treatment.xaml">

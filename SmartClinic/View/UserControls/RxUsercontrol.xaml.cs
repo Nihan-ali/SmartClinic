@@ -31,6 +31,8 @@ namespace SmartClinic.View.UserControls
     {
         //from Patientinfo
         private bool isPatientAdded = false;
+        private Patient newPatient;
+
 
         //from history
         private List<Complaint> selectedComplaints = new List<Complaint>();
@@ -61,7 +63,7 @@ namespace SmartClinic.View.UserControls
         public List<FollowUp> SelectedFollowUps => selectedFollowUps;
         public List<SpecialNote> SelectedSpecialNotes => selectedSpecialNotes;
 
-
+        public event EventHandler<PatientEventArgs> PrescriptionDataAvailable;
 
         public RxUsercontrol()
         {
@@ -70,6 +72,33 @@ namespace SmartClinic.View.UserControls
             docdegree.Content = variables.docdegree;
             docname_bangla.Content = variables.docname_bangla;
             docdegree_bangla.Content = variables.docdegree_bangla;
+        }
+
+        public RxUsercontrol(Patient newPatient) : this()
+        {
+            this.newPatient = newPatient;
+
+            // Initialize the UI or update it with the new patient data
+            // ...
+
+            //MessageBox.Show("also found in rx " + newPatient.Name);
+            UpdatePatientInfo(newPatient);
+            // Raise the PrescriptionDataAvailable event
+            OnPrescriptionDataAvailable(new PatientEventArgs { NewPatient = newPatient });
+        }
+        private void OnPrescriptionDataAvailable(PatientEventArgs e)
+        {
+            // Raise the event if there are subscribers
+            PrescriptionDataAvailable?.Invoke(this, e);
+        }
+        public void UpdatePatientInfo(Patient patient)
+        {
+            //MessageBox.Show("message from patientinfo " + patient.Name);
+            if (patient != null)
+            {
+                // Update UI with patient details
+                UpdateUIWithPatientDetails(patient.Name, patient.Age);
+            }
         }
 
 

@@ -22,7 +22,7 @@ namespace SmartClinic
         public ObservableCollection<Medicine> SelectedMedicines => selectedMedicines;
         public ObservableCollection<MedicineGroup> SelectedMedicineGroups => selectedMedicineGroups;
 
-        
+
 
         public MedicineSearchWindow()
         {
@@ -115,12 +115,52 @@ namespace SmartClinic
                         selectedMedicines.Remove(selectedMedicine);
                     }
 
-                    // Update the selected medicines ListView
                     UpdateSelectedMedicinesListView();
+                }
+                else if (toggleButton.DataContext is MedicineGroup selectedMedicineGroup)
+                {
+                    // Toggle the IsSelected property
+                    selectedMedicineGroup.IsSelected = toggleButton.IsChecked == true;
+
+                    // Update the selected medicines collection
+                    if (selectedMedicineGroup.IsSelected)
+                    {
+                        if (!selectedMedicineGroups.Contains(selectedMedicineGroup))
+                        {
+                            AddFromGroupToSelectedMedicine(selectedMedicineGroup);
+                        }
+                    }
+                    else
+                    {
+                        selectedMedicineGroups.Remove(selectedMedicineGroup);
+                    }
+
                 }
             }
         }
 
+        private void AddFromGroupToSelectedMedicine(MedicineGroup selectedMedicineGroup)
+        {
+
+            string[] medicineIds = selectedMedicineGroup.MedicineList.Split('+');
+            foreach (string id in medicineIds)
+            {
+                if (id == "")
+                {
+                    continue;
+                }
+                else
+                {
+                    int iid = int.Parse(id);
+                    Medicine medicine = DatabaseHelper.GetMedicineById(iid);
+                    MessageBox.Show(medicine.BrandName);
+                    selectedMedicines.Add(medicine);
+                }
+            }
+            selectedMedicinesListView.ItemsSource = null;
+            selectedMedicinesListView.ItemsSource = selectedMedicines;
+
+        }
 
 
         private void MedicineButton_Click(object sender, RoutedEventArgs e)
@@ -167,15 +207,8 @@ namespace SmartClinic
             if (searchResultsListBox.SelectedItem != null)
             {
                 Medicine selectedMedicine = (Medicine)searchResultsListBox.SelectedItem;
-
-                //// In your main window code
                 searchResultsPopup.IsOpen = false;
-                //DetailsWindow detailsWindow = new DetailsWindow(selectedMedicine);
-                //detailsWindow.ParentMainWindow = this;
-                //detailsWindow.Show();
                 selectedMedicines.Add(selectedMedicine);
-
-                // Update the selectedMedicinesListView
                 UpdateSelectedMedicinesListView();
             }
         }
@@ -189,104 +222,69 @@ namespace SmartClinic
 
         private void IncrementMorningButton_Click(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show("This is runnig");
-            IncrementTextBoxValue("MorningDose");
-        }
+            Button button = (Button)sender;
 
+            var dataObject = button.DataContext as Medicine;
+
+            dataObject.MorningDose = dataObject.MorningDose + 0.5;
+
+            button.GetBindingExpression(Button.ContentProperty)?.UpdateTarget();
+        }
         private void DecrementMorningButton_Click(object sender, RoutedEventArgs e)
         {
-            DecrementTextBoxValue("MorningDose");
+            Button button = (Button)sender;
+
+            var dataObject = button.DataContext as Medicine;
+
+            dataObject.MorningDose = dataObject.MorningDose - 0.5;
+
+            button.GetBindingExpression(Button.ContentProperty)?.UpdateTarget();
         }
-
-        // Similarly for other buttons...
-
-        private void IncrementTextBoxValue(string propertyName)
-        {
-            MessageBox.Show("comes here but not going into the if block");
-            if (selectedMedicinesListView.SelectedItem is Medicine selectedItem)
-            {
-                // Use reflection to get and set the property value
-                MessageBox.Show("Coming here ");
-                PropertyInfo property = typeof(Medicine).GetProperty(propertyName);
-                if (property != null && property.PropertyType == typeof(int))
-                {
-                    int value = (int)property.GetValue(selectedItem);
-                    value++;
-                    property.SetValue(selectedItem, value);
-
-                    // Manually update the binding source
-                    selectedMedicinesListView.GetBindingExpression(ListView.ItemsSourceProperty)?.UpdateTarget();
-                }
-            }
-        }
-
-        private void DecrementTextBoxValue(string propertyName)
-        {
-            if (selectedMedicinesListView.SelectedItem is Medicine selectedItem)
-            {
-                PropertyInfo property = typeof(Medicine).GetProperty(propertyName);
-                if (property != null && property.PropertyType == typeof(int))
-                {
-                    int value = (int)property.GetValue(selectedItem);
-                    if (value > 1)
-                    {
-                        value--;
-                        property.SetValue(selectedItem, value);
-                    }
-                }
-            }
-        }
-
-
         private void IncrementNoonButton_Click(object sender, RoutedEventArgs e)
         {
-            IncrementTextBoxValue("NoonDose");
+            Button button = (Button)sender;
+
+            var dataObject = button.DataContext as Medicine;
+
+            dataObject.NoonDose = dataObject.NoonDose + 0.5;
+
+            button.GetBindingExpression(Button.ContentProperty)?.UpdateTarget();
         }
 
         private void DecrementNoonButton_Click(object sender, RoutedEventArgs e)
         {
-            DecrementTextBoxValue("NoonDose");
+            Button button = (Button)sender;
+
+            var dataObject = button.DataContext as Medicine;
+
+            dataObject.NoonDose = dataObject.NoonDose - 0.5;
+
+            button.GetBindingExpression(Button.ContentProperty)?.UpdateTarget();
         }
 
         private void IncrementNightButton_Click(object sender, RoutedEventArgs e)
         {
-            IncrementTextBoxValue("NightDose");
+            Button button = (Button)sender;
+
+            var dataObject = button.DataContext as Medicine;
+
+            dataObject.NightDose = dataObject.NightDose + 0.5;
+
+            button.GetBindingExpression(Button.ContentProperty)?.UpdateTarget();
         }
 
         private void DecrementNightButton_Click(object sender, RoutedEventArgs e)
         {
-            DecrementTextBoxValue("NightDose");
+            Button button = (Button)sender;
+
+            var dataObject = button.DataContext as Medicine;
+
+            dataObject.NightDose = dataObject.NightDose - 0.5;
+
+            button.GetBindingExpression(Button.ContentProperty)?.UpdateTarget();
         }
 
-        private void IncrementDurationButton_Click(object sender, RoutedEventArgs e)
-        {
-            IncrementTextBoxValue("Duration");
-        }
 
-        private void DecrementDurationButton_Click(object sender, RoutedEventArgs e)
-        {
-            DecrementTextBoxValue("Duration");
-        }
-
-        private void IncrementTextBoxValue(TextBox textBox)
-        {
-            int value;
-            if (int.TryParse(textBox.Text, out value))
-            {
-                value++;
-                textBox.Text = value.ToString();
-            }
-        }
-
-        private void DecrementTextBoxValue(TextBox textBox)
-        {
-            int value;
-            if (int.TryParse(textBox.Text, out value) && value > 1)
-            {
-                value--;
-                textBox.Text = value.ToString();
-            }
-        }
 
         public void AddToSelectedMedicines(Medicine newMedicine)
         {
@@ -294,27 +292,21 @@ namespace SmartClinic
             UpdateSelectedMedicinesListView();
         }
 
-        private void AddToSelectedMedicineGroups(MedicineGroup newMedicineGroup)
-        {
-            selectedMedicineGroups.Add(newMedicineGroup);
-            UpdateSelectedMedicineGroupListView();
-        }
-
 
         private void addToRx_Click(object sender, RoutedEventArgs e)
         {
             Medicine selectedMedicine = (Medicine)searchResultsListBox.SelectedItem;
 
-             if (selectedMedicine != null)
-             {
+            if (selectedMedicine != null)
+            {
 
                 AddToSelectedMedicines(selectedMedicine);
                 this.Close();
-             }
-             else
-             {
+            }
+            else
+            {
                 this.Close();
-             }
+            }
         }
 
         private void CreateMedicineGroup_Click(object sender, RoutedEventArgs e)
@@ -332,10 +324,10 @@ namespace SmartClinic
 
         }
 
-        
+
         private void GroupNameEntered(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 MedicineGroupNamePopup.IsOpen = false;
                 //return GroupNameBox.Text;
@@ -352,6 +344,28 @@ namespace SmartClinic
             }
         }
 
+        private void YesButton_Click(object sender, RoutedEventArgs e)
+        {
+            MedicineGroupNamePopup.IsOpen = false;
+            string MedicineIds = ExtractId(selectedMedicines);
+            DatabaseHelper.AddMedicineGroup(GroupNameBox.Text, MedicineIds);
+        }
+
+        private string ExtractId(ObservableCollection<Medicine> selectedMedicines)
+        {
+            string MedicineIds = "";
+            foreach (Medicine medicine in selectedMedicines)
+            {
+                MedicineIds += medicine.Id + "+";
+            }
+            return MedicineIds;
+        }
+
+        private void NoButton_Click(object sender, RoutedEventArgs e)
+        {
+            MedicineGroupNamePopup.IsOpen = false;
+            MessageBox.Show("Medicine Group Not Created");
+        }
         private void rx_loaded(object sender, RoutedEventArgs e)
         {
             searchTextBox.Focus();

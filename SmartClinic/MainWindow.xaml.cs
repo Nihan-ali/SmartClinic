@@ -22,6 +22,7 @@ namespace SmartClinic
         public string TodayDate { get; set; }
 
         private Popup treatmentPlanPopup;
+        private RxUsercontrol rxUserControl;
         public MainWindow()
         {
             InitializeComponent();
@@ -29,7 +30,8 @@ namespace SmartClinic
            
             DataContext = this;
             TodayDate = DateTime.Now.ToString("dd-MM-yyyy");
-            contentControl.Content = new View.UserControls.RxUsercontrol();
+            rxUserControl = new RxUsercontrol();
+            contentControl.Content = rxUserControl;
         }
 
         // MainWindow.xaml.cs
@@ -58,7 +60,7 @@ namespace SmartClinic
         private void StatButton_Click(object sender, RoutedEventArgs e)
         {
             // Set content to StatUserControl
-            //contentControl.Content = new UserControls.StatUserControl();
+            contentControl.Content = new StatUserControl();
         }
 
         private void searchMenu_Loaded(object sender, RoutedEventArgs e)
