@@ -278,3 +278,7 @@ E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControl
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MedicineCreateWindow.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\SpecialNoteSearchWindow.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\TreatmentSearchWindow.baml
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MedicineGroupName.g.cs
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MedicineGroupName.baml
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\GroupNameWindow.g.cs
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\GroupNameWindow.baml

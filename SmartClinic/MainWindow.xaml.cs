@@ -31,24 +31,8 @@ namespace SmartClinic
             TodayDate = DateTime.Now.ToString("dd-MM-yyyy");
             contentControl.Content = new View.UserControls.RxUsercontrol();
         }
+
         // MainWindow.xaml.cs
-        private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (treatmentPlanPopup.IsOpen && !IsMouseOverPopup(e))
-            {
-                treatmentPlanPopup.IsOpen = false;
-            }
-        }
-
-        private bool IsMouseOverPopup(MouseButtonEventArgs e)
-        {
-            Point position = e.GetPosition(this);
-            return position.X >= treatmentPlanPopup.HorizontalOffset &&
-            position.X <= treatmentPlanPopup.HorizontalOffset + treatmentPlanPopup.ActualWidth &&
-                   position.Y >= treatmentPlanPopup.VerticalOffset &&
-            position.Y <= treatmentPlanPopup.VerticalOffset + treatmentPlanPopup.ActualHeight;
-        }
-
         public static implicit operator MainWindow(MedicineSearchWindow v)
         {
             throw new NotImplementedException();

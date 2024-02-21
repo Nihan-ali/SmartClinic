@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media;
 
 
@@ -94,17 +96,18 @@ namespace SmartClinic
         {
             if (sender is ToggleButton toggleButton)
             {
+                // Retrieve the associated Medicine object from DataContext
                 if (toggleButton.DataContext is Medicine selectedMedicine)
                 {
+                    // Toggle the IsSelected property
                     selectedMedicine.IsSelected = toggleButton.IsChecked == true;
 
+                    // Update the selected medicines collection
                     if (selectedMedicine.IsSelected)
                     {
                         if (!selectedMedicines.Contains(selectedMedicine))
                         {
-                            DetailsWindow detailsWindow = new DetailsWindow(selectedMedicine);
-                            detailsWindow.ParentMainWindow = this;
-                            detailsWindow.Show();
+                            selectedMedicines.Add(selectedMedicine);
                         }
                     }
                     else
@@ -112,6 +115,7 @@ namespace SmartClinic
                         selectedMedicines.Remove(selectedMedicine);
                     }
 
+                    // Update the selected medicines ListView
                     UpdateSelectedMedicinesListView();
                 }
             }
@@ -164,13 +168,126 @@ namespace SmartClinic
             {
                 Medicine selectedMedicine = (Medicine)searchResultsListBox.SelectedItem;
 
-                // In your main window code
+                //// In your main window code
                 searchResultsPopup.IsOpen = false;
-                DetailsWindow detailsWindow = new DetailsWindow(selectedMedicine);
-                detailsWindow.ParentMainWindow = this;
-                detailsWindow.Show();
+                //DetailsWindow detailsWindow = new DetailsWindow(selectedMedicine);
+                //detailsWindow.ParentMainWindow = this;
+                //detailsWindow.Show();
+                selectedMedicines.Add(selectedMedicine);
+
+                // Update the selectedMedicinesListView
+                UpdateSelectedMedicinesListView();
             }
         }
+        private void selectedMedicinesListView_Loaded(object sender, RoutedEventArgs e)
+        {
+            // You may not need to manually set AlternationIndex in the code-behind.
+            // The AlternationCount="{Binding Path=Items.Count, RelativeSource={RelativeSource Self}}"
+            // in XAML should automatically assign serial numbers based on the item index.
+        }
+
+
+        private void IncrementMorningButton_Click(object sender, RoutedEventArgs e)
+        {
+            //MessageBox.Show("This is runnig");
+            IncrementTextBoxValue("MorningDose");
+        }
+
+        private void DecrementMorningButton_Click(object sender, RoutedEventArgs e)
+        {
+            DecrementTextBoxValue("MorningDose");
+        }
+
+        // Similarly for other buttons...
+
+        private void IncrementTextBoxValue(string propertyName)
+        {
+            MessageBox.Show("comes here but not going into the if block");
+            if (selectedMedicinesListView.SelectedItem is Medicine selectedItem)
+            {
+                // Use reflection to get and set the property value
+                MessageBox.Show("Coming here ");
+                PropertyInfo property = typeof(Medicine).GetProperty(propertyName);
+                if (property != null && property.PropertyType == typeof(int))
+                {
+                    int value = (int)property.GetValue(selectedItem);
+                    value++;
+                    property.SetValue(selectedItem, value);
+
+                    // Manually update the binding source
+                    selectedMedicinesListView.GetBindingExpression(ListView.ItemsSourceProperty)?.UpdateTarget();
+                }
+            }
+        }
+
+        private void DecrementTextBoxValue(string propertyName)
+        {
+            if (selectedMedicinesListView.SelectedItem is Medicine selectedItem)
+            {
+                PropertyInfo property = typeof(Medicine).GetProperty(propertyName);
+                if (property != null && property.PropertyType == typeof(int))
+                {
+                    int value = (int)property.GetValue(selectedItem);
+                    if (value > 1)
+                    {
+                        value--;
+                        property.SetValue(selectedItem, value);
+                    }
+                }
+            }
+        }
+
+
+        private void IncrementNoonButton_Click(object sender, RoutedEventArgs e)
+        {
+            IncrementTextBoxValue("NoonDose");
+        }
+
+        private void DecrementNoonButton_Click(object sender, RoutedEventArgs e)
+        {
+            DecrementTextBoxValue("NoonDose");
+        }
+
+        private void IncrementNightButton_Click(object sender, RoutedEventArgs e)
+        {
+            IncrementTextBoxValue("NightDose");
+        }
+
+        private void DecrementNightButton_Click(object sender, RoutedEventArgs e)
+        {
+            DecrementTextBoxValue("NightDose");
+        }
+
+        private void IncrementDurationButton_Click(object sender, RoutedEventArgs e)
+        {
+            IncrementTextBoxValue("Duration");
+        }
+
+        private void DecrementDurationButton_Click(object sender, RoutedEventArgs e)
+        {
+            DecrementTextBoxValue("Duration");
+        }
+
+        private void IncrementTextBoxValue(TextBox textBox)
+        {
+            int value;
+            if (int.TryParse(textBox.Text, out value))
+            {
+                value++;
+                textBox.Text = value.ToString();
+            }
+        }
+
+        private void DecrementTextBoxValue(TextBox textBox)
+        {
+            int value;
+            if (int.TryParse(textBox.Text, out value) && value > 1)
+            {
+                value--;
+                textBox.Text = value.ToString();
+            }
+        }
+
         public void AddToSelectedMedicines(Medicine newMedicine)
         {
             selectedMedicines.Add(newMedicine);
@@ -200,7 +317,40 @@ namespace SmartClinic
              }
         }
 
+        private void CreateMedicineGroup_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedMedicines != null)
+            {
+                MedicineGroupNamePopup.IsOpen = true;
+                //DatabaseHelper.AddMedicineGroup(selectedMedicines);
+                //this.Close();
+            }
+            else
+            {
+                //this.Close();
+            }
 
+        }
+
+        
+        private void GroupNameEntered(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                MedicineGroupNamePopup.IsOpen = false;
+                //return GroupNameBox.Text;
+            }
+            //return "lol";
+        }
+
+        private void DeleteMedicineFromListview_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedMedicinesListView.SelectedItem is Medicine selectedItem)
+            {
+                selectedMedicines.Remove(selectedItem);
+                UpdateSelectedMedicinesListView();
+            }
+        }
 
         private void rx_loaded(object sender, RoutedEventArgs e)
         {

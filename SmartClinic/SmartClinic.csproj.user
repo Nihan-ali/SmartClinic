@@ -34,6 +34,9 @@
     <Compile Update="View\UserControls\FollowUpSearchWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\UserControls\GroupNameWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\UserControls\header.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -44,6 +47,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\MedicineCreateWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\UserControls\MedicineGroupName.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\MedicineSearchWindow.xaml.cs">
@@ -108,6 +114,9 @@
     <Page Update="View\UserControls\FollowUpSearchWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\UserControls\GroupNameWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\UserControls\header.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -118,6 +127,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\MedicineCreateWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserControls\MedicineGroupName.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\MedicineSearchWindow.xaml">
