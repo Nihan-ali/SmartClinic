@@ -1,0 +1,111 @@
+﻿<UserControl x:Class="SmartClinic.View.UserControls.demo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SmartClinic.View.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <!--<Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        --><!--<TextBlock Text="{Binding MedicineName}" FontWeight="Bold" Grid.Row="0" />--><!--
+        <TextBlock Text="Name Tablet" Grid.Row="0"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="25*"/>
+            </Grid.ColumnDefinitions>
+
+            --><!-- Schedule --><!--
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <TextBlock Text="Schedule" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center" Foreground="#3498DB"/>
+                </Grid>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Background="Gray">
+
+                    <TextBox x:Name="morningTextBox" Text="{Binding MorningDose}"  Width="50" Margin="5,5,-20,5" Height="35" TextAlignment="Left" HorizontalAlignment="Left" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1"/>
+                    <StackPanel Orientation="Vertical"  Background="#ECF0F1" Margin="5,15">
+                        <Button Content="&#9650;" FontSize="8" Click="IncrementMorningButton_Click" Foreground="#5c7080" BorderBrush="Transparent"/>
+                        <Button Content="&#9660;" FontSize="8" Click="DecrementMorningButton_Click" Foreground="#5c7080" BorderBrush="Transparent"/>
+                    </StackPanel>
+
+                    <TextBlock Text="+" FontWeight="Bold" FontSize="12" TextAlignment="Center" Height="15" Margin="5,0"  RenderTransformOrigin="0.844,0.557"/>
+                    <TextBox x:Name="noonTextBox" Width="50" Margin="5,5,-20,5" Height="45" TextAlignment="Left" HorizontalAlignment="Left" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1"/>
+                    <StackPanel Orientation="Vertical" Background="#ECF0F1" Margin="5,10">
+                        <Button  Content="&#9650;"  Click="IncrementNoonButton_Click" Foreground="#5c7080" BorderBrush="Transparent"/>
+                        <Button Content="&#9660;"  Click="DecrementNoonButton_Click" Foreground="#5c7080" BorderBrush="Transparent"/>
+                    </StackPanel>
+                    <TextBlock Text="+" FontWeight="Bold" FontSize="12" TextAlignment="Center"  Height="15" Margin="5,0"  RenderTransformOrigin="0.844,0.557"/>
+                    <TextBox x:Name="nightTextBox" Width="50" Margin="5,5,-20,5" Height="45" TextAlignment="Left" HorizontalAlignment="Left" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1"/>
+                    <StackPanel Orientation="Vertical" Margin="5,10" Background="#ECF0F1">
+                        <Button Content="&#9650;"  Click="IncrementNightButton_Click" Foreground="#5c7080" BorderBrush="Transparent"/>
+                        <Button Content="&#9660;"  Click="DecrementNightButton_Click" Foreground="#5c7080" BorderBrush="Transparent"/>
+                    </StackPanel>
+                </StackPanel>
+                <Grid Grid.Row="2">
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,5" HorizontalAlignment="Center">
+                        <CheckBox Content="Before Eating" IsChecked="{Binding BeforeEatingCheckBox}" Margin="0,0,10,0" Foreground="#3498DB"/>
+                        <CheckBox Content="After Eating" IsChecked="{Binding AfterEatingCheckBox}" Foreground="#3498DB"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+
+            --><!-- Unit --><!--
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="80*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Unit" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Center" FontSize="14" Foreground="#3498DB"/>
+                --><!-- ComboBox for Different Types of Units --><!--
+                <ComboBox x:Name="unitComboBox" SelectedItem="{Binding SelectedUnitItem}" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Top" Width="60" Height="20" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1">
+                    <ComboBoxItem Content="টি" IsSelected="True"/>
+                    <ComboBoxItem Content="ফোঁটা"/>
+                    <ComboBoxItem Content="চামচ"/>
+                    <ComboBoxItem Content="স্প্রে"/>
+                    <ComboBoxItem Content="পিস"/>
+                    <ComboBoxItem Content="স্টিক"/>
+                    --><!-- Add more unit options as needed --><!--
+                </ComboBox>
+            </Grid>
+
+            --><!-- Duration --><!--
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="80*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Duration" FontWeight="Bold" Grid.Row="0" HorizontalAlignment="Center" FontSize="14" Foreground="#3498DB"/>
+                <Grid Grid.Row="1">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBox x:Name="durationTextBox" Text="{Binding Duration}" TextAlignment="Center" Width="20" Margin="5" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1"/>
+                        <StackPanel Orientation="Vertical" Height="auto" Background="#ECF0F1">
+                    <Button Content="&#9650;"  Click="IncrementDurationButton_Click" Background="#3498DB" Foreground="White" BorderBrush="Transparent"/>
+                    <Button Content="&#9660;"  Click="DecrementDurationButton_Click" Background="#3498DB" Foreground="White" BorderBrush="Transparent"/>
+                </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+
+            --><!-- Note --><!--
+
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="5,20">
+            <StackPanel>
+                <TextBlock Text="Note" FontWeight="Bold" FontSize="14" Foreground="#3498DB"/>
+                <TextBox x:Name="detailsTextBox" Text="{Binding Details}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Height="40" Margin="0,5,0,5" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1"/>
+            </StackPanel>
+        </Grid>-->
+    </Grid>
+
+</UserControl>      

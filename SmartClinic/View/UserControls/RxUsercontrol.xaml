@@ -103,12 +103,12 @@
                                                     <TextBlock Text="{Binding Name}"  Margin="2" FontWeight="Bold" Foreground="#DA2D2727" HorizontalAlignment="Stretch"/>
                                                     <TextBlock Text="{Binding Age}" Margin="2" Grid.Column="1" FontWeight="Bold" Foreground="#DA2D2727" HorizontalAlignment="Stretch"/>
 
-                                                    <TextBlock Text="{Binding Blood}" Grid.Column="2" Margin="2" FontWeight="Bold" Foreground="#DA2D2727"/>
+                                                    <TextBlock Text="{Binding Blood}" Grid.Column="2" Margin="2,20,0,0" FontWeight="Bold" Foreground="#DA2D2727"/>
 
                                                 </Grid>
 
                                                 
-                                                <TextBlock Text="{Binding Phone}" Margin="2" FontStyle="Italic" Grid.Row="1" FontWeight="SemiBold" Foreground="#AA2D2727"/>
+                                                <TextBlock Text="{Binding Phone}" Margin="2,-15,0,0" FontStyle="Italic" Grid.Row="1" FontWeight="SemiBold" Foreground="#AA2D2727"/>
                                             </Grid>
                                         </Border>
                                         <ControlTemplate.Triggers>
@@ -548,7 +548,7 @@
                                                 </Button>
                                             </Grid>
 
-                                            <TextBlock Text="{Binding Note}" Grid.Row="1" Margin="25,5,0,0" FontWeight="Medium" FontSize="10" />
+                                            <TextBlock Text="{Binding MakeNote}" Grid.Row="1" Margin="25,5,0,0" FontWeight="Medium" FontSize="10" />
                                         </Grid>
                                     </Border>
                                 </DataTemplate>

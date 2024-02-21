@@ -6,6 +6,7 @@ using System.Data.SQLite;
 using System.IO;
 using System.IO.Packaging;
 using System.Net;
+using System.Windows;
 using System.Windows.Controls;
 using System.Xml.Linq;
 using GalaSoft.MvvmLight.Messaging;
@@ -825,6 +826,15 @@ namespace SmartClinic
                 Console.WriteLine($"Error inserting special note: {ex}");
                 throw;
             }
+        }
+
+        public static void AddMedicineGroup(ObservableCollection<Medicine> selectedmedicines)
+        {
+            foreach (var med in selectedmedicines)
+            {
+                MessageBox.Show(med.Id + med.BrandName);
+            }
+            MessageBox.Show("Medicine Group Added");
         }
 
 
