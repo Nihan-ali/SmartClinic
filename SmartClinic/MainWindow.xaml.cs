@@ -77,7 +77,7 @@ namespace SmartClinic
         private void StatButton_Click(object sender, RoutedEventArgs e)
         {
             // Set content to StatUserControl
-            //contentControl.Content = new UserControls.StatUserControl();
+            contentControl.Content = new View.UserControls.StatUserControl();
         }
 
     }

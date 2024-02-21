@@ -12,7 +12,7 @@ namespace SmartClinic.View.UserControls
 
         public PatientProfileUserControl(Patient selectedPatient)
         {
-            InitializeComponent();
+                InitializeComponent();
             Patients = new ObservableCollection<PatientVisit>(DatabaseHelper.GetPatientVisitsById(selectedPatient.Id));
 
             // Set the ItemsSource of the ListBox to the Patients collection

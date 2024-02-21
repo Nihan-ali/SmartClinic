@@ -388,3 +388,5 @@ D:\AcademicProject\MainProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\
 D:\AcademicProject\MainProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\SmartClinic.pdb
 D:\AcademicProject\MainProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\SmartClinic.genruntimeconfig.cache
 D:\AcademicProject\MainProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\ref\SmartClinic.dll
+D:\AcademicProject\MainProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\StatUserControl.g.cs
+D:\AcademicProject\MainProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\StatUserControl.baml

@@ -184,6 +184,37 @@ namespace SmartClinic
         public string Diagnosis { get; set; }
         public string TreatmentPlan { get; set; }
     }
+    public class PatientVisit2
+    {
+        public int ID { get; set; }
+        public string AdviceContent { get; set; }
+        public int AdviceOccurrence { get; set; }
+        public string ChiefComplaintContent { get; set; }
+        public int ChiefComplaintOccurrence { get; set; }
+        public string DiagnosisContent { get; set; }
+        public int DiagnosisOccurrence { get; set; }
+        public string FollowupContent { get; set; }
+        public int FollowupOccurrence { get; set; }
+        public string HistoryContent { get; set; }
+        public int HistoryOccurrence { get; set; }
+        public string InvestigationContent { get; set; }
+        public int InvestigationOccurrence { get; set; }
+        public string MedicineManufacturingName { get; set; }
+        public string MedicineBrandName { get; set; }
+        public string MedicineGenericName { get; set; }
+        public string MedicineStrength { get; set; }
+        public string MedicineType { get; set; }
+        public string DosageDescription { get; set; }
+        public string OnExaminationContent { get; set; }
+        public int OnExaminationOccurrence { get; set; }
+        public string Name { get; set; }
+        public string Age { get; set; }
+        public string SpecialNoteContent { get; set; }
+        public int SpecialOccurrence { get; set; }
+        public string TreatmentPlanContent { get; set; }
+        public int TreatmentOccurrence { get; set; }
+    }
+
 
     public class IsNullOrEmptyConverter : IValueConverter
     {

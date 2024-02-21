@@ -67,11 +67,30 @@ namespace SmartClinic
                                                                                                 DIAGNOSIS TEXT, TREATMENTPLAN TEXT,
 
                                                                                                 PRIMARY KEY (ID, VISIT)
-                                                                                            );";
+                                                                                            );
+                                                   CREATE TABLE IF NOT EXITS PatientVisit2 (
+
+                                                         ID INTEGER,
+                                                         ADVICE_CONTENT TEXT,ADVICE_OCCURENCE INTEGER,
+                                                         
+                                                       CHIEFCOMPLAINT_CONTENT TEXT,CHIEFCOMPLAINT_OCCURANCE INTEGER,DIAGNOSIS_CONTENT TEXT,DIAGNOSIS_OCCURANCE INTEGER,
+                                                          FOLLOWUP_CONTENT TEXT,FOLLOWUP_OCCURANCE INTEGER,HISTORY_CONTENT TEXT,HISTOEY_OCCURANCE INTEGER,INVESTIGATION_CONTENT TEXT,INVESTIGATION_OCCURANCE INTEGER,
+                                                        MEDICINE_MANUFACTURINGNAME TEXT,MEDICINE_BRANDNAME TEXT,MEDICINE_GENERICNAME TEXT,MEDICINE_STRENGTH TEXT,MEDICINE_TYPE TEXT,DOSAGEDESCRIPTION TEXT,
+                                                          ONEXAMINATION_CONTENT TEXT,ONEXAMINATION_OCCURANCE INTEGER,NAME TEXT,AGE TEXT,SPECIALNOTE_CONTENT TEXT,SPECIAL_OCCURENCE INTEGER,TREATMENTPLAN_CONTENT TEXT,
+                                                       
+                                                        TREATMENT_OCCURANCE INTEGER
+
+
+                                   );
+
+
+
+
+";
 
                                     command.CommandText = allQueries;
 
-                                    // Execute the concatenated queries
+                                    // Execute the concatenated queries_
                                     command.ExecuteNonQuery();
                                 }
                                 ImportMed.Import();
@@ -319,7 +338,7 @@ namespace SmartClinic
                     }
                 }
             }
-
+            
             return initialAdvices;
         }
         public static List<FollowUp> GetInitialFollowUps()
@@ -467,6 +486,51 @@ namespace SmartClinic
                 throw;
             }
         }
+        public static int GetPatientVisitsByVisit(string startdate, string enddate)
+        {
+            try
+            {
+                // Prepare the query to count patients within the specified date range
+                string query = "SELECT COUNT(ID) AS TotalPatients " +
+                               "FROM PatientVisit " +
+                               "WHERE VISIT BETWEEN @StartDate AND @EndDate;";
+
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    // Creating a command object with the SQL query and the connection
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                    {
+                        // Adding parameters for start and end dates
+                        command.Parameters.AddWithValue("@StartDate", startdate);
+                        command.Parameters.AddWithValue("@EndDate", enddate);
+
+                        // Executing the query and retrieving the total count of patients
+                        object result = command.ExecuteScalar();
+
+                        // Checking if the result is not null and converting it to an integer
+                        if (result != null && result != DBNull.Value)
+                        {
+                            int totalPatients = Convert.ToInt32(result);
+                            Console.WriteLine($"Total number of patients visiting between {startdate} and {enddate}: " + totalPatients);
+                            return totalPatients;
+                        }
+                        else
+                        {
+                            Console.WriteLine("No patients visited within the specified date range.");
+                            return 0;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving patient visits: {ex}");
+                throw;
+            }
+        }
+
 
 
 
