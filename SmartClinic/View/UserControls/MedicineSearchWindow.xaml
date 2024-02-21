@@ -191,11 +191,20 @@
                             <RowDefinition Height="60*"/>
                             <RowDefinition Height="20*"/>
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0">
-                            <TextBlock Text="{Binding MedicineName}" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                            <Button x:Name="deletemedicine" HorizontalAlignment="Right" VerticalAlignment="Center" Click="DeleteMedicineFromListview_Click">
-                                <Image Source="../../circle.png" Width="15" Height="15"/>
-                            </Button>
+                        <StackPanel Grid.Row="0" HorizontalAlignment="Stretch" Orientation="Horizontal">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="9*"/>
+                                    <!-- 90% of the row width -->
+                                    <ColumnDefinition Width="1*"/>
+                                    <!-- 10% of the row width -->
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding MedicineName}" Grid.Column="0" FontWeight="Bold" FontSize="14" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#3498DB"/>
+                                <Button x:Name="deletemedicine" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Click="DeleteMedicineFromListview_Click">
+                                    <Image HorizontalAlignment="Right" Source="../../circle.png" Width="15" Height="15"/>
+                                </Button>
+                            </Grid>
+
 
                         </StackPanel>
 
@@ -217,29 +226,30 @@
                                     <TextBlock Text="Schedule" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center" Foreground="#3498DB"/>
                                 </Grid>
                                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <TextBox x:Name="morningTextBox" Text="{Binding MorningDose}" Width="40" Padding="5,0,0,0" Margin="5,5,-22,5" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1"/>
-                                    <StackPanel Orientation="Vertical"  Background="#ECF0F1" VerticalAlignment="Center" Margin="10,0,5,0">
+                                    <TextBox x:Name="morningTextBox" Text="{Binding MorningDose, Mode=TwoWay}" Width="40" Padding="5,0,0,0" Margin="5,5,-22,5" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1"/>
+                                    <StackPanel Orientation="Vertical" Background="#ECF0F1" VerticalAlignment="Center" Margin="10,0,5,0">
                                         <Button Content="&#9650;" FontSize="7" Click="IncrementMorningButton_Click" Foreground="#5c7080" BorderBrush="Transparent"/>
                                         <Button Content="&#9660;" FontSize="7" Click="DecrementMorningButton_Click" Foreground="#5c7080" BorderBrush="Transparent"/>
                                     </StackPanel>
 
                                     <TextBlock Text="+" FontWeight="Bold" FontSize="12" TextAlignment="Center" Height="15" Margin="5,0"  RenderTransformOrigin="0.844,0.557"/>
-                                <TextBox x:Name="noonTextBox" TextAlignment="Center" Text="1" Width="20" Margin="5" Height="20" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1"/>
-                                <StackPanel Orientation="Vertical" Background="#ECF0F1" Margin="5,10">
-                                    <Button Content="&#9650;"  Click="IncrementNoonButton_Click" Background="#3498DB" Foreground="White" BorderBrush="Transparent"/>
-                                    <Button Content="&#9660;"  Click="DecrementNoonButton_Click" Background="#3498DB" Foreground="White" BorderBrush="Transparent"/>
-                                </StackPanel>
-                                <TextBlock Text="+" FontWeight="Bold" FontSize="12" TextAlignment="Center"  Height="15" Margin="5,0"  RenderTransformOrigin="0.844,0.557"/>
-                                <TextBox x:Name="nightTextBox" TextAlignment="Center" Text="1" Width="20" Margin="5" Height="20" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1"/>
-                                <StackPanel Orientation="Vertical" Margin="5,10" Background="#ECF0F1">
-                                    <Button Content="&#9650;"  Click="IncrementNightButton_Click" Background="#3498DB" Foreground="White" BorderBrush="Transparent"/>
-                                    <Button Content="&#9660;"  Click="DecrementNightButton_Click" Background="#3498DB" Foreground="White" BorderBrush="Transparent"/>
-                                </StackPanel>
+                                    <TextBox x:Name="noonTextBox" TextAlignment="Center" Text="{Binding NoonDose}" Width="40" Margin="5,5,-22,5" Padding="5,0,0,0" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1"/>
+                                    <StackPanel Orientation="Vertical" Background="#ECF0F1" VerticalAlignment="Center" Margin="10,0,5,0">
+                                        <Button Content="&#9650;" FontSize="7" Click="IncrementNoonButton_Click" Foreground="#5c7080" BorderBrush="Transparent"/>
+                                        <Button Content="&#9660;" FontSize="7" Click="DecrementNoonButton_Click" Foreground="#5c7080" BorderBrush="Transparent"/>
+                                    </StackPanel>
+
+                                    <TextBlock Text="+" FontWeight="Bold" FontSize="12" TextAlignment="Center" Height="15" Margin="5,0" RenderTransformOrigin="0.844,0.557"/>
+                                    <TextBox x:Name="nightTextBox" TextAlignment="Center" Text="{Binding NightDose}" Width="40" Padding="5,0,0,0" Margin="5,5,-22,5" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1"/>
+                                    <StackPanel Orientation="Vertical" Background="#ECF0F1" VerticalAlignment="Center" Margin="10,0,5,0">
+                                        <Button Content="&#9650;" FontSize="7" Click="IncrementNightButton_Click" Foreground="#5c7080" BorderBrush="Transparent"/>
+                                        <Button Content="&#9660;" FontSize="7" Click="DecrementNightButton_Click" Foreground="#5c7080" BorderBrush="Transparent"/>
+                                    </StackPanel>
                                 </StackPanel>
                                 <Grid Grid.Row="2">
                                     <StackPanel Orientation="Horizontal" Margin="0,10,0,5" HorizontalAlignment="Center">
-                                        <CheckBox Content="Before Eating" IsChecked="{Binding BeforeEatingCheckBox}" Margin="0,0,10,0" Foreground="#3498DB"/>
-                                        <CheckBox Content="After Eating" IsChecked="{Binding AfterEatingCheckBox}" Foreground="#3498DB"/>
+                                        <CheckBox Content="খাওয়ার আগে" IsChecked="{Binding BeforeEatingCheckBox}" Margin="0,0,10,0" Foreground="#3498DB"/>
+                                        <CheckBox Content="খাওয়ার পরে" IsChecked="{Binding AfterEatingCheckBox}" Foreground="#3498DB"/>
                                     </StackPanel>
                                 </Grid>
                             </Grid>
@@ -250,9 +260,9 @@
                                     <RowDefinition Height="20*"/>
                                     <RowDefinition Height="80*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="Unit" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Center" FontSize="14" Foreground="#3498DB"/>
+                                <TextBlock Text="Unit" FontWeight="Bold" Grid.Row="0" Margin="80,0,0,0" HorizontalAlignment="Center" FontSize="14" Foreground="#3498DB"/>
                                 <!-- ComboBox for Different Types of Units -->
-                                <ComboBox x:Name="unitComboBox" SelectedItem="{Binding SelectedUnitItem}" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Top" Width="60" Height="20" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1">
+                                <ComboBox x:Name="unitComboBox" SelectedItem="{Binding SelectedUnitItem}" Grid.Row="1" Margin="80,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="60" Height="20" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1">
                                     <ComboBoxItem Content="টি" IsSelected="True"/>
                                     <ComboBoxItem Content="ফোঁটা"/>
                                     <ComboBoxItem Content="চামচ"/>
@@ -267,16 +277,24 @@
                             <Grid Grid.Column="2">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="20*"/>
-                                    <RowDefinition Height="80*"/>
+                                    <RowDefinition Height="60*"/>
+                                    <RowDefinition Height="20*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="Duration" FontWeight="Bold" Grid.Row="0" HorizontalAlignment="Center" FontSize="14" Foreground="#3498DB"/>
+                                <TextBlock Text="Duration" FontWeight="Bold" Grid.Row="0" HorizontalAlignment="Center" FontSize="14" Margin="100,0,0,0" Foreground="#3498DB"/>
                                 <Grid Grid.Row="1">
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBox x:Name="durationTextBox" Text="{Binding Duration}" TextAlignment="Center" Width="20" Margin="5" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1"/>
-                                        <StackPanel Orientation="Vertical" Height="auto" Background="#ECF0F1">
-                                            <Button Content="&#9650;"  Click="IncrementDurationButton_Click" Background="#3498DB" Foreground="White" BorderBrush="Transparent"/>
-                                            <Button Content="&#9660;"  Click="DecrementDurationButton_Click" Background="#3498DB" Foreground="White" BorderBrush="Transparent"/>
-                                        </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBox x:Name="durationTextBox" Text="{Binding Duration}" TextAlignment="Center" Width="40" Padding="0,0,0,0" Margin="110,15,0,-10" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1"/>
+                                        <ComboBox x:Name="DurationComboBox" SelectedItem="{Binding SelectedDurationItem}" Grid.Row="1" Margin="80,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="60" Height="20" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1">
+                                            <ComboBoxItem Content="দিন" IsSelected="True"/>
+                                            <ComboBoxItem Content="সপ্তাহ"/>
+                                            <ComboBoxItem Content="মাস"/>
+                                        </ComboBox>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="40,0,0,0">
+                                    <StackPanel>
+                                        <TextBlock Text="Note" FontWeight="Bold" FontSize="14" Foreground="#3498DB"/>
+                                        <TextBox x:Name="detailsTextBox" Margin="30,0,0,20" Text="{Binding Details}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Height="40" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1"/>
                                     </StackPanel>
                                 </Grid>
                             </Grid>
@@ -284,12 +302,7 @@
                             <!-- Note -->
 
                         </Grid>
-                        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="5,20">
-                            <StackPanel>
-                                <TextBlock Text="Note" FontWeight="Bold" FontSize="14" Foreground="#3498DB"/>
-                                <TextBox x:Name="detailsTextBox" Text="{Binding Details}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Height="40" Margin="0,5,0,5" Background="#ECF0F1" Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1"/>
-                            </StackPanel>
-                        </Grid>
+
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -308,7 +321,19 @@
         <Popup x:Name="MedicineGroupNamePopup" PlacementTarget="{Binding ElementName=addToMedicineGroup}" Placement="Relative" KeyDown="GroupNameEntered" StaysOpen="False" Width="365" Margin="15" MaxHeight="350">
             <Grid>
                 <Border Background="#ebebeb" CornerRadius="5" BorderThickness="2" BorderBrush="Black">
-                    <TextBox x:Name="GroupNameBox" VerticalContentAlignment="Center" />
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBox x:Name="GroupNameBox" VerticalContentAlignment="Center" Grid.Row="0" />
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10" Grid.Row="1">
+                            <Button Content="Yes" Margin="5" Click="YesButton_Click"/>
+                            <Button Content="No" Margin="5" Click="NoButton_Click"/>
+                        </StackPanel>
+                    </Grid>
                 </Border>
             </Grid>
         </Popup>

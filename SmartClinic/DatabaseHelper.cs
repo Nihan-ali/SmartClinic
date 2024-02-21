@@ -828,13 +828,38 @@ namespace SmartClinic
             }
         }
 
-        public static void AddMedicineGroup(ObservableCollection<Medicine> selectedmedicines)
+        public static void AddMedicineGroup(string groupName, string medicineList)
         {
-            foreach (var med in selectedmedicines)
+            try
             {
-                MessageBox.Show(med.Id + med.BrandName);
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM MedicineGroup WHERE GroupName = @GroupName;", connection))
+                    {
+                        checkCommand.Parameters.AddWithValue("@GroupName", groupName);
+                        int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                        if (count == 0)
+                        {
+                            using (var insertCommand = new SQLiteCommand("INSERT INTO MedicineGroup (GroupName, MedicineList, Occurrence) VALUES (@GroupName, @MedicineList, @Occurrence);", connection))
+                            {
+                                insertCommand.Parameters.AddWithValue("@GroupName", groupName);
+                                insertCommand.Parameters.AddWithValue("@MedicineList", medicineList);
+                                insertCommand.Parameters.AddWithValue("@Occurrence", 1);
+
+                                insertCommand.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
             }
-            MessageBox.Show("Medicine Group Added");
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error inserting medicine group: {ex}");
+                throw;
+            }
         }
 
 
@@ -1166,6 +1191,50 @@ namespace SmartClinic
             }
         }   
 
+        public static Medicine GetMedicineById(int medicineId)
+        {
+            
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT * FROM Medicine WHERE ID = @MedicineId;", connection))
+                    {
+                        command.Parameters.AddWithValue("@MedicineId", medicineId);
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                Medicine medicine = new Medicine
+                                {
+                                    Id = Convert.ToInt32(reader["Id"]),
+                                    BrandName = reader["BrandName"].ToString(),
+                                    GenericName = reader["GenericName"].ToString(),
+                                    Strength = reader["Strength"].ToString(),
+                                    ManufacturerName = reader["ManufacturerName"].ToString(),
+                                    DosageDescription = reader["DosageDescription"].ToString(),
+                                    MedicineType = reader["MedicineType"].ToString()
+                                };
+
+                                return medicine;
+                            }
+                            else
+                            {
+                                return null;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching medicine: {ex}");
+                throw;
+            }
+        }
 
 
         public static void InsertPatientInfo(string name, string age, string phone, string address, string blood)
