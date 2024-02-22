@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SmartClinic.View.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="#F2F2F2">
+             d:DesignHeight="450" d:DesignWidth="800" Background="#F2F2F2"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid Background="#eeeeee">
         <Grid.RowDefinitions>
             <!-- First row -->
@@ -28,30 +29,29 @@
 
                 <!-- Total Visit -->
                 <Border Grid.Column="0" Background="White" Margin="5">
-                    <TextBlock Text="{Binding TotalVisit, StringFormat='Total Visit: {0}'}"
+                    <TextBlock x:Name="TotalVisitTextBlock" Text="{Binding TotalVisit, StringFormat='Total Visit: {0}'}"
                        FontSize="15" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
 
                 <!-- Today's Visit -->
                 <Border Grid.Column="1" Background="White" Margin="5">
-                    <TextBlock Text="{Binding TodaysVisit, StringFormat='Todays Visit: {0}'}"
+                    <TextBlock x:Name="TodaysVisitTextBlock" Text="{Binding TodaysVisit, StringFormat='Todays Visit: {0}'}"
                        FontSize="15" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
 
                 <!-- Months Visit -->
                 <Border Grid.Column="2" Background="White" Margin="5">
-                    <TextBlock Text="{Binding MonthsVisit, StringFormat='Months Visit: {0}'}"
+                    <TextBlock x:Name="MonthsVisitTextBlock" Text="{Binding MonthsVisit, StringFormat='This Month Visit: {0}'}"
                        FontSize="15" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
 
                 <!-- Last Months Visit -->
                 <Border Grid.Column="3" Background="White" Margin="5">
-                    <TextBlock Text="{Binding LastMonthsVisit, StringFormat='Last Months Visit: {0}'}"
+                    <TextBlock x:Name="LastMonthsVisitTextBlock" Text="{Binding LastMonthsVisit, StringFormat='Last Months Visit: {0}'}"
                        FontSize="15" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
             </Grid>
         </Border>
-
 
         <!-- Second row: Patient Information -->
         <Border Grid.Row="1" BorderThickness="1"  Margin="10" Padding="10">
@@ -65,34 +65,33 @@
 
                 <!-- Total Patient -->
                 <Border Grid.Column="0" Background="White" Margin="5">
-                    <TextBlock Text="{Binding TotalPatient, StringFormat='Total Patient: {0}'}" 
+                    <TextBlock x:Name="TotalPatientTextBlock" Text="{Binding TotalPatient, StringFormat='Total Patient: {0}'}" 
                        TextWrapping="Wrap" FontSize="15" Padding="10" 
                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
 
                 <!-- Today's Patient -->
                 <Border Grid.Column="1" Background="White" Margin="5">
-                    <TextBlock Text="{Binding TodaysPatient}" 
+                    <TextBlock x:Name="TodaysPatientTextBlock" Text="{Binding TodaysPatient, StringFormat='Todays Patient: {0}'}" 
                        TextWrapping="Wrap" FontSize="15" Padding="10" 
                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
 
                 <!-- This Month's Patient -->
                 <Border Grid.Column="2" Background="White" Margin="5">
-                    <TextBlock Text="{Binding ThisMonthsPatient, StringFormat='This Months Patient: {0}'}" 
+                    <TextBlock x:Name="ThisMonthsPatientTextBlock" Text="{Binding ThisMonthsPatient, StringFormat='This Months Patient: {0}'}" 
                        TextWrapping="Wrap" FontSize="15" Padding="10" 
                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
 
                 <!-- Last Month's Patient -->
                 <Border Grid.Column="3" Background="White" Margin="5">
-                    <TextBlock Text="{Binding LastMonthsPatient, StringFormat='Last Months Patient: {0}'}" 
+                    <TextBlock x:Name="LastMonthsPatientTextBlock" Text="{Binding LastMonthsPatient, StringFormat='Last Months Patient: {0}'}" 
                        TextWrapping="Wrap" FontSize="15" Padding="10" 
                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
             </Grid>
         </Border>
-
 
         <!-- Third row: Date Pickers -->
         <Grid Grid.Row="2" Margin="10">
@@ -105,14 +104,17 @@
 
             <!-- Start Date Picker -->
             <Border Grid.Column="0" BorderThickness="0" BorderBrush="AntiqueWhite" Margin="5" Padding="5">
-                <DatePicker x:Name="StartDatePicker" HorizontalAlignment="Right" VerticalAlignment="Center" SelectedDate="{Binding StartDate}" DisplayDateEnd="{Binding EndDate, Mode=OneWay}"/>
+                <DatePicker x:Name="StartDatePicker" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                SelectedDate="{Binding StartDate, Mode=TwoWay}" 
+                DisplayDateEnd="{Binding EndDate, Mode=OneWay}"/>
             </Border>
 
             <!-- End Date Picker -->
             <Border Grid.Column="1" BorderThickness="0" BorderBrush="AntiqueWhite" Margin="5" Padding="5">
-                <DatePicker x:Name="EndDatePicker" HorizontalAlignment="Left" VerticalAlignment="Center" SelectedDate="{Binding EndDate}" DisplayDateStart="{Binding StartDate, Mode=OneWay}"/>
+                <DatePicker x:Name="EndDatePicker" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                SelectedDate="{Binding EndDate, Mode=TwoWay}" 
+                DisplayDateStart="{Binding StartDate, Mode=OneWay}"/>
             </Border>
         </Grid>
-
     </Grid>
 </UserControl>

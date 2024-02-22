@@ -271,7 +271,7 @@ namespace SmartClinic
                 fractionalPartString = "½";
             else if (fractionalPart == 0.25)
                 fractionalPartString = "¼";
-            else
+            else 
                 fractionalPartString = fractionalPart.ToString();
 
             // Combine the whole part and formatted fractional part
@@ -353,21 +353,101 @@ namespace SmartClinic
     }
 
 
-    public class PatientVisit
+    public class PatientVisit : INotifyPropertyChanged
     {
-        public int Id { get; set; }
-        public DateTime Visit { get; set; }
-        public string Medicine { get; set; }
-        public string Advice { get; set; }
-        public string FollowUp { get; set; }
-        public string Notes { get; set; }
-        public string Complaint { get; set; }
-        public string History { get; set; }
-        public string OnExamination { get; set; }
-        public string Investigation { get; set; }
-        public string Diagnosis { get; set; }
-        public string TreatmentPlan { get; set; }
+        private int _id;
+        private DateTime _visit;
+        private string _medicine;
+        private string _advice;
+        private string _followUp;
+        private string _notes;
+        private string _complaint;
+        private string _history;
+        private string _onExamination;
+        private string _investigation;
+        private string _diagnosis;
+        private string _treatmentPlan;
+
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; OnPropertyChanged(nameof(Id)); }
+        }
+
+        public DateTime Visit
+        {
+            get { return _visit; }
+            set { _visit = value; OnPropertyChanged(nameof(Visit)); }
+        }
+
+        public string Medicine
+        {
+            get { return _medicine; }
+            set { _medicine = value; OnPropertyChanged(nameof(Medicine)); }
+        }
+
+        public string Advice
+        {
+            get { return _advice; }
+            set { _advice = value; OnPropertyChanged(nameof(Advice)); }
+        }
+
+        public string FollowUp
+        {
+            get { return _followUp; }
+            set { _followUp = value; OnPropertyChanged(nameof(FollowUp)); }
+        }
+
+        public string Notes
+        {
+            get { return _notes; }
+            set { _notes = value; OnPropertyChanged(nameof(Notes)); }
+        }
+
+        public string Complaint
+        {
+            get { return _complaint; }
+            set { _complaint = value; OnPropertyChanged(nameof(Complaint)); }
+        }
+
+        public string History
+        {
+            get { return _history; }
+            set { _history = value; OnPropertyChanged(nameof(History)); }
+        }
+
+        public string OnExamination
+        {
+            get { return _onExamination; }
+            set { _onExamination = value; OnPropertyChanged(nameof(OnExamination)); }
+        }
+
+        public string Investigation
+        {
+            get { return _investigation; }
+            set { _investigation = value; OnPropertyChanged(nameof(Investigation)); }
+        }
+
+        public string Diagnosis
+        {
+            get { return _diagnosis; }
+            set { _diagnosis = value; OnPropertyChanged(nameof(Diagnosis)); }
+        }
+
+        public string TreatmentPlan
+        {
+            get { return _treatmentPlan; }
+            set { _treatmentPlan = value; OnPropertyChanged(nameof(TreatmentPlan)); }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
+
 
     public class IsNullOrEmptyConverter : IValueConverter
     {

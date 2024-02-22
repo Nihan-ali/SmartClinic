@@ -499,6 +499,47 @@ namespace SmartClinic
             }
         }
 
+        public static List<PatientVisit> GetPatientVisits()
+        {
+            List<PatientVisit> patientVisits = new List<PatientVisit>();
+
+            using (SQLiteConnection connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT * FROM PatientVisit";
+
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            PatientVisit visit = new PatientVisit
+                            {
+                                Id = Convert.ToInt32(reader["ID"]),
+                                Visit = Convert.ToDateTime(reader["VISIT"]),
+                                Medicine = Convert.ToString(reader["MEDICINE"]),
+                                Advice = Convert.ToString(reader["ADVICE"]),
+                                FollowUp = Convert.ToString(reader["FOLLOWUP"]),
+                                Notes = Convert.ToString(reader["NOTES"]),
+                                Complaint = Convert.ToString(reader["COMPLAINT"]),
+                                History = Convert.ToString(reader["HISTORY"]),
+                                OnExamination = Convert.ToString(reader["ONEXAMINATION"]),
+                                Investigation = Convert.ToString(reader["INVESTIGATION"]),
+                                Diagnosis = Convert.ToString(reader["DIAGNOSIS"]),
+                                TreatmentPlan = Convert.ToString(reader["TREATMENTPLAN"]),
+                            };
+
+                            patientVisits.Add(visit);
+                        }
+                    }
+                }
+            }
+
+            return patientVisits;
+        }
+
         public static int GetPatientVisitsByVisit(string startdate, string enddate)
         {
             try
