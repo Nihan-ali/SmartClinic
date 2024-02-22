@@ -60,26 +60,26 @@
 
                                     <!-- Phone -->
                                     <TextBlock Grid.Column="0" Margin="10,5" VerticalAlignment="Center">
-                            <Run Text="Phone: "/>
-                            <Run Text="{Binding Phone}"/>
+                                        <Run Text="Phone: " FontWeight="Bold"/>
+                                        <Run Text="{Binding Phone}"/>
                                     </TextBlock>
 
                                     <!-- Address -->
                                     <TextBlock Grid.Column="1" Margin="10,5" VerticalAlignment="Center">
-                            <Run Text="Address: "/>
-                            <Run Text="{Binding Address}"/>
+                                        <Run Text="Address: " FontWeight="Bold"/>
+                                        <Run Text="{Binding Address}"/>
                                     </TextBlock>
 
                                     <!-- Age -->
                                     <TextBlock Grid.Column="2" Margin="10,5" VerticalAlignment="Center">
-                            <Run Text="Age: "/>
-                            <Run Text="{Binding Age}"/>
+                                        <Run Text="Age: "/>
+                                        <Run Text="{Binding Age}" FontWeight="Bold"/>
                                     </TextBlock>
 
                                     <!-- Serial No -->
                                     <TextBlock Grid.Column="3" Margin="10,5" VerticalAlignment="Center">
-                            <Run Text="Serial No: "/>
-                            <Run Text="{Binding ID}"/>
+                                        <Run Text="Serial No: " FontWeight="Bold"/>
+                                        <Run Text="{Binding Id}"/>
                                     </TextBlock>
 
                                     <!-- Delete Button -->

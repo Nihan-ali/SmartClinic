@@ -91,8 +91,48 @@ namespace SmartClinic.View.UserControls
 
         private void ShowPrescription_Click(object sender, RoutedEventArgs e)
         {
-            // Handle show prescription button click
+            Button showPrescriptionButton = sender as Button;
+
+            if (showPrescriptionButton != null)
+            {
+                // Retrieve the DataContext of the button, which should be a PatientVisit
+                PatientVisit patientVisit = showPrescriptionButton.DataContext as PatientVisit;
+
+                if (patientVisit != null)
+                {
+                    // Invoke the event with both newPatient and patientVisit
+                    PatientInfoSubmitted?.Invoke(this, new PatientEventArgs { NewPatient = newPatient, SelectedPatientVisit = patientVisit });
+
+                    // Assuming you have an instance of MainWindow called 'mainWindowInstance'
+                    if (mainWindowInstance != null)
+                    {
+                        RxUsercontrol rxUsercontrol = new RxUsercontrol(newPatient, patientVisit);
+
+                        if (rxUsercontrol != null && rxUsercontrol.Content != null)
+                        {
+                            mainWindowInstance.contentControl.Content = rxUsercontrol;
+                        }
+                        else
+                        {
+                            // Log an error or display a message indicating an issue with RxUsercontrol or its Content
+                            MessageBox.Show("Error: RxUsercontrol or its Content is null.");
+                        }
+                    }
+                    else
+                    {
+                        // Log an error or display a message indicating an issue with MainWindow
+                        MessageBox.Show("Error: MainWindow is null.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Error: Unable to retrieve PatientVisit from the button's DataContext.");
+                }
+            }
         }
+
+
+
 
         private void Print_Click(object sender, RoutedEventArgs e)
         {

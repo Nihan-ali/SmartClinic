@@ -16,5 +16,5 @@ E:\Web_Dev\350\SmartClinic\SmartClinic\App.xaml
 208-149389658
 MainWindow.xaml;View\UserControls\AddPatient.xaml;View\UserControls\AdviceSearchWindow.xaml;View\UserControls\ComplaintSearchWindow.xaml;View\UserControls\CreateMedicineGroupWindow.xaml;View\UserControls\DetailsWindow.xaml;View\UserControls\DiagnosisSearchWindow.xaml;View\UserControls\EditComplaintControl.xaml;View\UserControls\ExaminationSearchWindow.xaml;View\UserControls\FollowUpSearchWindow.xaml;View\UserControls\GroupNameWindow.xaml;View\UserControls\header.xaml;View\UserControls\HistorySearchWindow.xaml;View\UserControls\InvestigationSearchWindow.xaml;View\UserControls\MedicineCreateWindow.xaml;View\UserControls\MedicineGroupName.xaml;View\UserControls\MedicineSearchWindow.xaml;View\UserControls\MenuBar.xaml;View\UserControls\PatientList.xaml;View\UserControls\PatientProfileUserControl.xaml;View\UserControls\patientsUsercontrol.xaml;View\UserControls\RxUsercontrol.xaml;View\UserControls\searchMenu.xaml;View\UserControls\SpecialNoteSearchWindow.xaml;View\UserControls\StatUserControl.xaml;View\UserControls\treatment.xaml;View\UserControls\TreatmentSearchWindow.xaml;
 
-False
+True
 

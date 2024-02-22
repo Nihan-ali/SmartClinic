@@ -65,12 +65,6 @@ namespace SmartClinic
             selectedMedicinesListView.ItemsSource = null;
             selectedMedicinesListView.ItemsSource = selectedMedicines;
         }
-        private void UpdateSelectedMedicineGroupListView()
-        {
-            selectedMedicinesListView.ItemsSource = null;
-            selectedMedicinesListView.ItemsSource = selectedMedicineGroups;
-        }
-
 
         // MedicineSearchWindow.xaml.cs
         private void SearchTextBox_TextChanged(object sender, RoutedEventArgs e)
@@ -212,12 +206,6 @@ namespace SmartClinic
                 UpdateSelectedMedicinesListView();
             }
         }
-        private void selectedMedicinesListView_Loaded(object sender, RoutedEventArgs e)
-        {
-            // You may not need to manually set AlternationIndex in the code-behind.
-            // The AlternationCount="{Binding Path=Items.Count, RelativeSource={RelativeSource Self}}"
-            // in XAML should automatically assign serial numbers based on the item index.
-        }
 
 
         private void IncrementMorningButton_Click(object sender, RoutedEventArgs e)
@@ -295,19 +283,20 @@ namespace SmartClinic
 
         private void addToRx_Click(object sender, RoutedEventArgs e)
         {
-            //Medicine selectedMedicine = (Medicine)searchResultsListBox.SelectedItem;
+            Medicine selectedMedicine = (Medicine)searchResultsListBox.SelectedItem;
 
-            //if (selectedMedicine != null)
-            //{
-
-            //    AddToSelectedMedicines(selectedMedicine);
-            //    this.Close();
-            //}
-            //else
-            //{
-            //    this.Close();
-            //}
-            this.Close();
+            if (selectedMedicine != null)
+            {
+                if (!selectedMedicines.Contains(selectedMedicine))
+                {
+                    AddToSelectedMedicines(selectedMedicine);
+                }
+                this.Close();
+            }
+            else
+            {
+                this.Close();
+            }
         }
 
         private void CreateMedicineGroup_Click(object sender, RoutedEventArgs e)
@@ -338,10 +327,12 @@ namespace SmartClinic
 
         private void DeleteMedicineFromListview_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedMedicinesListView.SelectedItem is Medicine selectedItem)
+            Button deleteButton = (Button)sender;
+            Medicine medicine = (Medicine)deleteButton.DataContext;
+
+            if (medicine != null)
             {
-                selectedMedicines.Remove(selectedItem);
-                UpdateSelectedMedicinesListView();
+                selectedMedicines.Remove(medicine);
             }
         }
 

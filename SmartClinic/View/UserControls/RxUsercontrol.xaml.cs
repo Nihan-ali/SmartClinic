@@ -86,6 +86,42 @@ namespace SmartClinic.View.UserControls
             // Raise the PrescriptionDataAvailable event
             OnPrescriptionDataAvailable(new PatientEventArgs { NewPatient = newPatient });
         }
+        public RxUsercontrol(Patient newPatient, PatientVisit selectedPatientVisit) : this()
+        {
+            this.newPatient = newPatient;
+
+            // Initialize the UI or update it with the new patient data
+            // ...
+
+            // Update patient information
+            UpdatePatientInfo(newPatient);
+
+            // Update selected visit information
+            UpdateSelectedPatientVisit(selectedPatientVisit);
+
+            // Raise the PrescriptionDataAvailable event
+            
+            OnPrescriptionDataAvailable(new PatientEventArgs { NewPatient = newPatient, SelectedPatientVisit = selectedPatientVisit });
+        }
+
+        private void UpdateSelectedPatientVisit(PatientVisit selectedPatientVisit)
+        {
+            MessageBox.Show(selectedPatientVisit.Advice);
+            string adviceContent = selectedPatientVisit.Advice;
+
+            // Split the advice content into individual advice items using the "+" sign
+            string[] individualAdvices = adviceContent.Split('+');
+
+            // Update the selectedAdvices list with the individual advice items
+            //selectedAdvices.Clear(); // Clear the existing list
+            foreach (string advice in individualAdvices)
+            {
+                // Create Advice objects and add them to the list
+                selectedAdvices.Add(new Advice { Content = advice });
+            }
+            UpdateSelectedAdvicesListView();
+        }
+
         private void OnPrescriptionDataAvailable(PatientEventArgs e)
         {
             // Raise the event if there are subscribers
@@ -565,16 +601,19 @@ namespace SmartClinic.View.UserControls
                 else if (removeButton.DataContext is Advice selectedAdvice)
                 {
                     selectedAdvices.Remove(selectedAdvice);
+                    UpdateSelectedAdvicesListView();   
                 }
 
                 else if (removeButton.DataContext is FollowUp selectedFollowUp)
                 {
                     selectedFollowUps.Remove(selectedFollowUp);
+                    UpdateSelectedFollowUpsListView();
                 }
 
                 else if (removeButton.DataContext is SpecialNote selectedNote)
                 {
                     selectedSpecialNotes.Remove(selectedNote);
+                    UpdateSelectedHistoryListView();
                 }
             }
         }
