@@ -22,7 +22,7 @@ namespace SmartClinic
         public ObservableCollection<Medicine> SelectedMedicines => selectedMedicines;
         public ObservableCollection<MedicineGroup> SelectedMedicineGroups => selectedMedicineGroups;
 
-
+        
 
         public MedicineSearchWindow()
         {
@@ -65,12 +65,6 @@ namespace SmartClinic
             selectedMedicinesListView.ItemsSource = null;
             selectedMedicinesListView.ItemsSource = selectedMedicines;
         }
-        private void UpdateSelectedMedicineGroupListView()
-        {
-            selectedMedicinesListView.ItemsSource = null;
-            selectedMedicinesListView.ItemsSource = selectedMedicineGroups;
-        }
-
 
         // MedicineSearchWindow.xaml.cs
         private void SearchTextBox_TextChanged(object sender, RoutedEventArgs e)
@@ -141,7 +135,7 @@ namespace SmartClinic
 
         private void AddFromGroupToSelectedMedicine(MedicineGroup selectedMedicineGroup)
         {
-
+ 
             string[] medicineIds = selectedMedicineGroup.MedicineList.Split('+');
             foreach (string id in medicineIds)
             {
@@ -149,8 +143,7 @@ namespace SmartClinic
                 {
                     continue;
                 }
-                else
-                {
+                else {
                     int iid = int.Parse(id);
                     Medicine medicine = DatabaseHelper.GetMedicineById(iid);
                     MessageBox.Show(medicine.BrandName);
@@ -212,12 +205,6 @@ namespace SmartClinic
                 UpdateSelectedMedicinesListView();
             }
         }
-        private void selectedMedicinesListView_Loaded(object sender, RoutedEventArgs e)
-        {
-            // You may not need to manually set AlternationIndex in the code-behind.
-            // The AlternationCount="{Binding Path=Items.Count, RelativeSource={RelativeSource Self}}"
-            // in XAML should automatically assign serial numbers based on the item index.
-        }
 
 
         private void IncrementMorningButton_Click(object sender, RoutedEventArgs e)
@@ -226,7 +213,7 @@ namespace SmartClinic
 
             var dataObject = button.DataContext as Medicine;
 
-            dataObject.MorningDose = dataObject.MorningDose + 0.5;
+            dataObject.MorningDose=dataObject.MorningDose + 0.5;
 
             button.GetBindingExpression(Button.ContentProperty)?.UpdateTarget();
         }
@@ -284,7 +271,7 @@ namespace SmartClinic
             button.GetBindingExpression(Button.ContentProperty)?.UpdateTarget();
         }
 
-
+        
 
         public void AddToSelectedMedicines(Medicine newMedicine)
         {
@@ -299,8 +286,10 @@ namespace SmartClinic
 
             if (selectedMedicine != null)
             {
-
-                AddToSelectedMedicines(selectedMedicine);
+                if (!selectedMedicines.Contains(selectedMedicine))
+                {
+                    AddToSelectedMedicines(selectedMedicine);
+                }
                 this.Close();
             }
             else
@@ -324,10 +313,10 @@ namespace SmartClinic
 
         }
 
-
+        
         private void GroupNameEntered(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            if(e.Key == Key.Enter)
             {
                 MedicineGroupNamePopup.IsOpen = false;
                 //return GroupNameBox.Text;
@@ -337,10 +326,12 @@ namespace SmartClinic
 
         private void DeleteMedicineFromListview_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedMedicinesListView.SelectedItem is Medicine selectedItem)
+            Button deleteButton = (Button)sender;
+            Medicine medicine = (Medicine)deleteButton.DataContext;
+
+            if (medicine != null)
             {
-                selectedMedicines.Remove(selectedItem);
-                UpdateSelectedMedicinesListView();
+                selectedMedicines.Remove(medicine);
             }
         }
 
