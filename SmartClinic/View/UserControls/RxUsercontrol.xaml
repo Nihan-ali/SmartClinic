@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SmartClinic.View.UserControls"
+             xmlns:UserControls="clr-namespace:SmartClinic.View.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -12,6 +13,7 @@
     
     <Grid Background="White">
         <Grid.RowDefinitions>
+            <RowDefinition  Height="Auto"/>
             <RowDefinition x:Name="name" Height="7*"/>
             <RowDefinition x:Name="patient" Height="4*"/>
             <RowDefinition Height="80*"/>
@@ -20,10 +22,12 @@
         </Grid.RowDefinitions>
 
         <!-- Assuming title, patientInfo, History, medicine, savePrint, and Footer are UserControl classes -->
-        
-        
+
+        <Grid >
+            <UserControls:searchMenu/>
+        </Grid>
         <!--title xaml-->
-        <Grid Grid.Row="0" Background="White">
+        <Grid Grid.Row="1" Background="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="50*"/>
@@ -43,7 +47,7 @@
         </Grid>
         
         <!--patientInfo xaml-->
-        <Grid Background="White" Grid.Row="1">
+        <Grid Background="White" Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
@@ -127,10 +131,10 @@
         </Popup>
 
 
-        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,1,0,0"/>
+        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="0,1,0,0"/>
         
         
-        <Grid x:Name="prescription" Grid.Row="2">
+        <Grid x:Name="prescription" Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20*"/>
                 <ColumnDefinition Width="80*"/>
@@ -694,10 +698,10 @@
             <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,0,0"/>
         </Grid>
 
-        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="0,1,0,0"/>
+        <Border Grid.Row="3" BorderBrush="Black" BorderThickness="0,1,0,0"/>
         
         <!--savePrint xaml-->
-        <Grid x:Name="save" Grid.Row="3" Height="25">
+        <Grid x:Name="save" Grid.Row="4" Height="25">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="50*"/>
@@ -713,7 +717,7 @@
         </Grid>
 
         <!--footer xaml-->
-        <Grid x:Name="footer" Grid.Row="4">
+        <Grid x:Name="footer" Grid.Row="5">
             <StackPanel>
                 <TextBlock FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Run Text="Registered to"/>

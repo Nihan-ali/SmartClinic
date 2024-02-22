@@ -14,6 +14,7 @@ namespace SmartClinic.View.UserControls
         public PatientVisit SelectedPatientVisit { get; set; }
         public event EventHandler<PatientEventArgs> PatientInfoSubmitted;
         public Patient newPatient;
+        public int patientCount = 0;
 
         public PatientProfileUserControl(Patient selectedPatient, MainWindow mainWindow)
         {
@@ -27,6 +28,7 @@ namespace SmartClinic.View.UserControls
                 Patients = new ObservableCollection<PatientVisit>(DatabaseHelper.GetPatientVisitsById(selectedPatient.Id));
 
                 // Set the ItemsSource of the ListBox to the Patients collection
+                patientCount = Patients.Count;
                 newPatient = selectedPatient;
                 PrescriptionList.ItemsSource = Patients;
 
@@ -79,8 +81,8 @@ namespace SmartClinic.View.UserControls
             PatientNameTextBlock.Text = selectedPatient.Name;
             IDTextBlock.Text = $"ID: {selectedPatient.Id}";
             AgeTextBlock.Text = $"Age: {selectedPatient.Age}";
-            RxVisitTextBlock.Text = "Rx Visit: [Data]"; // Replace [Data] with actual data
-            PastVisitTextBlock.Text = "Past Visit: [Data]"; // Replace [Data] with actual data
+            //RxVisitTextBlock.Text = "Rx Visit: [Data]"; // Replace [Data] with actual data
+            PastVisitTextBlock.Text = $"Past Visits: {patientCount}"; // Replace [Data] with actual data
 
             // You may need to bind PrescriptionList.ItemsSource to a collection of prescription data
             // For simplicity, it's not done here. You need to replace [PrescriptionData] with actual prescription data.

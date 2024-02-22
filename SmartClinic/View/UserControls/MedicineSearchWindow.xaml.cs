@@ -295,18 +295,19 @@ namespace SmartClinic
 
         private void addToRx_Click(object sender, RoutedEventArgs e)
         {
-            Medicine selectedMedicine = (Medicine)searchResultsListBox.SelectedItem;
+            //Medicine selectedMedicine = (Medicine)searchResultsListBox.SelectedItem;
 
-            if (selectedMedicine != null)
-            {
+            //if (selectedMedicine != null)
+            //{
 
-                AddToSelectedMedicines(selectedMedicine);
-                this.Close();
-            }
-            else
-            {
-                this.Close();
-            }
+            //    AddToSelectedMedicines(selectedMedicine);
+            //    this.Close();
+            //}
+            //else
+            //{
+            //    this.Close();
+            //}
+            this.Close();
         }
 
         private void CreateMedicineGroup_Click(object sender, RoutedEventArgs e)

@@ -15,9 +15,9 @@ namespace SmartClinic
     public class variables
     {
         public static string docname = "DR. ABU NOYEM MOHAMMAD";
-        public static string docdegree = "MBBS, (Endocrinology &amp; Metabolism)";
+        public static string docdegree = "MBBS, (Endocrinology & Metabolism)";
         public static string docname_bangla = "ডা.আবু নঈম মোহাম্মাদ";
-        public static string docdegree_bangla = "এমবিবিএস, (এন্ডোক্রাইনোলজি &amp; মেটাবোলিজম)";
+        public static string docdegree_bangla = "এমবিবিএস, (এন্ডোক্রাইনোলজি ও মেটাবোলিজম)";
     }
 
 
