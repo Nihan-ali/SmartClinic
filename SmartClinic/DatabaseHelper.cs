@@ -1329,19 +1329,21 @@ namespace SmartClinic
                 Console.WriteLine($"Error searching patients: {ex}");
                 throw;
             }
-        }   
+        }
 
 
 
-        public static void InsertPatientInfo(string name, string age, string phone, string address, string blood)
+        public static int InsertPatientInfo(string name, string age, string phone, string address, string blood)
         {
             try
             {
+                int insertedId = 0;
+
                 using (var connection = GetConnection())
                 {
                     connection.Open();
 
-                    using (var insertCommand = new SQLiteCommand("INSERT INTO Patient (Name, Age, Phone, Address, Blood) VALUES (@Name, @Age, @Phone, @Address, @Blood);", connection))
+                    using (var insertCommand = new SQLiteCommand("INSERT INTO Patient (Name, Age, Phone, Address, Blood) VALUES (@Name, @Age, @Phone, @Address, @Blood); SELECT last_insert_rowid();", connection))
                     {
                         insertCommand.Parameters.AddWithValue("@Name", name);
                         insertCommand.Parameters.AddWithValue("@Age", age);
@@ -1349,11 +1351,14 @@ namespace SmartClinic
                         insertCommand.Parameters.AddWithValue("@Address", address);
                         insertCommand.Parameters.AddWithValue("@Blood", blood);
 
-                        insertCommand.ExecuteNonQuery();
+                        // Execute the query and retrieve the last inserted ID
+                        insertedId = Convert.ToInt32(insertCommand.ExecuteScalar());
 
-                        Console.WriteLine("Patient information inserted successfully.");
+                        Console.WriteLine("Patient information inserted successfully. ID: " + insertedId);
                     }
                 }
+
+                return insertedId;
             }
             catch (Exception ex)
             {
@@ -1361,6 +1366,7 @@ namespace SmartClinic
                 throw;
             }
         }
+
 
 
         public static bool DeletePatient(int patientId)

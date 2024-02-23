@@ -27,17 +27,18 @@ namespace SmartClinic.View.UserControls
             // Validate input (you may add more validation logic)
 
             // Create a new Patient object
+            int insertedId = DatabaseHelper.InsertPatientInfo(name, age, phone, address, bloodGroup);
+
+            // Create a new Patient object with the retrieved ID
             Patient newPatient = new Patient
             {
+                Id = insertedId,
                 Name = name,
                 Age = age,
                 Phone = phone,
                 Address = address,
                 Blood = bloodGroup
             };
-
-            // Insert patient info into the database
-            DatabaseHelper.InsertPatientInfo(name, age, phone, address, bloodGroup);
 
             // Raise the event to notify subscribers (e.g., patientInfo UserControl)
             PatientInfoSubmitted?.Invoke(this, new PatientEventArgs { NewPatient = newPatient });
