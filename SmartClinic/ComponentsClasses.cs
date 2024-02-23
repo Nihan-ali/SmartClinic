@@ -116,8 +116,6 @@ namespace SmartClinic
         public int Duration { get; set; }
         public string Details { get; set; }
 
-
-
         public double MorningDose
         {
             get { return morningDose; }
@@ -191,8 +189,6 @@ namespace SmartClinic
             }
         }
 
-
-
         private ComboBoxItem selectedUnitItem;
 
         public ComboBoxItem SelectedUnitItem
@@ -211,6 +207,7 @@ namespace SmartClinic
         }
 
         private ComboBoxItem selectedDurationItem;
+
         public ComboBoxItem SelectedDurationItem
         {
             get { return selectedDurationItem; }
@@ -221,7 +218,6 @@ namespace SmartClinic
                     selectedDurationItem = value;
                     OnPropertyChanged(nameof(SelectedDurationItem));
                     OnPropertyChanged(nameof(MakeNote));
-                    
                 }
             }
         }
@@ -244,7 +240,7 @@ namespace SmartClinic
                 return formattedDosage;
             }
         }
-
+        private string makeNote;
         public string MakeNote
         {
             get
@@ -263,14 +259,21 @@ namespace SmartClinic
                 string afterEatingNote = AfterEatingCheckBox ? " খাবার পরে " : "";
                 string beforeEatingNote = BeforeEatingCheckBox ? " খাবার আগে " : "";
 
-                string Note = string.IsNullOrEmpty(Details) ? "" : $" {Details}";
-                //string formattedDosage = FormatDosage(MorningDose) + " + " + FormatDosage(NoonDose) + " + " + FormatDosage(NightDose);
-
+                string note = string.IsNullOrEmpty(Details) ? "" : $" {Details}";
 
                 // Combine all dosages and notes
-                return $"{(MorningDose + NoonDose + NightDose >0 ? secheduleText + " করে " : "")}{afterEatingNote}{beforeEatingNote}{duration}{Note}";
+                return $"{(MorningDose + NoonDose + NightDose > 0 ? secheduleText + " করে " : "")}{afterEatingNote}{beforeEatingNote}{duration}{note}";
+            }
+            set
+            {
+                if (makeNote != value)
+                {
+                    makeNote = value;
+                    OnPropertyChanged(nameof(MakeNote));
+                }
             }
         }
+
         private string FormatDosage(double dosage)
         {
             int wholePart = (int)dosage;
@@ -293,9 +296,6 @@ namespace SmartClinic
 
             return formattedDosage;
         }
-
-
-
 
         public string MedicineName
         {
@@ -332,6 +332,7 @@ namespace SmartClinic
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
+
 
     public class Patient : INotifyPropertyChanged
     {

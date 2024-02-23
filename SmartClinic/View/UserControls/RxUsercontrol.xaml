@@ -24,7 +24,7 @@
         <!-- Assuming title, patientInfo, History, medicine, savePrint, and Footer are UserControl classes -->
 
         <Grid >
-            <UserControls:searchMenu/>
+            <UserControls:searchMenu/> 
         </Grid>
         <!--title xaml-->
         <Grid Grid.Row="1" Background="White">

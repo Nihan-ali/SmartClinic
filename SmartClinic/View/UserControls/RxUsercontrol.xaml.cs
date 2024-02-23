@@ -99,6 +99,7 @@ namespace SmartClinic.View.UserControls
             // Update selected visit information
             UpdateSelectedPatientVisit(selectedPatientVisit);
 
+
             // Raise the PrescriptionDataAvailable event
             
             OnPrescriptionDataAvailable(new PatientEventArgs { NewPatient = newPatient, SelectedPatientVisit = selectedPatientVisit });
@@ -147,6 +148,8 @@ namespace SmartClinic.View.UserControls
         }
         private void AddPatientWindow_PatientInfoSubmitted(object sender, PatientEventArgs e)
         {
+            int id=e.NewPatient.Id;
+            MessageBox.Show(id.ToString());
             string patientName = e.NewPatient.Name;
             string patientAge = e.NewPatient.Age;
             UpdateUIWithPatientDetails(patientName, patientAge);

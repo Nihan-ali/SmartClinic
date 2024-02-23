@@ -298,6 +298,38 @@ namespace SmartClinic
 
             return initialMedicines;
         }
+
+
+        public static List<Medicine> ExtractMedicine(string combinedString)
+        {
+            string[] medicinePairs = combinedString.Split("$$");
+
+            List<Medicine> medicines = new List<Medicine>();
+
+            foreach (string medicinePair in medicinePairs)
+            {
+                string[] pairValues = medicinePair.Split('@');
+                if (pairValues.Length == 2)
+                {
+                    string[] doseAndNote = pairValues[1].Split('&');
+                    if (doseAndNote.Length == 2)
+                    {
+                        Medicine medicine = new Medicine
+                        {
+                            //MedicineName = pairValues[0],
+                            //formatedDose = doseAndNote[0],
+                            MakeNote = doseAndNote[1]
+                        };
+
+                        medicines.Add(medicine);
+
+                        // Additional debugging output
+                        MessageBox.Show( medicine.MakeNote);
+                    }
+                }
+            }
+            return medicines;
+        }
         public static List<MedicineGroup> GetInitialMedicineGroups()
         {
             List<MedicineGroup> initialMedicineGroups = new List<MedicineGroup>();
@@ -1366,7 +1398,7 @@ namespace SmartClinic
                 throw;
             }
         }
-
+        
 
 
         public static bool DeletePatient(int patientId)
