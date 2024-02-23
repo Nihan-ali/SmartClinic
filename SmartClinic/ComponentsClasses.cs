@@ -118,6 +118,7 @@ namespace SmartClinic
 
 
 
+
         public double MorningDose
         {
             get { return morningDose; }
@@ -128,6 +129,7 @@ namespace SmartClinic
                     morningDose = value;
                     OnPropertyChanged(nameof(MorningDose));
                     OnPropertyChanged(nameof(MakeNote));
+                    OnPropertyChanged(nameof(formatedDose));
                 }
             }
         }
@@ -142,6 +144,7 @@ namespace SmartClinic
                     noonDose = value;
                     OnPropertyChanged(nameof(NoonDose));
                     OnPropertyChanged(nameof(MakeNote));
+                    OnPropertyChanged(nameof(formatedDose));
                 }
             }
         }
@@ -156,6 +159,7 @@ namespace SmartClinic
                     nightDose = value;
                     OnPropertyChanged(nameof(NightDose));
                     OnPropertyChanged(nameof(MakeNote));
+                    OnPropertyChanged(nameof(formatedDose));
                 }
             }
         }
@@ -202,6 +206,7 @@ namespace SmartClinic
                     selectedUnitItem = value;
                     OnPropertyChanged(nameof(SelectedUnitItem));
                     OnPropertyChanged(nameof(SelectedUnit));
+                    OnPropertyChanged(nameof(formatedDose));
                 }
             }
         }
@@ -217,6 +222,7 @@ namespace SmartClinic
                     selectedDurationItem = value;
                     OnPropertyChanged(nameof(SelectedDurationItem));
                     OnPropertyChanged(nameof(MakeNote));
+
                 }
             }
         }
@@ -231,13 +237,28 @@ namespace SmartClinic
             get { return (SelectedDurationItem?.Content)?.ToString() ?? "day"; }
         }
 
+        private string _formatdosage;
+        public string formatedDose
+        {
+            get
+            {
+                string formattedDosage = FormatDosage(MorningDose) + " + " + FormatDosage(NoonDose) + " + " + FormatDosage(NightDose);
+                return formattedDosage;
+            }
+            set
+            {
+                _formatdosage = value;
+                OnPropertyChanged(nameof(FormatDosage));
+            }
+        }
 
+        private string _MakeNote;
         public string MakeNote
         {
             get
             {
-                string selectedUnit = (SelectedUnit ?? "piece").ToString();
-                string selectedDuration = (SelectedDuration ?? "day").ToString();
+                string selectedUnit = string.IsNullOrEmpty(SelectedUnit) ? "" : SelectedUnit.ToString();
+                string selectedDuration = string.IsNullOrEmpty(SelectedDuration) ? "" : SelectedDuration.ToString();
 
                 // Create a note based on the selected dosage
                 string morningDosage = MorningDose > 0 ? $"সকালে  {FormatDosage(MorningDose)} {selectedUnit}" : "";
@@ -251,17 +272,20 @@ namespace SmartClinic
                 string beforeEatingNote = BeforeEatingCheckBox ? " খাবার আগে " : "";
 
                 string Note = string.IsNullOrEmpty(Details) ? "" : $" {Details}";
+                //string formattedDosage = FormatDosage(MorningDose) + " + " + FormatDosage(NoonDose) + " + " + FormatDosage(NightDose);
+
+
                 // Combine all dosages and notes
-                return $"{(secheduleText != null ? secheduleText + " করে " : "")}{afterEatingNote}{beforeEatingNote}{duration}{Note}";
+                return $"{(MorningDose + NoonDose + NightDose > 0 ? secheduleText + " করে " : "")}{afterEatingNote}{beforeEatingNote}{duration}{Note}";
+            }
+            set
+            {
+                _MakeNote = value;
+                OnPropertyChanged(nameof(MakeNote));
             }
         }
         private string FormatDosage(double dosage)
         {
-            if (dosage == 0)
-            {
-                return "";
-            }
-
             int wholePart = (int)dosage;
             double fractionalPart = dosage - wholePart;
 
@@ -275,11 +299,15 @@ namespace SmartClinic
                 fractionalPartString = fractionalPart.ToString();
 
             // Combine the whole part and formatted fractional part
-            string formattedDosage = $"{(wholePart == 0 ? "" : wholePart)}{fractionalPartString}";
+            string wholePartString = wholePart == 0 ? "0" : wholePart.ToString();
 
-            return $"{formattedDosage}";
+            // Adjust formatting based on the value of fractionalPart
+            string formattedDosage = fractionalPart == 0 ? wholePartString : $"{wholePartString}{fractionalPartString}";
+
+            return formattedDosage;
         }
 
+        private string _MedicineName;
         public string MedicineName
         {
             get
@@ -292,6 +320,11 @@ namespace SmartClinic
 
                 // Combine the components to form MedicineName
                 return $"{typePrefix}. {brandNameWithoutDigits} {Strength}";
+            }
+            set
+            {
+                _MedicineName = value;
+                OnPropertyChanged(nameof(MedicineName));
             }
         }
 
@@ -342,6 +375,7 @@ namespace SmartClinic
         public class PatientEventArgs : EventArgs
         {
             public Patient NewPatient { get; set; }
+            public PatientVisit SelectedPatientVisit { get; internal set; }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -352,22 +386,51 @@ namespace SmartClinic
         }
     }
 
+    public class DummyMedicine
+    {
+        public string MedicineName { get; set; }
+        public string formatedDose { get; set; }
+        public string MakeNote { get; set; }
+    }
 
-    public class PatientVisit
+    public class PatientVisit:INotifyPropertyChanged
     {
         public int Id { get; set; }
-        public DateTime Visit { get; set; }
-        public string Medicine { get; set; }
-        public string Advice { get; set; }
-        public string FollowUp { get; set; }
-        public string Notes { get; set; }
-        public string Complaint { get; set; }
-        public string History { get; set; }
-        public string OnExamination { get; set; }
-        public string Investigation { get; set; }
-        public string Diagnosis { get; set; }
-        public string TreatmentPlan { get; set; }
+        public string medicine { get; set; }
+        public string advice { get; set; }
+        public string followUp { get; set; }
+        public string notes { get; set; }
+        public string complaint { get; set; }
+        public string hhistory { get; set; }
+        public string onExamination { get; set; }
+        public string investigation { get; set; }
+        public string diagnosis { get; set; }
+        public string treatmentPlan { get; set; }
+        private DateTime _visit;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public DateTime visit
+        {
+            get { return _visit; }
+            set
+            {
+                _visit = value;
+                OnPropertyChanged(nameof(visit));
+                OnPropertyChanged(nameof(FormattedVisit)); // Notify about the change in the formatted property
+            }
+        }
+
+        public string FormattedVisit
+        {
+            get { return _visit.ToString("dd MMM yyyy"); }
+        }
     }
+
 
     public class IsNullOrEmptyConverter : IValueConverter
     {
@@ -386,5 +449,6 @@ namespace SmartClinic
             throw new NotImplementedException();
         }
     }
+
 
 }

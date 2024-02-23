@@ -8,12 +8,12 @@
 
     <Grid Background="#F3F3F3">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="15*"/>
-            <ColumnDefinition Width="85*"/>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="80*"/>
         </Grid.ColumnDefinitions>
 
         <!-- First Column: Sub-columns -->
-        <Grid Grid.Column="0">
+        <Grid Grid.Column="0" Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -23,46 +23,45 @@
             </Grid.RowDefinitions>
 
             <!-- Borders for each information section -->
-            <Border Grid.Row="0" Background="White" Margin="5" BorderThickness="0,0,0,2" BorderBrush="Gray" Height="40">
+            <Border Grid.Row="0" Background="White" Margin="1" BorderThickness="0,0,1,2" BorderBrush="Gray" Height="40">
                 <TextBlock x:Name="PatientNameTextBlock" FontWeight="Bold" FontSize="16" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Border>
 
-            <Border Grid.Row="1" Background="White"  Margin="5" BorderThickness="0,0,0,2" BorderBrush="Gray" Height="30" VerticalAlignment="Top">
+            <Border Grid.Row="1" Background="White"  Margin="1" BorderThickness="0,0,1,2" BorderBrush="Gray" Height="30" VerticalAlignment="Top">
                 <TextBlock x:Name="IDTextBlock" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Center"/>
             </Border>
 
-            <Border Grid.Row="2" Background="White" Margin="5" BorderThickness="0,0,0,2" BorderBrush="Gray" Height="30">
+            <Border Grid.Row="2" Background="White" Margin="1" BorderThickness="0,0,1,2" BorderBrush="Gray" Height="30">
                 <TextBlock x:Name="AgeTextBlock" FontWeight="Bold"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Border>
 
-            <Button x:Name="writePrescription" Content="Write Prescription" FontWeight="Bold" VerticalAlignment="Center" Height="30" Grid.Row="3" Margin="5" Background="Green" BorderBrush="{x:Null}" Click="writePrescription_Click"/>
+            <Button x:Name="writePrescription" Content="Write Prescription" FontWeight="Bold" VerticalAlignment="Center" Height="30" Grid.Row="3"  Background="Green" BorderBrush="{x:Null}" Click="writePrescription_Click"/>
         </Grid>
 
         <!-- Second Column (80*), Sub-rows with sizes: 10*, 15*, Auto -->
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Margin="10" Background="White">
             <Grid.RowDefinitions>
-                <RowDefinition Height="8*"/>
-                <RowDefinition Height="8*"/>
-                <RowDefinition Height="84*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="90*"/>
             </Grid.RowDefinitions>
 
             <!-- Borders for each information section -->
-            <Border Grid.Row="0" Background="#3498DB" Margin="5">
+            <!--<Border Grid.Row="0" Background="#3498DB" Margin="5">
                 <TextBlock x:Name="RxVisitTextBlock" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            </Border>
+            </Border>-->
 
-            <Border Grid.Row="1" Background="#2ECC71" Margin="5">
-                <TextBlock x:Name="PastVisitTextBlock" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <Border Grid.Row="0" Background="White" Margin="5">
+                <TextBlock x:Name="PastVisitTextBlock" Foreground="Black" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Border>
 
             <!-- ListBox for prescriptions -->
-            <ListBox x:Name="PrescriptionList" Grid.Row="2" Margin="5" SelectionChanged="PrescriptionList_SelectionChanged" HorizontalContentAlignment="Stretch" SelectedItem="{Binding Patients}">
+            <ListBox x:Name="PrescriptionList" Grid.Row="1" Margin="5" SelectionChanged="PrescriptionList_SelectionChanged" HorizontalContentAlignment="Stretch" SelectedItem="{Binding Patients}" Background="#eeeeee">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="DarkGray" BorderThickness="1" CornerRadius="5" Margin="5" Background="White" HorizontalAlignment="Stretch">
+                        <Border  CornerRadius="5" Margin="5" Background="White" HorizontalAlignment="Stretch" BorderThickness="0,.5,1,2" BorderBrush="Gray">
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="60"/>
                                 </Grid.RowDefinitions>
 
                                 <!-- Grid for each prescription entry -->
@@ -76,18 +75,18 @@
 
                                     <!-- Date -->
                                     <TextBlock Grid.Column="0" Margin="10,5" VerticalAlignment="Center">
-                                        <Run Text="Date: "/>
-                                        <Run Text="{Binding Visit}"/>
+                                        <Run Text="Date: " FontWeight="Bold"/>
+                                        <Run Text="{Binding FormattedVisit, Mode=OneWay}" FontWeight="SemiBold"/>
                                     </TextBlock>
 
                                     <!-- Show Prescription Button -->
-                                    <Button Grid.Column="1" Content="Show Prescription" Margin="50,10,50,10" Background="#3498DB" Foreground="White" Click="ShowPrescription_Click"/>
+                                    <Button Grid.Column="1" Content="Show Prescription" Margin="50,10,50,10" Background="White" Foreground="Blue" FontWeight="Bold" BorderBrush="{x:Null}" Click="ShowPrescription_Click"/>
 
                                     <!-- Print Button -->
-                                    <Button Grid.Column="2" Content="Print" Margin="10,5" Background="#2ECC71" Foreground="White" Click="Print_Click"/>
+                                    <Button Grid.Column="2" Content="Print" Margin="10,5" Background="White" Foreground="Green" FontWeight="Bold" BorderBrush="{x:Null}" Click="Print_Click"/>
 
                                     <!-- Delete Button -->
-                                    <Button Grid.Column="3" x:Name="DeleteButton" Content="Delete" Margin="10,5" Background="#FF3C5A7D" FontWeight="Bold" Foreground="White" Click="Delete_Click"/>
+                                    <Button Grid.Column="3" x:Name="DeleteButton" Content="Delete" Margin="10,5" Background="White" Foreground="Red" FontWeight="Bold" BorderBrush="{x:Null}" Click="Delete_Click"/>
                                 </Grid>
                             </Grid>
                         </Border>

@@ -18,8 +18,7 @@ using System.Windows.Shapes;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Controls.Primitives;
-
-
+using System.Printing;
 using static SmartClinic.Patient;
 
 namespace SmartClinic.View.UserControls
@@ -32,7 +31,6 @@ namespace SmartClinic.View.UserControls
         //from Patientinfo
         private bool isPatientAdded = false;
         private Patient newPatient;
-
 
         //from history
         private List<Complaint> selectedComplaints = new List<Complaint>();
@@ -54,11 +52,11 @@ namespace SmartClinic.View.UserControls
         public List<Treatment> SelectedTreatments => selectedTreatments;
 
         //from  medicine
-        private List<Medicine> selectedMedicines = new List<Medicine>();
+        private List<DummyMedicine> selectedMedicines = new List<DummyMedicine>();
         private List<Advice> selectedAdvices = new List<Advice>();
         private List<FollowUp> selectedFollowUps = new List<FollowUp>();
         private List<SpecialNote> selectedSpecialNotes = new List<SpecialNote>();
-        public List<Medicine> SelectedMedicines => selectedMedicines;
+        public List<DummyMedicine> SelectedMedicines => selectedMedicines;
         public List<Advice> SelectedAdvices => selectedAdvices;
         public List<FollowUp> SelectedFollowUps => selectedFollowUps;
         public List<SpecialNote> SelectedSpecialNotes => selectedSpecialNotes;
@@ -77,14 +75,41 @@ namespace SmartClinic.View.UserControls
         public RxUsercontrol(Patient newPatient) : this()
         {
             this.newPatient = newPatient;
-
-            // Initialize the UI or update it with the new patient data
-            // ...
-
-            //MessageBox.Show("also found in rx " + newPatient.Name);
             UpdatePatientInfo(newPatient);
-            // Raise the PrescriptionDataAvailable event
             OnPrescriptionDataAvailable(new PatientEventArgs { NewPatient = newPatient });
+        }
+        public RxUsercontrol(Patient newPatient, PatientVisit selectedPatientVisit) : this()
+        {
+            this.newPatient = newPatient;            
+            selectedComplaints = DatabaseHelper.ExtractComplaint(selectedPatientVisit.complaint);
+            selectedHistories = DatabaseHelper.ExtractHistory(selectedPatientVisit.hhistory);
+            selectedExaminations = DatabaseHelper.ExtractExamination(selectedPatientVisit.onExamination);
+            selectedInvestigations = DatabaseHelper.ExtractInvestigation(selectedPatientVisit.investigation);
+            selectedDiagnosis = DatabaseHelper.ExtractDiagnosis(selectedPatientVisit.diagnosis);
+            selectedTreatments = DatabaseHelper.ExtractTreatment(selectedPatientVisit.treatmentPlan);
+            selectedMedicines = DatabaseHelper.ExtractMedicine(selectedPatientVisit.medicine);
+            selectedAdvices = DatabaseHelper.ExtractAdvice(selectedPatientVisit.advice);
+            selectedFollowUps = DatabaseHelper.ExtractFollowUp(selectedPatientVisit.followUp);
+            selectedSpecialNotes = DatabaseHelper.ExtractSpecialNotes(selectedPatientVisit.notes);
+
+            MessageBox.Show(selectedPatientVisit.medicine);
+            foreach (DummyMedicine med in selectedMedicines)
+            {
+                MessageBox.Show(med.MedicineName + " " + med.formatedDose + " " + med.MakeNote);
+            }
+
+            UpdatePatientInfo(newPatient);
+            UpdateSelectedComplaintListView();
+            UpdateSelectedHistoryListView();
+            UpdateSelectedExaminationListView();
+            UpdateSelectedInvestigationListView();
+            UpdateSelectedDiagnosisListView();
+            UpdateSelectedTreatmentListView();
+            UpdateSelectedMedicinesListView();
+            UpdateSelectedAdvicesListView();
+            UpdateSelectedFollowUpsListView();
+            UpdateSelectedSpecialNotesListView();
+            
         }
         private void OnPrescriptionDataAvailable(PatientEventArgs e)
         {
@@ -111,8 +136,10 @@ namespace SmartClinic.View.UserControls
         }
         private void AddPatientWindow_PatientInfoSubmitted(object sender, PatientEventArgs e)
         {
+
             string patientName = e.NewPatient.Name;
             string patientAge = e.NewPatient.Age;
+            this.newPatient = e.NewPatient;
             UpdateUIWithPatientDetails(patientName, patientAge);
         }
         private void UpdateUIWithPatientDetails(string patientName, string patientAge)
@@ -462,7 +489,11 @@ namespace SmartClinic.View.UserControls
         public void AddToSelectedMedicines(Medicine newMedicine)
         {
             // Add the new medicine to the selectedMedicines collection
-            selectedMedicines.Add(newMedicine);
+            DummyMedicine dummy = new DummyMedicine();
+            dummy.MedicineName = newMedicine.MedicineName;
+            dummy.formatedDose = newMedicine.formatedDose;
+            dummy.MakeNote = newMedicine.MakeNote;
+            selectedMedicines.Add(dummy);
 
             // Update the selectedMedicinesListView
             UpdateSelectedMedicinesListView();
@@ -554,7 +585,7 @@ namespace SmartClinic.View.UserControls
         {
             if (sender is Button removeButton)
             {
-                if (removeButton.DataContext is Medicine selectedMedicine)
+                if (removeButton.DataContext is DummyMedicine selectedMedicine)
                 {
                     // Remove the selected medicine from the collection
                     selectedMedicines.Remove(selectedMedicine);
@@ -565,16 +596,19 @@ namespace SmartClinic.View.UserControls
                 else if (removeButton.DataContext is Advice selectedAdvice)
                 {
                     selectedAdvices.Remove(selectedAdvice);
+                    UpdateSelectedAdvicesListView();
                 }
 
                 else if (removeButton.DataContext is FollowUp selectedFollowUp)
                 {
                     selectedFollowUps.Remove(selectedFollowUp);
+                    UpdateSelectedFollowUpsListView();
                 }
 
                 else if (removeButton.DataContext is SpecialNote selectedNote)
                 {
                     selectedSpecialNotes.Remove(selectedNote);
+                    UpdateSelectedSpecialNotesListView();
                 }
             }
         }
@@ -608,17 +642,6 @@ namespace SmartClinic.View.UserControls
                 }
             }
             return null;
-        }
-
-
-        private void SpecialNotes_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void FollowUp_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void PatientSearchStringChanged(object sender, TextChangedEventArgs e)
@@ -659,8 +682,61 @@ namespace SmartClinic.View.UserControls
             }
         }
 
+        private void SavePrescription_Click(object sender, RoutedEventArgs e)
+        {
+            int id = newPatient.Id;
+            string combinedComplaint = string.Join("$$", selectedComplaints.Select(c => $"{c.Content}@{c.Note}"));
+            string combinedHistory = string.Join("$$", selectedHistories.Select(h => $"{h.Content}@{h.Note}"));
+            string combinedExamination = string.Join("$$", selectedExaminations.Select(e => $"{e.Content}@{e.Note}"));
+            string combinedInvestigation = string.Join("$$", selectedInvestigations.Select(i => $"{i.Content}@{i.Note}"));
+            string combinedDiagnosis = string.Join("$$", selectedDiagnosis.Select(d => $"{d.Content}@{d.Note}"));
+            string combinedTreatment = string.Join("$$", selectedTreatments.Select(t => $"{t.Content}@{t.Note}"));
+            string combinedMedicine = string.Join("$$", selectedMedicines.Select(m => $"{m.MedicineName}@{m.formatedDose}&{m.MakeNote}"));
+            string combinedAdvice = string.Join("$$", selectedAdvices.Select(a => $"{a.Content}"));
+            string combinedFollowUp = string.Join("$$", selectedFollowUps.Select(f => $"{f.Content}"));
+            string combinedSpecialNote = string.Join("$$", selectedSpecialNotes.Select(s => $"{s.Content}"));
 
-    }
+            MessageBox.Show(combinedAdvice.Length + " " + combinedFollowUp.Length + " " + combinedSpecialNote.Length);
+
+            PatientVisit newpres = new PatientVisit
+            {
+                Id = id,
+                visit = DateTime.Today,
+                complaint = combinedComplaint,
+                hhistory = combinedHistory,
+                onExamination = combinedExamination,
+                investigation = combinedInvestigation,
+                diagnosis = combinedDiagnosis,
+                treatmentPlan = combinedTreatment,
+                medicine = combinedMedicine,
+                advice = combinedAdvice,
+                followUp = combinedFollowUp,
+                notes = combinedSpecialNote
+            };
+            
+            DatabaseHelper.SavePrescription(newpres);
+
+        }
+
+
+
+        private void PrintPrescription_Click(object sender, RoutedEventArgs e)
+            {
+                PrintDialog printDialog = new PrintDialog();
+
+                if (printDialog.ShowDialog() == true)
+                {
+                    // Set the default print settings to A4 format
+                    PrintTicket printTicket = printDialog.PrintTicket;
+                    printTicket.PageMediaSize = new PageMediaSize(PageMediaSizeName.ISOA4);
+
+                    printDialog.PrintVisual(this, "Prescription");
+                }
+            }
+
+
+
+}
 
 
 

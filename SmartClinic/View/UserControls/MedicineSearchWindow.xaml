@@ -200,7 +200,7 @@
                                 <!-- Auto width for the button -->
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="{Binding MedicineName}" Grid.Column="0" FontWeight="Bold" FontSize="14" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#3498DB"/>
-                            <Button x:Name="deletemedicine" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Click="DeleteMedicineFromListview_Click">
+                            <Button x:Name="deletemedicine" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" BorderThickness="0" Click="DeleteMedicineFromListview_Click">
                                 <Image HorizontalAlignment="Right" Source="../../circle.png" Width="15" Height="15"/>
                             </Button>
                         </Grid>

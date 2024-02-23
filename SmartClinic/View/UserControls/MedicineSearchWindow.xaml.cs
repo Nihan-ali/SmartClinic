@@ -90,13 +90,10 @@ namespace SmartClinic
         {
             if (sender is ToggleButton toggleButton)
             {
-                // Retrieve the associated Medicine object from DataContext
                 if (toggleButton.DataContext is Medicine selectedMedicine)
                 {
-                    // Toggle the IsSelected property
                     selectedMedicine.IsSelected = toggleButton.IsChecked == true;
 
-                    // Update the selected medicines collection
                     if (selectedMedicine.IsSelected)
                     {
                         if (!selectedMedicines.Contains(selectedMedicine))
@@ -326,14 +323,39 @@ namespace SmartClinic
 
         private void DeleteMedicineFromListview_Click(object sender, RoutedEventArgs e)
         {
-            Button deleteButton = (Button)sender;
-            Medicine medicine = (Medicine)deleteButton.DataContext;
-
-            if (medicine != null)
+            if (sender is FrameworkElement element && element.DataContext is Medicine selectedItem)
             {
-                selectedMedicines.Remove(medicine);
+                ToggleButton toggleButton = FindToggleButton(selectedItem);
+
+                if (toggleButton != null)
+                {
+                    toggleButton.IsChecked = !toggleButton.IsChecked;
+                }
+
+                selectedMedicines.Remove(selectedItem);
+
+                UpdateSelectedMedicinesListView();
             }
         }
+
+
+        private ToggleButton FindToggleButton(Medicine medicine)
+        {
+            foreach (var item in medicineItemsControl.Items)
+            {
+                if (medicineItemsControl.ItemContainerGenerator.ContainerFromItem(item) is FrameworkElement container)
+                {
+                    ToggleButton toggleButton = FindVisualChild<ToggleButton>(container);
+                    if (toggleButton != null && toggleButton.DataContext == medicine)
+                    {
+                        return toggleButton;
+                    }
+                }
+            }
+
+            return null;
+        }
+
 
         private void YesButton_Click(object sender, RoutedEventArgs e)
         {

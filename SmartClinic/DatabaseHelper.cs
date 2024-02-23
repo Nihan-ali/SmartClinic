@@ -471,17 +471,17 @@ namespace SmartClinic
                                 PatientVisit visit = new PatientVisit
                                 {
                                     Id = Convert.ToInt32(reader["ID"]),
-                                    Visit = Convert.ToDateTime(reader["VISIT"]),
-                                    Medicine = reader["MEDICINE"].ToString(),
-                                    Advice = reader["ADVICE"].ToString(),
-                                    FollowUp = reader["FOLLOWUP"].ToString(),
-                                    Notes = reader["NOTES"].ToString(),
-                                    Complaint = reader["COMPLAINT"].ToString(),
-                                    History = reader["HISTORY"].ToString(),
-                                    OnExamination = reader["ONEXAMINATION"].ToString(),
-                                    Investigation = reader["INVESTIGATION"].ToString(),
-                                    Diagnosis = reader["DIAGNOSIS"].ToString(),
-                                    TreatmentPlan = reader["TREATMENTPLAN"].ToString(),
+                                    visit = Convert.ToDateTime(reader["VISIT"]),
+                                    medicine = reader["MEDICINE"].ToString(),
+                                    advice = reader["ADVICE"].ToString(),
+                                    followUp = reader["FOLLOWUP"].ToString(),
+                                    notes = reader["NOTES"].ToString(),
+                                    complaint = reader["COMPLAINT"].ToString(),
+                                    hhistory = reader["HISTORY"].ToString(),
+                                    onExamination = reader["ONEXAMINATION"].ToString(),
+                                    investigation = reader["INVESTIGATION"].ToString(),
+                                    diagnosis = reader["DIAGNOSIS"].ToString(),
+                                    treatmentPlan = reader["TREATMENTPLAN"].ToString(),
                                 };
 
                                 patientVisits.Add(visit);
@@ -1288,19 +1288,21 @@ namespace SmartClinic
                 Console.WriteLine($"Error searching patients: {ex}");
                 throw;
             }
-        }   
+        }
 
 
 
-        public static void InsertPatientInfo(string name, string age, string phone, string address, string blood)
+        public static int InsertPatientInfo(string name, string age, string phone, string address, string blood)
         {
             try
             {
+                int insertedId = 0;
+
                 using (var connection = GetConnection())
                 {
                     connection.Open();
 
-                    using (var insertCommand = new SQLiteCommand("INSERT INTO Patient (Name, Age, Phone, Address, Blood) VALUES (@Name, @Age, @Phone, @Address, @Blood);", connection))
+                    using (var insertCommand = new SQLiteCommand("INSERT INTO Patient (Name, Age, Phone, Address, Blood) VALUES (@Name, @Age, @Phone, @Address, @Blood); SELECT last_insert_rowid();", connection))
                     {
                         insertCommand.Parameters.AddWithValue("@Name", name);
                         insertCommand.Parameters.AddWithValue("@Age", age);
@@ -1308,11 +1310,14 @@ namespace SmartClinic
                         insertCommand.Parameters.AddWithValue("@Address", address);
                         insertCommand.Parameters.AddWithValue("@Blood", blood);
 
-                        insertCommand.ExecuteNonQuery();
+                        // Execute the query and retrieve the last inserted ID
+                        insertedId = Convert.ToInt32(insertCommand.ExecuteScalar());
 
-                        Console.WriteLine("Patient information inserted successfully.");
+                        Console.WriteLine("Patient information inserted successfully. ID: " + insertedId);
                     }
                 }
+
+                return insertedId;
             }
             catch (Exception ex)
             {
@@ -1321,6 +1326,46 @@ namespace SmartClinic
             }
         }
 
+        public static List<PatientVisit> GetPatientVisits()
+        {
+            List<PatientVisit> patientVisits = new List<PatientVisit>();
+
+            using (SQLiteConnection connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT * FROM PatientVisit";
+
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            PatientVisit visit = new PatientVisit
+                            {
+                                Id = Convert.ToInt32(reader["ID"]),
+                                visit = Convert.ToDateTime(reader["VISIT"]),
+                                medicine = Convert.ToString(reader["MEDICINE"]),
+                                advice = Convert.ToString(reader["ADVICE"]),
+                                followUp = Convert.ToString(reader["FOLLOWUP"]),
+                                notes = Convert.ToString(reader["NOTES"]),
+                                complaint = Convert.ToString(reader["COMPLAINT"]),
+                                hhistory = Convert.ToString(reader["HISTORY"]),
+                                onExamination = Convert.ToString(reader["ONEXAMINATION"]),
+                                investigation = Convert.ToString(reader["INVESTIGATION"]),
+                                diagnosis = Convert.ToString(reader["DIAGNOSIS"]),
+                                treatmentPlan = Convert.ToString(reader["TREATMENTPLAN"]),
+                            };
+
+                            patientVisits.Add(visit);
+                        }
+                    }
+                }
+            }
+
+            return patientVisits;
+        }
 
         public static bool DeletePatient(int patientId)
         {
@@ -1395,6 +1440,256 @@ namespace SmartClinic
             }
         }
 
+
+        public static List<Complaint> ExtractComplaint(string combinedString)
+        {
+            string[] complaintPairs = combinedString.Split("$$");
+
+            List<Complaint> ccomplaints = new List<Complaint>();
+
+            foreach (string complaintPair in complaintPairs)
+            {
+                string[] pairValues = complaintPair.Split('@');
+                if (pairValues.Length == 2)
+                {
+                    Complaint complaint = new Complaint
+                    {
+                        Content = pairValues[0],
+                        Note = pairValues[1]
+                    };
+                    ccomplaints.Add(complaint);
+                }
+            }
+            return ccomplaints;
+        }
+        public static List<history> ExtractHistory(string combinedString)
+        {
+            string[] historyPairs = combinedString.Split("$$");
+
+            List<history> hhistory = new List<history>();
+
+            foreach (string historyPair in historyPairs)
+            {
+                string[] pairValues = historyPair.Split('@');
+                if (pairValues.Length == 2)
+                {
+                    history history = new history
+                    {
+                        Content = pairValues[0],
+                        Note = pairValues[1]
+                    };
+                    hhistory.Add(history);
+                }
+            }
+            return hhistory;
+        }
+        public static List<Examination> ExtractExamination(string combinedString)
+        {
+            string[] examinationPairs = combinedString.Split("$$");
+
+            List<Examination> eexaminations = new List<Examination>();
+
+            foreach (string examinationPair in examinationPairs)
+            {
+                string[] pairValues = examinationPair.Split('@');
+                if (pairValues.Length == 2)
+                {
+                    Examination examination = new Examination
+                    {
+                        Content = pairValues[0],
+                        Note = pairValues[1]
+                    };
+                    eexaminations.Add(examination);
+                }
+            }
+            return eexaminations;
+        }
+        public static List<Investigation> ExtractInvestigation(string combinedString)
+        {
+            string[] investigationPairs = combinedString.Split("$$");
+
+            List<Investigation> iinvestigations = new List<Investigation>();
+
+            foreach (string investigationPair in investigationPairs)
+            {
+                string[] pairValues = investigationPair.Split('@');
+                if (pairValues.Length == 2)
+                {
+                    Investigation investigation = new Investigation
+                    {
+                        Content = pairValues[0],
+                        Note = pairValues[1]
+                    };
+                    iinvestigations.Add(investigation);
+                }
+            }
+            return iinvestigations;
+        }
+        public static List<Diagnosis> ExtractDiagnosis(string combinedString)
+        {
+            string[] diagnosisPairs = combinedString.Split("$$");
+
+            List<Diagnosis> ddiagnoses = new List<Diagnosis>();
+
+            foreach (string diagnosisPair in diagnosisPairs)
+            {
+                string[] pairValues = diagnosisPair.Split('@');
+                if (pairValues.Length == 2)
+                {
+                    Diagnosis diagnosis = new Diagnosis
+                    {
+                        Content = pairValues[0],
+                        Note = pairValues[1]
+                    };
+                    ddiagnoses.Add(diagnosis);
+                }
+            }
+            return ddiagnoses;
+        }
+        public static List<Treatment> ExtractTreatment(string combinedString)
+        {
+            string[] treatmentPairs = combinedString.Split("$$");
+
+            List<Treatment> ttreatments = new List<Treatment>();
+
+            foreach (string treatmentPair in treatmentPairs)
+            {
+                string[] pairValues = treatmentPair.Split('@');
+                if (pairValues.Length == 2)
+                {
+                    Treatment treatment = new Treatment
+                    {
+                        Content = pairValues[0],
+                        Note = pairValues[1]
+                    };
+                    ttreatments.Add(treatment);
+                }
+            }
+            return ttreatments;
+        }
+
+        public static List<DummyMedicine> ExtractMedicine(string combinedString)
+        {
+            string[] medicinePairs = combinedString.Split("$$");
+
+            List<DummyMedicine> medicines = new List<DummyMedicine>();
+
+            foreach (string medicinePair in medicinePairs)
+            {
+                string[] pairValues = medicinePair.Split('@');
+                if (pairValues.Length == 2)
+                {
+                    string[] doseAndNote = pairValues[1].Split('&');
+                    if (doseAndNote.Length == 2)
+                    {
+                        DummyMedicine medicine = new DummyMedicine
+                        {
+                            MedicineName = pairValues[0],
+                            formatedDose = doseAndNote[0],
+                            MakeNote = doseAndNote[1]
+                        };
+
+                        medicines.Add(medicine);
+
+                        MessageBox.Show(medicine.MedicineName + " " + medicine.formatedDose + " " + medicine.MakeNote);
+                    }
+                }
+            }
+            return medicines;
+        }
+
+        public static List<Advice> ExtractAdvice(string combinedString)
+        {
+            string[] adviceValues = combinedString.Split("$$");
+
+            List<Advice> extractedAdviceList = new List<Advice>();
+
+            foreach (string value in adviceValues)
+            {
+                if(value != "")
+                {
+                    Advice advice = new Advice
+                    {
+                        Content = value
+                    };
+                    extractedAdviceList.Add(advice);
+                }
+            }
+            return extractedAdviceList;
+        }
+        public static List<FollowUp> ExtractFollowUp(string combinedString)
+        {
+            string[] followUpValues = combinedString.Split("$$");
+
+            List<FollowUp> extractedFollowUpList = new List<FollowUp>();
+
+            foreach (string value in followUpValues)
+            {
+                if(value != "")
+                {
+                    FollowUp followUp = new FollowUp
+                    {
+                        Content = value
+                    };
+                    extractedFollowUpList.Add(followUp);
+                }
+            }
+            return extractedFollowUpList;
+        }
+        public static List<SpecialNote> ExtractSpecialNotes(string combinedString)
+        {
+            string[] specialNoteValues = combinedString.Split("$$");
+
+            List<SpecialNote> extractedSpecialNoteList = new List<SpecialNote>();
+
+            foreach (string value in specialNoteValues)
+            {
+                if(value != "")
+                {
+                    SpecialNote specialNote = new SpecialNote
+                    {
+                        Content = value
+                    };
+                    extractedSpecialNoteList.Add(specialNote);
+                }
+
+            }
+            return extractedSpecialNoteList;
+        }
+
+        public static void SavePrescription(PatientVisit prescription)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var insertCommand = new SQLiteCommand("INSERT INTO PatientVisit (ID, VISIT, COMPLAINT, HISTORY, ONEXAMINATION, INVESTIGATION, DIAGNOSIS, TREATMENTPLAN,MEDICINE, ADVICE, FOLLOWUP, NOTES) VALUES (@ID, @VISIT, @COMPLAINT, @HISTORY, @ONEXAMINATION, @INVESTIGATION, @DIAGNOSIS, @TREATMENTPLAN, @MEDICINE, @ADVICE, @FOLLOWUP, @NOTES);", connection))
+                    {
+                        insertCommand.Parameters.AddWithValue("@ID", prescription.Id);
+                        insertCommand.Parameters.AddWithValue("@VISIT", prescription.visit);
+                        insertCommand.Parameters.AddWithValue("@COMPLAINT", prescription.complaint);
+                        insertCommand.Parameters.AddWithValue("@HISTORY", prescription.hhistory);
+                        insertCommand.Parameters.AddWithValue("@ONEXAMINATION", prescription.onExamination);
+                        insertCommand.Parameters.AddWithValue("@INVESTIGATION", prescription.investigation);
+                        insertCommand.Parameters.AddWithValue("@DIAGNOSIS", prescription.diagnosis);
+                        insertCommand.Parameters.AddWithValue("@TREATMENTPLAN", prescription.treatmentPlan);
+                        insertCommand.Parameters.AddWithValue("@MEDICINE", prescription.medicine);
+                        insertCommand.Parameters.AddWithValue("@ADVICE", prescription.advice);
+                        insertCommand.Parameters.AddWithValue("@FOLLOWUP", prescription.followUp);
+                        insertCommand.Parameters.AddWithValue("@NOTES", prescription.notes);
+
+                        insertCommand.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving prescription: {ex}");
+                throw;
+            }
+        }
 
         public static SQLiteConnection GetConnection()
         {

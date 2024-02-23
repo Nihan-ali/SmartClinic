@@ -14,6 +14,7 @@ namespace SmartClinic.View.UserControls
         public PatientVisit SelectedPatientVisit { get; set; }
         public event EventHandler<PatientEventArgs> PatientInfoSubmitted;
         public Patient newPatient;
+        public int patientCount = 0;
 
         public PatientProfileUserControl(Patient selectedPatient, MainWindow mainWindow)
         {
@@ -27,6 +28,7 @@ namespace SmartClinic.View.UserControls
                 Patients = new ObservableCollection<PatientVisit>(DatabaseHelper.GetPatientVisitsById(selectedPatient.Id));
 
                 // Set the ItemsSource of the ListBox to the Patients collection
+                patientCount = Patients.Count;
                 newPatient = selectedPatient;
                 PrescriptionList.ItemsSource = Patients;
 
@@ -70,7 +72,7 @@ namespace SmartClinic.View.UserControls
                 // MessageBox.Show("Error: MainWindow or RxUsercontrol is null.");
             }
         }
-        
+
 
 
         private void SetDataContext(Patient selectedPatient)
@@ -79,8 +81,8 @@ namespace SmartClinic.View.UserControls
             PatientNameTextBlock.Text = selectedPatient.Name;
             IDTextBlock.Text = $"ID: {selectedPatient.Id}";
             AgeTextBlock.Text = $"Age: {selectedPatient.Age}";
-            RxVisitTextBlock.Text = "Rx Visit: [Data]"; // Replace [Data] with actual data
-            PastVisitTextBlock.Text = "Past Visit: [Data]"; // Replace [Data] with actual data
+            //RxVisitTextBlock.Text = "Rx Visit: [Data]"; // Replace [Data] with actual data
+            PastVisitTextBlock.Text = $"Past Visits: {patientCount}"; // Replace [Data] with actual data
 
             // You may need to bind PrescriptionList.ItemsSource to a collection of prescription data
             // For simplicity, it's not done here. You need to replace [PrescriptionData] with actual prescription data.
@@ -89,8 +91,48 @@ namespace SmartClinic.View.UserControls
 
         private void ShowPrescription_Click(object sender, RoutedEventArgs e)
         {
-            // Handle show prescription button click
+            Button showPrescriptionButton = sender as Button;
+
+            if (showPrescriptionButton != null)
+            {
+                // Retrieve the DataContext of the button, which should be a PatientVisit
+                PatientVisit patientVisit = showPrescriptionButton.DataContext as PatientVisit;
+
+                if (patientVisit != null)
+                {
+                    // Invoke the event with both newPatient and patientVisit
+                    PatientInfoSubmitted?.Invoke(this, new PatientEventArgs { NewPatient = newPatient, SelectedPatientVisit = patientVisit });
+
+                    // Assuming you have an instance of MainWindow called 'mainWindowInstance'
+                    if (mainWindowInstance != null)
+                    {
+                        RxUsercontrol rxUsercontrol = new RxUsercontrol(newPatient, patientVisit);
+
+                        if (rxUsercontrol != null && rxUsercontrol.Content != null)
+                        {
+                            mainWindowInstance.contentControl.Content = rxUsercontrol;
+                        }
+                        else
+                        {
+                            // Log an error or display a message indicating an issue with RxUsercontrol or its Content
+                            MessageBox.Show("Error: RxUsercontrol or its Content is null.");
+                        }
+                    }
+                    else
+                    {
+                        // Log an error or display a message indicating an issue with MainWindow
+                        MessageBox.Show("Error: MainWindow is null.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Error: Unable to retrieve PatientVisit from the button's DataContext.");
+                }
+            }
         }
+
+
+
 
         private void Print_Click(object sender, RoutedEventArgs e)
         {
@@ -105,7 +147,7 @@ namespace SmartClinic.View.UserControls
                 if (SelectedPatientVisit != null)
                 {
                     // Perform the deletion from the database based on ID
-                    bool deleted = DatabaseHelper.DeletePatientVisitByVisit(SelectedPatientVisit.Id, SelectedPatientVisit.Visit);
+                    bool deleted = DatabaseHelper.DeletePatientVisitByVisit(SelectedPatientVisit.Id, SelectedPatientVisit.visit);
 
                     if (deleted)
                     {

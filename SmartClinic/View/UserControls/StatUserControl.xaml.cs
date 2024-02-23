@@ -1,8 +1,8 @@
-﻿// Assuming DatabaseHelper class exists with GetPatientVisitsByVisit method
-using System;
-using System.Windows.Controls;
+﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace SmartClinic.View.UserControls
 {
@@ -23,56 +23,110 @@ namespace SmartClinic.View.UserControls
         public StatUserControl()
         {
             InitializeComponent();
+            SetDefaultValues();
+        }
+
+        private void SetDefaultValues()
+        {
+            // Load all patient visits initially
+            LoadAllPatientVisits();
+
+            // Set Todays values based on all patient visits initially
+            TodaysVisit = Patients.Count(visit => visit.visit.Date == DateTime.Today);
+            TodaysPatient = Patients.Select(visit => visit.Id).Distinct().Count(id => Patients.Any(visit => visit.Id == id && visit.visit.Date == DateTime.Today));
+
+            MonthsVisit = Patients.Count(visit => visit.visit.Month == DateTime.Today.Month);
+            LastMonthsVisit = Patients.Count(visit => visit.visit.Month == DateTime.Today.AddMonths(-1).Month);
+
+            // Set This Month and Last Month values based on all patient visits initially
+            ThisMonthsPatient = Patients.Select(visit => visit.Id).Distinct().Count(id => Patients.Any(visit => visit.Id == id && visit.visit.Month == DateTime.Today.Month));
+            LastMonthsPatient = Patients.Select(visit => visit.Id).Distinct().Count(id => Patients.Any(visit => visit.Id == id && visit.visit.Month == DateTime.Today.AddMonths(-1).Month));
 
             // Convert DateTime to string with a specific format
             StartDatePicker.SelectedDate = DateTime.Today;
             EndDatePicker.SelectedDate = DateTime.Today;
-            string startDateString = DateTime.Today.ToString("yyyy-MM-dd");
-            string endDateString = DateTime.Today.ToString("yyyy-MM-dd");
+
             // Set event handlers for date picker selection changed events
             StartDatePicker.SelectedDateChanged += DateChanged;
             EndDatePicker.SelectedDateChanged += DateChanged;
 
-            // Set other properties accordingly
-            TotalVisit = 300;
-            //TodaysVisit = 150;
-            MonthsVisit = 100;
-            LastMonthsVisit = 200;
-            ThisMonthsPatient = 300;
-            LastMonthsPatient = 200;
-            TodaysVisit = DatabaseHelper.GetPatientVisitsByVisit(startDateString, endDateString);
-            //TodaysPatient = 45;
-            // MessageBox.Show(TodaysPatient.ToString());
-            // Set the data context of the UserControl to itself
-            DataContext = this;
-
-            // Load patients data
-            LoadPatientsData();
+            // Update total visit and patient counts
+            UpdateCountsBasedOnVisits();
         }
+
+        private void LoadAllPatientVisits()
+        {
+            // Load all patient visits initially
+            Patients = new ObservableCollection<PatientVisit>(DatabaseHelper.GetPatientVisits());
+        }
+
         private void DateChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Get the DatePicker instance from the sender object
             if (sender is DatePicker datePicker)
             {
-                // Convert selected dates to string with a specific format
                 string startDateString = StartDatePicker.SelectedDate?.ToString("yyyy-MM-dd");
                 string endDateString = EndDatePicker.SelectedDate?.ToString("yyyy-MM-dd");
 
-                // Call the method to get the total patient count within the specified date range
-                TotalPatient = DatabaseHelper.GetPatientVisitsByVisit(startDateString, endDateString);
-
-                // Call the method to get today's patient count
-                TodaysPatient = DatabaseHelper.GetPatientVisitsByVisit(startDateString, endDateString);
-
-
-
+                // Update the statistics based on the selected dates
+                //MessageBox.Show("for " + startDateString + " and " + endDateString);
+                UpdateStatistics(startDateString, endDateString);
             }
         }
 
-
-        private void LoadPatientsData()
+        private void UpdateStatistics(string startDate, string endDate)
         {
-            // Load patients data if needed
+            var selectedVisits = Patients
+                .Where(visit => visit.visit >= DateTime.Parse(startDate) && visit.visit <= DateTime.Parse(endDate))
+                .ToList();
+
+            // Update the counts based on the filtered visits
+            UpdateVisitStatistics(selectedVisits);
+            UpdatePatientStatistics(selectedVisits);
+        }
+
+        private void UpdateVisitStatistics(List<PatientVisit> selectedVisits)
+        {
+            TotalVisit = selectedVisits.Count;
+            //MessageBox.Show("updating " + TotalPatient);
+            UpdateBindings();
+            //TodaysVisit = selectedVisits.Count(visit => visit.Visit.Date == DateTime.Today);
+            //MonthsVisit = selectedVisits.Count(visit => visit.Visit.Month == DateTime.Today.Month);
+            //LastMonthsVisit = selectedVisits.Count(visit => visit.Visit.Month == DateTime.Today.AddMonths(-1).Month);
+        }
+
+        private void UpdatePatientStatistics(List<PatientVisit> selectedVisits)
+        {
+            var uniquePatients = selectedVisits.Select(visit => visit.Id).Distinct().ToList();
+            TotalPatient = uniquePatients.Count();
+            //TodaysPatient = uniquePatients.Count(id => selectedVisits.Any(visit => visit.Id == id && visit.Visit.Date == DateTime.Today));
+            //ThisMonthsPatient = uniquePatients.Count(id => selectedVisits.Any(visit => visit.Id == id && visit.Visit.Month == DateTime.Today.Month));
+            //LastMonthsPatient = uniquePatients.Count(id => selectedVisits.Any(visit => visit.Id == id && visit.Visit.Month == DateTime.Today.AddMonths(-1).Month));
+
+            // Update the bindings
+            UpdateBindings();
+        }
+
+        private void UpdateCountsBasedOnVisits()
+        {
+            TotalVisit = Patients.Count;
+            TotalPatient = Patients.Select(visit => visit.Id).Distinct().Count();
+
+            // Update the bindings
+            UpdateBindings();
+        }
+
+        private void UpdateBindings()
+        {
+            // Explicitly update the bindings to reflect the changes in the UI
+            TotalVisitTextBlock.GetBindingExpression(TextBlock.TextProperty)?.UpdateTarget();
+            TodaysVisitTextBlock.GetBindingExpression(TextBlock.TextProperty)?.UpdateTarget();
+            MonthsVisitTextBlock.GetBindingExpression(TextBlock.TextProperty)?.UpdateTarget();
+            LastMonthsVisitTextBlock.GetBindingExpression(TextBlock.TextProperty)?.UpdateTarget();
+
+            TotalPatientTextBlock.GetBindingExpression(TextBlock.TextProperty)?.UpdateTarget();
+            TodaysPatientTextBlock.GetBindingExpression(TextBlock.TextProperty)?.UpdateTarget();
+            ThisMonthsPatientTextBlock.GetBindingExpression(TextBlock.TextProperty)?.UpdateTarget();
+            LastMonthsPatientTextBlock.GetBindingExpression(TextBlock.TextProperty)?.UpdateTarget();
         }
     }
 }

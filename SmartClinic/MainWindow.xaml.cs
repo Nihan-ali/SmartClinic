@@ -27,7 +27,7 @@ namespace SmartClinic
         {
             InitializeComponent();
             DatabaseHelper init = new DatabaseHelper();
-           
+
             DataContext = this;
             TodayDate = DateTime.Now.ToString("dd-MM-yyyy");
             rxUserControl = new RxUsercontrol();
