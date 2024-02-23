@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\
+D:\MainAcademicProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\
 SmartClinic
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-E:\Web_Dev\350\SmartClinic\SmartClinic\App.xaml
-27-903387088
+D:\MainAcademicProject\SmartClinic\SmartClinic\App.xaml
+28-1071556860
 8-1084499839
 38-266003089
-208-149389658
-MainWindow.xaml;View\UserControls\AddPatient.xaml;View\UserControls\AdviceSearchWindow.xaml;View\UserControls\ComplaintSearchWindow.xaml;View\UserControls\CreateMedicineGroupWindow.xaml;View\UserControls\DetailsWindow.xaml;View\UserControls\DiagnosisSearchWindow.xaml;View\UserControls\EditComplaintControl.xaml;View\UserControls\ExaminationSearchWindow.xaml;View\UserControls\FollowUpSearchWindow.xaml;View\UserControls\GroupNameWindow.xaml;View\UserControls\header.xaml;View\UserControls\HistorySearchWindow.xaml;View\UserControls\InvestigationSearchWindow.xaml;View\UserControls\MedicineCreateWindow.xaml;View\UserControls\MedicineGroupName.xaml;View\UserControls\MedicineSearchWindow.xaml;View\UserControls\MenuBar.xaml;View\UserControls\PatientList.xaml;View\UserControls\PatientProfileUserControl.xaml;View\UserControls\patientsUsercontrol.xaml;View\UserControls\RxUsercontrol.xaml;View\UserControls\searchMenu.xaml;View\UserControls\SpecialNoteSearchWindow.xaml;View\UserControls\StatUserControl.xaml;View\UserControls\treatment.xaml;View\UserControls\TreatmentSearchWindow.xaml;
+208-506293792
+MainWindow.xaml;View\UserControls\AddPatient.xaml;View\UserControls\AdviceSearchWindow.xaml;View\UserControls\ComplaintSearchWindow.xaml;View\UserControls\CreateMedicineGroupWindow.xaml;View\UserControls\DetailsWindow.xaml;View\UserControls\DiagnosisSearchWindow.xaml;View\UserControls\EditComplaintControl.xaml;View\UserControls\ExaminationSearchWindow.xaml;View\UserControls\FollowUpSearchWindow.xaml;View\UserControls\GroupNameWindow.xaml;View\UserControls\header.xaml;View\UserControls\HistorySearchWindow.xaml;View\UserControls\InvestigationSearchWindow.xaml;View\UserControls\MedicineCreateWindow.xaml;View\UserControls\MedicineGroupName.xaml;View\UserControls\MedicineSearchWindow.xaml;View\UserControls\MenuBar.xaml;View\UserControls\PatientList.xaml;View\UserControls\PatientProfileUserControl.xaml;View\UserControls\patientsUsercontrol.xaml;View\UserControls\ResourceDictionary.xaml;View\UserControls\RxUsercontrol.xaml;View\UserControls\searchMenu.xaml;View\UserControls\SpecialNoteSearchWindow.xaml;View\UserControls\StatUserControl.xaml;View\UserControls\treatment.xaml;View\UserControls\TreatmentSearchWindow.xaml;
 
 True
 

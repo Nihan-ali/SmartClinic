@@ -103,18 +103,28 @@
             </Grid.ColumnDefinitions>
 
             <!-- Start Date Picker -->
-            <Border Grid.Column="0" BorderThickness="0" BorderBrush="AntiqueWhite" Margin="5" Padding="5">
-                <DatePicker x:Name="StartDatePicker" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                SelectedDate="{Binding StartDate, Mode=TwoWay}" 
-                DisplayDateEnd="{Binding EndDate, Mode=OneWay}"/>
-            </Border>
+            <StackPanel Grid.Column="0" Margin="5">
+                <TextBlock Text="Start" HorizontalAlignment="Center"/>
+                <Border BorderThickness="0" BorderBrush="AntiqueWhite" Padding="5">
+                    <DatePicker x:Name="StartDatePicker" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                    SelectedDate="{Binding StartDate, Mode=TwoWay}" 
+                    DisplayDateEnd="{Binding EndDate, Mode=OneWay}" 
+                    SelectedDateChanged="StartDatePicker_SelectedDateChanged"/>
+                </Border>
+            </StackPanel>
 
             <!-- End Date Picker -->
-            <Border Grid.Column="1" BorderThickness="0" BorderBrush="AntiqueWhite" Margin="5" Padding="5">
-                <DatePicker x:Name="EndDatePicker" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                SelectedDate="{Binding EndDate, Mode=TwoWay}" 
-                DisplayDateStart="{Binding StartDate, Mode=OneWay}"/>
-            </Border>
+            <StackPanel Grid.Column="1" Margin="5">
+                <TextBlock Text="End" HorizontalAlignment="Center"/>
+                <Border BorderThickness="0" BorderBrush="AntiqueWhite" Padding="5">
+                    <DatePicker x:Name="EndDatePicker" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                    SelectedDate="{Binding EndDate, Mode=TwoWay}" 
+                    DisplayDateStart="{Binding StartDate, Mode=OneWay}" 
+                    SelectedDateChanged="EndDatePicker_SelectedDateChanged"/>
+                </Border>
+            </StackPanel>
+
+
         </Grid>
     </Grid>
 </UserControl>

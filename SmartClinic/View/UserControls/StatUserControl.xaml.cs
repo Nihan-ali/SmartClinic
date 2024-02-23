@@ -128,5 +128,24 @@ namespace SmartClinic.View.UserControls
             ThisMonthsPatientTextBlock.GetBindingExpression(TextBlock.TextProperty)?.UpdateTarget();
             LastMonthsPatientTextBlock.GetBindingExpression(TextBlock.TextProperty)?.UpdateTarget();
         }
+        private void StartDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (EndDatePicker.SelectedDate < StartDatePicker.SelectedDate)
+            {
+                EndDatePicker.SelectedDate = StartDatePicker.SelectedDate;
+                
+              
+            }
+        }
+
+        private void EndDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (EndDatePicker.SelectedDate < StartDatePicker.SelectedDate)
+            {
+                StartDatePicker.SelectedDate = EndDatePicker.SelectedDate;
+                MessageBox.Show("Please Select the end date greater than starting date");
+            }
+        }
+
     }
 }
