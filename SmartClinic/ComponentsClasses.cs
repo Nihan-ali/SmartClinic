@@ -18,6 +18,15 @@ namespace SmartClinic
         public static string docdegree = "MBBS, (Endocrinology &amp; Metabolism)";
         public static string docname_bangla = "ডা.আবু নঈম মোহাম্মাদ";
         public static string docdegree_bangla = "এমবিবিএস, (এন্ডোক্রাইনোলজি &amp; মেটাবোলিজম)";
+        public static string docdetail = "Consultant-Diabetologist, Endocrionologist &amp; Metabolic Disorder Specialist" ;
+        public static string docdetail_bangla = "ডায়াবেটিস, হরমোন ও মেডিসিন বিশেষজ্ঞ";
+        public static string moredetail_bangla = "আবাসিক চিকিৎসক - আর.পি (মেডিসিন), এম.এ.জি ওসমানী মেডিকেল কলেজ হাসপাতাল, সিলেট";
+        public static string chamber = "চেম্বারঃ এবিসি ডায়াগনস্টিক সেন্টার";
+        public static string chamber_location = "চৌহাট্টা পয়েট, সদর, সিলেট";
+        public static string visit_date = "রোগী দেখার সময়ঃ প্রতি শনি, সোম, মঙ্গল ও বুধবার";
+        public static string visit_time = "বিকাল ৫:৩০ থেকে রাত ৮ টা পর্যন্ত";
+        public static string chamber_phone = "যোগাযোগঃ 01914-478747 (সকাল ১০টা - ১২টা) রবি, বৃহস্পতি ও শুক্রবার বন্ধ";
+        public static string outro = "শরীরের যত্ন নিবেন। নিয়মিত ওষুধ খাবেন। পরবর্তী সাক্ষাতের সময় বাবস্থাপত্র আনবেন। প্রয়োজনে- ০১৮১৯-৮০০৩৩৩ (দুপুর ২টা-৩টা)";
     }
 
 

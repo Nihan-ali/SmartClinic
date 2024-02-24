@@ -8,11 +8,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("abclogo.jpeg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("create.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("doctor.ico")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("patient.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("rx.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("search.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("separator.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("settings.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("stat.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("circle.png")]

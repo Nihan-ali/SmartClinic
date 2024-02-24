@@ -777,22 +777,30 @@ namespace SmartClinic.View.UserControls
 
 
         private void PrintPrescription_Click(object sender, RoutedEventArgs e)
-            {
-                PrintDialog printDialog = new PrintDialog();
-
-                if (printDialog.ShowDialog() == true)
-                {
-                    // Set the default print settings to A4 format
-                    PrintTicket printTicket = printDialog.PrintTicket;
-                    printTicket.PageMediaSize = new PageMediaSize(PageMediaSizeName.ISOA4);
-
-                    printDialog.PrintVisual(this, "Prescription");
-                }
-            }
-        private void PrintPreview_Click(object sender, RoutedEventArgs e)
         {
+            // Instantiate the Printer window
             Printer printDialog = new Printer();
 
+            // Handle the ContentRendered event
+            printDialog.ContentRendered += (s, args) =>
+            {
+                // Once content is rendered, trigger printing
+                printDialog.PrintButton_Click(newPatient, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes);
+
+                // Close the window after printing
+                printDialog.Close();
+            };
+
+            // Make the window invisible
+            printDialog.Visibility = Visibility.Hidden;
+
+            // Show the window (this will trigger rendering)
+            printDialog.Show();
+        }
+
+        private void PrintPreview_Click(object sender, RoutedEventArgs e)
+        {
+            Printer printDialog = new Printer(newPatient, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes);
             printDialog.ShowDialog();
         }
 
