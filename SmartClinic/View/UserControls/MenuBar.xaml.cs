@@ -26,10 +26,8 @@ namespace SmartClinic.View.UserControls
         }
         private void PatientButton_click(object sender, RoutedEventArgs e)
         {
-            // Handle the click event for the Patients button
             PatientList patientListWindow = new PatientList();
             patientListWindow.Show();
-            //   MessageBox.Show("Patients Button Clicked!");
         }
     }
 }

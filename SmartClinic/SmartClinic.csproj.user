@@ -67,6 +67,9 @@
     <Compile Update="View\UserControls\patientsUsercontrol.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\UserControls\Printer.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\UserControls\RxUsercontrol.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -148,6 +151,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\patientsUsercontrol.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserControls\Printer.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\RxUsercontrol.xaml">

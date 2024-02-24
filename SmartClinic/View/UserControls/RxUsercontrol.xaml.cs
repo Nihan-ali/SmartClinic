@@ -32,6 +32,7 @@ namespace SmartClinic.View.UserControls
         private bool isPatientAdded = false;
         private Patient newPatient;
 
+
         //from history
         private List<Complaint> selectedComplaints = new List<Complaint>();
         public List<Complaint> SelectedComplaints => selectedComplaints;
@@ -70,8 +71,10 @@ namespace SmartClinic.View.UserControls
             docdegree.Content = variables.docdegree;
             docname_bangla.Content = variables.docname_bangla;
             docdegree_bangla.Content = variables.docdegree_bangla;
-        }
 
+            // Subscribe to the Loaded event of the Popup
+            searchResultsPopup.Loaded += SearchResultsPopup_Loaded;
+        }
         public RxUsercontrol(Patient newPatient) : this()
         {
             this.newPatient = newPatient;
@@ -80,7 +83,7 @@ namespace SmartClinic.View.UserControls
         }
         public RxUsercontrol(Patient newPatient, PatientVisit selectedPatientVisit) : this()
         {
-            this.newPatient = newPatient;            
+            this.newPatient = newPatient;
             selectedComplaints = DatabaseHelper.ExtractComplaint(selectedPatientVisit.complaint);
             selectedHistories = DatabaseHelper.ExtractHistory(selectedPatientVisit.hhistory);
             selectedExaminations = DatabaseHelper.ExtractExamination(selectedPatientVisit.onExamination);
@@ -91,12 +94,6 @@ namespace SmartClinic.View.UserControls
             selectedAdvices = DatabaseHelper.ExtractAdvice(selectedPatientVisit.advice);
             selectedFollowUps = DatabaseHelper.ExtractFollowUp(selectedPatientVisit.followUp);
             selectedSpecialNotes = DatabaseHelper.ExtractSpecialNotes(selectedPatientVisit.notes);
-
-            MessageBox.Show(selectedPatientVisit.medicine);
-            foreach (DummyMedicine med in selectedMedicines)
-            {
-                MessageBox.Show(med.MedicineName + " " + med.formatedDose + " " + med.MakeNote);
-            }
 
             UpdatePatientInfo(newPatient);
             UpdateSelectedComplaintListView();
@@ -109,7 +106,86 @@ namespace SmartClinic.View.UserControls
             UpdateSelectedAdvicesListView();
             UpdateSelectedFollowUpsListView();
             UpdateSelectedSpecialNotesListView();
-            
+
+        }
+
+        private void RefreshWholeWindow_Click(object sender, RoutedEventArgs e)
+        {
+            AddPatientButton.Content = "+ Add Patient";
+            AddPatientButton.Foreground = Brushes.Blue;
+            age.Text = "";
+            selectedComplaintsListView.ItemsSource = null;
+            historyListView.ItemsSource = null;
+            examinationListView.ItemsSource = null;
+            selectedInvestigationsListView.ItemsSource = null;
+            selectedDiagnosisListView.ItemsSource = null;
+            selectedTreatmentListView.ItemsSource = null;
+            selectedMedicinesListView.ItemsSource = null;
+            selectedAdvicesListView.ItemsSource = null;
+            selectedFollowUpListView.ItemsSource = null;
+            selectedSpecialNoteListView.ItemsSource = null;
+            searchPatientTextBox.Text = "Search Patient";
+            searchPatientTextBox.Foreground = Brushes.Gray;
+            isPatientAdded = false;
+        }
+
+        private void textBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (menubarbox.Text == "Search Here")
+            {
+                menubarbox.Text = "";
+                menubarbox.Opacity = 0.8;
+                menubarbox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void textBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (menubarbox.Text == "")
+            {
+                menubarbox.Text = "Search Here";
+                menubarbox.Opacity = 0.5;
+                menubarbox.Foreground = Brushes.Gray;
+
+            }
+        }
+        private void SearchResultsPopup_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Find the searchResultsListBox inside the Popup
+            ListBox searchResultsListBox = FindChild<ListBox>(searchResultsPopup, "searchResultsListBox");
+
+            if (searchResultsListBox != null)
+            {
+                // Subscribe to the SelectionChanged event of the searchResultsListBox
+                searchResultsListBox.SelectionChanged += searchResultsListBox_SelectionChanged;
+            }
+        }
+        private T FindChild<T>(DependencyObject parent, string name) where T : DependencyObject
+        {
+            if (parent == null) return null;
+            if (parent is T element && (element as FrameworkElement)?.Name == name) return element;
+
+            T result = null;
+            int childCount = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < childCount; i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+                result = FindChild<T>(child, name);
+                if (result != null) break;
+            }
+            return result;
+        }
+        private void searchResultsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is ListBox listBox)
+            {
+                if (listBox.SelectedItem is Patient selectedPatient)
+                {
+                    this.newPatient = selectedPatient;
+                    UpdatePatientInfo(selectedPatient);
+                    OnPrescriptionDataAvailable(new PatientEventArgs { NewPatient = selectedPatient });
+                }
+            }
         }
         private void OnPrescriptionDataAvailable(PatientEventArgs e)
         {
@@ -118,14 +194,15 @@ namespace SmartClinic.View.UserControls
         }
         public void UpdatePatientInfo(Patient patient)
         {
-            //MessageBox.Show("message from patientinfo " + patient.Name);
             if (patient != null)
             {
-                // Update UI with patient details
-                UpdateUIWithPatientDetails(patient.Name, patient.Age);
+                AddPatientButton.Content = patient.Name;
+                AddPatientButton.Foreground = Brushes.Black;
+                age.Text = patient.Age;
+                searchPatientTextBox.Text = "";
+                searchResultsPopup.IsOpen = false;
             }
         }
-
 
         //patientInfo cs
         private void AddPatientButton_Click(object sender, RoutedEventArgs e)
@@ -140,29 +217,7 @@ namespace SmartClinic.View.UserControls
             string patientName = e.NewPatient.Name;
             string patientAge = e.NewPatient.Age;
             this.newPatient = e.NewPatient;
-            UpdateUIWithPatientDetails(patientName, patientAge);
-        }
-        private void UpdateUIWithPatientDetails(string patientName, string patientAge)
-        {
-            if (!isPatientAdded)
-            {
-                // Remove the "+ Add Patient" button from the StackPanel
-                addPatientPanel.Children.Remove(AddPatientButton);
-
-                // Create TextBlocks for patient name and age
-                TextBlock nameLabel = new TextBlock
-                {
-                    Text = patientName,
-                    FontWeight = FontWeights.Bold,
-                    VerticalAlignment = VerticalAlignment.Center
-                };
-                age.Text = patientAge;
-
-                // Add the TextBlocks to the StackPanel
-                addPatientPanel.Children.Add(nameLabel);
-
-                isPatientAdded = true;
-            }
+            UpdatePatientInfo(e.NewPatient);
         }
         private void OnSearchTextBoxGotFocus(object sender, RoutedEventArgs e)
         {
@@ -312,6 +367,9 @@ namespace SmartClinic.View.UserControls
             selectedTreatmentListView.ItemsSource = null;
             selectedTreatmentListView.ItemsSource = selectedTreatments;
         }
+
+
+
 
 
         private void RemoveComplaint_Click(object sender, RoutedEventArgs e)
@@ -495,7 +553,6 @@ namespace SmartClinic.View.UserControls
             dummy.MakeNote = newMedicine.MakeNote;
             selectedMedicines.Add(dummy);
 
-            // Update the selectedMedicinesListView
             UpdateSelectedMedicinesListView();
         }
         public void AddToSelectedAdvices(Advice newAdvice)
@@ -696,7 +753,6 @@ namespace SmartClinic.View.UserControls
             string combinedFollowUp = string.Join("$$", selectedFollowUps.Select(f => $"{f.Content}"));
             string combinedSpecialNote = string.Join("$$", selectedSpecialNotes.Select(s => $"{s.Content}"));
 
-            MessageBox.Show(combinedAdvice.Length + " " + combinedFollowUp.Length + " " + combinedSpecialNote.Length);
 
             PatientVisit newpres = new PatientVisit
             {
@@ -733,6 +789,12 @@ namespace SmartClinic.View.UserControls
                     printDialog.PrintVisual(this, "Prescription");
                 }
             }
+        private void PrintPreview_Click(object sender, RoutedEventArgs e)
+        {
+            Printer printDialog = new Printer();
+
+            printDialog.ShowDialog();
+        }
 
 
 

@@ -66,9 +66,6 @@ namespace SmartClinic.View.UserControls
             {
                 string startDateString = StartDatePicker.SelectedDate?.ToString("yyyy-MM-dd");
                 string endDateString = EndDatePicker.SelectedDate?.ToString("yyyy-MM-dd");
-
-                // Update the statistics based on the selected dates
-                //MessageBox.Show("for " + startDateString + " and " + endDateString);
                 UpdateStatistics(startDateString, endDateString);
             }
         }

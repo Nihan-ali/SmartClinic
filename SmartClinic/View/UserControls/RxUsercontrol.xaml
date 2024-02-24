@@ -24,9 +24,16 @@
         <!-- Assuming title, patientInfo, History, medicine, savePrint, and Footer are UserControl classes -->
 
         <Grid Grid.Row="0">
-            <UserControls:searchMenu/>
+            <Rectangle Fill="AliceBlue"/>
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button x:Name="prescription1" Content="New Prescription" Margin="0,0,10,0" BorderBrush="{x:Null}" Foreground="#FF1A1840" FontWeight="Bold" Background="{x:Null}" Click="RefreshWholeWindow_Click"/>
+                <!-- Add margin to create space between buttons -->
+                <Button Content="Print Preview" Margin="0,0,10,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF5556C1" FontSize="10" FontWeight="Bold" Click="PrintPreview_Click"/>
+                <TextBox x:Name="menubarbox" Padding="0,3,0,0" Text="Search Here" Height="25" Background="#FFCADAE4" Width="96" Opacity="0.5" SelectionOpacity="-6" VerticalAlignment="Center" SelectionBrush="#FF7E94A5" GotFocus="textBox_GotFocus" LostFocus="textBox_LostFocus"/>
+            </StackPanel>
+
         </Grid>
-        
+
         <!--title xaml-->
         <Grid Grid.Row="1" Background="White">
             <Grid.ColumnDefinitions>
@@ -85,7 +92,7 @@
 
         <Popup x:Name="searchResultsPopup" PlacementTarget="{Binding ElementName=searchPatientTextBox}" Placement="Bottom" StaysOpen="False" Width="365" Margin="15" MaxHeight="350" Opened="searchResultsPopup_Opened">
             <Border BorderThickness="0"  Background="White" BorderBrush="Wheat">
-                <ListView x:Name="searchResultsListBox" Margin="5"  BorderThickness="0" SelectionMode="Single">
+                <ListView x:Name="searchResultsListBox" Margin="5" BorderThickness="0" SelectionMode="Single" SelectionChanged="searchResultsListBox_SelectionChanged">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Margin" Value="0,0,0,2"/>

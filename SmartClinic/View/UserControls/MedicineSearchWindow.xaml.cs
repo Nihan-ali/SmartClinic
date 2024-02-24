@@ -143,7 +143,6 @@ namespace SmartClinic
                 else {
                     int iid = int.Parse(id);
                     Medicine medicine = DatabaseHelper.GetMedicineById(iid);
-                    MessageBox.Show(medicine.BrandName);
                     selectedMedicines.Add(medicine);
                 }
             }
@@ -377,7 +376,6 @@ namespace SmartClinic
         private void NoButton_Click(object sender, RoutedEventArgs e)
         {
             MedicineGroupNamePopup.IsOpen = false;
-            MessageBox.Show("Medicine Group Not Created");
         }
         private void rx_loaded(object sender, RoutedEventArgs e)
         {

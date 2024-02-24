@@ -952,15 +952,6 @@ namespace SmartClinic
             }
         }
 
-        public static void AddMedicineGroup(ObservableCollection<Medicine> selectedmedicines)
-        {
-            foreach (var med in selectedmedicines)
-            {
-                MessageBox.Show(med.Id + med.BrandName);
-            }
-            MessageBox.Show("Medicine Group Added");
-        }
-
 
         public static void IncreaseComplaintOccurrence(ObservableCollection<Complaint> complaint)
         {
@@ -1590,8 +1581,6 @@ namespace SmartClinic
                         };
 
                         medicines.Add(medicine);
-
-                        MessageBox.Show(medicine.MedicineName + " " + medicine.formatedDose + " " + medicine.MakeNote);
                     }
                 }
             }

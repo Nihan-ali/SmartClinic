@@ -48,27 +48,15 @@ namespace SmartClinic.View.UserControls
 
         private void PatientProfileUserControl_PatientInfoSubmitted(object sender, PatientEventArgs e)
         {
-            // Handle the submitted patient info
             newPatient = e.NewPatient;
-
-            // Log information to identify the issue
-            //Console.WriteLine("Handling PatientInfoSubmitted event. Patient: " + newPatient.Name);
-
-            // Show MessageBox with additional information
-            // MessageBox.Show("Handling PatientInfoSubmitted event. Patient: " + newPatient.Name, "Debug Information");
-
-            // Unsubscribe from the event if needed to avoid multiple invocations
             PatientInfoSubmitted -= PatientProfileUserControl_PatientInfoSubmitted;
 
-            // Update the RxUsercontrol with the new patient data
             if (mainWindowInstance != null && mainWindowInstance.contentControl.Content is RxUsercontrol rxUsercontrol)
             {
-                // Update RxUsercontrol with the new patient data
                 rxUsercontrol.UpdatePatientInfo(newPatient);
             }
             else
             {
-                // Log an error or display a message indicating an issue with MainWindow or RxUsercontrol
                 // MessageBox.Show("Error: MainWindow or RxUsercontrol is null.");
             }
         }
@@ -81,12 +69,7 @@ namespace SmartClinic.View.UserControls
             PatientNameTextBlock.Text = selectedPatient.Name;
             IDTextBlock.Text = $"ID: {selectedPatient.Id}";
             AgeTextBlock.Text = $"Age: {selectedPatient.Age}";
-            //RxVisitTextBlock.Text = "Rx Visit: [Data]"; // Replace [Data] with actual data
             PastVisitTextBlock.Text = $"Past Visits: {patientCount}"; // Replace [Data] with actual data
-
-            // You may need to bind PrescriptionList.ItemsSource to a collection of prescription data
-            // For simplicity, it's not done here. You need to replace [PrescriptionData] with actual prescription data.
-            // PrescriptionList.ItemsSource = [PrescriptionData];
         }
 
         private void ShowPrescription_Click(object sender, RoutedEventArgs e)
