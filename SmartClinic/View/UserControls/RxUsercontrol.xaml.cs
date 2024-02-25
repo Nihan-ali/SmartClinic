@@ -20,6 +20,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Controls.Primitives;
 using System.Printing;
 using static SmartClinic.Patient;
+using System.Windows.Markup;
 
 namespace SmartClinic.View.UserControls
 {
@@ -92,11 +93,11 @@ namespace SmartClinic.View.UserControls
             selectedFollowUps = DatabaseHelper.ExtractFollowUp(selectedPatientVisit.followUp);
             selectedSpecialNotes = DatabaseHelper.ExtractSpecialNotes(selectedPatientVisit.notes);
 
-            MessageBox.Show(selectedPatientVisit.medicine);
-            foreach (DummyMedicine med in selectedMedicines)
-            {
-                MessageBox.Show(med.MedicineName + " " + med.formatedDose + " " + med.MakeNote);
-            }
+            //MessageBox.Show(selectedPatientVisit.medicine);
+            //foreach (DummyMedicine med in selectedMedicines)
+            //{
+            //    MessageBox.Show(med.MedicineName + " " + med.formatedDose + " " + med.MakeNote);
+            //}
 
             UpdatePatientInfo(newPatient);
             UpdateSelectedComplaintListView();
@@ -696,7 +697,7 @@ namespace SmartClinic.View.UserControls
             string combinedFollowUp = string.Join("$$", selectedFollowUps.Select(f => $"{f.Content}"));
             string combinedSpecialNote = string.Join("$$", selectedSpecialNotes.Select(s => $"{s.Content}"));
 
-            MessageBox.Show(combinedAdvice.Length + " " + combinedFollowUp.Length + " " + combinedSpecialNote.Length);
+            //MessageBox.Show(combinedAdvice.Length + " " + combinedFollowUp.Length + " " + combinedSpecialNote.Length);
 
             PatientVisit newpres = new PatientVisit
             {
@@ -720,55 +721,100 @@ namespace SmartClinic.View.UserControls
 
 
 
+        //private void PrintPrescription_Click(object sender, RoutedEventArgs e)
+        //    {
+        //        PrintDialog printDialog = new PrintDialog();
+
+        //        if (printDialog.ShowDialog() == true)
+        //        {
+        //            // Set the default print settings to A4 format
+        //            PrintTicket printTicket = printDialog.PrintTicket;
+        //            printTicket.PageMediaSize = new PageMediaSize(PageMediaSizeName.ISOA4);
+
+        //            printDialog.PrintVisual(this, "Prescription");
+        //        }
+        //    }
         private void PrintPrescription_Click(object sender, RoutedEventArgs e)
-            {
-                PrintDialog printDialog = new PrintDialog();
-
-                if (printDialog.ShowDialog() == true)
-                {
-                    // Set the default print settings to A4 format
-                    PrintTicket printTicket = printDialog.PrintTicket;
-                    printTicket.PageMediaSize = new PageMediaSize(PageMediaSizeName.ISOA4);
-
-                    printDialog.PrintVisual(this, "Prescription");
-                }
-            }
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public class IsNullOrEmptyConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is string stringValue)
-            {
-                return string.IsNullOrEmpty(stringValue);
-            }
+            PrintablePrescription printablePrescription = new PrintablePrescription();
 
-            return true; // Default to true if not a string
+            printablePrescription.PatientName = newPatient.Name;
+            printablePrescription.Age=newPatient.Age.ToString();
+            printablePrescription.TodayDate= DateTime.Now.ToString("dd MMM yyyy");
+            printablePrescription.Note = "This is a sample prescription.";
+            printablePrescription.SerialNumber = newPatient.Id.ToString();
+            printablePrescription.IsFollowUpVisible = selectedFollowUpListView.Items.Count > 0;
+
+            // List<Advice> SelectedAdvices = selectedAdvices; // Replace with the actual method to get advices
+
+            //ObservableCollection<PrintablePrescription.AdviceItem> adviceList = new ObservableCollection<PrintablePrescription.AdviceItem>();
+
+            // Convert the List<Advice> to ObservableCollection<PrintablePrescription.AdviceItem>
+
+
+            printablePrescription.UpdateAdvices(selectedAdvices);
+            printablePrescription.UpdateMedicines(selectedMedicines);
+
+            // Sample list of medications
+            //        printablePrescription.Medications = new ObservableCollection<Medication>
+            //{
+            //    new Medication { MedicineName = "Medicine A", Dose = "10mg" },
+            //    new Medication { MedicineName = "Medicine B", Dose = "5mg" },
+            //    // Add more medications as needed
+            //};
+
+            PrintDialog printDialog = new PrintDialog();
+
+            if (printDialog.ShowDialog() == true)
+            {
+                FixedDocument fixedDoc = new FixedDocument();
+                PageContent pageContent = new PageContent();
+                FixedPage fixedPage = new FixedPage();
+                fixedPage.Children.Add(printablePrescription);
+                ((IAddChild)pageContent).AddChild(fixedPage);
+                fixedDoc.Pages.Add(pageContent);
+
+                printDialog.PrintDocument(fixedDoc.DocumentPaginator, "Prescription Print Job");
+            }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //public class IsNullOrEmptyConverter : IValueConverter
+    //{
+    //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+    //        if (value is string stringValue)
+    //        {
+    //            return string.IsNullOrEmpty(stringValue);
+    //        }
+
+    //        return true; // Default to true if not a string
+    //    }
+
+    //    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
 }

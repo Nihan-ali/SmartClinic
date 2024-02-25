@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup />
+  <PropertyGroup>
+    <_LastSelectedProfileId>E:\Web_Dev\350\SmartClinic\SmartClinic\Properties\PublishProfiles\ClickOnceProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
   <ItemGroup>
     <ApplicationDefinition Update="App.xaml">
       <SubType>Designer</SubType>
@@ -65,6 +67,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\patientsUsercontrol.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\UserControls\PrintablePrescription.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\RxUsercontrol.xaml.cs">
@@ -148,6 +153,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\patientsUsercontrol.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserControls\PrintablePrescription.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\RxUsercontrol.xaml">

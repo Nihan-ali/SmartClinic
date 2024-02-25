@@ -1591,7 +1591,7 @@ namespace SmartClinic
 
                         medicines.Add(medicine);
 
-                        MessageBox.Show(medicine.MedicineName + " " + medicine.formatedDose + " " + medicine.MakeNote);
+                        //MessageBox.Show(medicine.MedicineName + " " + medicine.formatedDose + " " + medicine.MakeNote);
                     }
                 }
             }
