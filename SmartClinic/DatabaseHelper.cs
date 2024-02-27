@@ -64,12 +64,12 @@ namespace SmartClinic
 
                                                     CREATE TABLE IF NOT EXISTS Patient (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Age TEXT, Address TEXT, Phone TEXT,Blood TEXT);
                                                     CREATE TABLE IF NOT EXISTS PatientVisit (
-                                                                                                ID INTEGER, VISIT DATE,
+                                                                                                ID INTEGER, VISIT DATE, PRESCRIPTIONID INTEGER PRIMARY KEY AUTOINCREMENT,
                                                                                                 MEDICINE TEXT, ADVICE TEXT, FOLLOWUP TEXT, NOTES TEXT,
                                                                                                 COMPLAINT TEXT, HISTORY TEXT, ONEXAMINATION TEXT, INVESTIGATION TEXT,
                                                                                                 DIAGNOSIS TEXT, TREATMENTPLAN TEXT,
 
-                                                                                                PRIMARY KEY (ID, VISIT)
+                                                                                                PRIMARY KEY (PRESCRIPTIONID),
                                                                                             );";
                                                     
 
@@ -498,7 +498,6 @@ namespace SmartClinic
                 throw;
             }
         }
-
         public static int GetPatientVisitsByVisit(string startdate, string enddate)
         {
             try
@@ -543,47 +542,6 @@ namespace SmartClinic
                 throw;
             }
         }
-
-        public static void AddMedicine(string brandName, string manufacturerName, string genericName, string strength, string medicineType)
-        {
-            try
-            {
-                using (var connection = GetConnection())
-                {
-                    connection.Open();
-
-                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM Medicine WHERE BrandName = @BrandName AND GenericName = @GenericName AND Strength = @Strength;", connection))
-                    {
-                        checkCommand.Parameters.AddWithValue("@BrandName", brandName);
-                        checkCommand.Parameters.AddWithValue("@GenericName", genericName);
-                        checkCommand.Parameters.AddWithValue("@Strength", strength);
-
-                        int count = Convert.ToInt32(checkCommand.ExecuteScalar());
-
-                        if (count == 0)
-                        {
-                            using (var insertCommand = new SQLiteCommand("INSERT INTO Medicine (BrandName, ManufacturerName, GenericName, Strength, MedicineType, Occurrence) VALUES (@BrandName, @ManufacturerName, @GenericName, @Strength, @MedicineType, @Occurrence);", connection))
-                            {
-                                insertCommand.Parameters.AddWithValue("@BrandName", brandName);
-                                insertCommand.Parameters.AddWithValue("@ManufacturerName", manufacturerName);
-                                insertCommand.Parameters.AddWithValue("@GenericName", genericName);
-                                insertCommand.Parameters.AddWithValue("@Strength", strength);
-                                insertCommand.Parameters.AddWithValue("@MedicineType", medicineType);
-                                insertCommand.Parameters.AddWithValue("@Occurrence", 0);
-                                insertCommand.ExecuteNonQuery();
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error inserting medicine: {ex}");
-                throw;
-            }
-        }
-
-
         public static Medicine GetMedicineById(int medicineId)
         {
 
@@ -629,6 +587,45 @@ namespace SmartClinic
             }
         }
 
+
+        public static void AddMedicine(string brandName, string manufacturerName, string genericName, string strength, string medicineType)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM Medicine WHERE BrandName = @BrandName AND GenericName = @GenericName AND Strength = @Strength;", connection))
+                    {
+                        checkCommand.Parameters.AddWithValue("@BrandName", brandName);
+                        checkCommand.Parameters.AddWithValue("@GenericName", genericName);
+                        checkCommand.Parameters.AddWithValue("@Strength", strength);
+
+                        int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                        if (count == 0)
+                        {
+                            using (var insertCommand = new SQLiteCommand("INSERT INTO Medicine (BrandName, ManufacturerName, GenericName, Strength, MedicineType, Occurrence) VALUES (@BrandName, @ManufacturerName, @GenericName, @Strength, @MedicineType, @Occurrence);", connection))
+                            {
+                                insertCommand.Parameters.AddWithValue("@BrandName", brandName);
+                                insertCommand.Parameters.AddWithValue("@ManufacturerName", manufacturerName);
+                                insertCommand.Parameters.AddWithValue("@GenericName", genericName);
+                                insertCommand.Parameters.AddWithValue("@Strength", strength);
+                                insertCommand.Parameters.AddWithValue("@MedicineType", medicineType);
+                                insertCommand.Parameters.AddWithValue("@Occurrence", 0);
+                                insertCommand.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error inserting medicine: {ex}");
+                throw;
+            }
+        }
         public static void AddMedicineGroup(string groupName, string medicineList)
         {
             try
@@ -662,7 +659,6 @@ namespace SmartClinic
                 throw;
             }
         }
-
         public static void AddComplaint(string complaint)
         {
             try
@@ -1237,7 +1233,6 @@ namespace SmartClinic
                 throw;
             }
         }
-
         public static List<Patient> SearchPatients(string searchTerm)
         {
             try
@@ -1558,7 +1553,6 @@ namespace SmartClinic
             }
             return ttreatments;
         }
-
         public static List<DummyMedicine> ExtractMedicine(string combinedString)
         {
             string[] medicinePairs = combinedString.Split("$$");
@@ -1586,7 +1580,6 @@ namespace SmartClinic
             }
             return medicines;
         }
-
         public static List<Advice> ExtractAdvice(string combinedString)
         {
             string[] adviceValues = combinedString.Split("$$");
@@ -1654,22 +1647,53 @@ namespace SmartClinic
                 {
                     connection.Open();
 
-                    using (var insertCommand = new SQLiteCommand("INSERT INTO PatientVisit (ID, VISIT, COMPLAINT, HISTORY, ONEXAMINATION, INVESTIGATION, DIAGNOSIS, TREATMENTPLAN,MEDICINE, ADVICE, FOLLOWUP, NOTES) VALUES (@ID, @VISIT, @COMPLAINT, @HISTORY, @ONEXAMINATION, @INVESTIGATION, @DIAGNOSIS, @TREATMENTPLAN, @MEDICINE, @ADVICE, @FOLLOWUP, @NOTES);", connection))
+                    // Check if there are any existing prescriptions with matching attributes
+                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM PatientVisit WHERE ID = @ID AND VISIT = @VISIT AND COMPLAINT = @COMPLAINT AND HISTORY = @HISTORY AND ONEXAMINATION = @ONEXAMINATION AND INVESTIGATION = @INVESTIGATION AND DIAGNOSIS = @DIAGNOSIS AND TREATMENTPLAN = @TREATMENTPLAN AND MEDICINE = @MEDICINE AND ADVICE = @ADVICE AND FOLLOWUP = @FOLLOWUP AND NOTES = @NOTES;", connection))
                     {
-                        insertCommand.Parameters.AddWithValue("@ID", prescription.Id);
-                        insertCommand.Parameters.AddWithValue("@VISIT", prescription.visit);
-                        insertCommand.Parameters.AddWithValue("@COMPLAINT", prescription.complaint);
-                        insertCommand.Parameters.AddWithValue("@HISTORY", prescription.hhistory);
-                        insertCommand.Parameters.AddWithValue("@ONEXAMINATION", prescription.onExamination);
-                        insertCommand.Parameters.AddWithValue("@INVESTIGATION", prescription.investigation);
-                        insertCommand.Parameters.AddWithValue("@DIAGNOSIS", prescription.diagnosis);
-                        insertCommand.Parameters.AddWithValue("@TREATMENTPLAN", prescription.treatmentPlan);
-                        insertCommand.Parameters.AddWithValue("@MEDICINE", prescription.medicine);
-                        insertCommand.Parameters.AddWithValue("@ADVICE", prescription.advice);
-                        insertCommand.Parameters.AddWithValue("@FOLLOWUP", prescription.followUp);
-                        insertCommand.Parameters.AddWithValue("@NOTES", prescription.notes);
+                        checkCommand.Parameters.AddWithValue("@ID", prescription.Id);
+                        checkCommand.Parameters.AddWithValue("@VISIT", prescription.visit);
+                        checkCommand.Parameters.AddWithValue("@COMPLAINT", prescription.complaint);
+                        checkCommand.Parameters.AddWithValue("@HISTORY", prescription.hhistory);
+                        checkCommand.Parameters.AddWithValue("@ONEXAMINATION", prescription.onExamination);
+                        checkCommand.Parameters.AddWithValue("@INVESTIGATION", prescription.investigation);
+                        checkCommand.Parameters.AddWithValue("@DIAGNOSIS", prescription.diagnosis);
+                        checkCommand.Parameters.AddWithValue("@TREATMENTPLAN", prescription.treatmentPlan);
+                        checkCommand.Parameters.AddWithValue("@MEDICINE", prescription.medicine);
+                        checkCommand.Parameters.AddWithValue("@ADVICE", prescription.advice);
+                        checkCommand.Parameters.AddWithValue("@FOLLOWUP", prescription.followUp);
+                        checkCommand.Parameters.AddWithValue("@NOTES", prescription.notes);
 
-                        insertCommand.ExecuteNonQuery();
+                        Int64 count = (Int64)checkCommand.ExecuteScalar();
+                        if (count == 0)
+                        {
+                            // If no existing prescription found, proceed to insert
+                            prescription.prescriptionId = GeneratePrescriptionId(prescription.Id);
+
+                            // Insert the prescription into the database
+                            using (var insertCommand = new SQLiteCommand("INSERT INTO PatientVisit (ID, VISIT, PRESCRIPTIONID, COMPLAINT, HISTORY, ONEXAMINATION, INVESTIGATION, DIAGNOSIS, TREATMENTPLAN, MEDICINE, ADVICE, FOLLOWUP, NOTES) VALUES (@ID, @VISIT, @PRESCRIPTIONID, @COMPLAINT, @HISTORY, @ONEXAMINATION, @INVESTIGATION, @DIAGNOSIS, @TREATMENTPLAN, @MEDICINE, @ADVICE, @FOLLOWUP, @NOTES);", connection))
+                            {
+                                insertCommand.Parameters.AddWithValue("@ID", prescription.Id);
+                                insertCommand.Parameters.AddWithValue("@VISIT", prescription.visit);
+                                insertCommand.Parameters.AddWithValue("@PRESCRIPTIONID", prescription.prescriptionId);
+                                insertCommand.Parameters.AddWithValue("@COMPLAINT", prescription.complaint);
+                                insertCommand.Parameters.AddWithValue("@HISTORY", prescription.hhistory);
+                                insertCommand.Parameters.AddWithValue("@ONEXAMINATION", prescription.onExamination);
+                                insertCommand.Parameters.AddWithValue("@INVESTIGATION", prescription.investigation);
+                                insertCommand.Parameters.AddWithValue("@DIAGNOSIS", prescription.diagnosis);
+                                insertCommand.Parameters.AddWithValue("@TREATMENTPLAN", prescription.treatmentPlan);
+                                insertCommand.Parameters.AddWithValue("@MEDICINE", prescription.medicine);
+                                insertCommand.Parameters.AddWithValue("@ADVICE", prescription.advice);
+                                insertCommand.Parameters.AddWithValue("@FOLLOWUP", prescription.followUp);
+                                insertCommand.Parameters.AddWithValue("@NOTES", prescription.notes);
+
+                                insertCommand.ExecuteNonQuery();
+                            }
+                        }
+                        else
+                        {
+                            // If a matching prescription exists, do not insert to avoid duplication
+                            MessageBox.Show("Same Prescription already exists.");
+                        }
                     }
                 }
             }
@@ -1680,7 +1704,54 @@ namespace SmartClinic
             }
         }
 
-        public static SQLiteConnection GetConnection()
+        private static Int64 GeneratePrescriptionId(int id)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    // Check if there are any existing prescription IDs matching the pattern id + ddmmyyyy
+                    using (var checkCommand = new SQLiteCommand("SELECT PRESCRIPTIONID FROM PatientVisit WHERE PRESCRIPTIONID LIKE @Pattern;", connection))
+                    {
+                        checkCommand.Parameters.AddWithValue("@Pattern", $"{id}{DateTime.Today.ToString("ddMMyyyy")}%");
+                        var reader = checkCommand.ExecuteReader();
+
+                        // If no matches found, assign id + ddmmyyyy + 1 as the prescription ID
+                        if (!reader.HasRows)
+                        {
+                            return Int64.Parse($"{id}{DateTime.Today.ToString("ddMMyyyy")}1");
+                        }
+                        else
+                        {
+                            // If matches found, extract the last digit and increment it by 1
+                            List<long> ids = new List<long>();
+                            while (reader.Read())
+                            {
+                                Int64 existingPrescriptionId = reader.GetInt64(0);
+                                Int64 lastDigit = existingPrescriptionId % 10;
+                                ids.Add(lastDigit);
+                            }
+                            long maxDigit = ids.Max();
+                            long nextDigit = maxDigit + 1;
+
+                            // Assign id + ddmmyyyy + (digit + 1) as the prescription ID
+                            return Int64.Parse($"{id}{DateTime.Today.ToString("ddMMyyyy")}{nextDigit}");
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error generating prescription ID: {ex}");
+                throw;
+            }
+        }
+
+
+         public static SQLiteConnection GetConnection()
         {
             return new SQLiteConnection(ConnectionString);
         }

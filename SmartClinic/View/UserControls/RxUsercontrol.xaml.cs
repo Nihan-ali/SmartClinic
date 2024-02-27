@@ -28,11 +28,10 @@ namespace SmartClinic.View.UserControls
     /// </summary>
     public partial class RxUsercontrol : UserControl
     {
+        //variable initialization
         //from Patientinfo
         private bool isPatientAdded = false;
         private Patient newPatient;
-
-
         //from history
         private List<Complaint> selectedComplaints = new List<Complaint>();
         public List<Complaint> SelectedComplaints => selectedComplaints;
@@ -51,7 +50,6 @@ namespace SmartClinic.View.UserControls
 
         private List<Treatment> selectedTreatments = new List<Treatment>();
         public List<Treatment> SelectedTreatments => selectedTreatments;
-
         //from  medicine
         private List<DummyMedicine> selectedMedicines = new List<DummyMedicine>();
         private List<Advice> selectedAdvices = new List<Advice>();
@@ -61,8 +59,10 @@ namespace SmartClinic.View.UserControls
         public List<Advice> SelectedAdvices => selectedAdvices;
         public List<FollowUp> SelectedFollowUps => selectedFollowUps;
         public List<SpecialNote> SelectedSpecialNotes => selectedSpecialNotes;
-
         public event EventHandler<PatientEventArgs> PrescriptionDataAvailable;
+
+
+        
 
         public RxUsercontrol()
         {
@@ -182,6 +182,7 @@ namespace SmartClinic.View.UserControls
                 if (listBox.SelectedItem is Patient selectedPatient)
                 {
                     this.newPatient = selectedPatient;
+                    RefreshWholeWindow_Click(null, null);
                     UpdatePatientInfo(selectedPatient);
                     OnPrescriptionDataAvailable(new PatientEventArgs { NewPatient = selectedPatient });
                 }
@@ -199,6 +200,7 @@ namespace SmartClinic.View.UserControls
                 AddPatientButton.Content = patient.Name;
                 AddPatientButton.Foreground = Brushes.Black;
                 age.Text = patient.Age;
+                PatientId.Text = patient.Id.ToString();
                 searchPatientTextBox.Text = "";
                 searchResultsPopup.IsOpen = false;
             }
@@ -752,12 +754,14 @@ namespace SmartClinic.View.UserControls
             string combinedAdvice = string.Join("$$", selectedAdvices.Select(a => $"{a.Content}"));
             string combinedFollowUp = string.Join("$$", selectedFollowUps.Select(f => $"{f.Content}"));
             string combinedSpecialNote = string.Join("$$", selectedSpecialNotes.Select(s => $"{s.Content}"));
+            string prescriptionId = id.ToString() + DateTime.Today.ToString("ddMMyyyy");
 
 
             PatientVisit newpres = new PatientVisit
             {
                 Id = id,
                 visit = DateTime.Today,
+                prescriptionId = Int64.Parse(prescriptionId),
                 complaint = combinedComplaint,
                 hhistory = combinedHistory,
                 onExamination = combinedExamination,
@@ -769,7 +773,7 @@ namespace SmartClinic.View.UserControls
                 followUp = combinedFollowUp,
                 notes = combinedSpecialNote
             };
-            
+            MessageBox.Show(newpres.prescriptionId.ToString());
             DatabaseHelper.SavePrescription(newpres);
 
         }

@@ -61,6 +61,7 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
             <!-- Name Label and Add Patient Button -->
@@ -81,8 +82,13 @@
                 <TextBlock x:Name="age" Grid.Column="2" Text="" VerticalAlignment="Center"/>
             </StackPanel>
 
+            <StackPanel x:Name="PatientIdPanel" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center">
+                <Label Content="Id : " VerticalAlignment="Center" FontWeight="Bold"/>
+                <TextBlock x:Name="PatientId" Grid.Column="3" Text="" VerticalAlignment="Center"/>
+            </StackPanel> 
+
             <!-- Search Patient TextBox and Button -->
-            <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <Button Name="search" Background="{x:Null}" BorderBrush="{x:Null}">
                     <Image Source="../../search.png" Height="15" Width="15"/>
                 </Button>

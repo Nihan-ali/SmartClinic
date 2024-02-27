@@ -416,6 +416,7 @@ namespace SmartClinic
         public string diagnosis { get; set; }
         public string treatmentPlan { get; set; }
         private DateTime _visit;
+        public Int64 prescriptionId { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

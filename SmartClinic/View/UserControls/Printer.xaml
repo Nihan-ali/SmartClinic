@@ -72,7 +72,7 @@
             </Grid.ColumnDefinitions>
 
             <!--Name Label and Add Patient Button-->
-            <StackPanel x:Name="addPatientPanel" Grid.Column="0" Orientation="Horizontal" Margin="10">
+            <StackPanel x:Name="addPatientPanel" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
                 <Label Content="Pt's Name:" VerticalAlignment="Center" FontWeight="Bold" Background="Green"/>
                 <TextBlock x:Name="PatientName" Text="" FontWeight="Bold" VerticalAlignment="Center" Margin="2,0,0,0"/>
             </StackPanel>
@@ -450,10 +450,10 @@
             <Grid Background="White" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40*"/>
-                    <RowDefinition Height="10*"/>
-                    <RowDefinition Height="10*"/>
-                    <RowDefinition Height="10*"/>
-                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="15*"/>
+                    <RowDefinition Height="15*"/>
+                    <RowDefinition Height="15*"/>
+                    <RowDefinition Height="15*"/>
                 </Grid.RowDefinitions>
                 <Grid x:Name="medicinegrid">
                     <StackPanel Margin="10,12,10,0">
