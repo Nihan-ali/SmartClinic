@@ -109,7 +109,6 @@ namespace SmartClinic.View.UserControls
             {
                 PatientName.Text = newPatient.Name;
                 age.Text = newPatient.Age;
-                todaydate.Text = DateTime.Now.ToString("dd/MM/yyyy");
                 PatientId.Text = newPatient.Id.ToString();
             }
         }

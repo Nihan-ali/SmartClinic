@@ -73,6 +73,7 @@ namespace SmartClinic.View.UserControls
             docdegree.Content = variables.docdegree;
             docname_bangla.Content = variables.docname_bangla;
             docdegree_bangla.Content = variables.docdegree_bangla;
+            todaydate.Text = DateTime.Now.ToString("dd-MM-yyyy");
 
             // Subscribe to the Loaded event of the Popup
             //searchResultsPopup.Loaded += SearchResultsPopup_Loaded;
@@ -81,6 +82,7 @@ namespace SmartClinic.View.UserControls
         public RxUsercontrol(Patient newPatient) : this()
         {
             this.newPatient = newPatient;
+            todaydate.Text = DateTime.Now.ToString("dd-MM-yyyy");
             UpdatePatientInfo(newPatient);
             OnPrescriptionDataAvailable(new PatientEventArgs { NewPatient = newPatient });
         }
@@ -92,6 +94,7 @@ namespace SmartClinic.View.UserControls
         private void UpdateUI(Patient newPatient, PatientVisit selectedPatientVisit)
         {
             this.newPatient = newPatient;
+            todaydate.Text = selectedPatientVisit.visit.ToString("dd-MM-yyyy");
             selectedComplaints = DatabaseHelper.ExtractComplaint(selectedPatientVisit.complaint);
             selectedHistories = DatabaseHelper.ExtractHistory(selectedPatientVisit.hhistory);
             selectedExaminations = DatabaseHelper.ExtractExamination(selectedPatientVisit.onExamination);
@@ -859,7 +862,7 @@ namespace SmartClinic.View.UserControls
             PatientVisit newpres = new PatientVisit
             {
                 Id = id,
-                visit = DateTime.Today,
+                visit = DateTime.Now,
                 Name = name,
                 prescriptionId = Int64.Parse(prescriptionId),
                 complaint = combinedComplaint,

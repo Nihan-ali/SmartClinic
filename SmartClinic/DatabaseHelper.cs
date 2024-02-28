@@ -1517,12 +1517,10 @@ namespace SmartClinic
 
                         if (rowsAffected > 0)
                         {
-                            Console.WriteLine("Patient deleted successfully.");
                             return true;
                         }
                         else
                         {
-                            Console.WriteLine("Patient not found or deletion failed.");
                             return false;
                         }
                     }
@@ -1802,10 +1800,9 @@ namespace SmartClinic
                     connection.Open();
 
                     // Check if there are any existing prescriptions with matching attributes
-                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM PatientVisit WHERE ID = @ID AND VISIT = @VISIT AND NAME = @NAME AND COMPLAINT = @COMPLAINT AND HISTORY = @HISTORY AND ONEXAMINATION = @ONEXAMINATION AND INVESTIGATION = @INVESTIGATION AND DIAGNOSIS = @DIAGNOSIS AND TREATMENTPLAN = @TREATMENTPLAN AND MEDICINE = @MEDICINE AND ADVICE = @ADVICE AND FOLLOWUP = @FOLLOWUP AND NOTES = @NOTES;", connection))
+                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM PatientVisit WHERE ID = @ID AND NAME = @NAME AND COMPLAINT = @COMPLAINT AND HISTORY = @HISTORY AND ONEXAMINATION = @ONEXAMINATION AND INVESTIGATION = @INVESTIGATION AND DIAGNOSIS = @DIAGNOSIS AND TREATMENTPLAN = @TREATMENTPLAN AND MEDICINE = @MEDICINE AND ADVICE = @ADVICE AND FOLLOWUP = @FOLLOWUP AND NOTES = @NOTES;", connection))
                     {
                         checkCommand.Parameters.AddWithValue("@ID", prescription.Id);
-                        checkCommand.Parameters.AddWithValue("@VISIT", prescription.visit);
                         checkCommand.Parameters.AddWithValue("@NAME", prescription.Name);
                         checkCommand.Parameters.AddWithValue("@COMPLAINT", prescription.complaint);
                         checkCommand.Parameters.AddWithValue("@HISTORY", prescription.hhistory);

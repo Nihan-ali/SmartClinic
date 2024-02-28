@@ -119,7 +119,7 @@
             <!-- Today's Date -->
             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                 <Label Content="Date : " VerticalAlignment="Center" FontWeight="Bold"/>
-                <TextBlock x:Name="todaydate" Grid.Column="1" Text="{Binding TodayDate}" VerticalAlignment="Center"/>
+                <TextBlock x:Name="todaydate" Grid.Column="1" Text="" VerticalAlignment="Center"/>
             </StackPanel>
 
             <!-- Patient's Age -->

@@ -2,26 +2,31 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace SmartClinic.View.UserControls
 {
     public partial class PatientsUserControl : UserControl
     {
         public ObservableCollection<Patient> Patients { get; set; }
-
+        int n = 1;
         public PatientsUserControl()
         {
             InitializeComponent();
-
-            // Initialize Patients collection by fetching from the database
-            Patients = new ObservableCollection<Patient>(DatabaseHelper.GetPatientsByLastVisitedDate(1));
-
-            // Set the ItemsSource of the ListBox to the Patients collection
-            PatientsListBox.ItemsSource = Patients;
             SearchPatient.Text = "search Patient";
             SearchPatient.Opacity = 0.5;
-        }
+            UpdateListView(n);
 
+        }
+        
+
+        private void UpdateListView(int n)
+        {
+            MessageBox.Show("UpdateListView "+n.ToString());
+            Patients = new ObservableCollection<Patient>(DatabaseHelper.GetPatientsByLastVisitedDate(n));
+            PatientsListBox.ItemsSource = Patients;
+
+        }
         private void PatientsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count > 0)
@@ -32,7 +37,6 @@ namespace SmartClinic.View.UserControls
                 UpdateMainWindowContent(selectedPatient);
             }
         }
-
         private void UpdateMainWindowContent(Patient selectedPatient)
         {
             if (Application.Current.MainWindow is MainWindow mainWindow)
@@ -58,7 +62,6 @@ namespace SmartClinic.View.UserControls
             AddPatientWindow.Show();
 
         }
-
         private void OnSearchTextBoxGotFocus(object sender, RoutedEventArgs e)
         {
             // Handle search text box got focus
@@ -68,7 +71,6 @@ namespace SmartClinic.View.UserControls
                 SearchPatient.Opacity = 1.0;
             }
         }
-
         private void OnSearchTextBoxLostFocus(object sender, RoutedEventArgs e)
         {
             // Handle search text box lost focus
@@ -88,7 +90,6 @@ namespace SmartClinic.View.UserControls
 
                 if (deleted)
                 {
-                    // Remove the item from the ObservableCollection
                     Patients.Remove(patientToDelete);
                 }
                 else
@@ -98,28 +99,37 @@ namespace SmartClinic.View.UserControls
             }
         }
 
+        private void OnPreviousButtonClick(object sender, RoutedEventArgs e)
+        {
+            if(n>1)
+            {
+                n--;
+                UpdateListView(n);
+            }
+        }
+
+        private void OnNextButtonClick(object sender, RoutedEventArgs e)
+        {
+            n++;
+            UpdateListView(n);
+        }
+        private void PatientsListBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if(e.Delta > 0)
+            {
+                MessageBox.Show("MouseWheel Up");
+                PatientListScrollviewer.LineDown();
+            }
+            else
+            {
+                MessageBox.Show("MouseWheel Down");
+                PatientListScrollviewer.LineUp();
+            }
+        }
+
 
 
     }
-
-    /*private void SearchBox_KeyDown(object sender, RoutedEventArgs e)
-    {
-        // Handle search box key down event
-        // You might want to filter the Patients collection based on the search term
-    }*/
-    /* private void OnGridMouseDown(object sender, MouseButtonEventArgs e)
-     {
-         // Handle mouse down on the grid or UserControl
-         // This can help maintain focus and close the popup
-       *//*  PatientPopup.IsOpen = false;
-     }*/
-    /*  private void PatientList_MouseDown(object sender, RoutedEventArgs e)
-      {
-          // Handle mouse down event for the entire window';
-          ;
-      }
-  */
-    // Add other methods as needed...
 
 
 }

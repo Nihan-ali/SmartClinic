@@ -195,8 +195,6 @@ H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\AdviceSearc
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\DetailsWindow.g.cs
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\header.g.cs
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MedicineSearchWindow.g.cs
-H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MenuBar.g.cs
-H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\PatientList.g.cs
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\PatientProfileUserControl.g.cs
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\patientsUsercontrol.g.cs
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\RxUsercontrol.g.cs
@@ -212,8 +210,6 @@ H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\MainWindow.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\AdviceSearchWindow.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\DetailsWindow.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\header.baml
-H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MenuBar.baml
-H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\PatientList.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\patientsUsercontrol.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\RxUsercontrol.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\searchMenu.baml

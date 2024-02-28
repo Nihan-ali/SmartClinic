@@ -7,12 +7,13 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="1000">
 
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer x:Name="PatientListScrollviewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <Grid Background="White" Margin="50,2,50,2" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <!-- Header Section -->
@@ -30,7 +31,7 @@
 
             <!-- Patient List -->
             <!-- Patient List -->
-            <ListBox x:Name="PatientsListBox" Grid.Row="2" Margin="10" SelectionChanged="PatientsListBox_SelectionChanged" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Patients}">
+            <ListBox x:Name="PatientsListBox" Grid.Row="2" Margin="10" SelectionChanged="PatientsListBox_SelectionChanged" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Patients}" PreviewMouseWheel="PatientsListBox_PreviewMouseWheel">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="DarkGray" BorderThickness="1" CornerRadius="5" Margin="5" Background="White" HorizontalAlignment="Stretch">
@@ -83,7 +84,7 @@
                                     </TextBlock>
 
                                     <!-- Delete Button -->
-                                    <Button x:Name="Delete" Content="Delete" Margin="10,5" Background="#FF3C5A7D" BorderBrush="{x:Null}" FontWeight="Bold" Foreground="White" Grid.Column="4" Click="Delete_Click"/>
+                                    <Button x:Name="Delete" Content="Delete" Margin="10,5" Background="#FF3C5A7D" BorderBrush="{x:Null}" FontWeight="Bold" Foreground="White" Grid.Column="4" Focusable="False" Click="Delete_Click"/>
                                 </Grid>
                             </Grid>
                         </Border>
@@ -98,6 +99,41 @@
                 </Border>
             </Popup>
 
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Previous" Margin="5" Background="#FF3C5A7D" Foreground="White" FontSize="16" FontWeight="Bold" BorderBrush="{x:Null}" Click="OnPreviousButtonClick">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" CornerRadius="3" Padding="10,5">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <Button Content="Next" Margin="5" Background="#FF3C5A7D" Foreground="White" FontSize="16" FontWeight="Bold" BorderBrush="{x:Null}" Click="OnNextButtonClick">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" CornerRadius="3" Padding="10,5">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+
         </Grid>
     </ScrollViewer>
+    
 </UserControl>
