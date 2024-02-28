@@ -472,6 +472,7 @@ namespace SmartClinic
                                 {
                                     Id = Convert.ToInt32(reader["ID"]),
                                     visit = Convert.ToDateTime(reader["VISIT"]),
+                                    prescriptionId = Convert.ToInt64(reader["PRESCRIPTIONID"]),
                                     medicine = reader["MEDICINE"].ToString(),
                                     advice = reader["ADVICE"].ToString(),
                                     followUp = reader["FOLLOWUP"].ToString(),
@@ -1275,6 +1276,54 @@ namespace SmartClinic
                 throw;
             }
         }
+        public static List<PatientVisit> SearchPrescriptionByPrescriptionId(Int64 prescriptionId)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT * FROM PatientVisit WHERE ID = @PrescriptionId;", connection))
+                    {
+                        command.Parameters.AddWithValue("@PrescriptionId", prescriptionId);
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<PatientVisit> patientVisits = new List<PatientVisit>();
+
+                            while (reader.Read())
+                            {
+                                PatientVisit visit = new PatientVisit
+                                {
+                                    Id = Convert.ToInt32(reader["ID"]),
+                                    visit = Convert.ToDateTime(reader["VISIT"]),
+                                    medicine = reader["MEDICINE"].ToString(),
+                                    advice = reader["ADVICE"].ToString(),
+                                    followUp = reader["FOLLOWUP"].ToString(),
+                                    notes = reader["NOTES"].ToString(),
+                                    complaint = reader["COMPLAINT"].ToString(),
+                                    hhistory = reader["HISTORY"].ToString(),
+                                    onExamination = reader["ONEXAMINATION"].ToString(),
+                                    investigation = reader["INVESTIGATION"].ToString(),
+                                    diagnosis = reader["DIAGNOSIS"].ToString(),
+                                    treatmentPlan = reader["TREATMENTPLAN"].ToString(),
+                                };
+
+                                patientVisits.Add(visit);
+                            }
+
+                            return patientVisits;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error searching prescription by ID: {ex}");
+                throw;
+            }
+        }
 
 
 
@@ -1389,41 +1438,50 @@ namespace SmartClinic
                 return false;
             }
         }
-        public static bool DeletePatientVisitByVisit(int patient_id, DateTime VisitId)
+        public static bool DeletePatientByPrescriptionId(Int64 prescriptionId)
         {
-            try
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this patient?", "Delete Patient", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if(result == MessageBoxResult.Yes)
             {
-                using (var connection = GetConnection())
+                try
                 {
-                    connection.Open();
-
-                    // Use a parameterized query to avoid SQL injection
-                    string query = "DELETE FROM PatientVisit WHERE ID= @patient_id and visit=@VisitId";
-
-                    using (var command = new SQLiteCommand(query, connection))
+                    using (var connection = GetConnection())
                     {
-                        command.Parameters.AddWithValue("@patient_id", patient_id);
-                        command.Parameters.AddWithValue("@VisitId", VisitId);
-                        int rowsAffected = command.ExecuteNonQuery();
+                        connection.Open();
 
-                        if (rowsAffected > 0)
+                        // Use a parameterized query to avoid SQL injection
+                        string query = "DELETE FROM PatientVisit WHERE PRESCRIPTIONID = @prescriptionid";
+
+                        using (var command = new SQLiteCommand(query, connection))
                         {
-                            Console.WriteLine("Visit deleted successfully.");
-                            return true;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Visit not found or deletion failed.");
-                            return false;
+                            command.Parameters.AddWithValue("@prescriptionid", prescriptionId);
+
+                            int rowsAffected = command.ExecuteNonQuery();
+
+                            if (rowsAffected > 0)
+                            {
+                                Console.WriteLine("Patient deleted successfully.");
+                                return true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Patient not found or deletion failed.");
+                                return false;
+                            }
                         }
                     }
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error deleting patient: {ex.Message}");
+                    return false;
+                }
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"Error deleting visit: {ex.Message}");
                 return false;
             }
+
         }
 
 

@@ -773,11 +773,47 @@ namespace SmartClinic.View.UserControls
                 followUp = combinedFollowUp,
                 notes = combinedSpecialNote
             };
-            MessageBox.Show(newpres.prescriptionId.ToString());
+            MessageBox.Show("Prescription Stored Successfully");
             DatabaseHelper.SavePrescription(newpres);
 
         }
+        private void SearchPrescription_Click(object sender, TextChangedEventArgs e)
+        {
+            //string searchText = menubarbox.Text;
+            //if (!string.IsNullOrEmpty(searchText))
+            //{
+            //    if (menubarbox.Text == "Search Here")
+            //    {
+            //        menubarbox.Text = "0";
+            //        menubarbox.Opacity = 0.8;
+            //        menubarbox.Foreground = Brushes.Black;
+            //    }
+            //    List<PatientVisit> filteredPrescriptions = DatabaseHelper.SearchPrescriptionByPrescriptionId(Int64.Parse(menubarbox.Text));
+            //    if (filteredPrescriptions.Count > 0)
+            //    {
+            //        PrescriptionSearchResultsListBox.ItemsSource = filteredPrescriptions;
+            //        PrescriptionSearchResultsPopup.IsOpen = true; // Show the popup
+            //    }
+            //    else
+            //    {
+            //        PrescriptionSearchResultsPopup.IsOpen = false; // Hide the popup if search text is empty
+            //    }
+            //}
+            //else
+            //{
+            //    PrescriptionSearchResultsPopup.IsOpen = false; // Hide the popup if search text is empty
+            //}
+        }
 
+
+        private void PrescriptionSearchResultsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (PrescriptionSearchResultsListBox.SelectedItem != null)
+            {
+                PatientVisit selectedPatientVisit = (PatientVisit)PrescriptionSearchResultsListBox.SelectedItem;
+                //RxUsercontrol(selectedPatientVisit);
+            }
+        }
 
 
         private void PrintPrescription_Click(object sender, RoutedEventArgs e)

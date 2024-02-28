@@ -68,6 +68,8 @@
                                 <Grid HorizontalAlignment="Stretch">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
@@ -78,15 +80,20 @@
                                         <Run Text="Date: " FontWeight="Bold"/>
                                         <Run Text="{Binding FormattedVisit, Mode=OneWay}" FontWeight="SemiBold"/>
                                     </TextBlock>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <Label Content="Prescription ID: " FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{Binding prescriptionId}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
+                                    </StackPanel>
+
 
                                     <!-- Show Prescription Button -->
-                                    <Button Grid.Column="1" Content="Show Prescription" Margin="50,10,50,10" Background="White" Foreground="Blue" FontWeight="Bold" BorderBrush="{x:Null}" Click="ShowPrescription_Click"/>
+                                    <Button Grid.Column="2" Content="Show Prescription" Margin="50,10,50,10" Background="White" Foreground="Blue" FontWeight="Bold" BorderBrush="{x:Null}" Click="ShowPrescription_Click"/>
 
                                     <!-- Print Button -->
-                                    <Button Grid.Column="2" Content="Print" Margin="10,5" Background="White" Foreground="Green" FontWeight="Bold" BorderBrush="{x:Null}" Click="Print_Click"/>
+                                    <Button Grid.Column="3" Content="Print" Margin="10,5" Background="White" Foreground="Green" FontWeight="Bold" BorderBrush="{x:Null}" Click="Print_Click"/>
 
                                     <!-- Delete Button -->
-                                    <Button Grid.Column="3" x:Name="DeleteButton" Content="Delete" Margin="10,5" Background="White" Foreground="Red" FontWeight="Bold" BorderBrush="{x:Null}" Click="Delete_Click"/>
+                                    <Button Grid.Column="4" x:Name="DeleteButton" Content="Delete" Margin="10,5" Background="White" Foreground="Red" FontWeight="Bold" BorderBrush="{x:Null}" Click="Delete_Click"/>
                                 </Grid>
                             </Grid>
                         </Border>

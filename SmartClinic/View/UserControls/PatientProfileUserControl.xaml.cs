@@ -31,6 +31,7 @@ namespace SmartClinic.View.UserControls
                 patientCount = Patients.Count;
                 newPatient = selectedPatient;
                 PrescriptionList.ItemsSource = Patients;
+                
 
                 // Set the data context for the UI elements based on the selected patient
                 SetDataContext(selectedPatient);
@@ -130,7 +131,7 @@ namespace SmartClinic.View.UserControls
                 if (SelectedPatientVisit != null)
                 {
                     // Perform the deletion from the database based on ID
-                    bool deleted = DatabaseHelper.DeletePatientVisitByVisit(SelectedPatientVisit.Id, SelectedPatientVisit.visit);
+                    bool deleted = DatabaseHelper.DeletePatientByPrescriptionId(SelectedPatientVisit.prescriptionId);
 
                     if (deleted)
                     {
