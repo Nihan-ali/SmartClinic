@@ -222,17 +222,39 @@ namespace SmartClinic.View.UserControls
         private void PrescriptionSearchStringChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = menubarbox.Text;
-            List<PatientVisit> filteredPrescriptions = DatabaseHelper.SearchPrescriptionByPrescriptionId(Int64.Parse(searchText));
-            if (filteredPrescriptions.Count > 0)
+            
+            // Check if the searchText is not empty or null before attempting to parse
+            if (!string.IsNullOrEmpty(searchText))
             {
-                PrescriptionSearchResultsListBox.ItemsSource = filteredPrescriptions;
-                PrescriptionSearchResultsPopup.IsOpen = true; // Show the popup
+                MessageBox.Show(searchText);
+                if (long.TryParse(searchText, out long prescriptionId))
+                {
+                    
+                    // Successfully parsed the prescriptionId, proceed with the search
+                    List<PatientVisit> filteredPrescriptions = DatabaseHelper.SearchPrescriptionByPrescriptionId(prescriptionId);
+                    MessageBox.Show("it parsed" + filteredPrescriptions.Count);
+                    if (filteredPrescriptions.Count > 0)
+                    {
+                        PrescriptionSearchResultsListBox.ItemsSource = filteredPrescriptions;
+                        PrescriptionSearchResultsPopup.IsOpen = true; // Show the popup
+                    }
+                    else
+                    {
+                        PrescriptionSearchResultsPopup.IsOpen = false; // Hide the popup if search text is empty
+                    }
+                }
+                else
+                {
+                    // Handle the case where the searchText is not a valid long
+                    // You might want to show a message to the user indicating that the input is not a valid prescription ID
+                }
             }
             else
             {
                 PrescriptionSearchResultsPopup.IsOpen = false; // Hide the popup if search text is empty
             }
         }
+
         private void PrescriptionSearchResultsPopup_Opened(object sender, EventArgs e)
         {
             // Access the PrescriptionSearchResultsListBox inside the PrescriptionSearchResultsPopup
@@ -262,7 +284,7 @@ namespace SmartClinic.View.UserControls
             {
                 if (listBox.SelectedItem is PatientVisit selectedPatientVisit)
                 {
-                    //RxUsercontrol(selectedPatientVisit);
+                    // Handle the selection as needed
                 }
             }
         }
