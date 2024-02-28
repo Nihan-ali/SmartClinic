@@ -55,12 +55,6 @@
     <Compile Update="View\UserControls\MedicineSearchWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\UserControls\MenuBar.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\UserControls\PatientList.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\UserControls\PatientProfileUserControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -139,12 +133,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\MedicineSearchWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\UserControls\MenuBar.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\UserControls\PatientList.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\PatientProfileUserControl.xaml">
