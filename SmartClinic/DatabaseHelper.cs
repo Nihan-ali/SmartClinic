@@ -587,6 +587,55 @@ namespace SmartClinic
                 throw;
             }
         }
+        public static List<PatientVisit> SearchPrescriptionByPrescriptionId(Int64 prescriptionId)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT * FROM PatientVisit WHERE PRESCRIPTIONID = @PrescriptionId;", connection))
+                    {
+                        command.Parameters.AddWithValue("@PrescriptionId", prescriptionId);
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<PatientVisit> patientVisits = new List<PatientVisit>();
+
+                            while (reader.Read())
+                            {
+                                PatientVisit visit = new PatientVisit
+                                {
+                                    Id = Convert.ToInt32(reader["ID"]),
+                                    visit = Convert.ToDateTime(reader["VISIT"]),
+                                    prescriptionId = Convert.ToInt64(reader["PRESCRIPTIONID"]),
+                                    medicine = reader["MEDICINE"].ToString(),
+                                    advice = reader["ADVICE"].ToString(),
+                                    followUp = reader["FOLLOWUP"].ToString(),
+                                    notes = reader["NOTES"].ToString(),
+                                    complaint = reader["COMPLAINT"].ToString(),
+                                    hhistory = reader["HISTORY"].ToString(),
+                                    onExamination = reader["ONEXAMINATION"].ToString(),
+                                    investigation = reader["INVESTIGATION"].ToString(),
+                                    diagnosis = reader["DIAGNOSIS"].ToString(),
+                                    treatmentPlan = reader["TREATMENTPLAN"].ToString(),
+                                };
+
+                                patientVisits.Add(visit);
+                            }
+
+                            return patientVisits;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error searching prescription by ID: {ex}");
+                throw;
+            }
+        }
 
 
         public static void AddMedicine(string brandName, string manufacturerName, string genericName, string strength, string medicineType)
@@ -1273,54 +1322,6 @@ namespace SmartClinic
             catch (Exception ex)
             {
                 Console.WriteLine($"Error searching patients: {ex}");
-                throw;
-            }
-        }
-        public static List<PatientVisit> SearchPrescriptionByPrescriptionId(Int64 prescriptionId)
-        {
-            try
-            {
-                using (var connection = GetConnection())
-                {
-                    connection.Open();
-
-                    using (var command = new SQLiteCommand("SELECT * FROM PatientVisit WHERE ID = @PrescriptionId;", connection))
-                    {
-                        command.Parameters.AddWithValue("@PrescriptionId", prescriptionId);
-
-                        using (var reader = command.ExecuteReader())
-                        {
-                            List<PatientVisit> patientVisits = new List<PatientVisit>();
-
-                            while (reader.Read())
-                            {
-                                PatientVisit visit = new PatientVisit
-                                {
-                                    Id = Convert.ToInt32(reader["ID"]),
-                                    visit = Convert.ToDateTime(reader["VISIT"]),
-                                    medicine = reader["MEDICINE"].ToString(),
-                                    advice = reader["ADVICE"].ToString(),
-                                    followUp = reader["FOLLOWUP"].ToString(),
-                                    notes = reader["NOTES"].ToString(),
-                                    complaint = reader["COMPLAINT"].ToString(),
-                                    hhistory = reader["HISTORY"].ToString(),
-                                    onExamination = reader["ONEXAMINATION"].ToString(),
-                                    investigation = reader["INVESTIGATION"].ToString(),
-                                    diagnosis = reader["DIAGNOSIS"].ToString(),
-                                    treatmentPlan = reader["TREATMENTPLAN"].ToString(),
-                                };
-
-                                patientVisits.Add(visit);
-                            }
-
-                            return patientVisits;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error searching prescription by ID: {ex}");
                 throw;
             }
         }

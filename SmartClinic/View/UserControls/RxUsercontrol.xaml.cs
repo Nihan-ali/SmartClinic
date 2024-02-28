@@ -62,7 +62,7 @@ namespace SmartClinic.View.UserControls
         public event EventHandler<PatientEventArgs> PrescriptionDataAvailable;
 
 
-        
+
 
         public RxUsercontrol()
         {
@@ -74,6 +74,7 @@ namespace SmartClinic.View.UserControls
 
             // Subscribe to the Loaded event of the Popup
             searchResultsPopup.Loaded += SearchResultsPopup_Loaded;
+            PrescriptionSearchResultsPopup.Loaded += PrescriptionSearchResultsPopup_Loaded;
         }
         public RxUsercontrol(Patient newPatient) : this()
         {
@@ -138,7 +139,6 @@ namespace SmartClinic.View.UserControls
                 menubarbox.Foreground = Brushes.Black;
             }
         }
-
         private void textBox_LostFocus(object sender, RoutedEventArgs e)
         {
             if (menubarbox.Text == "")
@@ -149,31 +149,15 @@ namespace SmartClinic.View.UserControls
 
             }
         }
+
         private void SearchResultsPopup_Loaded(object sender, RoutedEventArgs e)
         {
-            // Find the searchResultsListBox inside the Popup
             ListBox searchResultsListBox = FindChild<ListBox>(searchResultsPopup, "searchResultsListBox");
 
             if (searchResultsListBox != null)
             {
-                // Subscribe to the SelectionChanged event of the searchResultsListBox
                 searchResultsListBox.SelectionChanged += searchResultsListBox_SelectionChanged;
             }
-        }
-        private T FindChild<T>(DependencyObject parent, string name) where T : DependencyObject
-        {
-            if (parent == null) return null;
-            if (parent is T element && (element as FrameworkElement)?.Name == name) return element;
-
-            T result = null;
-            int childCount = VisualTreeHelper.GetChildrenCount(parent);
-            for (int i = 0; i < childCount; i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(parent, i);
-                result = FindChild<T>(child, name);
-                if (result != null) break;
-            }
-            return result;
         }
         private void searchResultsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -188,10 +172,122 @@ namespace SmartClinic.View.UserControls
                 }
             }
         }
+        private void PatientSearchStringChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchterm = searchPatientTextBox.Text;
+            List<Patient> searchresults = DatabaseHelper.SearchPatients(searchterm);
+
+            if (searchresults.Count > 0)
+            {
+                // Handle the search results, e.g., update ListBox or other UI elements
+                searchResultsListBox.ItemsSource = searchresults;
+                searchResultsPopup.IsOpen = true;
+            }
+            else
+            {
+                // Close the popup if there are no search results
+                searchResultsPopup.IsOpen = false;
+            }
+        }
+        private void searchResultsPopup_Opened(object sender, EventArgs e)
+        {
+            string searchterm = searchPatientTextBox.Text;
+            List<Patient> searchresults = DatabaseHelper.SearchPatients(searchterm);
+
+            if (searchresults.Count > 0)
+            {
+                // Handle the search results, e.g., update ListBox or other UI elements
+
+                searchResultsListBox.ItemsSource = searchresults;
+                searchResultsPopup.IsOpen = true;
+            }
+            else
+            {
+                // Close the popup if there are no search results
+                searchResultsPopup.IsOpen = false;
+            }
+        }
+
+        private void PrescriptionSearchResultsPopup_Loaded(object sender, RoutedEventArgs e)
+        {
+            ListBox PrescriptionSearchResultsListBox = FindChild<ListBox>(PrescriptionSearchResultsPopup, "PrescriptionSearchResultsListBox");
+
+            if (PrescriptionSearchResultsListBox != null)
+            {
+                PrescriptionSearchResultsListBox.SelectionChanged += PrescriptionSearchResultsListBox_SelectionChanged;
+            }
+        }
+
+
+        private void PrescriptionSearchStringChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchText = menubarbox.Text;
+            List<PatientVisit> filteredPrescriptions = DatabaseHelper.SearchPrescriptionByPrescriptionId(Int64.Parse(searchText));
+            if (filteredPrescriptions.Count > 0)
+            {
+                PrescriptionSearchResultsListBox.ItemsSource = filteredPrescriptions;
+                PrescriptionSearchResultsPopup.IsOpen = true; // Show the popup
+            }
+            else
+            {
+                PrescriptionSearchResultsPopup.IsOpen = false; // Hide the popup if search text is empty
+            }
+        }
+        private void PrescriptionSearchResultsPopup_Opened(object sender, EventArgs e)
+        {
+            // Access the PrescriptionSearchResultsListBox inside the PrescriptionSearchResultsPopup
+            ListBox PrescriptionSearchResultsListBox = FindChild<ListBox>(PrescriptionSearchResultsPopup, "PrescriptionSearchResultsListBox");
+
+            if (PrescriptionSearchResultsListBox != null)
+            {
+                PrescriptionSearchResultsListBox.SelectionChanged += PrescriptionSearchResultsListBox_SelectionChanged;
+            }
+
+            string searchText = menubarbox.Text;
+            List<PatientVisit> filteredPrescriptions = DatabaseHelper.SearchPrescriptionByPrescriptionId(Int64.Parse(searchText));
+            if (filteredPrescriptions.Count > 0)
+            {
+                PrescriptionSearchResultsListBox.ItemsSource = filteredPrescriptions;
+                PrescriptionSearchResultsPopup.IsOpen = true; // Show the popup
+            }
+            else
+            {
+                PrescriptionSearchResultsPopup.IsOpen = false; // Hide the popup if search text is empty
+            }
+        }
+
+        private void PrescriptionSearchResultsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is ListBox listBox)
+            {
+                if (listBox.SelectedItem is PatientVisit selectedPatientVisit)
+                {
+                    //RxUsercontrol(selectedPatientVisit);
+                }
+            }
+        }
+
+
         private void OnPrescriptionDataAvailable(PatientEventArgs e)
         {
             // Raise the event if there are subscribers
             PrescriptionDataAvailable?.Invoke(this, e);
+        }
+
+        private T FindChild<T>(DependencyObject parent, string name) where T : DependencyObject
+        {
+            if (parent == null) return null;
+            if (parent is T element && (element as FrameworkElement)?.Name == name) return element;
+
+            T result = null;
+            int childCount = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < childCount; i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+                result = FindChild<T>(child, name);
+                if (result != null) break;
+            }
+            return result;
         }
         public void UpdatePatientInfo(Patient patient)
         {
@@ -575,18 +671,22 @@ namespace SmartClinic.View.UserControls
             selectedAdvicesListView.ItemsSource = null;
             selectedAdvicesListView.ItemsSource = selectedAdvices;
         }
-
         private void UpdateSelectedFollowUpsListView()
         {
             selectedFollowUpListView.ItemsSource = null;
             selectedFollowUpListView.ItemsSource = selectedFollowUps;
         }
-
         private void UpdateSelectedSpecialNotesListView()
         {
             selectedSpecialNoteListView.ItemsSource = null;
             selectedSpecialNoteListView.ItemsSource = selectedSpecialNotes;
         }
+        private void UpdateSelectedMedicinesListView()
+        {
+            selectedMedicinesListView.ItemsSource = null;
+            selectedMedicinesListView.ItemsSource = selectedMedicines;
+        }
+
 
         private void Rx_Click(object sender, RoutedEventArgs e)
         {
@@ -633,11 +733,6 @@ namespace SmartClinic.View.UserControls
             UpdateSelectedSpecialNotesListView();
         }
 
-        private void UpdateSelectedMedicinesListView()
-        {
-            selectedMedicinesListView.ItemsSource = null;
-            selectedMedicinesListView.ItemsSource = selectedMedicines;
-        }
 
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
@@ -703,43 +798,8 @@ namespace SmartClinic.View.UserControls
             return null;
         }
 
-        private void PatientSearchStringChanged(object sender, TextChangedEventArgs e)
-        {
-            string searchterm = searchPatientTextBox.Text;
-            List<Patient> searchresults = DatabaseHelper.SearchPatients(searchterm);
-
-            if (searchresults.Count > 0)
-            {
-                // Handle the search results, e.g., update ListBox or other UI elements
-                searchResultsListBox.ItemsSource = searchresults;
-                searchResultsPopup.IsOpen = true;
-            }
-            else
-            {
-                // Close the popup if there are no search results
-                searchResultsPopup.IsOpen = false;
-            }
-        }
 
 
-        private void searchResultsPopup_Opened(object sender, EventArgs e)
-        {
-            string searchterm = searchPatientTextBox.Text;
-            List<Patient> searchresults = DatabaseHelper.SearchPatients(searchterm);
-
-            if (searchresults.Count > 0)
-            {
-                // Handle the search results, e.g., update ListBox or other UI elements
-
-                searchResultsListBox.ItemsSource = searchresults;
-                searchResultsPopup.IsOpen = true;
-            }
-            else
-            {
-                // Close the popup if there are no search results
-                searchResultsPopup.IsOpen = false;
-            }
-        }
 
         private void SavePrescription_Click(object sender, RoutedEventArgs e)
         {
@@ -777,44 +837,6 @@ namespace SmartClinic.View.UserControls
             DatabaseHelper.SavePrescription(newpres);
 
         }
-        private void SearchPrescription_Click(object sender, TextChangedEventArgs e)
-        {
-            //string searchText = menubarbox.Text;
-            //if (!string.IsNullOrEmpty(searchText))
-            //{
-            //    if (menubarbox.Text == "Search Here")
-            //    {
-            //        menubarbox.Text = "0";
-            //        menubarbox.Opacity = 0.8;
-            //        menubarbox.Foreground = Brushes.Black;
-            //    }
-            //    List<PatientVisit> filteredPrescriptions = DatabaseHelper.SearchPrescriptionByPrescriptionId(Int64.Parse(menubarbox.Text));
-            //    if (filteredPrescriptions.Count > 0)
-            //    {
-            //        PrescriptionSearchResultsListBox.ItemsSource = filteredPrescriptions;
-            //        PrescriptionSearchResultsPopup.IsOpen = true; // Show the popup
-            //    }
-            //    else
-            //    {
-            //        PrescriptionSearchResultsPopup.IsOpen = false; // Hide the popup if search text is empty
-            //    }
-            //}
-            //else
-            //{
-            //    PrescriptionSearchResultsPopup.IsOpen = false; // Hide the popup if search text is empty
-            //}
-        }
-
-
-        private void PrescriptionSearchResultsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (PrescriptionSearchResultsListBox.SelectedItem != null)
-            {
-                PatientVisit selectedPatientVisit = (PatientVisit)PrescriptionSearchResultsListBox.SelectedItem;
-                //RxUsercontrol(selectedPatientVisit);
-            }
-        }
-
 
         private void PrintPrescription_Click(object sender, RoutedEventArgs e)
         {
@@ -846,22 +868,8 @@ namespace SmartClinic.View.UserControls
 
 
 
-}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 
 
     public class IsNullOrEmptyConverter : IValueConverter
@@ -881,4 +889,5 @@ namespace SmartClinic.View.UserControls
             throw new NotImplementedException();
         }
     }
+
 }
