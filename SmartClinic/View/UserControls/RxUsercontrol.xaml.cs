@@ -20,6 +20,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Controls.Primitives;
 using System.Printing;
 using static SmartClinic.Patient;
+using Org.BouncyCastle.Asn1.Crmf;
 
 namespace SmartClinic.View.UserControls
 {
@@ -32,6 +33,7 @@ namespace SmartClinic.View.UserControls
         //from Patientinfo
         private bool isPatientAdded = false;
         private Patient newPatient;
+        private PatientVisit selectedPatientVisit;
         //from history
         private List<Complaint> selectedComplaints = new List<Complaint>();
         public List<Complaint> SelectedComplaints => selectedComplaints;
@@ -73,8 +75,8 @@ namespace SmartClinic.View.UserControls
             docdegree_bangla.Content = variables.docdegree_bangla;
 
             // Subscribe to the Loaded event of the Popup
-            searchResultsPopup.Loaded += SearchResultsPopup_Loaded;
-            PrescriptionSearchResultsPopup.Loaded += PrescriptionSearchResultsPopup_Loaded;
+            //searchResultsPopup.Loaded += SearchResultsPopup_Loaded;
+            //PrescriptionSearchResultsPopup.Loaded += PrescriptionSearchResultsPopup_Loaded;
         }
         public RxUsercontrol(Patient newPatient) : this()
         {
@@ -83,6 +85,11 @@ namespace SmartClinic.View.UserControls
             OnPrescriptionDataAvailable(new PatientEventArgs { NewPatient = newPatient });
         }
         public RxUsercontrol(Patient newPatient, PatientVisit selectedPatientVisit) : this()
+        {
+            UpdateUI(newPatient, selectedPatientVisit);
+        }
+
+        private void UpdateUI(Patient newPatient, PatientVisit selectedPatientVisit)
         {
             this.newPatient = newPatient;
             selectedComplaints = DatabaseHelper.ExtractComplaint(selectedPatientVisit.complaint);
@@ -95,7 +102,6 @@ namespace SmartClinic.View.UserControls
             selectedAdvices = DatabaseHelper.ExtractAdvice(selectedPatientVisit.advice);
             selectedFollowUps = DatabaseHelper.ExtractFollowUp(selectedPatientVisit.followUp);
             selectedSpecialNotes = DatabaseHelper.ExtractSpecialNotes(selectedPatientVisit.notes);
-
             UpdatePatientInfo(newPatient);
             UpdateSelectedComplaintListView();
             UpdateSelectedHistoryListView();
@@ -107,7 +113,6 @@ namespace SmartClinic.View.UserControls
             UpdateSelectedAdvicesListView();
             UpdateSelectedFollowUpsListView();
             UpdateSelectedSpecialNotesListView();
-
         }
 
         private void RefreshWholeWindow_Click(object sender, RoutedEventArgs e)
@@ -207,7 +212,6 @@ namespace SmartClinic.View.UserControls
                 searchResultsPopup.IsOpen = false;
             }
         }
-
         private void PrescriptionSearchResultsPopup_Loaded(object sender, RoutedEventArgs e)
         {
             ListBox PrescriptionSearchResultsListBox = FindChild<ListBox>(PrescriptionSearchResultsPopup, "PrescriptionSearchResultsListBox");
@@ -217,16 +221,32 @@ namespace SmartClinic.View.UserControls
                 PrescriptionSearchResultsListBox.SelectionChanged += PrescriptionSearchResultsListBox_SelectionChanged;
             }
         }
-
-
         private void PrescriptionSearchStringChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = menubarbox.Text;
-            List<PatientVisit> filteredPrescriptions = DatabaseHelper.SearchPrescriptionByPrescriptionId(Int64.Parse(searchText));
-            if (filteredPrescriptions.Count > 0)
+            
+            // Check if the searchText is not empty or null before attempting to parse
+            if (!string.IsNullOrEmpty(searchText))
             {
-                PrescriptionSearchResultsListBox.ItemsSource = filteredPrescriptions;
-                PrescriptionSearchResultsPopup.IsOpen = true; // Show the popup
+                if (Int64.TryParse(searchText, out Int64 prescriptionId))
+                {
+                    
+                    List<PatientVisit> filteredPrescriptions = DatabaseHelper.SearchPrescriptionByPrescriptionId(prescriptionId);
+                    if (filteredPrescriptions.Count > 0)
+                    {
+                        PrescriptionSearchResultsListBox.ItemsSource = filteredPrescriptions;
+                        PrescriptionSearchResultsPopup.IsOpen = true; // Show the popup
+                    }
+                    else
+                    {
+                        PrescriptionSearchResultsPopup.IsOpen = false; // Hide the popup if search text is empty
+                    }
+                }
+                else
+                {
+                    // Handle the case where the searchText is not a valid long
+                    // You might want to show a message to the user indicating that the input is not a valid prescription ID
+                }
             }
             else
             {
@@ -235,26 +255,41 @@ namespace SmartClinic.View.UserControls
         }
         private void PrescriptionSearchResultsPopup_Opened(object sender, EventArgs e)
         {
-            // Access the PrescriptionSearchResultsListBox inside the PrescriptionSearchResultsPopup
-            ListBox PrescriptionSearchResultsListBox = FindChild<ListBox>(PrescriptionSearchResultsPopup, "PrescriptionSearchResultsListBox");
-
-            if (PrescriptionSearchResultsListBox != null)
+            // Ensure that PrescriptionSearchResultsListBox is found only when PrescriptionSearchResultsPopup is fully loaded
+            if (PrescriptionSearchResultsPopup.IsLoaded)
             {
-                PrescriptionSearchResultsListBox.SelectionChanged += PrescriptionSearchResultsListBox_SelectionChanged;
-            }
+                ListBox PrescriptionSearchResultsListBox = FindChild<ListBox>(PrescriptionSearchResultsPopup.Child, "PrescriptionSearchResultsListBox");
 
-            string searchText = menubarbox.Text;
-            List<PatientVisit> filteredPrescriptions = DatabaseHelper.SearchPrescriptionByPrescriptionId(Int64.Parse(searchText));
-            if (filteredPrescriptions.Count > 0)
-            {
-                PrescriptionSearchResultsListBox.ItemsSource = filteredPrescriptions;
-                PrescriptionSearchResultsPopup.IsOpen = true; // Show the popup
+                if (PrescriptionSearchResultsListBox != null)
+                {
+                    //PrescriptionSearchResultsListBox.SelectionChanged += PrescriptionSearchResultsListBox_SelectionChanged;
+
+                    string searchText = menubarbox.Text;
+                    List<PatientVisit> filteredPrescriptions = DatabaseHelper.SearchPrescriptionByPrescriptionId(Int64.Parse(searchText));
+                    if (filteredPrescriptions.Count > 0)
+                    {
+                        //PrescriptionSearchResultsListBox.ItemsSource = null;
+                        PrescriptionSearchResultsListBox.ItemsSource = filteredPrescriptions;
+                        PrescriptionSearchResultsPopup.IsOpen = true; // Show the popup
+                    }
+                    else
+                    {
+                        PrescriptionSearchResultsPopup.IsOpen = false; // Hide the popup if search text is empty
+                    }
+                }
+                else
+                {
+                    // Handle case when PrescriptionSearchResultsListBox is not found
+                    MessageBox.Show("PrescriptionSearchResultsListBox not found!");
+                }
             }
             else
             {
-                PrescriptionSearchResultsPopup.IsOpen = false; // Hide the popup if search text is empty
+                // Handle case when PrescriptionSearchResultsPopup is not fully loaded
+                MessageBox.Show("PrescriptionSearchResultsPopup is not fully loaded!");
             }
         }
+
 
         private void PrescriptionSearchResultsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -262,7 +297,9 @@ namespace SmartClinic.View.UserControls
             {
                 if (listBox.SelectedItem is PatientVisit selectedPatientVisit)
                 {
-                    //RxUsercontrol(selectedPatientVisit);
+                    this.selectedPatientVisit = selectedPatientVisit;
+                    this.newPatient = DatabaseHelper.GetPatientById(selectedPatientVisit.Id);
+                    UpdateUI(newPatient, selectedPatientVisit);
                 }
             }
         }
@@ -293,6 +330,7 @@ namespace SmartClinic.View.UserControls
         {
             if (patient != null)
             {
+                MessageBox.Show("i am here kire vai " + patient.Name);
                 AddPatientButton.Content = patient.Name;
                 AddPatientButton.Foreground = Brushes.Black;
                 age.Text = patient.Age;
@@ -804,6 +842,7 @@ namespace SmartClinic.View.UserControls
         private void SavePrescription_Click(object sender, RoutedEventArgs e)
         {
             int id = newPatient.Id;
+            string name = newPatient.Name;
             string combinedComplaint = string.Join("$$", selectedComplaints.Select(c => $"{c.Content}@{c.Note}"));
             string combinedHistory = string.Join("$$", selectedHistories.Select(h => $"{h.Content}@{h.Note}"));
             string combinedExamination = string.Join("$$", selectedExaminations.Select(e => $"{e.Content}@{e.Note}"));
@@ -821,6 +860,7 @@ namespace SmartClinic.View.UserControls
             {
                 Id = id,
                 visit = DateTime.Today,
+                Name = name,
                 prescriptionId = Int64.Parse(prescriptionId),
                 complaint = combinedComplaint,
                 hhistory = combinedHistory,

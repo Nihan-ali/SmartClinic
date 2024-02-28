@@ -26,8 +26,8 @@ namespace SmartClinic.View.UserControls
         }
         private void PatientButton_click(object sender, RoutedEventArgs e)
         {
-            PatientList patientListWindow = new PatientList();
-            patientListWindow.Show();
+            //PatientList patientListWindow = new PatientList();
+            //patientListWindow.Show();
         }
     }
 }

@@ -44,7 +44,7 @@
                                 <Border Background="#FF3C5A7D" Padding="10" HorizontalAlignment="Stretch">
                                     <TextBlock FontSize="16" Foreground="White">
                             <Run Text="{Binding Name}" FontWeight="Bold"/>
-                            <Run Text=" last visited date" FontSize="12" FontStyle="Italic"/>
+                            <Run Text="{Binding LastVisit}" FontSize="12" FontStyle="Italic"/>
                                     </TextBlock>
                                 </Border>
 

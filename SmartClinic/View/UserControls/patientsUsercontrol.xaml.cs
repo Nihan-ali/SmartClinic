@@ -14,14 +14,12 @@ namespace SmartClinic.View.UserControls
             InitializeComponent();
 
             // Initialize Patients collection by fetching from the database
-            Patients = new ObservableCollection<Patient>(DatabaseHelper.GetAllPatients());
+            Patients = new ObservableCollection<Patient>(DatabaseHelper.GetPatientsByLastVisitedDate(1));
 
             // Set the ItemsSource of the ListBox to the Patients collection
             PatientsListBox.ItemsSource = Patients;
             SearchPatient.Text = "search Patient";
             SearchPatient.Opacity = 0.5;
-            Console.WriteLine(PatientsListBox.ItemsSource);
-            Console.WriteLine("mostahid");
         }
 
         private void PatientsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

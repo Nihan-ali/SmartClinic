@@ -62,14 +62,12 @@ namespace SmartClinic
                                                     CREATE TABLE IF NOT EXISTS Diagnosis (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
                                                     CREATE TABLE IF NOT EXISTS TreatmentPlan (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
 
-                                                    CREATE TABLE IF NOT EXISTS Patient (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Age TEXT, Address TEXT, Phone TEXT,Blood TEXT);
+                                                    CREATE TABLE IF NOT EXISTS Patient (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Age TEXT, Address TEXT, Phone TEXT,Blood TEXT, LastVisit DATE);
                                                     CREATE TABLE IF NOT EXISTS PatientVisit (
-                                                                                                ID INTEGER, VISIT DATE, PRESCRIPTIONID INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                                                                MEDICINE TEXT, ADVICE TEXT, FOLLOWUP TEXT, NOTES TEXT,
+                                                                                                ID INTEGER, VISIT DATE, PRESCRIPTIONID INTEGER PRIMARY KEY,
+                                                                                                MEDICINE TEXT, ADVICE TEXT, FOLLOWUP TEXT, NOTES TEXT, NAME TEXT,
                                                                                                 COMPLAINT TEXT, HISTORY TEXT, ONEXAMINATION TEXT, INVESTIGATION TEXT,
                                                                                                 DIAGNOSIS TEXT, TREATMENTPLAN TEXT,
-
-                                                                                                PRIMARY KEY (PRESCRIPTIONID),
                                                                                             );";
                                                     
 
@@ -499,6 +497,50 @@ namespace SmartClinic
                 throw;
             }
         }
+
+        public static Patient GetPatientById(int Id)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT * FROM Patient WHERE ID = @Id;", connection))
+                    {
+                        command.Parameters.AddWithValue("@Id", Id);
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                Patient patient = new Patient
+                                {
+                                    Id = Convert.ToInt32(reader["ID"]),
+                                    Name = reader["Name"].ToString(),
+                                    Age = reader["Age"].ToString(),
+                                    Phone = reader["Phone"].ToString(),
+                                    Address = reader["Address"].ToString(),
+                                    Blood = reader["Blood"].ToString()
+                                };
+
+                                return patient;
+                            }
+                            else
+                            {
+                                return null;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching patient: {ex}");
+                throw;
+            }
+        }
+
         public static int GetPatientVisitsByVisit(string startdate, string enddate)
         {
             try
@@ -587,54 +629,54 @@ namespace SmartClinic
                 throw;
             }
         }
-        public static List<PatientVisit> SearchPrescriptionByPrescriptionId(Int64 prescriptionId)
+
+        public static List<Patient> GetPatientsByLastVisitedDate(int n)
         {
+            List<Patient> patients = new List<Patient>();
+
+            // Calculate the offset based on the provided integer 'n'
+            int offset = (n - 1) * 25;
+
+            // SQL query to select patients sorted by last visited date and limit the result to 25 records starting from the calculated offset
+            string query = $"SELECT * FROM Patient ORDER BY LastVisit DESC LIMIT 25 OFFSET {offset}";
+
             try
             {
                 using (var connection = GetConnection())
                 {
                     connection.Open();
 
-                    using (var command = new SQLiteCommand("SELECT * FROM PatientVisit WHERE PRESCRIPTIONID = @PrescriptionId;", connection))
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@PrescriptionId", prescriptionId);
-
-                        using (var reader = command.ExecuteReader())
+                        using (SQLiteDataReader reader = command.ExecuteReader())
                         {
-                            List<PatientVisit> patientVisits = new List<PatientVisit>();
-
                             while (reader.Read())
                             {
-                                PatientVisit visit = new PatientVisit
+                                // Assuming Patient class has appropriate properties and constructor
+                                Patient patient = new Patient
                                 {
                                     Id = Convert.ToInt32(reader["ID"]),
-                                    visit = Convert.ToDateTime(reader["VISIT"]),
-                                    prescriptionId = Convert.ToInt64(reader["PRESCRIPTIONID"]),
-                                    medicine = reader["MEDICINE"].ToString(),
-                                    advice = reader["ADVICE"].ToString(),
-                                    followUp = reader["FOLLOWUP"].ToString(),
-                                    notes = reader["NOTES"].ToString(),
-                                    complaint = reader["COMPLAINT"].ToString(),
-                                    hhistory = reader["HISTORY"].ToString(),
-                                    onExamination = reader["ONEXAMINATION"].ToString(),
-                                    investigation = reader["INVESTIGATION"].ToString(),
-                                    diagnosis = reader["DIAGNOSIS"].ToString(),
-                                    treatmentPlan = reader["TREATMENTPLAN"].ToString(),
+                                    Name = Convert.ToString(reader["Name"]),
+                                    Age = Convert.ToString(reader["Age"]),
+                                    Phone = Convert.ToString(reader["Phone"]),
+                                    Address = Convert.ToString(reader["Address"]),
+                                    Blood = Convert.ToString(reader["Blood"]),
+                                    LastVisit = Convert.ToDateTime(reader["LastVisit"])
                                 };
 
-                                patientVisits.Add(visit);
+                                patients.Add(patient);
                             }
-
-                            return patientVisits;
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error searching prescription by ID: {ex}");
-                throw;
+                // Handle exception appropriately
+                Console.WriteLine("An error occurred: " + ex.Message);
             }
+
+            return patients;
         }
 
 
@@ -1283,6 +1325,59 @@ namespace SmartClinic
                 throw;
             }
         }
+        public static List<PatientVisit> SearchPrescriptionByPrescriptionId(Int64 prescriptionid)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT * FROM PatientVisit WHERE PRESCRIPTIONID LIKE @PrescriptionId;", connection))
+                    {
+                        // Constructing the search pattern to match partially
+                        command.Parameters.AddWithValue("@PrescriptionId", "%" + prescriptionid + "%");
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<PatientVisit> patientVisits = new List<PatientVisit>();
+
+                            while (reader.Read())
+                            {
+                                PatientVisit visit = new PatientVisit
+                                {
+                                    Id = Convert.ToInt32(reader["ID"]),
+                                    visit = Convert.ToDateTime(reader["VISIT"]),
+                                    Name = reader["NAME"].ToString(),
+                                    prescriptionId = Convert.ToInt64(reader["PRESCRIPTIONID"]),
+                                    medicine = reader["MEDICINE"].ToString(),
+                                    advice = reader["ADVICE"].ToString(),
+                                    followUp = reader["FOLLOWUP"].ToString(),
+                                    notes = reader["NOTES"].ToString(),
+                                    complaint = reader["COMPLAINT"].ToString(),
+                                    hhistory = reader["HISTORY"].ToString(),
+                                    onExamination = reader["ONEXAMINATION"].ToString(),
+                                    investigation = reader["INVESTIGATION"].ToString(),
+                                    diagnosis = reader["DIAGNOSIS"].ToString(),
+                                    treatmentPlan = reader["TREATMENTPLAN"].ToString(),
+                                };
+
+                                patientVisits.Add(visit);
+                            }
+
+                            return patientVisits;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error searching patients: {ex}");
+                throw;
+            }
+        }
+
+
         public static List<Patient> SearchPatients(string searchTerm)
         {
             try
@@ -1707,10 +1802,11 @@ namespace SmartClinic
                     connection.Open();
 
                     // Check if there are any existing prescriptions with matching attributes
-                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM PatientVisit WHERE ID = @ID AND VISIT = @VISIT AND COMPLAINT = @COMPLAINT AND HISTORY = @HISTORY AND ONEXAMINATION = @ONEXAMINATION AND INVESTIGATION = @INVESTIGATION AND DIAGNOSIS = @DIAGNOSIS AND TREATMENTPLAN = @TREATMENTPLAN AND MEDICINE = @MEDICINE AND ADVICE = @ADVICE AND FOLLOWUP = @FOLLOWUP AND NOTES = @NOTES;", connection))
+                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM PatientVisit WHERE ID = @ID AND VISIT = @VISIT AND NAME = @NAME AND COMPLAINT = @COMPLAINT AND HISTORY = @HISTORY AND ONEXAMINATION = @ONEXAMINATION AND INVESTIGATION = @INVESTIGATION AND DIAGNOSIS = @DIAGNOSIS AND TREATMENTPLAN = @TREATMENTPLAN AND MEDICINE = @MEDICINE AND ADVICE = @ADVICE AND FOLLOWUP = @FOLLOWUP AND NOTES = @NOTES;", connection))
                     {
                         checkCommand.Parameters.AddWithValue("@ID", prescription.Id);
                         checkCommand.Parameters.AddWithValue("@VISIT", prescription.visit);
+                        checkCommand.Parameters.AddWithValue("@NAME", prescription.Name);
                         checkCommand.Parameters.AddWithValue("@COMPLAINT", prescription.complaint);
                         checkCommand.Parameters.AddWithValue("@HISTORY", prescription.hhistory);
                         checkCommand.Parameters.AddWithValue("@ONEXAMINATION", prescription.onExamination);
@@ -1729,10 +1825,11 @@ namespace SmartClinic
                             prescription.prescriptionId = GeneratePrescriptionId(prescription.Id);
 
                             // Insert the prescription into the database
-                            using (var insertCommand = new SQLiteCommand("INSERT INTO PatientVisit (ID, VISIT, PRESCRIPTIONID, COMPLAINT, HISTORY, ONEXAMINATION, INVESTIGATION, DIAGNOSIS, TREATMENTPLAN, MEDICINE, ADVICE, FOLLOWUP, NOTES) VALUES (@ID, @VISIT, @PRESCRIPTIONID, @COMPLAINT, @HISTORY, @ONEXAMINATION, @INVESTIGATION, @DIAGNOSIS, @TREATMENTPLAN, @MEDICINE, @ADVICE, @FOLLOWUP, @NOTES);", connection))
+                            using (var insertCommand = new SQLiteCommand("INSERT INTO PatientVisit (ID, VISIT, NAME, PRESCRIPTIONID, COMPLAINT, HISTORY, ONEXAMINATION, INVESTIGATION, DIAGNOSIS, TREATMENTPLAN, MEDICINE, ADVICE, FOLLOWUP, NOTES) VALUES (@ID, @VISIT, @NAME, @PRESCRIPTIONID, @COMPLAINT, @HISTORY, @ONEXAMINATION, @INVESTIGATION, @DIAGNOSIS, @TREATMENTPLAN, @MEDICINE, @ADVICE, @FOLLOWUP, @NOTES);", connection))
                             {
                                 insertCommand.Parameters.AddWithValue("@ID", prescription.Id);
                                 insertCommand.Parameters.AddWithValue("@VISIT", prescription.visit);
+                                insertCommand.Parameters.AddWithValue("@NAME", prescription.Name);
                                 insertCommand.Parameters.AddWithValue("@PRESCRIPTIONID", prescription.prescriptionId);
                                 insertCommand.Parameters.AddWithValue("@COMPLAINT", prescription.complaint);
                                 insertCommand.Parameters.AddWithValue("@HISTORY", prescription.hhistory);
@@ -1747,6 +1844,7 @@ namespace SmartClinic
 
                                 insertCommand.ExecuteNonQuery();
                             }
+                            UpdatePatientLastVisit(prescription.Id, prescription.visit);
                         }
                         else
                         {
@@ -1763,7 +1861,30 @@ namespace SmartClinic
             }
         }
 
-        private static Int64 GeneratePrescriptionId(int id)
+        private static void UpdatePatientLastVisit(int id, DateTime visit)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var updateCommand = new SQLiteCommand("UPDATE Patient SET LastVisit = @LastVisit WHERE ID = @ID;", connection))
+                    {
+                        updateCommand.Parameters.AddWithValue("@LastVisit", visit);
+                        updateCommand.Parameters.AddWithValue("@ID", id);
+                        updateCommand.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to Update last visit");
+            }
+        }
+
+
+         private static Int64 GeneratePrescriptionId(int id)
         {
             try
             {

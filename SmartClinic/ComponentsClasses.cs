@@ -368,6 +368,7 @@ namespace SmartClinic
         public string Phone { get; set; }
         public string Address { get; set; }
         public string Blood { get; set; }
+        public DateTime LastVisit { get; set; } // New property for LastVisit date
 
         public bool IsSelected
         {
@@ -381,6 +382,7 @@ namespace SmartClinic
                 }
             }
         }
+
         public class PatientEventArgs : EventArgs
         {
             public Patient NewPatient { get; set; }
@@ -395,6 +397,7 @@ namespace SmartClinic
         }
     }
 
+
     public class DummyMedicine
     {
         public string MedicineName { get; set; }
@@ -404,6 +407,7 @@ namespace SmartClinic
 
     public class PatientVisit:INotifyPropertyChanged
     {
+        public string Name { get; set; }
         public int Id { get; set; }
         public string medicine { get; set; }
         public string advice { get; set; }
@@ -415,6 +419,7 @@ namespace SmartClinic
         public string investigation { get; set; }
         public string diagnosis { get; set; }
         public string treatmentPlan { get; set; }
+
         private DateTime _visit;
         public Int64 prescriptionId { get; set; }
 

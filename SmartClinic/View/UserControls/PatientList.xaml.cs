@@ -6,25 +6,12 @@ namespace SmartClinic
     public partial class PatientList : Window
     {
         public ObservableCollection<Patient> Patients { get; set; }
-        public ObservableCollection<Medicine> Medicines { get; set; }
-
-
         public PatientList()
         {
             InitializeComponent();
             DataContext = this;
-
-            // Initialize Patients collection by fetching from the database
-            Patients = new ObservableCollection<Patient>(DatabaseHelper.GetAllPatients());
-
-            // Initialize Medicines collection by fetching from the database
-            Medicines = new ObservableCollection<Medicine>(DatabaseHelper.GetInitialMedicines());
-
-            // Set the ItemsSource of the ListView to the Patients collection
+            Patients = new ObservableCollection<Patient>(DatabaseHelper.GetPatientsByLastVisitedDate(1));
             PatientListView.ItemsSource = Patients;
-
-            // Set the ItemsSource of the MedicineListView to the Medicines collection
-            //PatientListView.ItemsSource = Medicines;  // Fix here
         }
 
         private void OnclickAddPatient(object sender, RoutedEventArgs e)
@@ -63,6 +50,12 @@ namespace SmartClinic
         private void PatientList_MouseDown(object sender, RoutedEventArgs e)
         {
             // Handle mouse down event for the entire window
+        }
+
+        private void OnNavigationButtonClick(object sender, RoutedEventArgs e)
+        {
+            // Handle navigation button click
+            // You can implement logic to switch between pages of patients
         }
     }
 }

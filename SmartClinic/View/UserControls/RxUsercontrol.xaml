@@ -29,36 +29,54 @@
                 <Button x:Name="prescription1" Content="New Prescription" Margin="0,0,10,0" BorderBrush="{x:Null}" Foreground="#FF1A1840" FontWeight="Bold" Background="{x:Null}" Click="RefreshWholeWindow_Click"/>
                 <!-- Add margin to create space between buttons -->
                 <Button Content="Print Preview" Margin="0,0,10,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF5556C1" FontSize="10" FontWeight="Bold" Click="PrintPreview_Click"/>
-                <TextBox x:Name="menubarbox" Padding="0,3,0,0" Text="" Height="25" Background="#FFCADAE4" Width="96" Opacity="0.5" SelectionOpacity="-6" VerticalAlignment="Center" SelectionBrush="#FF7E94A5" GotFocus="textBox_GotFocus" LostFocus="textBox_LostFocus"  TextChanged="PrescriptionSearchStringChanged"/>
+                <TextBox x:Name="menubarbox" Padding="0,3,0,0" Text="" Height="25" Background="#FFCADAE4" Width="96" Opacity="0.5" SelectionOpacity="-6" VerticalAlignment="Center" SelectionBrush="#FF7E94A5" TextChanged="PrescriptionSearchStringChanged"/>
             </StackPanel>
-            <Popup x:Name="PrescriptionSearchResultsPopup" PlacementTarget="{Binding ElementName=menubarbox}" Placement="Bottom" StaysOpen="False" Width="365" Margin="15" MaxHeight="350" Opened="prescriptionSearchResultsPopup_Opened">
-                <Border BorderThickness="0"  Background="White" BorderBrush="Wheat">
+            <Popup x:Name="PrescriptionSearchResultsPopup" PlacementTarget="{Binding ElementName=menubarbox}" Placement="Bottom" StaysOpen="False" Width="365" Margin="15" MaxHeight="350" Opened="PrescriptionSearchResultsPopup_Opened">
+                <Border BorderThickness="1" Background="White" BorderBrush="LightGray">
                     <ListView x:Name="PrescriptionSearchResultsListBox" Margin="5" BorderThickness="0" SelectionMode="Single" SelectionChanged="PrescriptionSearchResultsListBox_SelectionChanged">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
-                                <Setter Property="Margin" Value="0,0,0,2"/>
+                                <Setter Property="Margin" Value="0"/>
+                                <Setter Property="Padding" Value="5"/>
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="ListViewItem">
-                                            <Border x:Name="Border" BorderBrush="LightGray" BorderThickness="0,0,0,1" Padding="2" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                            <Border x:Name="Border" BorderThickness="0,0,0,1" Padding="5" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
                                                 <Grid>
-                                                    <TextBlock Text="{Binding PrescriptioId}" Margin="2,-15,0,0" FontStyle="Italic" Grid.Row="1" FontWeight="SemiBold" Foreground="#AA2D2727"/>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="50*"/>
+                                                        <ColumnDefinition Width="50*"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Name}" FontWeight="Bold" Foreground="#2D2727"/>
+                                                    </StackPanel>
+
+                                                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding prescriptionId}" FontStyle="Italic" FontWeight="SemiBold" Foreground="#2D2727"/>
+                                                    </StackPanel>
                                                 </Grid>
                                             </Border>
+
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="True">
                                                     <Setter TargetName="Border" Property="Background" Value="#E8F0FE"/>
+                                                </Trigger>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter TargetName="Border" Property="Background" Value="#0078D7"/>
+                                                    <Setter Property="Foreground" Value="White"/>
                                                 </Trigger>
                                             </ControlTemplate.Triggers>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
-                                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
                             </Style>
                         </ListView.ItemContainerStyle>
                     </ListView>
                 </Border>
             </Popup>
+
+
 
         </Grid>
 
