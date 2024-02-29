@@ -117,12 +117,12 @@ namespace SmartClinic.View.UserControls
         {
             if(e.Delta > 0)
             {
-                MessageBox.Show("MouseWheel Up");
+                //MessageBox.Show("MouseWheel Up");
                 PatientListScrollviewer.LineDown();
             }
             else
             {
-                MessageBox.Show("MouseWheel Down");
+                //MessageBox.Show("MouseWheel Down");
                 PatientListScrollviewer.LineUp();
             }
         }

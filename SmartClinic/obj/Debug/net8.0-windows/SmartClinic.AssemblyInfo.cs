@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartClinic")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a21be4c42028ecd5c6c438c30fbc3df18899187")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b8c64850f94a5adfac8c449cf1d7f46f38376aa3")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartClinic")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartClinic")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
