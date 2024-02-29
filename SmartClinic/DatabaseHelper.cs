@@ -541,6 +541,94 @@ namespace SmartClinic
             }
         }
 
+        public static List<Patient> GetPatientByIdNear(int id)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT * FROM Patient WHERE ID LIKE @Id;", connection))
+                    {
+                        command.Parameters.AddWithValue("@Id", $"{id}%");
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<Patient> patients = new List<Patient>();
+
+                            while (reader.Read())
+                            {
+                                Patient patient = new Patient
+                                {
+                                    Id = Convert.ToInt32(reader["ID"]),
+                                    Name = reader["Name"].ToString(),
+                                    Age = reader["Age"].ToString(),
+                                    Phone = reader["Phone"].ToString(),
+                                    Address = reader["Address"].ToString(),
+                                    Blood = reader["Blood"].ToString(),
+                                    LastVisit = Convert.ToDateTime(reader["LastVisit"])
+                                };
+
+                                patients.Add(patient);
+                            }
+
+                            return patients;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching patient: {ex}");
+                throw;
+            }
+        }
+
+        public static List<Patient> GetPatientsByName(string name)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT * FROM Patient WHERE Name LIKE @Name;", connection))
+                    {
+                        command.Parameters.AddWithValue("@Name", $"%{name}%");
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<Patient> patients = new List<Patient>();
+
+                            while (reader.Read())
+                            {
+                                Patient patient = new Patient
+                                {
+                                    Id = Convert.ToInt32(reader["ID"]),
+                                    Name = reader["Name"].ToString(),
+                                    Age = reader["Age"].ToString(),
+                                    Phone = reader["Phone"].ToString(),
+                                    Address = reader["Address"].ToString(),
+                                    Blood = reader["Blood"].ToString(),
+                                    LastVisit = Convert.ToDateTime(reader["LastVisit"])
+                                };
+
+                                patients.Add(patient);
+                            }
+
+                            return patients;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching patient information: {ex}");
+                throw;
+            }
+        }
+
         public static int GetPatientVisitsByVisit(string startdate, string enddate)
         {
             try

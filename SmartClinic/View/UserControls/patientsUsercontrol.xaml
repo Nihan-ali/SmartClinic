@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="1000">
 
-    <ScrollViewer x:Name="PatientListScrollviewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer x:Name="PatientListScrollviewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
         <Grid Background="White" Margin="50,2,50,2" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -27,7 +27,7 @@
             </Grid>
 
             <!-- Search Section -->
-            <TextBox x:Name="SearchPatient" Text="Search from patient" Grid.Row="1" Margin="10" Height="25" BorderBrush="Blue" GotFocus="OnSearchTextBoxGotFocus" LostFocus="OnSearchTextBoxLostFocus"/>
+            <TextBox x:Name="SearchPatient" Text="" Grid.Row="1" Height="25" BorderBrush="Blue" TextChanged="SearchPatient_TextChanged" GotFocus="OnSearchTextBoxGotFocus" LostFocus="OnSearchTextBoxLostFocus"/>
 
             <!-- Patient List -->
             <!-- Patient List -->

@@ -22,7 +22,6 @@ namespace SmartClinic.View.UserControls
 
         private void UpdateListView(int n)
         {
-            MessageBox.Show("UpdateListView "+n.ToString());
             Patients = new ObservableCollection<Patient>(DatabaseHelper.GetPatientsByLastVisitedDate(n));
             PatientsListBox.ItemsSource = Patients;
 
@@ -117,16 +116,35 @@ namespace SmartClinic.View.UserControls
         {
             if(e.Delta > 0)
             {
-                //MessageBox.Show("MouseWheel Up");
                 PatientListScrollviewer.LineDown();
             }
             else
             {
-                //MessageBox.Show("MouseWheel Down");
                 PatientListScrollviewer.LineUp();
             }
         }
 
+        private void SearchPatient_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (SearchPatient.Text != "search Patient" && SearchPatient.Text != "")
+            {
+                Patients = new ObservableCollection<Patient>(DatabaseHelper.GetPatientsByName(SearchPatient.Text));
+                if(Patients.Count > 0)
+                {
+                    PatientsListBox.ItemsSource = Patients;
+                }
+                else if (Patients.Count == 0)
+                {
+                    if (int.TryParse(SearchPatient.Text, out int searchId))
+                    {
+                        Patients.Clear();
+                        Patients = new ObservableCollection<Patient>(DatabaseHelper.GetPatientByIdNear(searchId));
+                        PatientsListBox.ItemsSource = Patients;
+                    }
+                }
+
+            }
+        }
 
 
     }
