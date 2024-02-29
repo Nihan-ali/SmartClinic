@@ -61,7 +61,16 @@
     <Compile Update="View\UserControls\patientsUsercontrol.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\UserControls\Prescription.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\UserControls\Printer.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\UserControls\PrintFooter.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\UserControls\PrintHeader.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\RxUsercontrol.xaml.cs">
@@ -141,7 +150,16 @@
     <Page Update="View\UserControls\patientsUsercontrol.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\UserControls\Prescription.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\UserControls\Printer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserControls\PrintFooter.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserControls\PrintHeader.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\RxUsercontrol.xaml">

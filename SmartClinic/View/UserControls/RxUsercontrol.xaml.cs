@@ -21,6 +21,12 @@ using System.Windows.Controls.Primitives;
 using System.Printing;
 using static SmartClinic.Patient;
 using Org.BouncyCastle.Asn1.Crmf;
+using System.Windows.Xps;
+using System.IO;
+using System.Windows.Xps.Packaging;
+using System.Windows.Markup;
+using System.Xml;
+using System.Text.RegularExpressions;
 
 namespace SmartClinic.View.UserControls
 {
@@ -881,33 +887,75 @@ namespace SmartClinic.View.UserControls
 
         }
 
-        private void PrintPrescription_Click(object sender, RoutedEventArgs e)
-        {
-            // Instantiate the Printer window
-            Printer printDialog = new Printer();
+        //private void PrintPrescription_Click(object sender, RoutedEventArgs e)
+        //{
+        //    // Instantiate the Printer window
+        //    Printer printDialog = new Printer();
 
-            // Handle the ContentRendered event
-            printDialog.ContentRendered += (s, args) =>
-            {
-                // Once content is rendered, trigger printing
-                printDialog.PrintButton_Click(newPatient, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes);
+        //    // Handle the ContentRendered event
+        //    printDialog.ContentRendered += (s, args) =>
+        //    {
+        //        // Once content is rendered, trigger printing
+        //        printDialog.PrintButton_Click(newPatient, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes);
 
-                // Close the window after printing
-                printDialog.Close();
-            };
+        //        // Close the window after printing
+        //        printDialog.Close();
+        //    };
 
-            // Make the window invisible
-            printDialog.Visibility = Visibility.Hidden;
+        //    // Make the window invisible
+        //    printDialog.Visibility = Visibility.Hidden;
 
-            // Show the window (this will trigger rendering)
-            printDialog.Show();
-        }
+        //    // Show the window (this will trigger rendering)
+        //    printDialog.Show();
+        //}
 
         private void PrintPreview_Click(object sender, RoutedEventArgs e)
         {
-            Printer printDialog = new Printer(newPatient, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes);
-            printDialog.ShowDialog();
+            //Printer printDialog = new Printer(newPatient, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes);
+            Prescription printDialog = new Prescription(newPatient, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes);
+            //printDialog.ShowDialog();
         }
+        private void PrintPrescription_Click(object sender, RoutedEventArgs e)
+        {
+            UserControl header = new PrintHeader();
+            UserControl footer = new PrintFooter();
+            UserControl prescriptionContent = new Prescription(newPatient, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes);
+
+            PrintDialog printDialog = new PrintDialog();
+
+            if (printDialog.ShowDialog() == true)
+            {
+                DocumentPaginator paginator = new PrescriptionDocumentPaginator(header, footer, prescriptionContent);
+
+                FixedDocument fixedDocument = new FixedDocument();
+                PageContent pageContent = new PageContent();
+
+                // Create a new FixedPage
+                FixedPage fixedPage = new FixedPage();
+
+                // Convert the Visual to UIElement and add it to the FixedPage
+                UIElement uiElement = paginator.GetPage(0).Visual as UIElement;
+                fixedPage.Children.Add(uiElement);
+
+                // Add the FixedPage to the PageContent
+                ((IAddChild)pageContent).AddChild(fixedPage);
+
+                // Add the PageContent to the FixedDocument
+                fixedDocument.Pages.Add(pageContent);
+
+                printDialog.PrintDocument(fixedDocument.DocumentPaginator, "Prescription Print Job");
+            }
+        }
+
+
+
+
+
+
+
+
+
+
 
 
 

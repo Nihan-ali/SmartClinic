@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="SmartClinic.View.UserControls.PrintHeader"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SmartClinic.View.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Assuming title, patientInfo, History, medicine, savePrint, and Footer are UserControl classes -->
+
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Vertical">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Black">
+           "WHO makes (you) ill, regulates all things. Pray to HIM"
+                </TextBlock>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Black">
+            "যিনি রোগ দিয়েছেন, তিনিই সবকিছু করেন। তাঁরই করুণা যাচেন।"
+                </TextBlock>
+            </StackPanel>
+
+        </Grid>
+
+        <!--title xaml-->
+        <Grid Grid.Row="1" Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <StackPanel Margin="20,0,0,0">
+                    <Label x:Name="docname" Content="DR. ABU NOYEM MOHAMMAD" FontWeight="DemiBold" Foreground="ForestGreen" FontSize="20" Margin="0,0,0,-10" />
+                    <Label x:Name="docdegree" Content="MBBS; DEM(Endocrinology &amp; Metabolism)" Margin="0,-5,0,0" FontStyle="Italic" FontWeight="DemiBold" />
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="1">
+                <StackPanel HorizontalAlignment="Right" Margin="0,0,20,0">
+                    <Label x:Name="docname_bangla" Content="ডা.আবু নঈম মোহাম্মাদ" FontWeight="DemiBold" Foreground="ForestGreen" FontSize="20" Margin="0,0,0,-8" />
+                    <Label x:Name="docdegree_bangla" Content="এমবিবিএস; ডি.ই.এম(এন্ডোক্রাইনোলজি &amp; মেটাবোলিজম)" HorizontalAlignment="Right" Margin="0,-5,0,0" FontWeight="Bold" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <StackPanel Orientation="Vertical">
+                <Label x:Name="docdetail" Content='Consultant-"Diabetologist, Endocrionologist &amp; Metabolic Disorder Specialist"' FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Center"/>
+                <Label x:Name="docdetail_bangla" Content='ডায়াবেটিস, হরমোন ও মেডিসিন বিশেষজ্ঞ' Margin="-5" FontSize="15" Foreground="ForestGreen" FontWeight="DemiBold" HorizontalAlignment="Center"/>
+                <Label x:Name="moredetail_bangla" Content="আবাসিক চিকিৎসক - আর.পি (মেডিসিন), এম.এ.জি ওসমানী মেডিকেল কলেজ হাসপাতাল, সিলেট" HorizontalAlignment="Center" Margin="0,-5,0,0"/>
+            </StackPanel>
+        </Grid>
+        <Border Grid.Row="2" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="0,1,0,0" />
+    </Grid>
+</UserControl>

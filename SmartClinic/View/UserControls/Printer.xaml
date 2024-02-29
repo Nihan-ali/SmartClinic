@@ -11,12 +11,12 @@
     </Window.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="6*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="65*"/>
-            <RowDefinition Height="12*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition MinHeight="200" Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- Assuming title, patientInfo, History, medicine, savePrint, and Footer are UserControl classes -->
@@ -24,7 +24,7 @@
         <Grid Grid.Row="0">
             <StackPanel Orientation="Vertical">
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Black">
-                   "WHO makes (you) ill, regulates all things. Pray to HIM।"
+                   "WHO makes (you) ill, regulates all things. Pray to HIM"
                 </TextBlock>
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Black">
                     "যিনি রোগ দিয়েছেন, তিনিই সবকিছু করেন। তাঁরই করুণা যাচেন।"
