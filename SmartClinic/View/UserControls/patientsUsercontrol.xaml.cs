@@ -17,8 +17,18 @@ namespace SmartClinic.View.UserControls
             SearchPatient.Opacity = 0.5;
             UpdateListView(n);
 
+            // Subscribe to the Loaded event
+            Loaded += PatientsUserControl_Loaded;
         }
-        
+
+        private void PatientsUserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Set focus to the SearchPatient TextBox
+            SearchPatient.Focus();
+            Keyboard.Focus(SearchPatient);
+        }
+
+
 
         private void UpdateListView(int n)
         {
@@ -63,7 +73,7 @@ namespace SmartClinic.View.UserControls
         }
         private void OnSearchTextBoxGotFocus(object sender, RoutedEventArgs e)
         {
-            // Handle search text box got focus
+
             if (SearchPatient.Text == "search Patient")
             {
                 SearchPatient.Text = "";

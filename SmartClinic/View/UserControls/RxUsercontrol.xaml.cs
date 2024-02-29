@@ -333,7 +333,6 @@ namespace SmartClinic.View.UserControls
         {
             if (patient != null)
             {
-                MessageBox.Show("i am here kire vai " + patient.Name);
                 AddPatientButton.Content = patient.Name;
                 AddPatientButton.Foreground = Brushes.Black;
                 age.Text = patient.Age;

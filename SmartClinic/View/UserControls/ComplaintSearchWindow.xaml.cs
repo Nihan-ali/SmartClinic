@@ -33,10 +33,17 @@ namespace SmartClinic.View.UserControls
             displayedComplaints = new ObservableCollection<Complaint>(initialComplaints);
             selectedComplaints = new ObservableCollection<Complaint>();
             UpdateComplaintItems();
+            Loaded += ComplaintSearchWindow_Loaded;
         }
         public void UpdateComplaintItems()
         {
             complaintItemsControl.ItemsSource = displayedComplaints;
+        }
+
+        private void ComplaintSearchWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            searchTextBox.Focus();
+            Keyboard.Focus(searchTextBox);
         }
 
         private void EnterPressed(object sender, KeyEventArgs e)

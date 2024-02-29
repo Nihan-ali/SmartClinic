@@ -27,7 +27,7 @@
             </Grid>
 
             <!-- Search Section -->
-            <TextBox x:Name="SearchPatient" Text="" Grid.Row="1" Height="25" BorderBrush="Blue" TextChanged="SearchPatient_TextChanged" GotFocus="OnSearchTextBoxGotFocus" LostFocus="OnSearchTextBoxLostFocus"/>
+            <TextBox x:Name="SearchPatient" Text="" Loaded="PatientsUserControl_Loaded" Grid.Row="1" Margin="10" Padding="2,3,0,0" Height="25" BorderBrush="Blue" TextChanged="SearchPatient_TextChanged" GotFocus="OnSearchTextBoxGotFocus" LostFocus="OnSearchTextBoxLostFocus"/>
 
             <!-- Patient List -->
             <!-- Patient List -->
