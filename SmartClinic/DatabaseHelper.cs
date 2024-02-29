@@ -103,7 +103,7 @@ namespace SmartClinic
             {
                 connection.Open();
 
-                string query = "SELECT Content, Occurrence FROM ChiefComplaint ORDER BY Occurrence DESC LIMIT 50";
+                string query = "SELECT Content, Occurrence FROM ChiefComplaint ORDER BY Occurrence DESC LIMIT 30";
 
                 using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 using (SQLiteDataReader reader = command.ExecuteReader())
@@ -131,7 +131,7 @@ namespace SmartClinic
             {
                 connection.Open();
 
-                string query = "SELECT Content, Occurrence FROM History ORDER BY Occurrence DESC LIMIT 50";
+                string query = "SELECT Content, Occurrence FROM History ORDER BY Occurrence DESC LIMIT 30";
 
                 using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 using (SQLiteDataReader reader = command.ExecuteReader())
@@ -159,7 +159,7 @@ namespace SmartClinic
             {
                 connection.Open();
 
-                string query = "SELECT Content, Occurrence FROM OnExamination ORDER BY Occurrence DESC LIMIT 50";
+                string query = "SELECT Content, Occurrence FROM OnExamination ORDER BY Occurrence DESC LIMIT 30";
 
                 using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 using (SQLiteDataReader reader = command.ExecuteReader())
@@ -187,7 +187,7 @@ namespace SmartClinic
             {
                 connection.Open();
 
-                string query = "SELECT Content, Occurrence FROM Investigation ORDER BY Occurrence DESC LIMIT 50";
+                string query = "SELECT Content, Occurrence FROM Investigation ORDER BY Occurrence DESC LIMIT 30";
 
                 using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 using (SQLiteDataReader reader = command.ExecuteReader())
@@ -215,7 +215,7 @@ namespace SmartClinic
             {
                 connection.Open();
 
-                string query = "SELECT Content, Occurrence FROM Diagnosis ORDER BY Occurrence DESC LIMIT 50";
+                string query = "SELECT Content, Occurrence FROM Diagnosis ORDER BY Occurrence DESC LIMIT 30";
 
                 using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 using (SQLiteDataReader reader = command.ExecuteReader())
@@ -243,7 +243,7 @@ namespace SmartClinic
             {
                 connection.Open();
 
-                string query = "SELECT Content, Occurrence FROM TreatmentPlan ORDER BY Occurrence DESC LIMIT 50";
+                string query = "SELECT Content, Occurrence FROM TreatmentPlan ORDER BY Occurrence DESC LIMIT 30";
 
                 using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 using (SQLiteDataReader reader = command.ExecuteReader())
@@ -270,7 +270,7 @@ namespace SmartClinic
             using (var connection = GetConnection())
             {
                 connection.Open();
-                using (var command = new SQLiteCommand("SELECT * FROM Medicine LIMIT 45;", connection))
+                using (var command = new SQLiteCommand("SELECT * FROM Medicine ORDER BY Occurrence DESC LIMIT 30;", connection))
                 {
                     using (var reader = command.ExecuteReader())
                     {
@@ -303,7 +303,7 @@ namespace SmartClinic
             using (var connection = GetConnection())
             {
                 connection.Open();
-                using (var command = new SQLiteCommand("SELECT * FROM MedicineGroup LIMIT 45;", connection))
+                using (var command = new SQLiteCommand("SELECT * FROM MedicineGroup ORDER BY Occurrence DESC LIMIT 30;", connection))
                 {
                     using (var reader = command.ExecuteReader())
                     {
@@ -331,7 +331,7 @@ namespace SmartClinic
             {
                 connection.Open();
 
-                string query = "SELECT Content, Occurrence FROM Advices ORDER BY Occurrence DESC LIMIT 20";
+                string query = "SELECT Content, Occurrence FROM Advices ORDER BY Occurrence DESC LIMIT 30";
 
                 using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 using (SQLiteDataReader reader = command.ExecuteReader())
@@ -359,7 +359,7 @@ namespace SmartClinic
             {
                 connection.Open();
 
-                string query = "SELECT Content, Occurrence FROM FollowUp ORDER BY Occurrence DESC LIMIT 20";
+                string query = "SELECT Content, Occurrence FROM FollowUp ORDER BY Occurrence DESC LIMIT 30";
 
                 using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 using (SQLiteDataReader reader = command.ExecuteReader())
@@ -387,7 +387,7 @@ namespace SmartClinic
             {
                 connection.Open();
 
-                string query = "SELECT Content, Occurrence FROM SpecialNotes ORDER BY Occurrence DESC LIMIT 20";
+                string query = "SELECT Content, Occurrence FROM SpecialNotes ORDER BY Occurrence DESC LIMIT 30";
 
                 using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 using (SQLiteDataReader reader = command.ExecuteReader())
@@ -406,46 +406,6 @@ namespace SmartClinic
             }
 
             return initialSpecialNotes;
-        }
-        public static List<Patient> GetAllPatients()
-        {
-            try
-            {
-                using (var connection = GetConnection())
-                {
-                    connection.Open();
-
-                    using (var command = new SQLiteCommand("SELECT * FROM Patient;", connection))
-                    {
-                        using (var reader = command.ExecuteReader())
-                        {
-                            List<Patient> patients = new List<Patient>();
-
-                            while (reader.Read())
-                            {
-                                Patient patient = new Patient
-                                {
-                                    Id = Convert.ToInt32(reader["ID"]),
-                                    Name = reader["Name"].ToString(),
-                                    Age = reader["Age"].ToString(),
-                                    Phone = reader["Phone"].ToString(),
-                                    Address = reader["Address"].ToString(),
-                                    Blood = reader["Blood"].ToString()
-                                };
-
-                                patients.Add(patient);
-                            }
-
-                            return patients;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error fetching patient information: {ex}");
-                throw;
-            }
         }
         public static List<PatientVisit> GetPatientVisitsById(int patientId)
         {
@@ -1355,6 +1315,34 @@ namespace SmartClinic
             }
         }
 
+        public static void IncreaseMedicineOccurrence(ObservableCollection<Medicine> medicine)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    foreach (var medicineItem in medicine)
+                    {
+                        using (var updateCommand = new SQLiteCommand("UPDATE Medicine SET Occurrence = Occurrence + 1 WHERE BrandName = @BrandName AND GenericName = @GenericName AND Strength = @Strength;", connection))
+                        {
+                            updateCommand.Parameters.AddWithValue("@BrandName", medicineItem.BrandName);
+                            updateCommand.Parameters.AddWithValue("@GenericName", medicineItem.GenericName);
+                            updateCommand.Parameters.AddWithValue("@Strength", medicineItem.Strength);
+                            updateCommand.ExecuteNonQuery();
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error increasing medicine occurrence: {ex}");
+                throw;
+            }
+        }
+
 
 
         public static List<Medicine> SearchMedicines(string searchTerm, MedicineSearchCriteria searchCriteria)
@@ -1464,8 +1452,6 @@ namespace SmartClinic
                 throw;
             }
         }
-
-
         public static List<Patient> SearchPatients(string searchTerm)
         {
             try
@@ -1505,6 +1491,44 @@ namespace SmartClinic
             catch (Exception ex)
             {
                 Console.WriteLine($"Error searching patients: {ex}");
+                throw;
+            }
+        }
+        public static List<Advice> SearchAdvices(string searchTerm)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT * FROM Advices WHERE Content LIKE @SearchTerm;", connection))
+                    {
+                        command.Parameters.AddWithValue("@SearchTerm", $"%{searchTerm}%");
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<Advice> advices = new List<Advice>();
+
+                            while (reader.Read())
+                            {
+                                Advice advice = new Advice
+                                {
+                                    Content = reader["Content"].ToString(),
+                                    Occurrence = Convert.ToInt32(reader["Occurrence"])
+                                };
+
+                                advices.Add(advice);
+                            }
+
+                            return advices;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error searching advices: {ex}");
                 throw;
             }
         }

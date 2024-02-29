@@ -29,8 +29,14 @@ namespace SmartClinic.View.UserControls
             displayedExaminations = new ObservableCollection<Examination>(initialExaminations);
             selectedExaminations = new ObservableCollection<Examination>();
             UpdateExaminationItems();
+            Loaded += ExaminationSearchWindow_Loaded;
         }
 
+        private void ExaminationSearchWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            searchTextBox.Focus();
+            Keyboard.Focus(searchTextBox);
+        }
         private void addToExamination_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

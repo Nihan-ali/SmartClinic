@@ -28,6 +28,13 @@ namespace SmartClinic.View.UserControls
             selectedAdvices = new ObservableCollection<Advice>();
 
             UpdateAdviceItems();
+            Loaded += AdviceSearchWindow_Loaded;
+        }
+
+        private void AdviceSearchWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            searchTextBox.Focus();
+            Keyboard.Focus(searchTextBox);
         }
 
         private void UpdateAdviceItems()
@@ -35,18 +42,29 @@ namespace SmartClinic.View.UserControls
             adviceItemsControl.ItemsSource = displayedAdvices;
         }
 
-        private void SearchAdvices(string keyword)
+        private void SearchAdvices(string Content)
         {
-            displayedAdvices = new ObservableCollection<Advice>(
-                initialAdvices
-                .Where(advice => advice.Content.ToLower().Contains(keyword.ToLower()))
-                .OrderByDescending(advice => advice.Occurrence)
-                .Take(20)
-                .ToList());
+            if(Content != "")
+            {
+                var searchedAdvices = DatabaseHelper.SearchAdvices(Content);
+                displayedAdvices.Clear(); // Clear the existing items in displayedAdvices
+                foreach (var advice in searchedAdvices)
+                {
+                    displayedAdvices.Add(advice); // Add each advice from the search result
+                }
+                UpdateAdviceItems();
+            }
+            else
+            {
+                displayedAdvices.Clear(); // Clear the existing items in displayedAdvices
+                foreach (var advice in initialAdvices)
+                {
+                    displayedAdvices.Add(advice); // Add each advice from the initial advices
+                }
+                UpdateAdviceItems();
+            }
 
-            UpdateAdviceItems();
         }
-
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             SearchAdvices(searchTextBox.Text);
@@ -56,14 +74,32 @@ namespace SmartClinic.View.UserControls
         {
             if (Key.Enter == e.Key)
             {
-                string advice = searchTextBox.Text;
-                Advice selectedAdvice = new Advice();
-                selectedAdvice.Content = advice;
-                SelectedAdvices.Add(selectedAdvice);
-                DatabaseHelper.AddAdvice(advice);
+                string adviceContent = searchTextBox.Text;
+
+                Advice newAdvice = new Advice() { Content = adviceContent, IsSelected = true };
+                initialAdvices.Add(newAdvice);
+                selectedAdvices.Add(newAdvice);
+                DatabaseHelper.AddAdvice(newAdvice.Content);
+
+                foreach (var selectedAdvice in selectedAdvices)
+                {
+                    if (selectedAdvice.Content == newAdvice.Content)
+                    {
+                        selectedAdvice.IsSelected = true;
+                        break;
+                    }
+                }
+
+                SearchAdvices(searchTextBox.Text);
+
+                // Update the adviceItemsControl.ItemsSource with the updated displayedAdvices
+                UpdateAdviceItems();
+
+                // Clear the search text box
                 searchTextBox.Text = "";
             }
         }
+
 
         private void ToggleButton_Click(object sender, RoutedEventArgs e)
         {

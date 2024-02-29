@@ -27,8 +27,14 @@ namespace SmartClinic.View.UserControls
             selectedFollowUps = new ObservableCollection<FollowUp>();
 
             UpdateFollowUpItems();
+            Loaded += FollowUpSearchWindow_Loaded;
         }
 
+        private void FollowUpSearchWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            searchTextBox.Focus();
+            Keyboard.Focus(searchTextBox);
+        }
         private void UpdateFollowUpItems()
         {
             followUpItemsControl.ItemsSource = displayedFollowUps;

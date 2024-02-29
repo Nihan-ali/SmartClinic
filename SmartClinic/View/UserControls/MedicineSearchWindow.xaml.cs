@@ -34,8 +34,14 @@ namespace SmartClinic
             InitializeMedicineListView();
             medicinegroupscrollviewer.Visibility = Visibility.Hidden;
             medicinescrollviewer.Visibility = Visibility.Visible;
+            Loaded += MedicineSearchWindow_Loaded;
         }
 
+        private void MedicineSearchWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            searchTextBox.Focus();
+            Keyboard.Focus(searchTextBox);
+        }
         private void InitializeMedicineListView()
         {
             List<Medicine> initialMedicines = DatabaseHelper.GetInitialMedicines();
@@ -286,13 +292,18 @@ namespace SmartClinic
                 {
                     AddToSelectedMedicines(selectedMedicine);
                 }
-                this.Close();
             }
-            else
-            {
-                this.Close();
-            }
+
+            // Close the window
+            this.Close();
+
+            // Create an ObservableCollection for selected medicines
+            ObservableCollection<Medicine> selectedMedicinesCollection = new ObservableCollection<Medicine>(selectedMedicines);
+
+            // Pass the ObservableCollection to IncreaseMedicineOccurrence
+            DatabaseHelper.IncreaseMedicineOccurrence(selectedMedicinesCollection);
         }
+
 
         private void CreateMedicineGroup_Click(object sender, RoutedEventArgs e)
         {

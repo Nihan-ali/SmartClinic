@@ -20,7 +20,7 @@
             <Border BorderBrush="Blue" Width="340" BorderThickness="1" CornerRadius="15" Padding="0 0 20 0" Margin="50,2,20,3">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../search.png" Margin="5 0 0 0" Height="15" Width="15" VerticalAlignment="Center"/>
-                    <TextBox x:Name="searchTextBox" Width="350" HorizontalAlignment="Left" VerticalAlignment="Center" Background="White" BorderThickness="0" KeyDown="EnterPressed" TextChanged="SearchTextBox_TextChanged">
+                    <TextBox x:Name="searchTextBox" Loaded="DiagnosisSearchWindow_Loaded" Width="350" HorizontalAlignment="Left" VerticalAlignment="Center" Background="White" BorderThickness="0" KeyDown="EnterPressed" TextChanged="SearchTextBox_TextChanged">
                         <TextBox.Style>
                             <Style TargetType="TextBox">
                                 <Setter Property="Padding" Value="8,2"/>

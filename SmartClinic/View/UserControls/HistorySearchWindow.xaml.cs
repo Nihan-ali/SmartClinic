@@ -29,8 +29,14 @@ namespace SmartClinic.View.UserControls
             displayedHistoryItems = new ObservableCollection<history>(initialHistoryItems);
             selectedHistoryItems = new ObservableCollection<history>();
             UpdateHistoryItems();
+            Loaded += HistorySearchWindow_Loaded;
         }
 
+        private void HistorySearchWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            searchTextBox.Focus();
+            Keyboard.Focus(searchTextBox);
+        }
 
         public void UpdateHistoryItems()
         {

@@ -30,10 +30,29 @@ namespace SmartClinic
     }
 
 
-    public class Advice
+    public class Advice : INotifyPropertyChanged
     {
+        private bool isSelected;
+
+        public bool IsSelected
+        {
+            get { return isSelected; }
+            set
+            {
+                isSelected = value;
+                OnPropertyChanged("IsSelected");
+            }
+        }
+
         public string Content { get; set; }
         public int Occurrence { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
     public class Complaint
@@ -102,7 +121,7 @@ namespace SmartClinic
     public class Medicine : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
+        public int Occurrence { get; set; }
         private double morningDose;
         private double noonDose;
         private double nightDose;

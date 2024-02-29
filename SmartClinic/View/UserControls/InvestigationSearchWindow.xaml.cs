@@ -31,8 +31,14 @@ namespace SmartClinic.View.UserControls
             displayedInvestigations = new ObservableCollection<Investigation>(initialInvestigations);
             selectedInvestigations = new ObservableCollection<Investigation>();
             UpdateInvestigationItems();
+            Loaded += InvestigationSearchWindow_Loaded;
         }
 
+        private void InvestigationSearchWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            searchTextBox.Focus();
+            Keyboard.Focus(searchTextBox);
+        }
         public void UpdateInvestigationItems()
         {
             investigationItemsControl.ItemsSource = displayedInvestigations;

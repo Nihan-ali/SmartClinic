@@ -31,8 +31,14 @@ namespace SmartClinic.View.UserControls
             displayedDiagnoses = new ObservableCollection<Diagnosis>(initialDiagnoses);
             selectedDiagnoses = new ObservableCollection<Diagnosis>();
             UpdateDiagnosisItems();
+            Loaded += DiagnosisSearchWindow_Loaded;
         }
 
+        private void DiagnosisSearchWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            searchTextBox.Focus();
+            Keyboard.Focus(searchTextBox);
+        }
         public void UpdateDiagnosisItems()
         {
             diagnosisItemsControl.ItemsSource = displayedDiagnoses;

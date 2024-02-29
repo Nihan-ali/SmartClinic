@@ -140,33 +140,36 @@ namespace SmartClinic.View.UserControls
 
         private void textBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (menubarbox.Text == "Search Here")
+            if (menubarbox.Text == "Search Prescription")
             {
                 menubarbox.Text = "";
-                menubarbox.Opacity = 0.8;
+                menubarbox.Opacity = 1;
                 menubarbox.Foreground = Brushes.Black;
             }
         }
         private void textBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (menubarbox.Text == "")
-            {
-                menubarbox.Text = "Search Here";
-                menubarbox.Opacity = 0.5;
-                menubarbox.Foreground = Brushes.Gray;
+            menubarbox.Text = "Search Prescription";
+            menubarbox.Opacity = 0.7;
+            menubarbox.Foreground = Brushes.Gray;
 
-            }
         }
 
-        private void SearchResultsPopup_Loaded(object sender, RoutedEventArgs e)
+        private void PatientTextBoxGotFocus(object sender, RoutedEventArgs e)
         {
-            ListBox searchResultsListBox = FindChild<ListBox>(searchResultsPopup, "searchResultsListBox");
-
-            if (searchResultsListBox != null)
+            if (searchPatientTextBox.Text == "Search Patient")
             {
-                searchResultsListBox.SelectionChanged += searchResultsListBox_SelectionChanged;
+                searchPatientTextBox.Text = "";
+                searchPatientTextBox.Foreground = Brushes.Black;
             }
         }
+        private void PatientTextBoxLostFocus(object sender, RoutedEventArgs e)
+        {
+            searchPatientTextBox.Text = "Search Patient";
+            searchPatientTextBox.Opacity = 0.7;
+            searchPatientTextBox.Foreground = Brushes.Gray;
+        }
+
         private void searchResultsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (sender is ListBox listBox)
@@ -184,18 +187,21 @@ namespace SmartClinic.View.UserControls
         {
             string searchterm = searchPatientTextBox.Text;
             List<Patient> searchresults = DatabaseHelper.SearchPatients(searchterm);
+            if(searchterm != "Search Patient" && searchterm != "")
+            {
+                if (searchresults.Count > 0)
+                {
+                    // Handle the search results, e.g., update ListBox or other UI elements
+                    searchResultsListBox.ItemsSource = searchresults;
+                    searchResultsPopup.IsOpen = true;
+                }
+                else
+                {
+                    // Close the popup if there are no search results
+                    searchResultsPopup.IsOpen = false;
+                }
+            }
 
-            if (searchresults.Count > 0)
-            {
-                // Handle the search results, e.g., update ListBox or other UI elements
-                searchResultsListBox.ItemsSource = searchresults;
-                searchResultsPopup.IsOpen = true;
-            }
-            else
-            {
-                // Close the popup if there are no search results
-                searchResultsPopup.IsOpen = false;
-            }
         }
         private void searchResultsPopup_Opened(object sender, EventArgs e)
         {
@@ -215,15 +221,7 @@ namespace SmartClinic.View.UserControls
                 searchResultsPopup.IsOpen = false;
             }
         }
-        private void PrescriptionSearchResultsPopup_Loaded(object sender, RoutedEventArgs e)
-        {
-            ListBox PrescriptionSearchResultsListBox = FindChild<ListBox>(PrescriptionSearchResultsPopup, "PrescriptionSearchResultsListBox");
 
-            if (PrescriptionSearchResultsListBox != null)
-            {
-                PrescriptionSearchResultsListBox.SelectionChanged += PrescriptionSearchResultsListBox_SelectionChanged;
-            }
-        }
         private void PrescriptionSearchStringChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = menubarbox.Text;
@@ -292,8 +290,6 @@ namespace SmartClinic.View.UserControls
                 MessageBox.Show("PrescriptionSearchResultsPopup is not fully loaded!");
             }
         }
-
-
         private void PrescriptionSearchResultsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (sender is ListBox listBox)
@@ -302,7 +298,9 @@ namespace SmartClinic.View.UserControls
                 {
                     this.selectedPatientVisit = selectedPatientVisit;
                     this.newPatient = DatabaseHelper.GetPatientById(selectedPatientVisit.Id);
+                    PrescriptionSearchResultsPopup.IsOpen = false;
                     UpdateUI(newPatient, selectedPatientVisit);
+                    textBox_LostFocus(null, null);
                 }
             }
         }
@@ -340,9 +338,9 @@ namespace SmartClinic.View.UserControls
                 searchPatientTextBox.Text = "";
                 searchResultsPopup.IsOpen = false;
             }
+            PatientTextBoxLostFocus(null, null);
         }
 
-        //patientInfo cs
         private void AddPatientButton_Click(object sender, RoutedEventArgs e)
         {
             AddPatient addPatientWindow = new AddPatient();
@@ -357,25 +355,8 @@ namespace SmartClinic.View.UserControls
             this.newPatient = e.NewPatient;
             UpdatePatientInfo(e.NewPatient);
         }
-        private void OnSearchTextBoxGotFocus(object sender, RoutedEventArgs e)
-        {
-            if (searchPatientTextBox.Text == "Search Patient")
-            {
-                searchPatientTextBox.Text = "";
-                searchPatientTextBox.Foreground = Brushes.Black;
-            }
-        }
-        private void OnSearchTextBoxLostFocus(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(searchPatientTextBox.Text))
-            {
-                searchPatientTextBox.Text = "Search Patient";
-                searchPatientTextBox.Foreground = Brushes.Gray;
-            }
-        }
 
 
-        //history cs
         private void AddComplaint_Click(object sender, RoutedEventArgs e)
         {
             // Uncomment this block if you want to use it

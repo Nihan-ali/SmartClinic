@@ -53,7 +53,7 @@
 
         <Label Grid.Row="0" Content="Medicine Name" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         <Border Grid.Row="0" Grid.Column="1" BorderBrush="Transparent">
-            <TextBox x:Name="MedicineNameTextBox"/>
+            <TextBox x:Name="MedicineNameTextBox" Loaded="MedicineCreateWindow_Loaded"/>
         </Border>
 
         <Label Grid.Row="1" Content="Manufacturer Name" VerticalAlignment="Center" HorizontalAlignment="Left"/>

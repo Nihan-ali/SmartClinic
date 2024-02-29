@@ -24,6 +24,13 @@ namespace SmartClinic.View.UserControls
         public MedicineCreateWindow()
         {
             InitializeComponent();
+            Loaded += MedicineCreateWindow_Loaded;
+        }
+
+        private void MedicineCreateWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            MedicineNameTextBox.Focus();
+            Keyboard.Focus(MedicineNameTextBox);
         }
         private async void AddMedicineToDB_Click(object sender, RoutedEventArgs e)
         {
