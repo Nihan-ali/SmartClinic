@@ -27,6 +27,7 @@ using System.Windows.Xps.Packaging;
 using System.Windows.Markup;
 using System.Xml;
 using System.Text.RegularExpressions;
+using System.IO.Packaging;
 
 namespace SmartClinic.View.UserControls
 {
@@ -917,35 +918,138 @@ namespace SmartClinic.View.UserControls
         }
         private void PrintPrescription_Click(object sender, RoutedEventArgs e)
         {
+            // Create instances of your UserControls
             UserControl header = new PrintHeader();
             UserControl footer = new PrintFooter();
-            UserControl prescriptionContent = new Prescription(newPatient, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes);
 
+            // Create a FlowDocument
+            FlowDocument flowDocument = new FlowDocument();
+
+            // Add header to the FlowDocument
+            BlockUIContainer headerContainer = new BlockUIContainer(header);
+            flowDocument.Blocks.Add(headerContainer);
+
+            // Create a Section for the first page
+            Section firstPageSection = new Section();
+
+            // Calculate available height for the first page (excluding header and footer)
+            double availableHeightFirstPage = 11 * 96 - header.ActualHeight - footer.ActualHeight;
+
+            // Create a new instance of the Prescription UserControl for the first page
+            Prescription firstPagePrescription = CreatePrescriptionInstance(newPatient, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes);
+
+            // Set the margin to position it correctly
+            firstPagePrescription.Margin = new Thickness(0, header.ActualHeight, 0, 0);
+
+            // Add prescription content to the first page
+            firstPageSection.Blocks.Add(new BlockUIContainer(firstPagePrescription));
+
+            // Add the first page Section to the FlowDocument
+            flowDocument.Blocks.Add(firstPageSection);
+
+            // Add footer to the FlowDocument
+            BlockUIContainer footerContainer = new BlockUIContainer(footer);
+            flowDocument.Blocks.Add(footerContainer);
+
+            // Create a PrintDialog
             PrintDialog printDialog = new PrintDialog();
 
             if (printDialog.ShowDialog() == true)
             {
-                DocumentPaginator paginator = new PrescriptionDocumentPaginator(header, footer, prescriptionContent);
+                // Create a DocumentPaginator
+                DocumentPaginator paginator = ((IDocumentPaginatorSource)flowDocument).DocumentPaginator;
 
-                FixedDocument fixedDocument = new FixedDocument();
-                PageContent pageContent = new PageContent();
-
-                // Create a new FixedPage
-                FixedPage fixedPage = new FixedPage();
-
-                // Convert the Visual to UIElement and add it to the FixedPage
-                UIElement uiElement = paginator.GetPage(0).Visual as UIElement;
-                fixedPage.Children.Add(uiElement);
-
-                // Add the FixedPage to the PageContent
-                ((IAddChild)pageContent).AddChild(fixedPage);
-
-                // Add the PageContent to the FixedDocument
-                fixedDocument.Pages.Add(pageContent);
-
-                printDialog.PrintDocument(fixedDocument.DocumentPaginator, "Prescription Print Job");
+                // Print the document using PrintDocument
+                printDialog.PrintDocument(paginator, "Prescription Print Job");
             }
         }
+
+
+        private Prescription CreatePrescriptionInstance(Patient patient, List<Complaint> complaints, List<history> histories, List<Examination> examinations, List<Investigation> investigations, List<Diagnosis> diagnoses, List<Treatment> treatments, List<DummyMedicine> medicines, List<Advice> advices, List<FollowUp> followUps, List<SpecialNote> specialNotes)
+
+        {
+            // Create a new instance of the Prescription UserControl
+            Prescription prescription = new Prescription(newPatient, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes);
+
+            // Set any other properties or data for the instance
+
+            return prescription;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private UserControl CloneUserControl(UserControl source)
+        {
+            // Clone the UserControl
+            string xaml = XamlWriter.Save(source);
+            StringReader stringReader = new StringReader(xaml);
+            XmlReader xmlReader = XmlReader.Create(stringReader);
+            UIElement clonedElement = XamlReader.Load(xmlReader) as UIElement;
+
+            // Clear names to avoid conflicts
+            ClearNames(clonedElement);
+
+            return clonedElement as UserControl;
+        }
+
+        private void ClearNames(DependencyObject obj)
+        {
+            // Recursively clear names from the visual tree
+            if (obj is FrameworkElement element)
+            {
+                element.Name = null;
+            }
+
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                ClearNames(child);
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

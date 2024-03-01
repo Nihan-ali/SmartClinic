@@ -1,6 +1,7 @@
 ﻿using PdfSharp.Pdf.Content.Objects;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Printing;
 using System.Text;
@@ -10,18 +11,24 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace SmartClinic.View.UserControls
 {
     /// <summary>
     /// Interaction logic for Prescription.xaml
     /// </summary>
+    /// 
     public partial class Prescription : UserControl
     {
+
+
+        
         private Patient newPatient;
         private List<Complaint> selectedComplaints = new List<Complaint>();
         public List<Complaint> SelectedComplaints => selectedComplaints;
@@ -50,6 +57,7 @@ namespace SmartClinic.View.UserControls
         public List<Advice> SelectedAdvices => selectedAdvices;
         public List<FollowUp> SelectedFollowUps => selectedFollowUps;
         public List<SpecialNote> SelectedSpecialNotes => selectedSpecialNotes;
+
         public Prescription()
         {
             InitializeComponent();
@@ -259,5 +267,6 @@ namespace SmartClinic.View.UserControls
             printDialog.PrintVisual(this, "Prescription");
         }
     }
+
 
 }
