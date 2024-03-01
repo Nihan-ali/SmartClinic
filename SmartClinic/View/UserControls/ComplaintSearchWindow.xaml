@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartClinic.View.UserControls"
         mc:Ignorable="d"
-        Title="ComplaintSearchWindow" Height="450" Width="800">
+        Title="ComplaintSearchWindow" Height="450" Width="680">
 
 
     <Grid Background="White">

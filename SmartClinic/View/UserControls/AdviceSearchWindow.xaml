@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartClinic.View.UserControls"
         mc:Ignorable="d"
-        Title="AdviceSearchWindow" Height="250" Width="800">
+        Title="AdviceSearchWindow" Height="250" Width="680">
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

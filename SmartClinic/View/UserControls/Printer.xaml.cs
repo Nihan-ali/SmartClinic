@@ -109,7 +109,7 @@ namespace SmartClinic.View.UserControls
             {
                 PatientName.Text = newPatient.Name;
                 age.Text = newPatient.Age;
-                PatientId.Text = newPatient.Id.ToString();
+                PrescriptionId.Text = newPatient.Id.ToString();
             }
         }
         private void UpdateComplaintListViews()

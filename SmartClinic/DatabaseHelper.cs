@@ -331,7 +331,7 @@ namespace SmartClinic
             {
                 connection.Open();
 
-                string query = "SELECT Content, Occurrence FROM Advices ORDER BY Occurrence DESC LIMIT 30";
+                string query = "SELECT Content, Occurrence FROM Advices ORDER BY Occurrence DESC LIMIT 5";
 
                 using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 using (SQLiteDataReader reader = command.ExecuteReader())
