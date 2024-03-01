@@ -31,7 +31,15 @@ namespace SmartClinic
             DataContext = this;
             TodayDate = DateTime.Now.ToString("dd-MM-yyyy");
             rxUserControl = new RxUsercontrol();
+            rx.Background = Brushes.Red;
+            
             contentControl.Content = rxUserControl;
+        }
+        private void checking(object sender, RoutedEventArgs e)
+        {
+            rx.Foreground = Brushes.Purple;
+            rx.Background = Brushes.Red;
+
         }
 
         // MainWindow.xaml.cs
@@ -47,7 +55,7 @@ namespace SmartClinic
 
         private void PatientButton_Click(object sender, RoutedEventArgs e)
         {
-            // Set content to PatientUserControl
+            
             contentControl.Content = new View.UserControls.PatientsUserControl();
         }
 
