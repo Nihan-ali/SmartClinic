@@ -71,16 +71,27 @@ namespace SmartClinic.View.UserControls
             }
         }
 
-        private void SearchExamination(string keyword)
+        private void SearchExamination(string Content)
         {
-            displayedExaminations = new ObservableCollection<Examination>(
-                initialExaminations
-                .Where(examination => examination.Content.ToLower().Contains(keyword.ToLower()))
-                .OrderByDescending(examination => examination.Occurrence)
-                .Take(20)
-                .ToList());
-
-            UpdateExaminationItems();
+            if (Content != "")
+            {
+                var searchedExaminations = DatabaseHelper.SearchExaminations(Content);
+                displayedExaminations.Clear(); // Clear the existing items in displayedAdvices
+                foreach (var examination in searchedExaminations)
+                {
+                    displayedExaminations.Add(examination); // Add each advice from the search result
+                }
+                UpdateExaminationItems();
+            }
+            else
+            {
+                displayedExaminations.Clear(); // Clear the existing items in displayedAdvices
+                foreach (var examination in initialExaminations)
+                {
+                    displayedExaminations.Add(examination); // Add each advice from the initial advices
+                }
+                UpdateExaminationItems();
+            }
         }
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)

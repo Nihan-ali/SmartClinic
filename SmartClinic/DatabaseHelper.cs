@@ -63,12 +63,7 @@ namespace SmartClinic
                                                     CREATE TABLE IF NOT EXISTS TreatmentPlan (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
 
                                                     CREATE TABLE IF NOT EXISTS Patient (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Age TEXT, Address TEXT, Phone TEXT,Blood TEXT, LastVisit DATE);
-                                                    CREATE TABLE IF NOT EXISTS PatientVisit (
-                                                                                                ID INTEGER, VISIT DATE, PRESCRIPTIONID INTEGER PRIMARY KEY,
-                                                                                                MEDICINE TEXT, ADVICE TEXT, FOLLOWUP TEXT, NOTES TEXT, NAME TEXT,
-                                                                                                COMPLAINT TEXT, HISTORY TEXT, ONEXAMINATION TEXT, INVESTIGATION TEXT,
-                                                                                                DIAGNOSIS TEXT, TREATMENTPLAN TEXT,
-                                                                                            );";
+                                                    CREATE TABLE IF NOT EXISTS PatientVisit ( ID INTEGER, VISIT DATE, PRESCRIPTIONID INTEGER PRIMARY KEY, MEDICINE TEXT, ADVICE TEXT, FOLLOWUP TEXT, NOTES TEXT, NAME TEXT, COMPLAINT TEXT, HISTORY TEXT, ONEXAMINATION TEXT, INVESTIGATION TEXT,DIAGNOSIS TEXT, TREATMENTPLAN TEXT);";
                                                     
 
                                     command.CommandText = allQueries;
@@ -76,9 +71,10 @@ namespace SmartClinic
                                     // Execute the concatenated queries
                                     command.ExecuteNonQuery();
                                 }
-                                ImportMed.Import();
                             }
                         }
+                        ImportMed.Import();
+
                     }
 
                     Console.WriteLine($"Database file created at: {databaseFilePath}");
@@ -1504,7 +1500,7 @@ namespace SmartClinic
 
                     using (var command = new SQLiteCommand("SELECT * FROM Advices WHERE Content LIKE @SearchTerm;", connection))
                     {
-                        command.Parameters.AddWithValue("@SearchTerm", $"%{searchTerm}%");
+                        command.Parameters.AddWithValue("@SearchTerm", $"{searchTerm}%");
 
                         using (var reader = command.ExecuteReader())
                         {
@@ -1533,6 +1529,315 @@ namespace SmartClinic
             }
         }
 
+        // complaint, history, examamination, investigation, diagnosis, treatment
+        public static List<Complaint> SearchComplaints(string searchTerm)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT * FROM ChiefComplaint WHERE Content LIKE @SearchTerm;", connection))
+                    {
+                        command.Parameters.AddWithValue("@SearchTerm", $"{searchTerm}%");
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<Complaint> complaints = new List<Complaint>();
+
+                            while (reader.Read())
+                            {
+                                Complaint complaint = new Complaint
+                                {
+                                    Content = reader["Content"].ToString(),
+                                    Occurrence = Convert.ToInt32(reader["Occurrence"])
+                                };
+
+                                complaints.Add(complaint);
+                            }
+
+                            return complaints;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error searching complaints: {ex}");
+                throw;
+            }
+        }
+        public static List<history> SearchHistories(string searchTerm)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT * FROM History WHERE Content LIKE @SearchTerm;", connection))
+                    {
+                        command.Parameters.AddWithValue("@SearchTerm", $"{searchTerm}%");
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<history> histories = new List<history>();
+
+                            while (reader.Read())
+                            {
+                                history history = new history
+                                {
+                                    Content = reader["Content"].ToString(),
+                                    Occurrence = Convert.ToInt32(reader["Occurrence"])
+                                };
+
+                                histories.Add(history);
+                            }
+
+                            return histories;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error searching histories: {ex}");
+                throw;
+            }
+        }
+        public static List<Examination> SearchExaminations(string searchTerm)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT * FROM OnExamination WHERE Content LIKE @SearchTerm;", connection))
+                    {
+                        command.Parameters.AddWithValue("@SearchTerm", $"{searchTerm}%");
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<Examination> examinations = new List<Examination>();
+
+                            while (reader.Read())
+                            {
+                                Examination examination = new Examination
+                                {
+                                    Content = reader["Content"].ToString(),
+                                    Occurrence = Convert.ToInt32(reader["Occurrence"])
+                                };
+
+                                examinations.Add(examination);
+                            }
+
+                            return examinations;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error searching examinations: {ex}");
+                throw;
+            }
+        }
+
+        public static List<Investigation> SearchInvestigations(string searchTerm)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT * FROM Investigation WHERE Content LIKE @SearchTerm;", connection))
+                    {
+                        command.Parameters.AddWithValue("@SearchTerm", $"{searchTerm}%");
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<Investigation> investigations = new List<Investigation>();
+
+                            while (reader.Read())
+                            {
+                                Investigation investigation = new Investigation
+                                {
+                                    Content = reader["Content"].ToString(),
+                                    Occurrence = Convert.ToInt32(reader["Occurrence"])
+                                };
+
+                                investigations.Add(investigation);
+                            }
+
+                            return investigations;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error searching investigations: {ex}");
+                throw;
+            }
+        }
+
+        public static List<Diagnosis> SearchDiagnoses(string searchTerm)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT * FROM Diagnosis WHERE Content LIKE @SearchTerm;", connection))
+                    {
+                        command.Parameters.AddWithValue("@SearchTerm", $"{searchTerm}%");
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<Diagnosis> diagnoses = new List<Diagnosis>();
+
+                            while (reader.Read())
+                            {
+                                Diagnosis diagnosis = new Diagnosis
+                                {
+                                    Content = reader["Content"].ToString(),
+                                    Occurrence = Convert.ToInt32(reader["Occurrence"])
+                                };
+
+                                diagnoses.Add(diagnosis);
+                            }
+
+                            return diagnoses;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error searching diagnoses: {ex}");
+                throw;
+            }
+        }
+
+        public static List<Treatment> SearchTreatments(string searchTerm)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT * FROM TreatmentPlan WHERE Content LIKE @SearchTerm;", connection))
+                    {
+                        command.Parameters.AddWithValue("@SearchTerm", $"{searchTerm}%");
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<Treatment> treatments = new List<Treatment>();
+
+                            while (reader.Read())
+                            {
+                                Treatment treatment = new Treatment
+                                {
+                                    Content = reader["Content"].ToString(),
+                                    Occurrence = Convert.ToInt32(reader["Occurrence"])
+                                };
+
+                                treatments.Add(treatment);
+                            }
+
+                            return treatments;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error searching treatments: {ex}");
+                throw;
+            }
+        }
+
+        public static List<FollowUp> SearchFollowUps(string searchTerm)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT * FROM FollowUp WHERE Content LIKE @SearchTerm;", connection))
+                    {
+                        command.Parameters.AddWithValue("@SearchTerm", $"{searchTerm}%");
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<FollowUp> followUps = new List<FollowUp>();
+
+                            while (reader.Read())
+                            {
+                                FollowUp followUp = new FollowUp
+                                {
+                                    Content = reader["Content"].ToString(),
+                                    Occurrence = Convert.ToInt32(reader["Occurrence"])
+                                };
+
+                                followUps.Add(followUp);
+                            }
+
+                            return followUps;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error searching follow-ups: {ex}");
+                throw;
+            }
+        }   
+        public static List<SpecialNote> SearchSpecialNotes(string searchTerm)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT * FROM SpecialNotes WHERE Content LIKE @SearchTerm;", connection))
+                    {
+                        command.Parameters.AddWithValue("@SearchTerm", $"{searchTerm}%");
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            List<SpecialNote> specialNotes = new List<SpecialNote>();
+
+                            while (reader.Read())
+                            {
+                                SpecialNote specialNote = new SpecialNote
+                                {
+                                    Content = reader["Content"].ToString(),
+                                    Occurrence = Convert.ToInt32(reader["Occurrence"])
+                                };
+
+                                specialNotes.Add(specialNote);
+                            }
+
+                            return specialNotes;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error searching special notes: {ex}");
+                throw;
+            }
+        }
 
 
         public static int InsertPatientInfo(string name, string age, string phone, string address, string blood)
@@ -1903,7 +2208,7 @@ namespace SmartClinic
             return extractedSpecialNoteList;
         }
 
-        public static void SavePrescription(PatientVisit prescription)
+        public static bool SavePrescription(PatientVisit prescription)
         {
             try
             {
@@ -1954,11 +2259,11 @@ namespace SmartClinic
                                 insertCommand.ExecuteNonQuery();
                             }
                             UpdatePatientLastVisit(prescription.Id, prescription.visit);
+                            return true;
                         }
                         else
                         {
-                            // If a matching prescription exists, do not insert to avoid duplication
-                            MessageBox.Show("Same Prescription already exists.");
+                            return false;
                         }
                     }
                 }

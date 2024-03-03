@@ -856,21 +856,30 @@ namespace SmartClinic.View.UserControls
                 followUp = combinedFollowUp,
                 notes = combinedSpecialNote
             };
-            MessageBox.Show("Prescription Stored Successfully");
-            DatabaseHelper.SavePrescription(newpres);
+            if (DatabaseHelper.SavePrescription(newpres))
+            {
+                MessageBox.Show("Prescription Stored Successfully");
+                todaydate.Text = DateTime.Now.ToString("dd-MM-yyyy");
+            }
+            else
+            {
+                MessageBox.Show("Prescription Alreadys Exists");
+            }
 
         }
 
         private void PrintPrescription_Click(object sender, RoutedEventArgs e)
         {
-            // Instantiate the Printer window
+
+            SavePrescription_Click(null, null);
+
             Printer printDialog = new Printer();
 
             // Handle the ContentRendered event
             printDialog.ContentRendered += (s, args) =>
             {
                 // Once content is rendered, trigger printing
-                printDialog.PrintButton_Click(newPatient, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes);
+                printDialog.PrintButton_Click(newPatient, todaydate.Text, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes);
 
                 // Close the window after printing
                 printDialog.Close();
@@ -885,7 +894,7 @@ namespace SmartClinic.View.UserControls
 
         private void PrintPreview_Click(object sender, RoutedEventArgs e)
         {
-            Printer printDialog = new Printer(newPatient, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes);
+            Printer printDialog = new Printer(newPatient, todaydate.Text, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes);
             printDialog.ShowDialog();
         }
 

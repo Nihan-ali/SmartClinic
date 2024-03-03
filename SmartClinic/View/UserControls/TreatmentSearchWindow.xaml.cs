@@ -52,16 +52,28 @@ namespace SmartClinic.View.UserControls
             }
         }
 
-        private void SearchTreatment(string keyword)
-        {
-            displayedTreatments = new ObservableCollection<Treatment>(
-                initialTreatments
-                .Where(treatment => treatment.Content.ToLower().Contains(keyword.ToLower()))
-                .OrderByDescending(treatment => treatment.Occurrence)
-                .Take(20)
-                .ToList());
 
-            UpdateTreatmentItems();
+        private void SearchTreatment(string Content)
+        {
+            if (Content != "")
+            {
+                var searchedTreatments = DatabaseHelper.SearchTreatments(Content);
+                displayedTreatments.Clear(); // Clear the existing items in displayedAdvices
+                foreach (var treatment in searchedTreatments)
+                {
+                    displayedTreatments.Add(treatment); // Add each advice from the search result
+                }
+                UpdateTreatmentItems();
+            }
+            else
+            {
+                displayedTreatments.Clear(); // Clear the existing items in displayedAdvices
+                foreach (var treatment in initialTreatments)
+                {
+                    displayedTreatments.Add(treatment); // Add each advice from the initial advices
+                }
+                UpdateTreatmentItems();
+            }
         }
 
         private void addToTreatment_Click(object sender, RoutedEventArgs e)

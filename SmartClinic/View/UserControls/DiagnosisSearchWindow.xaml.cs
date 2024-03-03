@@ -58,16 +58,27 @@ namespace SmartClinic.View.UserControls
             }
         }
 
-        private void SearchDiagnosis(string keyword)
+        private void SearchDiagnosis(string Content)
         {
-            displayedDiagnoses = new ObservableCollection<Diagnosis>(
-                initialDiagnoses
-                .Where(diagnosis => diagnosis.Content.ToLower().Contains(keyword.ToLower()))
-                .OrderByDescending(diagnosis => diagnosis.Occurrence)
-                .Take(20)
-                .ToList());
-
-            UpdateDiagnosisItems();
+            if (Content != "")
+            {
+                var searchedDiagnoses = DatabaseHelper.SearchDiagnoses(Content);
+                displayedDiagnoses.Clear(); // Clear the existing items in displayedAdvices
+                foreach (var diagnosis in searchedDiagnoses)
+                {
+                    displayedDiagnoses.Add(diagnosis); // Add each advice from the search result
+                }
+                UpdateDiagnosisItems();
+            }
+            else
+            {
+                displayedDiagnoses.Clear(); // Clear the existing items in displayedAdvices
+                foreach (var diagnosis in initialDiagnoses)
+                {
+                    displayedDiagnoses.Add(diagnosis); // Add each advice from the initial advices
+                }
+                UpdateDiagnosisItems();
+            }
         }
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)

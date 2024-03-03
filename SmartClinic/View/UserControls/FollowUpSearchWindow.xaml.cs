@@ -40,16 +40,27 @@ namespace SmartClinic.View.UserControls
             followUpItemsControl.ItemsSource = displayedFollowUps;
         }
 
-        private void SearchFollowUps(string keyword)
+        private void SearchFollowUps(string Content)
         {
-            displayedFollowUps = new ObservableCollection<FollowUp>(
-                initialFollowUps
-                .Where(followUp => followUp.Content.ToLower().Contains(keyword.ToLower()))
-                .OrderByDescending(followUp => followUp.Occurrence)
-                .Take(20)
-                .ToList());
-
-            UpdateFollowUpItems();
+            if (Content != "")
+            {
+                var searchedFollowUps = DatabaseHelper.SearchFollowUps(Content);
+                displayedFollowUps.Clear(); // Clear the existing items in displayedAdvices
+                foreach (var followUp in searchedFollowUps)
+                {
+                    displayedFollowUps.Add(followUp); // Add each advice from the search result
+                }
+                UpdateFollowUpItems();
+            }
+            else
+            {
+                displayedFollowUps.Clear(); // Clear the existing items in displayedAdvices
+                foreach (var followUp in initialFollowUps)
+                {
+                    displayedFollowUps.Add(followUp); // Add each advice from the initial advices
+                }
+                UpdateFollowUpItems();
+            }
         }
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -61,11 +72,28 @@ namespace SmartClinic.View.UserControls
         {
             if (Key.Enter == e.Key)
             {
-                string followUp = searchTextBox.Text;
-                FollowUp selectedFollowUp = new FollowUp();
-                selectedFollowUp.Content = followUp;
-                SelectedFollowUps.Add(selectedFollowUp);
-                DatabaseHelper.AddFollowUp(followUp);
+                string FollowUpContent = searchTextBox.Text;
+
+                FollowUp newFollowUp = new FollowUp() { Content = FollowUpContent, IsSelected = true };
+                initialFollowUps.Add(newFollowUp);
+                selectedFollowUps.Add(newFollowUp);
+                DatabaseHelper.AddFollowUp(newFollowUp.Content);
+
+                foreach (var selectedFollowUp in selectedFollowUps)
+                {
+                    if (selectedFollowUp.Content == newFollowUp.Content)
+                    {
+                        selectedFollowUp.IsSelected = true;
+                        break;
+                    }
+                }
+
+                SearchFollowUps(searchTextBox.Text);
+
+                // Update the adviceItemsControl.ItemsSource with the updated displayedAdvices
+                UpdateFollowUpItems();
+
+                // Clear the search text box
                 searchTextBox.Text = "";
             }
         }

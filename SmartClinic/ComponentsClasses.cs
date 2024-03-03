@@ -30,30 +30,7 @@ namespace SmartClinic
     }
 
 
-    public class Advice : INotifyPropertyChanged
-    {
-        private bool isSelected;
 
-        public bool IsSelected
-        {
-            get { return isSelected; }
-            set
-            {
-                isSelected = value;
-                OnPropertyChanged("IsSelected");
-            }
-        }
-
-        public string Content { get; set; }
-        public int Occurrence { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
 
     public class Complaint
     {
@@ -97,16 +74,80 @@ namespace SmartClinic
         public int Occurrence { get; set; }
     }
 
-    public class FollowUp
+    // followup and specialnote should be similar to advice
+    public class Advice : INotifyPropertyChanged
     {
+        private bool isSelected;
+
+        public bool IsSelected
+        {
+            get { return isSelected; }
+            set
+            {
+                isSelected = value;
+                OnPropertyChanged("IsSelected");
+            }
+        }
+
         public string Content { get; set; }
         public int Occurrence { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
-    public class SpecialNote
+    public class FollowUp : INotifyPropertyChanged
     {
+        private bool isSelected;
+
+        public bool IsSelected
+        {
+            get { return isSelected; }
+            set
+            {
+                isSelected = value;
+                OnPropertyChanged("IsSelected");
+            }
+        }
+
         public string Content { get; set; }
         public int Occurrence { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    public class SpecialNote : INotifyPropertyChanged
+    {
+        private bool isSelected;
+
+        public bool IsSelected
+        {
+            get { return isSelected; }
+            set
+            {
+                isSelected = value;
+                OnPropertyChanged("IsSelected");
+            }
+        }
+
+        public string Content { get; set; }
+        public int Occurrence { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
     public class MedicineGroup

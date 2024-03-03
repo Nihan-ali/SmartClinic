@@ -68,14 +68,14 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="30*"/>
-                            <ColumnDefinition Width="60*"/>
+                            <ColumnDefinition Width="30*"/>
                             <ColumnDefinition Width="3*"/>
                         </Grid.ColumnDefinitions>
 
                         <TextBlock FontWeight="Bold" Text="{Binding Content}" VerticalAlignment="Center" Margin="5,5,5,5"/>
                         <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Orientation="Horizontal">
                             <Label Content="Note" Margin="200 1 5 1"/>
-                            <TextBox BorderThickness="2" Width="350" Text="{Binding Note, Mode=TwoWay}" VerticalAlignment="Center" Margin="5,5,80,5"/>
+                            <TextBox BorderThickness="2" Width="250" Text="{Binding Note, Mode=TwoWay}" VerticalAlignment="Center" Margin="5,5,80,5"/>
                         </StackPanel>
 
                         <Button BorderThickness="0" x:Name="deleteExaminationFromWindow" Grid.Column="2" VerticalAlignment="Center" Width="20" Foreground="Red" FontWeight="Bold" Click="RemoveExaminationFromWindow">

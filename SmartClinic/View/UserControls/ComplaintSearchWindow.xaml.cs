@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -59,17 +60,33 @@ namespace SmartClinic.View.UserControls
                 searchTextBox.Text = "";
             }
         }
-        private void SearchComplaint(string keyword)
-        {
-            displayedComplaints = new ObservableCollection<Complaint>(
-                initialComplaints
-                .Where(complaint => complaint.Content.ToLower().Contains(keyword.ToLower()))
-                .OrderByDescending(complaint => complaint.Occurrence)
-                .Take(20)
-                .ToList());
 
-            UpdateComplaintItems();
+        //complaint,history,examination,investigation,diagnosis,treatment, specialnote, followup
+        private void SearchComplaint(string Content)
+        {
+            if (Content != "")
+            {
+                var searchedComplaints = DatabaseHelper.SearchComplaints(Content);
+                displayedComplaints.Clear(); // Clear the existing items in displayedAdvices
+                foreach (var advice in searchedComplaints)
+                {
+                    displayedComplaints.Add(advice); // Add each advice from the search result
+                }
+                UpdateComplaintItems();
+            }
+            else
+            {
+                displayedComplaints.Clear(); // Clear the existing items in displayedAdvices
+                foreach (var advice in initialComplaints)
+                {
+                    displayedComplaints.Add(advice); // Add each advice from the initial advices
+                }
+                UpdateComplaintItems();
+            }
         }
+
+        
+
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {

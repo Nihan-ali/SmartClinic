@@ -45,6 +45,7 @@ namespace SmartClinic.View.UserControls
         private List<Advice> selectedAdvices = new List<Advice>();
         private List<FollowUp> selectedFollowUps = new List<FollowUp>();
         private List<SpecialNote> selectedSpecialNotes = new List<SpecialNote>();
+        string dayyt;
         public List<DummyMedicine> SelectedMedicines => selectedMedicines;
         public List<Advice> SelectedAdvices => selectedAdvices;
         public List<FollowUp> SelectedFollowUps => selectedFollowUps;
@@ -70,10 +71,11 @@ namespace SmartClinic.View.UserControls
             outro.Content = variables.outro;
 
     }
-        public Printer(Patient patient, List<Complaint> complaints, List<history> histories, List<Examination> examinations, List<Investigation> investigations, List<Diagnosis> diagnoses, List<Treatment> treatments, List<DummyMedicine> medicines, List<Advice> advices, List<FollowUp> followUps, List<SpecialNote> specialNotes)
+        public Printer(Patient patient, string todaydate, List<Complaint> complaints, List<history> histories, List<Examination> examinations, List<Investigation> investigations, List<Diagnosis> diagnoses, List<Treatment> treatments, List<DummyMedicine> medicines, List<Advice> advices, List<FollowUp> followUps, List<SpecialNote> specialNotes)
         {
             InitializeComponent();
             newPatient = patient;
+            dayyt = todaydate;
             selectedComplaints = complaints;
             selectedHistories = histories;
             selectedExaminations = examinations;
@@ -90,6 +92,7 @@ namespace SmartClinic.View.UserControls
 
         private void UpdateAllFields()
         {
+            todaydate.Text = dayyt;
             UpdatePatientInformation();
             UpdateComplaintListViews();
             UpdateHistoryListViews();
@@ -116,13 +119,13 @@ namespace SmartClinic.View.UserControls
         {
             if (selectedComplaints != null && selectedComplaints.Count > 0)
             {
-                selectedComplaintsListView.ItemsSource = null;
-                selectedComplaintsListView.ItemsSource = selectedComplaints;
+                ComplaintsListView.ItemsSource = null;
+                ComplaintsListView.ItemsSource = selectedComplaints;
             }
             else
             {
                 complaintgrid.Visibility = Visibility.Collapsed;
-                selectedComplaintsListView.ItemsSource = null;
+                ComplaintsListView.ItemsSource = null;
             }
         }
 
@@ -166,7 +169,7 @@ namespace SmartClinic.View.UserControls
             else
             {
                 investigationgrid.Visibility = Visibility.Collapsed;
-                selectedComplaintsListView.ItemsSource = null;
+                selectedDiagnosisListView.ItemsSource = null;
             }
         }
 
@@ -255,9 +258,10 @@ namespace SmartClinic.View.UserControls
         }
 
 
-        public void PrintButton_Click(Patient patient, List<Complaint> complaints, List<history> histories, List<Examination> examinations, List<Investigation> investigations, List<Diagnosis> diagnoses, List<Treatment> treatments, List<DummyMedicine> medicines, List<Advice> advices, List<FollowUp> followUps, List<SpecialNote> specialNotes)
+        public void PrintButton_Click(Patient patient, string todaydate, List<Complaint> complaints, List<history> histories, List<Examination> examinations, List<Investigation> investigations, List<Diagnosis> diagnoses, List<Treatment> treatments, List<DummyMedicine> medicines, List<Advice> advices, List<FollowUp> followUps, List<SpecialNote> specialNotes)
         {
             newPatient = patient;
+            dayyt = todaydate;
             selectedComplaints = complaints;
             selectedHistories = histories;
             selectedExaminations = examinations;
@@ -277,6 +281,37 @@ namespace SmartClinic.View.UserControls
             printTicket.PageMediaSize = new PageMediaSize(PageMediaSizeName.ISOA4);
 
             printDialog.PrintVisual(this, "Prescription");
+        }
+
+        private void ListViewItem_Loaded(object sender, RoutedEventArgs e)
+        {
+            ListViewItem item = sender as ListViewItem;
+            if (item != null)
+            {
+                int index = selectedMedicinesListView.Items.IndexOf(item.DataContext) + 1;
+                TextBlock serialNumberTextBlock = FindVisualChild<TextBlock>(item, "serialNumberTextBlock");
+                if (serialNumberTextBlock != null)
+                {
+                    serialNumberTextBlock.Text = index.ToString();
+                }
+            }
+        }
+
+        private T FindVisualChild<T>(DependencyObject depObj, string name) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                if (child is T && (child as FrameworkElement).Name == name)
+                    return child as T;
+                else
+                {
+                    T childItem = FindVisualChild<T>(child, name);
+                    if (childItem != null)
+                        return childItem;
+                }
+            }
+            return null;
         }
 
     }

@@ -58,16 +58,27 @@ namespace SmartClinic.View.UserControls
             }
         }
 
-        private void SearchInvestigation(string keyword)
+        private void SearchInvestigation(string Content)
         {
-            displayedInvestigations = new ObservableCollection<Investigation>(
-                initialInvestigations
-                .Where(investigation => investigation.Content.ToLower().Contains(keyword.ToLower()))
-                .OrderByDescending(investigation => investigation.Occurrence)
-                .Take(20)
-                .ToList());
-
-            UpdateInvestigationItems();
+            if (Content != "")
+            {
+                var searchedInvestigations = DatabaseHelper.SearchInvestigations(Content);
+                displayedInvestigations.Clear(); // Clear the existing items in displayedAdvices
+                foreach (var investigation in searchedInvestigations)
+                {
+                    displayedInvestigations.Add(investigation); // Add each advice from the search result
+                }
+                UpdateInvestigationItems();
+            }
+            else
+            {
+                displayedInvestigations.Clear(); // Clear the existing items in displayedAdvices
+                foreach (var investigation in initialInvestigations)
+                {
+                    displayedInvestigations.Add(investigation); // Add each advice from the initial advices
+                }
+                UpdateInvestigationItems();
+            }
         }
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)

@@ -34,18 +34,30 @@ namespace SmartClinic.View.UserControls
             specialNoteItemsControl.ItemsSource = displayedSpecialNotes;
         }
 
-        private void SearchSpecialNotes(string keyword)
+
+
+        private void SearchSpecialNotes(string Content)
         {
-            displayedSpecialNotes = new ObservableCollection<SpecialNote>(
-                initialSpecialNotes
-                .Where(specialNote => specialNote.Content.ToLower().Contains(keyword.ToLower()))
-                .OrderByDescending(specialNote => specialNote.Occurrence)
-                .Take(20)
-                .ToList());
-
-            UpdateSpecialNoteItems();
+            if (Content != "")
+            {
+                var searchedSpecialNotes = DatabaseHelper.SearchSpecialNotes(Content);
+                displayedSpecialNotes.Clear(); // Clear the existing items in displayedAdvices
+                foreach (var specialNote in searchedSpecialNotes)
+                {
+                    displayedSpecialNotes.Add(specialNote); // Add each advice from the search result
+                }
+                UpdateSpecialNoteItems();
+            }
+            else
+            {
+                displayedSpecialNotes.Clear(); // Clear the existing items in displayedAdvices
+                foreach (var specialNote in initialSpecialNotes)
+                {
+                    displayedSpecialNotes.Add(specialNote); // Add each advice from the initial advices
+                }
+                UpdateSpecialNoteItems();
+            }
         }
-
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             SearchSpecialNotes(searchTextBox.Text);
@@ -55,14 +67,33 @@ namespace SmartClinic.View.UserControls
         {
             if (Key.Enter == e.Key)
             {
-                string specialNote = searchTextBox.Text;
-                SpecialNote selectedSpecialNote = new SpecialNote();
-                selectedSpecialNote.Content = specialNote;
-                SelectedSpecialNotes.Add(selectedSpecialNote);
-                DatabaseHelper.AddSpecialNote(specialNote);
+                string SpecialNoteContent = searchTextBox.Text;
+
+                SpecialNote newNote = new SpecialNote() { Content = SpecialNoteContent, IsSelected = true };
+                initialSpecialNotes.Add(newNote);
+                selectedSpecialNotes.Add(newNote);
+                DatabaseHelper.AddSpecialNote(newNote.Content);
+
+                foreach (var selectedNote in selectedSpecialNotes)
+                {
+                    if (selectedNote.Content == newNote.Content)
+                    {
+                        selectedNote.IsSelected = true;
+                        break;
+                    }
+                }
+
+                SearchSpecialNotes(searchTextBox.Text);
+
+                // Update the adviceItemsControl.ItemsSource with the updated displayedAdvices
+                UpdateSpecialNoteItems();
+
+                // Clear the search text box
                 searchTextBox.Text = "";
             }
         }
+
+        // make another enterpressed for followup
 
         private void ToggleButton_Click(object sender, RoutedEventArgs e)
         {

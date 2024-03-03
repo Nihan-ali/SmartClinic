@@ -29,7 +29,7 @@
             <Grid>
                 <Rectangle Fill="#FF332646"/>
                 <StackPanel>
-                    <Button Name="rx" Margin="15,15" Background="{x:Null}" Padding="15" BorderBrush="{x:Null}" Click="RxButton_Click">
+                    <Button Name="rx" Margin="15,15" Background="{x:Null}" BorderBrush="{x:Null}" Click="RxButton_Click">
                         <Image Source="rx.png" Height="20" Width="20"/>
                     </Button>
                     <Button Name="patients" Margin="15,15" Background="{x:Null}" BorderBrush="{x:Null}" Click="PatientButton_Click">

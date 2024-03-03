@@ -65,16 +65,27 @@ namespace SmartClinic.View.UserControls
 
 
 
-        private void SearchHistory(string keyword)
+        private void SearchHistory(string Content)
         {
-            displayedHistoryItems = new ObservableCollection<history>(
-                initialHistoryItems
-                .Where(historyitem => historyitem.Content.ToLower().Contains(keyword.ToLower()))
-                .OrderByDescending(historyitem => historyitem.Occurrence)
-                .Take(20)
-                .ToList());
-
-            UpdateHistoryItems();
+            if (Content != "")
+            {
+                var searchedHistoryItems = DatabaseHelper.SearchHistories(Content);
+                displayedHistoryItems.Clear(); // Clear the existing items in displayedAdvices
+                foreach (var historyItem in searchedHistoryItems)
+                {
+                    displayedHistoryItems.Add(historyItem); // Add each advice from the search result
+                }
+                UpdateHistoryItems();
+            }
+            else
+            {
+                displayedHistoryItems.Clear(); // Clear the existing items in displayedAdvices
+                foreach (var historyItem in initialHistoryItems)
+                {
+                    displayedHistoryItems.Add(historyItem); // Add each advice from the initial advices
+                }
+                UpdateHistoryItems();
+            }
         }
 
 

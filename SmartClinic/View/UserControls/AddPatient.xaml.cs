@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Eventing.Reader;
 using System.Windows;
 using System.Windows.Controls;
 using static SmartClinic.Patient;
@@ -17,34 +18,60 @@ namespace SmartClinic.View.UserControls
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
-            // Get patient info from form elements
-            string name = nameTextBox.Text;
-            string age = ageTextBox.Text;
-            string phone = phoneTextBox.Text;
-            string address = addressTextBox.Text;
-            string bloodGroup = (string)((ComboBoxItem)bloodGroupComboBox.SelectedItem).Content;
+            string name = string.Empty;
+            string age = string.Empty;
+            string phone = string.Empty;
+            string address = string.Empty;
+            string bloodGroup = string.Empty;
 
-            // Validate input (you may add more validation logic)
-
-            // Create a new Patient object
-            int insertedId = DatabaseHelper.InsertPatientInfo(name, age, phone, address, bloodGroup);
-
-            // Create a new Patient object with the retrieved ID
-            Patient newPatient = new Patient
+            if (nameTextBox.Text != null)
             {
-                Id = insertedId,
-                Name = name,
-                Age = age,
-                Phone = phone,
-                Address = address,
-                Blood = bloodGroup
-            };
+                name = nameTextBox.Text;
+            }
+            if(ageTextBox.Text != null)
+            {
+                age = ageTextBox.Text;
+            }
+            if(phoneTextBox.Text != null)
+            {
+                phone = phoneTextBox.Text;
+            }
+            if(addressTextBox.Text != null)
+            {
+                address = addressTextBox.Text;
+            }
+            if((ComboBoxItem)bloodGroupComboBox.SelectedItem != null)
+            {
+                bloodGroup = (string)((ComboBoxItem)bloodGroupComboBox.SelectedItem).Content;
+            }
 
-            // Raise the event to notify subscribers (e.g., patientInfo UserControl)
-            PatientInfoSubmitted?.Invoke(this, new PatientEventArgs { NewPatient = newPatient });
+            if (name != null && name.Length > 0)
+            {
+                int insertedId = DatabaseHelper.InsertPatientInfo(name, age, phone, address, bloodGroup);
 
-            // Close the form window
-            Close();
+                // Create a new Patient object with the retrieved ID
+                Patient newPatient = new Patient
+                {
+                    Id = insertedId,
+                    Name = name,
+                    Age = age,
+                    Phone = phone,
+                    Address = address,
+                    Blood = bloodGroup
+                };
+
+                // Raise the event to notify subscribers (e.g., patientInfo UserControl)
+                PatientInfoSubmitted?.Invoke(this, new PatientEventArgs { NewPatient = newPatient });
+
+                // Close the form window
+                Close();
+
+            }
+            else
+            {
+                MessageBox.Show("Provide A Patient's Name");
+            }
+
         }
     }
 }
