@@ -5,10 +5,10 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <!-- Base style without triggers -->
-        <Style x:Key="BaseButtonStyle" TargetType="Button">
+        <Style x:Key="BaseButtonStyle" TargetType="ButtonBase">
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="Button">
+                    <ControlTemplate TargetType="ButtonBase">
                         <Border Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
@@ -17,7 +17,18 @@
             </Setter>
         </Style>
 
-        <!-- Style for Save buttons with hover effect -->
+        <!-- Common style for ButtonBase (Button and ToggleButton) -->
+        <Style TargetType="ButtonBase" BasedOn="{StaticResource BaseButtonStyle}" x:Key="CommonButtonStyle">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Style for Save button with hover effect -->
         <Style TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}" x:Key="SaveButtonStyle">
             <Setter Property="Background" Value="#FF28BF6F"/>
             <Setter Property="FontSize" Value="13"/>
@@ -28,7 +39,10 @@
             <Setter Property="OpacityMask" Value="#FF257A8A"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="blue"/>
+                    <Setter Property="Background" Value="Blue"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="Red"/>
                 </Trigger>
             </Style.Triggers>
         </Style>

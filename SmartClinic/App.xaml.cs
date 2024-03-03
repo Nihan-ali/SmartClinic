@@ -13,4 +13,5 @@ namespace SmartClinic
         public static SelectedItemsViewModel SelectedItemsViewModel { get; } = new SelectedItemsViewModel();
     }
 
+
 }

@@ -14,11 +14,12 @@ namespace SmartClinic
     internal class ComponentsClasses { }
     public class variables
     {
-        public static string docname = "DR. ABU NOYEM MOHAMMAD";
+        // get doctor info from database
+        public static string docname = "DR. ABU NOIEM MOHAMMAD";
         public static string docdegree = "MBBS, (Endocrinology & Metabolism)";
         public static string docname_bangla = "ডা.আবু নঈম মোহাম্মাদ";
         public static string docdegree_bangla = "এমবিবিএস, (এন্ডোক্রাইনোলজি ও মেটাবোলিজম)";
-        public static string docdetail = "Consultant-Diabetologist, Endocrionologist & Metabolic Disorder Specialist" ;
+        public static string docdetail = "Consultant-Diabetologist, Endocrionologist & Metabolic Disorder Specialist";
         public static string docdetail_bangla = "ডায়াবেটিস, হরমোন ও মেডিসিন বিশেষজ্ঞ";
         public static string moredetail_bangla = "আবাসিক চিকিৎসক - আর.পি (মেডিসিন), এম.এ.জি ওসমানী মেডিকেল কলেজ হাসপাতাল, সিলেট";
         public static string chamber = "চেম্বারঃ এবিসি ডায়াগনস্টিক সেন্টার";
@@ -27,9 +28,46 @@ namespace SmartClinic
         public static string visit_time = "বিকাল ৫:৩০ থেকে রাত ৮ টা পর্যন্ত";
         public static string chamber_phone = "যোগাযোগঃ 01914-478747 (সকাল ১০টা - ১২টা) রবি, বৃহস্পতি ও শুক্রবার বন্ধ";
         public static string outro = "শরীরের যত্ন নিবেন। নিয়মিত ওষুধ খাবেন। পরবর্তী সাক্ষাতের সময় বাবস্থাপত্র আনবেন। প্রয়োজনে- ০১৮১৯-৮০০৩৩৩ (দুপুর ২টা-৩টা)";
+        public variables() {
+            List<DoctorInfo> doctorInfos = DatabaseHelper.GetDoctorInfos();
+            if (doctorInfos.Count > 0)
+            {
+                docname = doctorInfos[0].docname;
+                docdegree = doctorInfos[0].docdegree;
+                docname_bangla = doctorInfos[0].docname_bangla;
+                docdegree_bangla = doctorInfos[0].docdegree_bangla;
+                docdetail = doctorInfos[0].docdetail;
+                docdetail_bangla = doctorInfos[0].docdetail_bangla;
+                moredetail_bangla = doctorInfos[0].moredetail_bangla;
+                chamber = doctorInfos[0].chamber;
+                chamber_location = doctorInfos[0].chamber_location;
+                visit_date = doctorInfos[0].visit_date;
+                visit_time = doctorInfos[0].visit_time;
+                chamber_phone = doctorInfos[0].chamber_phone;
+                outro = doctorInfos[0].outro;
+            }
+
+        }
+        
     }
 
-
+    public class DoctorInfo
+    {
+        //like variable class
+        public string docname { get; set; }
+        public string docdegree { get; set; }
+        public string docname_bangla { get; set; }
+        public string docdegree_bangla { get; set; }
+        public string docdetail { get; set; }
+        public string docdetail_bangla { get; set; }
+        public string moredetail_bangla { get; set; }
+        public string chamber { get; set; }
+        public string chamber_location { get; set; }
+        public string visit_date { get; set; }
+        public string visit_time { get; set; }
+        public string chamber_phone { get; set; }
+        public string outro { get; set; }
+    }
 
 
     public class Complaint

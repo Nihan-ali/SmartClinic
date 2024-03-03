@@ -7,59 +7,15 @@
         xmlns:UserControls="clr-namespace:SmartClinic.View.UserControls"
         mc:Ignorable="d"
         Title="Doctor Rx"
-        WindowState="Maximized"
         Icon="doctor.ico" 
-        Height="{x:Static SystemParameters.PrimaryScreenHeight}" 
-        Width="{x:Static SystemParameters.PrimaryScreenWidth}"
+        Height="550" 
+        Width="550"
         >
     <!--<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible">-->
     <Grid>
 
+        <Button Content="Open Home" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="30" Click="Home_Button_Click"/>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="6*"/>
-            <RowDefinition Height="94*"/>
-        </Grid.RowDefinitions>
-        <UserControls:header/>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="96*"/>
-            </Grid.ColumnDefinitions>
-            <Grid>
-                <Rectangle Fill="#FF332646"/>
-                <StackPanel>
-                    <Button Name="rx" Margin="15,15" Background="{x:Null}" BorderBrush="{x:Null}" Click="RxButton_Click">
-                        <Image Source="rx.png" Height="20" Width="20"/>
-                    </Button>
-                    <Button Name="patients" Margin="15,15" Background="{x:Null}" BorderBrush="{x:Null}" Click="PatientButton_Click">
-                        <Image Source="patient.png" Height="20" Width="20"/>
-                    </Button>
-                    <Button Name="settings" Margin="15,15" Background="{x:Null}" BorderBrush="{x:Null}" Click="SettingsButton_Click">
-                        <Image Source="settings.png" Height="20" Width="20"/>
-                    </Button>
-                    <Button Name="stat" Margin="15,15" Background="{x:Null}" BorderBrush="{x:Null}" Click="StatButton_Click">
-                        <Image Source="stat.png" Height="20" Width="20"/>
-                    </Button>
-                </StackPanel>
-
-            </Grid>
-            <Grid Grid.Column="1">
-
-                <Grid.RowDefinitions>
-                    <RowDefinition x:Name="searching" Height="Auto"/>
-                    <RowDefinition Height="96*"/>
-                </Grid.RowDefinitions>
-
-                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <Grid Grid.Column="1" Background="AliceBlue">
-                        <ContentControl x:Name="contentControl" />
-                    </Grid>
-                </ScrollViewer>
-
-            </Grid>
-
-        </Grid>
     </Grid>
 
     <!--</ScrollViewer>-->

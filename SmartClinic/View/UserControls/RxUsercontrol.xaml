@@ -783,10 +783,11 @@
         <!--footer xaml-->
         <Grid x:Name="footer" Grid.Row="5">
             <StackPanel>
-                <TextBlock FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Run Text="Registered to"/>
-        <Run FontWeight="Bold" Text="Dr. Abu Noyem Mohammad +8801619800333"/>
-                </TextBlock>
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Label Content="Registered To " FontWeight="DemiBold"/>
+                    <Label x:Name="DoctorsName" Content="Dr. Abu Noyem Mohammad" FontWeight="Bold"/>
+                    <Label x:Name="Mobile" Content="+8801619800333" FontWeight="Bold"/>
+                </StackPanel>
                 <TextBlock FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Run Text=" &#169;"/>
         <Run Text="All rights reserved to SmartClinic"/>

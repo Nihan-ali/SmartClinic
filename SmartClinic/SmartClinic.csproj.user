@@ -9,6 +9,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="HomeWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\UserControls\AddPatient.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -66,6 +69,9 @@
     <Compile Update="View\UserControls\searchMenu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\UserControls\Settings.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\UserControls\SpecialNoteSearchWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -80,6 +86,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="HomeWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -138,6 +147,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\searchMenu.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserControls\Settings.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\SpecialNoteSearchWindow.xaml">

@@ -8,7 +8,7 @@ namespace SmartClinic.View.UserControls
 {
     public partial class PatientProfileUserControl : UserControl
     {
-        private readonly MainWindow mainWindowInstance;
+        private readonly HomeWindow mainWindowInstance;
 
         public ObservableCollection<PatientVisit> Patients { get; set; }
         public PatientVisit SelectedPatientVisit { get; set; }
@@ -16,12 +16,13 @@ namespace SmartClinic.View.UserControls
         public Patient newPatient;
         public int patientCount = 0;
 
-        public PatientProfileUserControl(Patient selectedPatient, MainWindow mainWindow)
+        public PatientProfileUserControl(Patient selectedPatient, HomeWindow mainWindow)
         {
             InitializeComponent();
 
             // Store the instance of MainWindow
             mainWindowInstance = mainWindow;
+            MessageBox.Show("PatientProfileUserControl constructor called." + selectedPatient.Name);
 
             if (selectedPatient != null)
             {

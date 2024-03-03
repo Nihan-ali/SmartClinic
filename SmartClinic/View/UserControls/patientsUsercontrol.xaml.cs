@@ -43,20 +43,32 @@ namespace SmartClinic.View.UserControls
                 var selectedPatient = (Patient)e.AddedItems[0];
 
                 // Update the MainWindow content with the PatientProfileUserControl
+                //show the selected patient name in messagebox
+                //MessageBox.Show(selectedPatient.Name);
                 UpdateMainWindowContent(selectedPatient);
             }
         }
+
+
         private void UpdateMainWindowContent(Patient selectedPatient)
         {
-            if (Application.Current.MainWindow is MainWindow mainWindow)
+            if (Application.Current.MainWindow is HomeWindow homeWindow)
             {
-                if (mainWindow.FindName("contentControl") is ContentControl contentControl)
+                MessageBox.Show("HomeWindow found.");
+                if (homeWindow.FindName("contentControl") is ContentControl contentControl)
                 {
-                    // Provide both parameters when creating the PatientProfileUserControl instance
-                    contentControl.Content = new View.UserControls.PatientProfileUserControl(selectedPatient, mainWindow);
+                    contentControl.Content = new View.UserControls.PatientProfileUserControl(selectedPatient, homeWindow);
                 }
             }
+            else
+            {
+                // Handle the case where the main window is not of type HomeWindow
+                MessageBox.Show("Unexpected main window type.");
+            }
         }
+
+
+
 
 
 

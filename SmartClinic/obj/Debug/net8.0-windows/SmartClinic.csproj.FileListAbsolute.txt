@@ -100,8 +100,6 @@ E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\MainWindow.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\DetailsWindow.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\header.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MedicineSearchWindow.g.cs
-E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MenuBar.g.cs
-E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\PatientList.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\PatientProfileUserControl.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\patientsUsercontrol.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\RxUsercontrol.g.cs
@@ -116,8 +114,6 @@ E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\App.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\MainWindow.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\DetailsWindow.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\header.baml
-E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MenuBar.baml
-E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\PatientList.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\patientsUsercontrol.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\RxUsercontrol.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\searchMenu.baml
@@ -274,10 +270,6 @@ E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControl
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MedicineCreateWindow.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\SpecialNoteSearchWindow.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\TreatmentSearchWindow.baml
-E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\GroupNameWindow.g.cs
-E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MedicineGroupName.g.cs
-E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\GroupNameWindow.baml
-E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MedicineGroupName.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\StatUserControl.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\StatUserControl.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\StatUserControl.g.cs
@@ -330,3 +322,7 @@ E:\Web_Dev\350\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\PdfSharp.dll
 E:\Web_Dev\350\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\de\PdfSharp.Charting.resources.dll
 E:\Web_Dev\350\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\de\PdfSharp.resources.dll
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\Printer.baml
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\HomeWindow.g.cs
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\HomeWindow.baml
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\Settings.g.cs
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\Settings.baml

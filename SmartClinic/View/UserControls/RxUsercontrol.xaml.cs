@@ -69,10 +69,7 @@ namespace SmartClinic.View.UserControls
         public RxUsercontrol()
         {
             InitializeComponent();
-            docname.Content = variables.docname;
-            docdegree.Content = variables.docdegree;
-            docname_bangla.Content = variables.docname_bangla;
-            docdegree_bangla.Content = variables.docdegree_bangla;
+            updatedocordetails();
             todaydate.Text = DateTime.Now.ToString("dd-MM-yyyy");
 
             // Subscribe to the Loaded event of the Popup
@@ -83,12 +80,24 @@ namespace SmartClinic.View.UserControls
         {
             this.newPatient = newPatient;
             todaydate.Text = DateTime.Now.ToString("dd-MM-yyyy");
+            updatedocordetails();
             UpdatePatientInfo(newPatient);
             OnPrescriptionDataAvailable(new PatientEventArgs { NewPatient = newPatient });
         }
         public RxUsercontrol(Patient newPatient, PatientVisit selectedPatientVisit) : this()
         {
             UpdateUI(newPatient, selectedPatientVisit);
+            updatedocordetails();
+        }
+        private void updatedocordetails()
+        {
+            List<DoctorInfo> doctorInfos = DatabaseHelper.GetDoctorInfos();
+            docname.Content = doctorInfos[0].docname;
+            docdegree.Content = doctorInfos[0].docdegree;
+            docname_bangla.Content = doctorInfos[0].docname_bangla;
+            docdegree_bangla.Content = doctorInfos[0].docdegree_bangla;
+            DoctorsName.Content = doctorInfos[0].docname;
+            Mobile.Content = doctorInfos[0].chamber_phone;
         }
 
         private void UpdateUI(Patient newPatient, PatientVisit selectedPatientVisit)

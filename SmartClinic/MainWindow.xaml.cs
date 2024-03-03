@@ -20,56 +20,34 @@ namespace SmartClinic
     public partial class MainWindow : Window
     {
         public string TodayDate { get; set; }
-
-        private Popup treatmentPlanPopup;
-        private RxUsercontrol rxUserControl;
         public MainWindow()
         {
             InitializeComponent();
             DatabaseHelper init = new DatabaseHelper();
 
-            DataContext = this;
-            TodayDate = DateTime.Now.ToString("dd-MM-yyyy");
-            rxUserControl = new RxUsercontrol();
-            rx.Background = Brushes.Red;
-            
-            contentControl.Content = rxUserControl;
-        }
-        private void checking(object sender, RoutedEventArgs e)
-        {
-            rx.Foreground = Brushes.Purple;
-            rx.Background = Brushes.Red;
-
         }
 
         // MainWindow.xaml.cs
-        public static implicit operator MainWindow(MedicineSearchWindow v)
+        //public static implicit operator MainWindow(MedicineSearchWindow v)
+        //{
+        //    throw new NotImplementedException();
+        //}
+        private void Home_Button_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
-        }
-        private void RxButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Set content to RxUserControl
-            contentControl.Content = new View.UserControls.RxUsercontrol();
+            // Create an instance of HomeWindow
+            HomeWindow homeWindow = new HomeWindow();
+
+            // Set the HomeWindow as the main window
+            Application.Current.MainWindow = homeWindow;
+
+            // Show the HomeWindow
+            homeWindow.Show();
+
+            // Close the current window
+            this.Close();
         }
 
-        private void PatientButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-            contentControl.Content = new View.UserControls.PatientsUserControl();
-        }
 
-        private void SettingsButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Set content to SettingsUserControl
-            //contentControl.Content = new UserControls.SettingsUserControl();
-        }
-
-        private void StatButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Set content to StatUserControl
-            contentControl.Content = new StatUserControl();
-        }
 
         private void searchMenu_Loaded(object sender, RoutedEventArgs e)
         {

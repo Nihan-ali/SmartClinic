@@ -48,6 +48,10 @@ namespace SmartClinic
                                 {
                                     // Concatenate all the queries into a single string
                                     string allQueries = @"
+                                                    CREATE TABLE IF NOT EXISTS DoctorInformation (ID INTEGER PRIMARY KEY AUTOINCREMENT, docname TEXT, docdegree TEXT, docname_bangla TEXT, docdegree_bangla TEXT, docdetail TEXT, docdetail_bangla TEXT, moredetail_bangla TEXT, chamber TEXT, chamber_location TEXT, visit_date TEXT, visit_time TEXT, chamber_phone TEXT, outro TEXT);
+                                                    INSERT INTO DoctorInformation (docname, docdegree, docname_bangla, docdegree_bangla, docdetail, docdetail_bangla, moredetail_bangla, chamber, chamber_location, visit_date, visit_time, chamber_phone, outro)
+VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.আবু নঈম মোহাম্মাদ', 'এমবিবিএস, (এন্ডোক্রাইনোলজি ও মেটাবোলিজম)', 'Consultant-Diabetologist, Endocrionologist & Metabolic Disorder Specialist', 'ডায়াবেটিস, হরমোন ও মেডিসিন বিশেষজ্ঞ', 'আবাসিক চিকিৎসক - আর.পি (মেডিসিন), এম.এ.জি ওসমানী মেডিকেল কলেজ হাসপাতাল, সিলেট', 'চেম্বারঃ এবিসি ডায়াগনস্টিক সেন্টার', 'চৌহাট্টা পয়েট, সদর, সিলেট', 'রোগী দেখার সময়ঃ প্রতি শনি, সোম, মঙ্গল ও বুধবার', 'বিকাল ৫:৩০ থেকে রাত ৮ টা পর্যন্ত', 'যোগাযোগঃ 01914-478747 (সকাল ১০টা - ১২টা) রবি, বৃহস্পতি ও শুক্রবার বন্ধ', 'শরীরের যত্ন নিবেন। নিয়মিত ওষুধ খাবেন। পরবর্তী সাক্ষাতের সময় বাবস্থাপত্র আনবেন। প্রয়োজনে- ০১৮১৯-৮০০৩৩৩ (দুপুর ২টা-৩টা)');
+
                                                     CREATE TABLE IF NOT EXISTS Medicine (ID INTEGER PRIMARY KEY AUTOINCREMENT, ManufacturerName TEXT, BrandName TEXT, GenericName TEXT, Strength TEXT, MedicineType TEXT,Occurrence INTEGER NOT NULL, DosageDescription TEXT);
                                                     CREATE TABLE IF NOT EXISTS MedicineGroup(GroupName TEXT, MedicineList TEXT, Occurrence INTEGER NOT NULL);                                                    
 
@@ -61,10 +65,12 @@ namespace SmartClinic
                                                     CREATE TABLE IF NOT EXISTS Investigation (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
                                                     CREATE TABLE IF NOT EXISTS Diagnosis (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
                                                     CREATE TABLE IF NOT EXISTS TreatmentPlan (Content TEXT NOT NULL PRIMARY KEY, Occurrence INTEGER NOT NULL);
+                                                    
 
                                                     CREATE TABLE IF NOT EXISTS Patient (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Age TEXT, Address TEXT, Phone TEXT,Blood TEXT, LastVisit DATE);
                                                     CREATE TABLE IF NOT EXISTS PatientVisit ( ID INTEGER, VISIT DATE, PRESCRIPTIONID INTEGER PRIMARY KEY, MEDICINE TEXT, ADVICE TEXT, FOLLOWUP TEXT, NOTES TEXT, NAME TEXT, COMPLAINT TEXT, HISTORY TEXT, ONEXAMINATION TEXT, INVESTIGATION TEXT,DIAGNOSIS TEXT, TREATMENTPLAN TEXT);";
                                                     
+                                    
 
                                     command.CommandText = allQueries;
 
@@ -90,7 +96,112 @@ namespace SmartClinic
             }
         }
 
+        //implement Get doctorinfo where id = 1
+        public static List<DoctorInfo> GetDoctorInfos()
+        {
+            List<DoctorInfo> doctorInfos = new List<DoctorInfo>();
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                using (var command = new SQLiteCommand("SELECT * FROM DoctorInformation WHERE ID = 1 ;", connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            DoctorInfo doctorInfo = new DoctorInfo
+                            {
+                                // Id = Convert.ToInt32(reader["ID"]),
+                                docname = reader["docname"].ToString(),
+                                docdegree = reader["docdegree"].ToString(),
+                                docname_bangla = reader["docname_bangla"].ToString(),
+                                docdegree_bangla = reader["docdegree_bangla"].ToString(), // Corrected property name
+                                docdetail = reader["docdetail"].ToString(), // Corrected property name
+                                docdetail_bangla = reader["docdetail_bangla"].ToString(), // Corrected property name
+                                moredetail_bangla = reader["moredetail_bangla"].ToString(),
+                                chamber = reader["chamber"].ToString(),
+                                chamber_location = reader["chamber_location"].ToString(), // Corrected property name
+                                visit_date = reader["visit_date"].ToString(),
+                                visit_time = reader["visit_time"].ToString(),
+                                chamber_phone = reader["chamber_phone"].ToString(),
+                                outro = reader["outro"].ToString()
+                            };
 
+
+                            doctorInfos.Add(doctorInfo);
+                        }
+                    }
+                }
+            }
+            return doctorInfos;
+        }
+        //implement insert doctorinfo
+        public static void InsertDoctorInfo(string docname, string docdegree, string docname_bangla, string docdegree_bangla, string docdetail, string docdetail_bangla, string moredetail_bangla, string chamber, string chamber_location, string visit_date, string visit_time, string chamber_phone, string outro)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+                    using (var insertCommand = new SQLiteCommand("INSERT INTO DoctorInformation (docname, docdegree, docname_bangla, docdegree_bangla, docdetail, docdetail_bangla, moredetail_bangla, chamber, chamber_location, visit_date, visit_time, chamber_phone, outro) VALUES (@docname, @docdegree, @docname_bangla, @docdegree_bangla, @docdetail, @docdetail_bangla, @moredetail_bangla, @chamber, @chamber_location, @visit_date, @visit_time, @chamber_phone, @outro);", connection))
+                    {
+                        insertCommand.Parameters.AddWithValue("@docname", docname);
+                        insertCommand.Parameters.AddWithValue("@docdegree", docdegree);
+                        insertCommand.Parameters.AddWithValue("@docname_bangla", docname_bangla);
+                        insertCommand.Parameters.AddWithValue("@docdegree_bangla", docdegree_bangla);
+                        insertCommand.Parameters.AddWithValue("@docdetail", docdetail);
+                        insertCommand.Parameters.AddWithValue("@docdetail_bangla", docdetail_bangla);
+                        insertCommand.Parameters.AddWithValue("@moredetail_bangla", moredetail_bangla);
+                        insertCommand.Parameters.AddWithValue("@chamber", chamber);
+                        insertCommand.Parameters.AddWithValue("@chamber_location", chamber_location);
+                        insertCommand.Parameters.AddWithValue("@visit_date", visit_date);
+                        insertCommand.Parameters.AddWithValue("@visit_time", visit_time);
+                        insertCommand.Parameters.AddWithValue("@chamber_phone", chamber_phone);
+                        insertCommand.Parameters.AddWithValue("@outro", outro);
+                        insertCommand.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error inserting doctor info: {ex}");
+                throw;
+            }
+        }
+        //implement DatabaseHelper.UpdateDoctorInfo(doctorInfo); where id =1
+        public static void UpdateDoctorInfo(DoctorInfo doctorInfo)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+                    using (var updateCommand = new SQLiteCommand("UPDATE DoctorInformation SET docname = @docname, docdegree = @docdegree, docname_bangla = @docname_bangla, docdegree_bangla = @docdegree_bangla, docdetail = @docdetail, docdetail_bangla = @docdetail_bangla, moredetail_bangla = @moredetail_bangla, chamber = @chamber, chamber_location = @chamber_location, visit_date = @visit_date, visit_time = @visit_time, chamber_phone = @chamber_phone, outro = @outro WHERE ID = 1;", connection))
+                    {
+                        updateCommand.Parameters.AddWithValue("@docname", doctorInfo.docname);
+                        updateCommand.Parameters.AddWithValue("@docdegree", doctorInfo.docdegree);
+                        updateCommand.Parameters.AddWithValue("@docname_bangla", doctorInfo.docname_bangla);
+                        updateCommand.Parameters.AddWithValue("@docdegree_bangla", doctorInfo.docdegree_bangla);
+                        updateCommand.Parameters.AddWithValue("@docdetail", doctorInfo.docdetail);
+                        updateCommand.Parameters.AddWithValue("@docdetail_bangla", doctorInfo.docdetail_bangla);
+                        updateCommand.Parameters.AddWithValue("@moredetail_bangla", doctorInfo.moredetail_bangla);
+                        updateCommand.Parameters.AddWithValue("@chamber", doctorInfo.chamber);
+                        updateCommand.Parameters.AddWithValue("@chamber_location", doctorInfo.chamber_location);
+                        updateCommand.Parameters.AddWithValue("@visit_date", doctorInfo.visit_date);
+                        updateCommand.Parameters.AddWithValue("@visit_time", doctorInfo.visit_time);
+                        updateCommand.Parameters.AddWithValue("@chamber_phone", doctorInfo.chamber_phone);
+                        updateCommand.Parameters.AddWithValue("@outro", doctorInfo.outro);
+                        updateCommand.ExecuteNonQuery();
+                    }
+                }
+                MessageBox.Show("Doctor Information Updated Successfully");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating doctor info: {ex}");
+                throw;
+            }
+        }
         public static List<Complaint> GetInitialComplaint()
         {
             List<Complaint> initialComplaint = new List<Complaint>();

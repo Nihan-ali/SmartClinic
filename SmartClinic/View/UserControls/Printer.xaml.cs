@@ -53,27 +53,19 @@ namespace SmartClinic.View.UserControls
 
         //public event EventHandler<PatientEventArgs> PrescriptionDataAvailable;
 
+
         public Printer()
         {
             InitializeComponent();
-            docdegree.Content = variables.docdegree;
-            docname.Content = variables.docname;
-            docname_bangla.Content = variables.docname_bangla;
-            docdegree_bangla.Content = variables.docdegree_bangla;
-            docdetail.Content = variables.docdetail;
-            docdetail_bangla.Content = variables.docdetail_bangla;
-            moredetail_bangla.Content = variables.moredetail_bangla;
-            chambername.Content = variables.chamber;
-            chamberlocation.Content = variables.chamber_location;
-            chamberphone.Content = variables.chamber_phone;
-            visit_date.Content = variables.visit_date;
-            visit_time.Content = variables.visit_time;
-            outro.Content = variables.outro;
+            UpdateDoctorInfo();
 
-    }
+
+        }
         public Printer(Patient patient, string todaydate, List<Complaint> complaints, List<history> histories, List<Examination> examinations, List<Investigation> investigations, List<Diagnosis> diagnoses, List<Treatment> treatments, List<DummyMedicine> medicines, List<Advice> advices, List<FollowUp> followUps, List<SpecialNote> specialNotes)
         {
             InitializeComponent();
+            //docname.Content = "ghochu222";
+            
             newPatient = patient;
             dayyt = todaydate;
             selectedComplaints = complaints;
@@ -86,8 +78,31 @@ namespace SmartClinic.View.UserControls
             selectedAdvices = advices;
             selectedFollowUps = followUps;
             selectedSpecialNotes = specialNotes;
-
+            UpdateDoctorInfo();
             UpdateAllFields();
+        }
+        private void UpdateDoctorInfo()
+        {
+            List<DoctorInfo> doctorInfos = DatabaseHelper.GetDoctorInfos();
+            // Check if the list is not empty before accessing its first element
+            if (doctorInfos != null && doctorInfos.Count > 0)
+            {
+                DoctorInfo doctorInfo = doctorInfos[0];
+
+                docdegree.Content = doctorInfo.docdegree;
+                docname.Content = doctorInfo.docname;
+                docname_bangla.Content = doctorInfo.docname_bangla;
+                docdegree_bangla.Content = doctorInfo.docdegree_bangla;
+                docdetail.Content = doctorInfo.docdetail;
+                docdetail_bangla.Content = doctorInfo.docdetail_bangla;
+                moredetail_bangla.Content = doctorInfo.moredetail_bangla;
+                chambername.Content = doctorInfo.chamber;
+                chamberlocation.Content = doctorInfo.chamber_location;
+                chamberphone.Content = doctorInfo.chamber_phone;
+                visit_date.Content = doctorInfo.visit_date;
+                visit_time.Content = doctorInfo.visit_time;
+                outro.Content = doctorInfo.outro;
+            }
         }
 
         private void UpdateAllFields()
