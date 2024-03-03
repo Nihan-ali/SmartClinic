@@ -23,6 +23,7 @@ namespace SmartClinic
 
         private Popup treatmentPlanPopup;
         private RxUsercontrol rxUserControl;
+        private Button selectedButton;
         public MainWindow()
         {
             InitializeComponent();
@@ -31,16 +32,10 @@ namespace SmartClinic
             DataContext = this;
             TodayDate = DateTime.Now.ToString("dd-MM-yyyy");
             rxUserControl = new RxUsercontrol();
-            rx.Background = Brushes.Red;
             
             contentControl.Content = rxUserControl;
         }
-        private void checking(object sender, RoutedEventArgs e)
-        {
-            rx.Foreground = Brushes.Purple;
-            rx.Background = Brushes.Red;
-
-        }
+        
 
         // MainWindow.xaml.cs
         public static implicit operator MainWindow(MedicineSearchWindow v)
@@ -50,30 +45,47 @@ namespace SmartClinic
         private void RxButton_Click(object sender, RoutedEventArgs e)
         {
             // Set content to RxUserControl
+            UpdateButtonSelection(rx);
             contentControl.Content = new View.UserControls.RxUsercontrol();
         }
 
         private void PatientButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            UpdateButtonSelection(patients);
             contentControl.Content = new View.UserControls.PatientsUserControl();
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
             // Set content to SettingsUserControl
+            UpdateButtonSelection(settings);
             //contentControl.Content = new UserControls.SettingsUserControl();
         }
 
         private void StatButton_Click(object sender, RoutedEventArgs e)
         {
             // Set content to StatUserControl
+            UpdateButtonSelection(stat);
             contentControl.Content = new StatUserControl();
         }
 
         private void searchMenu_Loaded(object sender, RoutedEventArgs e)
         {
 
+        }
+        private void UpdateButtonSelection(Button clickedButton)
+        {
+            if (selectedButton != null)
+            {
+                // Reset the background of the previously selected button
+                selectedButton.Background = System.Windows.Media.Brushes.Transparent;
+            }
+
+            // Set the background of the clicked button to red
+            clickedButton.Background = System.Windows.Media.Brushes.Red;
+
+            // Update the selectedButton reference
+            selectedButton = clickedButton;
         }
     }
 }

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartClinic.View.UserControls"
         mc:Ignorable="d"
-        Title="AddPatient" Height="450" Width="800">
-    <Grid Background="#F0F0F0">
+        Title="Add Patient" Height="450" Width="800">
+    <Grid Background="#D3D3D3">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -14,26 +14,26 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Border Grid.Row="0" Background="#3498DB">
-            <TextBlock Text="Add Patient" Foreground="White" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Border Grid.Row="0" Background="#4CAF50">
+            <TextBlock Text="Add Patient" Foreground="White" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI"/>
         </Border>
 
         <!-- Content -->
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="20" VerticalAlignment="Center">
             <StackPanel Margin="0,0,20,0">
-                <TextBlock Text="Name:" Foreground="#333333" FontWeight="Bold" Margin="0,0,0,5"/>
-                <TextBox x:Name="nameTextBox" Width="200" Height="30" Background="#EAEAEA" Foreground="#333333" BorderBrush="#3498DB" BorderThickness="1" Margin="0,0,0,10"/>
+                <TextBlock Text="Name:" Foreground="#333333" FontWeight="Bold" Margin="0,0,0,5" FontFamily="Segoe UI"/>
+                <TextBox x:Name="nameTextBox" Width="200" Height="30" Background="#FFFFFF" Foreground="#333333" BorderBrush="#4CAF50" BorderThickness="1" Margin="0,0,0,10"/>
 
-                <TextBlock Text="Age:" Foreground="#333333" FontWeight="Bold" Margin="0,0,0,5"/>
-                <TextBox x:Name="ageTextBox" Width="200" Height="30" Background="#EAEAEA" Foreground="#333333" BorderBrush="#3498DB" BorderThickness="1" Margin="0,0,0,10"/>
+                <TextBlock Text="Age:" Foreground="#333333" FontWeight="Bold" Margin="0,0,0,5" FontFamily="Segoe UI"/>
+                <TextBox x:Name="ageTextBox" Width="200" Height="30" Background="#FFFFFF" Foreground="#333333" BorderBrush="#4CAF50" BorderThickness="1" Margin="0,0,0,10"/>
             </StackPanel>
 
             <StackPanel Margin="0,0,20,0">
-                <TextBlock Text="Phone:" Foreground="#333333" FontWeight="Bold" Margin="0,0,0,5"/>
-                <TextBox x:Name="phoneTextBox" Width="200" Height="30" Background="#EAEAEA" Foreground="#333333" BorderBrush="#3498DB" BorderThickness="1" Margin="0,0,0,10"/>
+                <TextBlock Text="Phone:" Foreground="#333333" FontWeight="Bold" Margin="0,0,0,5" FontFamily="Segoe UI"/>
+                <TextBox x:Name="phoneTextBox" Width="200" Height="30" Background="#FFFFFF" Foreground="#333333" BorderBrush="#4CAF50" BorderThickness="1" Margin="0,0,0,10"/>
 
-                <TextBlock Text="Blood Group:" Foreground="#333333" FontWeight="Bold" Margin="0,0,0,5"/>
-                <ComboBox x:Name="bloodGroupComboBox" Width="200" Height="30" Background="#EAEAEA" Foreground="#333333" BorderBrush="#3498DB" BorderThickness="1" Margin="0,0,0,10">
+                <TextBlock Text="Blood Group:" Foreground="#333333" FontWeight="Bold" Margin="0,0,0,5" FontFamily="Segoe UI"/>
+                <ComboBox x:Name="bloodGroupComboBox" Width="200" Height="30" Background="#FFFFFF" Foreground="#333333" BorderBrush="#4CAF50" BorderThickness="1" Margin="0,0,0,10">
                     <ComboBoxItem>O-</ComboBoxItem>
                     <ComboBoxItem>O+</ComboBoxItem>
                     <ComboBoxItem>A+</ComboBoxItem>
@@ -46,12 +46,12 @@
             </StackPanel>
 
             <StackPanel>
-                <TextBlock Text="Address:" Foreground="#333333" FontWeight="Bold" Margin="0,0,0,5"/>
-                <TextBox x:Name="addressTextBox" Width="200" Height="80" Background="#EAEAEA" Foreground="#333333" BorderBrush="#3498DB" BorderThickness="1" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Margin="0,0,0,10"/>
+                <TextBlock Text="Address:" Foreground="#333333" FontWeight="Bold" Margin="0,0,0,5" FontFamily="Segoe UI"/>
+                <TextBox x:Name="addressTextBox" Width="200" Height="80" Background="#FFFFFF" Foreground="#333333" BorderBrush="#4CAF50" BorderThickness="1" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Margin="0,0,0,10"/>
             </StackPanel>
         </StackPanel>
 
         <!-- Submit Button -->
-        <Button Content="Submit" Grid.Row="2"   Click="SubmitButton_Click" Background="#3498DB" Foreground="White"/>
+        <Button Content="Submit" Grid.Row="2" Click="SubmitButton_Click" Background="#4CAF50" Foreground="White" FontFamily="Segoe UI" FontSize="16"/>
     </Grid>
 </Window>
