@@ -51,7 +51,9 @@ namespace SmartClinic
                                                     CREATE TABLE IF NOT EXISTS DoctorInformation (ID INTEGER PRIMARY KEY AUTOINCREMENT, docname TEXT, docdegree TEXT, docname_bangla TEXT, docdegree_bangla TEXT, docdetail TEXT, docdetail_bangla TEXT, moredetail_bangla TEXT, chamber TEXT, chamber_location TEXT, visit_date TEXT, visit_time TEXT, chamber_phone TEXT, outro TEXT);
                                                     INSERT INTO DoctorInformation (docname, docdegree, docname_bangla, docdegree_bangla, docdetail, docdetail_bangla, moredetail_bangla, chamber, chamber_location, visit_date, visit_time, chamber_phone, outro)
 VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.আবু নঈম মোহাম্মাদ', 'এমবিবিএস, (এন্ডোক্রাইনোলজি ও মেটাবোলিজম)', 'Consultant-Diabetologist, Endocrionologist & Metabolic Disorder Specialist', 'ডায়াবেটিস, হরমোন ও মেডিসিন বিশেষজ্ঞ', 'আবাসিক চিকিৎসক - আর.পি (মেডিসিন), এম.এ.জি ওসমানী মেডিকেল কলেজ হাসপাতাল, সিলেট', 'চেম্বারঃ এবিসি ডায়াগনস্টিক সেন্টার', 'চৌহাট্টা পয়েট, সদর, সিলেট', 'রোগী দেখার সময়ঃ প্রতি শনি, সোম, মঙ্গল ও বুধবার', 'বিকাল ৫:৩০ থেকে রাত ৮ টা পর্যন্ত', 'যোগাযোগঃ 01914-478747 (সকাল ১০টা - ১২টা) রবি, বৃহস্পতি ও শুক্রবার বন্ধ', 'শরীরের যত্ন নিবেন। নিয়মিত ওষুধ খাবেন। পরবর্তী সাক্ষাতের সময় বাবস্থাপত্র আনবেন। প্রয়োজনে- ০১৮১৯-৮০০৩৩৩ (দুপুর ২টা-৩টা)');
-
+                                                    CREATE TABLE IF NOT EXISTS Users (ID INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, status INT NOT NULL DEFAULT 0);
+                                                    
+                                                    CREATE TABLE IF NOT EXISTS Questions(ID INTEGER PRIMARY KEY AUTOINCREMENT, Question TEXT, Answer TEXT);
                                                     CREATE TABLE IF NOT EXISTS Medicine (ID INTEGER PRIMARY KEY AUTOINCREMENT, ManufacturerName TEXT, BrandName TEXT, GenericName TEXT, Strength TEXT, MedicineType TEXT,Occurrence INTEGER NOT NULL, DosageDescription TEXT);
                                                     CREATE TABLE IF NOT EXISTS MedicineGroup(GroupName TEXT, MedicineList TEXT, Occurrence INTEGER NOT NULL);                                                    
 
@@ -95,8 +97,77 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
                 Console.WriteLine($"Database file already exists at: {databaseFilePath}");
             }
         }
+        //implement check function for login
+        public static bool CheckLogin(string username, string password)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT COUNT(*) FROM Users WHERE username = @Username AND password = @Password;", connection))
+                    {
+                        command.Parameters.AddWithValue("@Username", username);
+                        command.Parameters.AddWithValue("@Password", password);
+
+                        int count = Convert.ToInt32(command.ExecuteScalar());
+
+                        return count > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error checking login: {ex}");
+                throw;
+            }
+        }
+        // update password of user , if user name is present then update password else create new user and password
+        public static void UpdatePassword(string username, string password)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM Users WHERE username = @Username;", connection))
+                    {
+                        checkCommand.Parameters.AddWithValue("@Username", username);
+
+                        int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                        if (count == 0)
+                        {
+                            using (var insertCommand = new SQLiteCommand("INSERT INTO Users (username, password) VALUES (@Username, @Password);", connection))
+                            {
+                                insertCommand.Parameters.AddWithValue("@Username", username);
+                                insertCommand.Parameters.AddWithValue("@Password", password);
+                                insertCommand.ExecuteNonQuery();
+                            }
+                        }
+                        else
+                        {
+                            using (var updateCommand = new SQLiteCommand("UPDATE Users SET password = @Password WHERE username = @Username;", connection))
+                            {
+                                updateCommand.Parameters.AddWithValue("@Username", username);
+                                updateCommand.Parameters.AddWithValue("@Password", password);
+                                updateCommand.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating password: {ex}");
+                throw;
+            }
+        }
 
         //implement Get doctorinfo where id = 1
+        
         public static List<DoctorInfo> GetDoctorInfos()
         {
             List<DoctorInfo> doctorInfos = new List<DoctorInfo>();
@@ -135,6 +206,35 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
             }
             return doctorInfos;
         }
+        // get question using question all question
+        public static List<Question> GetQuestions()
+        {
+            List<Question> questions = new List<Question>();
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                using (var command = new SQLiteCommand("SELECT * FROM Questions;", connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Question question = new Question
+                            {
+                                Id = Convert.ToInt32(reader["ID"]),
+                                Ques = reader["Question"].ToString(),
+                                Answer = reader["Answer"].ToString()
+                            };
+
+                            questions.Add(question);
+                        }
+                    }
+                }
+            }
+            return questions;
+        }
+
+        
         //implement insert doctorinfo
         public static void InsertDoctorInfo(string docname, string docdegree, string docname_bangla, string docdegree_bangla, string docdetail, string docdetail_bangla, string moredetail_bangla, string chamber, string chamber_location, string visit_date, string visit_time, string chamber_phone, string outro)
         {

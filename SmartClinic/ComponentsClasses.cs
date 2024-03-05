@@ -68,6 +68,15 @@ namespace SmartClinic
         public string chamber_phone { get; set; }
         public string outro { get; set; }
     }
+    //Question class
+    public class Question
+    {
+        public int Id { get; set; }
+        public string Ques { get; set; }
+        public string Answer { get; set; }
+        public string UserAnswer { get; set; }
+    }
+
 
 
     public class Complaint

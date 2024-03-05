@@ -4,20 +4,62 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartClinic"
-        xmlns:UserControls="clr-namespace:SmartClinic.View.UserControls"
         mc:Ignorable="d"
         Title="Doctor Rx"
-        Icon="doctor.ico" 
+        Icon="icon.ico" 
+        WindowStartupLocation="CenterScreen"
         Height="550" 
-        Width="550"
-        >
-    <!--<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible">-->
-    <Grid>
+        Width="650">
+    <Grid Background="AliceBlue">
+        <Border BorderBrush="DarkGray" BorderThickness="1" Background="White" Width="320"  CornerRadius="10" VerticalAlignment="Center">
+            <StackPanel Margin="20">
+                <TextBlock Text="Login" FontWeight="Bold" FontSize="24" Margin="0,0,0,20" HorizontalAlignment="Center"/>
+                <StackPanel>
+                    <TextBlock Text="Username:" FontWeight="Bold" FontSize="14" Margin="0,0,0,5"/>
+                    <!-- Give placeholder text to the TextBox -->
+                    <TextBox x:Name="Username" Margin="0,0,0,10" FontSize="14" Padding="5" BorderThickness="1" BorderBrush="DarkGray" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="TextBox">
+                                            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
+                                                <Grid>
+                                                    <TextBlock x:Name="Watermark" Text="Enter your username" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" Foreground="DarkGray" Visibility="Visible" Padding="5"/>
+                                                    <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                                </Grid>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                </StackPanel>
 
-        <Button Content="Open Home" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="30" Click="Home_Button_Click"/>
 
+                <StackPanel>
+                    <TextBlock Text="Password:" FontWeight="Bold" FontSize="14" Margin="0,0,0,5"/>
+                    <Grid>
+                        <!-- Add a border to the password box with password watermark -->
+                        <Border x:Name="PasswordBorder" Background="White" BorderBrush="DarkGray" BorderThickness="1" CornerRadius="5">
+                            <PasswordBox x:Name="Password" FontSize="14" Padding="5" BorderThickness="0" BorderBrush="{x:Null}" Background="Transparent"/>
+                        </Border>
+                        <TextBlock x:Name="PasswordWatermark" Text="Enter your password" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" Foreground="DarkGray" Visibility="Visible"/>
+                    </Grid>
+                </StackPanel>
+
+                <TextBlock x:Name="Error" Text="Invalid Username or Password" Foreground="Red" Visibility="Hidden" Margin="0,0,0,10"/>
+                <!-- Grid with 2 columns for Forgot Password and Login Button -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="ForgotPassword" Content="Forgot Password" Grid.Column="0" Margin="0,0,0,10" Background="Transparent" BorderBrush="{x:Null}" Foreground="Blue" FontWeight="Bold" Click="ForgotPassword_Click"/>
+                    <Button x:Name="Login" Content="Login" Grid.Column="1" Margin="10,0,10,10" Background="Green" Foreground="White" FontWeight="Bold" Click="Login_Click" FontSize="14" Padding="5"/>
+                </Grid>
+            </StackPanel>
+        </Border>
     </Grid>
-
-    <!--</ScrollViewer>-->
 </Window>
-    

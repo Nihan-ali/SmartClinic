@@ -11,6 +11,7 @@
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("abclogo.jpeg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("create.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("doctor.ico")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icon.ico")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("patient.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("rx.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("search.png")]
