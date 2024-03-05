@@ -396,3 +396,4 @@ D:\MainAcademicProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\refint\S
 D:\MainAcademicProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\SmartClinic.pdb
 D:\MainAcademicProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\SmartClinic.genruntimeconfig.cache
 D:\MainAcademicProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\ref\SmartClinic.dll
+D:\MainAcademicProject\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\ResourceDictionary.baml

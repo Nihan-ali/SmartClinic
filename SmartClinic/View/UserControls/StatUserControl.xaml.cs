@@ -17,6 +17,8 @@ namespace SmartClinic.View.UserControls
         public int TodaysPatient { get; set; }
         public int ThisMonthsPatient { get; set; }
         public int LastMonthsPatient { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         public ObservableCollection<PatientVisit> Patients { get; set; }
 
@@ -24,6 +26,7 @@ namespace SmartClinic.View.UserControls
         {
             InitializeComponent();
             SetDefaultValues();
+            SetCalendarDisplayDate();
         }
 
         private void SetDefaultValues()
@@ -43,15 +46,25 @@ namespace SmartClinic.View.UserControls
             LastMonthsPatient = Patients.Select(visit => visit.Id).Distinct().Count(id => Patients.Any(visit => visit.Id == id && visit.Visit.Month == DateTime.Today.AddMonths(-1).Month));
 
             // Convert DateTime to string with a specific format
-            StartDatePicker.SelectedDate = DateTime.Today;
-            EndDatePicker.SelectedDate = DateTime.Today;
+            StartDateCalendar.SelectedDate = DateTime.Today;
+
+            // Initialize EndDate with today's date
+            EndDate = DateTime.Today;
+            EndDateCalendar.SelectedDate = DateTime.Today;
 
             // Set event handlers for date picker selection changed events
-            StartDatePicker.SelectedDateChanged += DateChanged;
-            EndDatePicker.SelectedDateChanged += DateChanged;
+            StartDateCalendar.SelectedDatesChanged += DateChanged;
+            EndDateCalendar.SelectedDatesChanged += EndDateCalendar_SelectedDatesChanged;
 
             // Update total visit and patient counts
             UpdateCountsBasedOnVisits();
+        }
+
+        private void SetCalendarDisplayDate()
+        {
+            // Set the display date of both calendars to the first day of the current year
+            StartDateCalendar.DisplayDate = new DateTime(DateTime.Today.Year, 1, 1);
+            EndDateCalendar.DisplayDate = new DateTime(DateTime.Today.Year, 1, 1);
         }
 
         private void LoadAllPatientVisits()
@@ -64,11 +77,10 @@ namespace SmartClinic.View.UserControls
         {
             if (sender is DatePicker datePicker)
             {
-                string startDateString = StartDatePicker.SelectedDate?.ToString("yyyy-MM-dd");
-                string endDateString = EndDatePicker.SelectedDate?.ToString("yyyy-MM-dd");
+                string startDateString = StartDateCalendar.SelectedDate?.ToString("yyyy-MM-dd");
+                string endDateString = EndDateCalendar.SelectedDate?.ToString("yyyy-MM-dd");
 
                 // Update the statistics based on the selected dates
-                //MessageBox.Show("for " + startDateString + " and " + endDateString);
                 UpdateStatistics(startDateString, endDateString);
             }
         }
@@ -87,22 +99,13 @@ namespace SmartClinic.View.UserControls
         private void UpdateVisitStatistics(List<PatientVisit> selectedVisits)
         {
             TotalVisit = selectedVisits.Count;
-            //MessageBox.Show("updating " + TotalPatient);
             UpdateBindings();
-            //TodaysVisit = selectedVisits.Count(visit => visit.Visit.Date == DateTime.Today);
-            //MonthsVisit = selectedVisits.Count(visit => visit.Visit.Month == DateTime.Today.Month);
-            //LastMonthsVisit = selectedVisits.Count(visit => visit.Visit.Month == DateTime.Today.AddMonths(-1).Month);
         }
 
         private void UpdatePatientStatistics(List<PatientVisit> selectedVisits)
         {
             var uniquePatients = selectedVisits.Select(visit => visit.Id).Distinct().ToList();
             TotalPatient = uniquePatients.Count();
-            //TodaysPatient = uniquePatients.Count(id => selectedVisits.Any(visit => visit.Id == id && visit.Visit.Date == DateTime.Today));
-            //ThisMonthsPatient = uniquePatients.Count(id => selectedVisits.Any(visit => visit.Id == id && visit.Visit.Month == DateTime.Today.Month));
-            //LastMonthsPatient = uniquePatients.Count(id => selectedVisits.Any(visit => visit.Id == id && visit.Visit.Month == DateTime.Today.AddMonths(-1).Month));
-
-            // Update the bindings
             UpdateBindings();
         }
 
@@ -110,8 +113,6 @@ namespace SmartClinic.View.UserControls
         {
             TotalVisit = Patients.Count;
             TotalPatient = Patients.Select(visit => visit.Id).Distinct().Count();
-
-            // Update the bindings
             UpdateBindings();
         }
 
@@ -128,24 +129,13 @@ namespace SmartClinic.View.UserControls
             ThisMonthsPatientTextBlock.GetBindingExpression(TextBlock.TextProperty)?.UpdateTarget();
             LastMonthsPatientTextBlock.GetBindingExpression(TextBlock.TextProperty)?.UpdateTarget();
         }
-        private void StartDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+
+        private void EndDateCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (EndDatePicker.SelectedDate < StartDatePicker.SelectedDate)
+            if (EndDateCalendar.SelectedDate < StartDateCalendar.SelectedDate)
             {
-                EndDatePicker.SelectedDate = StartDatePicker.SelectedDate;
-                
-              
+                MessageBox.Show("Please select an end date that is greater than or equal to the start date.");
             }
         }
-
-        private void EndDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (EndDatePicker.SelectedDate < StartDatePicker.SelectedDate)
-            {
-                StartDatePicker.SelectedDate = EndDatePicker.SelectedDate;
-                MessageBox.Show("Please Select the end date greater than starting date");
-            }
-        }
-
     }
 }

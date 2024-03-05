@@ -96,33 +96,97 @@
         <!-- Third row: Date Pickers -->
         <Grid Grid.Row="2" Margin="10">
             <Grid.ColumnDefinitions>
-                <!-- First column -->
                 <ColumnDefinition Width="*" />
-                <!-- Second column -->
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <!-- Start Date Picker -->
-            <StackPanel Grid.Column="0" Margin="5">
-                <TextBlock Text="Start" HorizontalAlignment="Center"/>
-                <Border BorderThickness="0" BorderBrush="AntiqueWhite" Padding="5">
-                    <DatePicker x:Name="StartDatePicker" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                    SelectedDate="{Binding StartDate, Mode=TwoWay}" 
-                    DisplayDateEnd="{Binding EndDate, Mode=OneWay}" 
-                    SelectedDateChanged="StartDatePicker_SelectedDateChanged"/>
-                </Border>
-            </StackPanel>
+            <!-- Start Date Picker -->
+            <Border Grid.Column="0" Margin="5,5,243,5" Grid.ColumnSpan="2">
+                <!-- Start Date Calendar -->
+                <Calendar x:Name="StartDateCalendar" VerticalAlignment="Center" 
+          DisplayDate="{Binding StartDate, Mode=TwoWay}" 
+          SelectedDate="{Binding StartDate, Mode=TwoWay}" Margin="0,0,-137,0">
+
+                    <Calendar.Resources>
+                        <Style TargetType="CalendarItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="CalendarItem">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <ItemsPresenter Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7"/>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Calendar.Resources>
+                </Calendar>
+
+            </Border>
+
+
+
 
             <!-- End Date Picker -->
-            <StackPanel Grid.Column="1" Margin="5">
-                <TextBlock Text="End" HorizontalAlignment="Center"/>
-                <Border BorderThickness="0" BorderBrush="AntiqueWhite" Padding="5">
-                    <DatePicker x:Name="EndDatePicker" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                    SelectedDate="{Binding EndDate, Mode=TwoWay}" 
-                    DisplayDateStart="{Binding StartDate, Mode=OneWay}" 
-                    SelectedDateChanged="EndDatePicker_SelectedDateChanged"/>
-                </Border>
-            </StackPanel>
+            <!-- End Date Calendar -->
+            <Border Grid.Column="1" Margin="5">
+                <Calendar x:Name="EndDateCalendar" VerticalAlignment="Top" 
+        DisplayDate="{Binding EndDate, Mode=TwoWay}" 
+        SelectedDatesChanged="EndDateCalendar_SelectedDatesChanged"
+        Margin="-185,0,-23,0" Height="165">
+                    <Calendar.Resources>
+                        <Style TargetType="CalendarItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="CalendarItem">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <ItemsPresenter Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7"/>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Calendar.Resources>
+                </Calendar>
+            </Border>
+
+
+
 
 
         </Grid>
