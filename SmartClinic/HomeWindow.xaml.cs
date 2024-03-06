@@ -37,6 +37,9 @@ namespace SmartClinic
             rxUserControl = new RxUsercontrol();
 
             contentControl.Content = rxUserControl;
+            // Set the selectedButton to RxButton
+            selectedButton = rx;
+            selectedButton.Background = Brushes.White;
         }
         private void RxButton_Click(object sender, RoutedEventArgs e)
         {
@@ -80,7 +83,7 @@ namespace SmartClinic
             }
 
             // Set the background of the clicked button to red
-            clickedButton.Background = System.Windows.Media.Brushes.Red;
+            clickedButton.Background = System.Windows.Media.Brushes.White;
 
             // Update the selectedButton reference
             selectedButton = clickedButton;

@@ -26,9 +26,9 @@
             <Grid>
                 <Rectangle Fill="#FF332646"/>
                 <StackPanel>
-                    <Button Name="rx" Margin="15,15" Click="RxButton_Click" Style="{StaticResource CommonButtonStyle}" Height="35" Width="40">
+                    <Button x:Name="rx" Margin="15,15" Click="RxButton_Click" Style="{StaticResource CommonButtonStyle}" Height="35" Width="40">
                         <Button.Content>
-                            <Image Source="rx.png" Height="25" Width="25"/>
+                            <Image Source="rx.png" />
                         </Button.Content>
                     </Button>
 
@@ -36,7 +36,7 @@
 
                     <Button Name="patients" Margin="15,15" Click="PatientButton_Click" Style="{StaticResource CommonButtonStyle}" Height="35" Width="40">
                         <Button.Content>
-                            <Image Source="patient.png" Height="25" Width="25"/>
+                            <Image Source="patient.png"/>
                         </Button.Content>
                     </Button>
 
@@ -44,7 +44,7 @@
 
                     <Button Name="settings" Margin="15,15" Click="SettingsButton_Click" Style="{StaticResource CommonButtonStyle}" Height="35" Width="40">
                         <Button.Content>
-                            <Image Source="settings.png" Height="25" Width="25"/>
+                            <Image Source="settings.png"/>
                         </Button.Content>
                     </Button>
 
@@ -52,7 +52,7 @@
 
                     <Button Name="stat" Margin="15,15" Click="StatButton_Click" Style="{StaticResource CommonButtonStyle}" Height="35" Width="40">
                         <Button.Content>
-                            <Image Source="stat.png" Height="25" Width="25"/>
+                            <Image Source="stat.png"/>
                         </Button.Content>
                     </Button>
                 </StackPanel>
