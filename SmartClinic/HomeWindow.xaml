@@ -14,19 +14,19 @@
         >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="6*"/>
+            <RowDefinition Height="6.5*"/>
             <RowDefinition Height="94*"/>
         </Grid.RowDefinitions>
         <UserControls:header/>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4.8*"/>
-                <ColumnDefinition Width="95*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="96*"/>
             </Grid.ColumnDefinitions>
             <Grid>
                 <Rectangle Fill="#FF332646"/>
                 <StackPanel>
-                    <Button x:Name="rx" Margin="15,15" Click="RxButton_Click" Style="{StaticResource CommonButtonStyle}" Height="35" Width="40">
+                    <Button x:Name="rx" Margin="2,25,2,15" Click="RxButton_Click" Style="{StaticResource CommonButtonStyle}" >
                         <Button.Content>
                             <Image Source="rx.png" />
                         </Button.Content>
@@ -34,7 +34,7 @@
 
                     <!-- Repeat the same structure for other buttons -->
 
-                    <Button Name="patients" Margin="15,15" Click="PatientButton_Click" Style="{StaticResource CommonButtonStyle}" Height="35" Width="40">
+                    <Button Name="patients" Margin="5,15" Click="PatientButton_Click" Style="{StaticResource CommonButtonStyle}" >
                         <Button.Content>
                             <Image Source="patient.png"/>
                         </Button.Content>
@@ -42,7 +42,7 @@
 
                     <!-- Repeat the same structure for other buttons -->
 
-                    <Button Name="settings" Margin="15,15" Click="SettingsButton_Click" Style="{StaticResource CommonButtonStyle}" Height="35" Width="40">
+                    <Button Name="settings" Margin="5,15" Click="SettingsButton_Click" Style="{StaticResource CommonButtonStyle}">
                         <Button.Content>
                             <Image Source="settings.png"/>
                         </Button.Content>
@@ -50,7 +50,7 @@
 
                     <!-- Repeat the same structure for other buttons -->
 
-                    <Button Name="stat" Margin="15,15" Click="StatButton_Click" Style="{StaticResource CommonButtonStyle}" Height="35" Width="40">
+                    <Button Name="stat" Margin="5,15" Click="StatButton_Click" Style="{StaticResource CommonButtonStyle}" >
                         <Button.Content>
                             <Image Source="stat.png"/>
                         </Button.Content>

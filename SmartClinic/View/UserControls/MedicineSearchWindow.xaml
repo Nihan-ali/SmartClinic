@@ -342,23 +342,28 @@
             <Button x:Name="addToMedicineGroup" Content="Create Medicine Group" Grid.Column="1" Background="LightBlue" BorderThickness="1" FontWeight="Bold" Click="CreateMedicineGroup_Click"/>
         </Grid>
 
-        <Popup x:Name="MedicineGroupNamePopup" PlacementTarget="{Binding ElementName=addToMedicineGroup}" Placement="Relative" KeyDown="GroupNameEntered" StaysOpen="False" Width="365" Margin="15" MaxHeight="350">
-            <Grid>
-                <Border Background="#ebebeb" CornerRadius="5" BorderThickness="2" BorderBrush="Black">
+        <Popup x:Name="MedicineGroupNamePopup" PlacementTarget="{Binding ElementName=addToMedicineGroup}" Placement="Top" KeyDown="GroupNameEntered" StaysOpen="False" Width="365" Margin="15" Height="150">
+            <Grid Background="White">
+                <!--<Border Background="#ebebeb" CornerRadius="5" BorderThickness="0,0,2,2" BorderBrush="Black">-->
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" MinHeight="25"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
+                        <TextBlock Text="Enter Medicine Group Name" FontWeight="Bold" HorizontalAlignment="Left" Margin="10" Grid.Row="0"/>
+                        <TextBox x:Name="GroupNameBox" VerticalContentAlignment="Center" Grid.Row="1" Margin="10,5" Padding="5" />
 
-                        <TextBox x:Name="GroupNameBox" VerticalContentAlignment="Center" Grid.Row="0" />
-
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10" Grid.Row="1">
-                            <Button Content="Yes" Margin="5" Click="YesButton_Click"/>
-                            <Button Content="No" Margin="5" Click="NoButton_Click"/>
-                        </StackPanel>
+                        <Grid Margin="10" Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Content="Add" Margin="15,5" Click="YesButton_Click" FontWeight="Bold" Background="Blue" Foreground="White" Padding="5"/>
+                            <Button Content="Cancel" Margin="15,5" Click="NoButton_Click" Grid.Column="1" FontWeight="Bold" Background="Red" Foreground="White" Padding="5"/>
+                        </Grid>
                     </Grid>
-                </Border>
+                <!--</Border>-->
             </Grid>
         </Popup>
     </Grid>
