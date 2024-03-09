@@ -17,7 +17,20 @@
             <RowDefinition Height="6.5*"/>
             <RowDefinition Height="94*"/>
         </Grid.RowDefinitions>
-        <UserControls:header/>
+        <Grid Name="top" MinHeight="30" Background="#FF332646">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--first column content will be a label and second column content will be a label and a log out button-->
+            <Label Content="Digital Rx" HorizontalAlignment="Left" VerticalAlignment="Center"  Foreground="#FFF5E8E8" FontSize="18" FontWeight="Bold" Grid.Column="0"/>
+            <Grid Grid.Column="1" HorizontalAlignment="Right" Margin="10,0">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Dr. Abu Noyem Mohammad" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FFF1E1E1" FontSize="14" FontWeight="Bold" Margin="5,0"/>
+                    <Button Content="Log Out" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Wheat" BorderBrush="{x:Null}" FontSize="14" FontWeight="Bold" Background="Transparent" Click="LogOut_Click"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="4*"/>

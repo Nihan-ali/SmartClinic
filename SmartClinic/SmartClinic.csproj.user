@@ -45,9 +45,6 @@
     <Compile Update="View\UserControls\FollowUpSearchWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\UserControls\header.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\UserControls\HistorySearchWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -129,9 +126,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\FollowUpSearchWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\UserControls\header.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\HistorySearchWindow.xaml">

@@ -41,6 +41,21 @@ namespace SmartClinic
             selectedButton = rx;
             selectedButton.Background = Brushes.White;
         }
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            // Create an instance of MainWindow
+            MainWindow mainWindow = new MainWindow();
+
+            // Set the MainWindow as the main window
+            Application.Current.MainWindow = mainWindow;
+
+            // Show the MainWindow
+            mainWindow.Show();
+
+            // Close the current window
+            Window.GetWindow(this).Close();
+            DatabaseHelper.ResetStatus("Nihan");
+        }
         private void RxButton_Click(object sender, RoutedEventArgs e)
         {
             // Set content to RxUserControl

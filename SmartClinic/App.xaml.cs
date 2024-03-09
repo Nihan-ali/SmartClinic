@@ -1,17 +1,24 @@
-﻿using SmartClinic.ViewModel;
-using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
 
 namespace SmartClinic
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
-        public static SelectedItemsViewModel SelectedItemsViewModel { get; } = new SelectedItemsViewModel();
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            bool condition = DatabaseHelper.CheckStatus("Nihan"); // Change this to your actual condition
+            if (condition==false)
+            {
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("You are already logged in");
+                HomeWindow homeWindow = new HomeWindow();
+                homeWindow.Show();
+            }
+        }
     }
-
-
 }
