@@ -82,6 +82,8 @@ namespace SmartClinic
     public class Complaint
     {
         public string Content { get; set; }
+
+        public string Period { get; set; }
         public string Note { get; set; }
         public int Occurrence { get; set; }
     }

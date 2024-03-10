@@ -10,14 +10,11 @@ namespace SmartClinic
             bool condition = DatabaseHelper.CheckStatus("Nihan"); // Change this to your actual condition
             if (condition==false)
             {
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.Show();
+                StartupUri = new System.Uri("MainWindow.xaml", System.UriKind.Relative);
             }
             else
             {
-                MessageBox.Show("You are already logged in");
-                HomeWindow homeWindow = new HomeWindow();
-                homeWindow.Show();
+                StartupUri = new System.Uri("HomeWindow.xaml", System.UriKind.Relative);
             }
         }
     }
