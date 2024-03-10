@@ -336,3 +336,5 @@ H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\ChangePassword.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\ForgotPasswordWindow.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\HomeWindow.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\Settings.baml
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\EditMainComplaintControl.g.cs
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\EditMainComplaintControl.baml

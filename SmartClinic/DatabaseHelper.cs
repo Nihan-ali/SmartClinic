@@ -2283,23 +2283,29 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
         {
             string[] complaintPairs = combinedString.Split("$$");
 
-            List<Complaint> ccomplaints = new List<Complaint>();
+            List<Complaint> complaints = new List<Complaint>();
 
             foreach (string complaintPair in complaintPairs)
             {
                 string[] pairValues = complaintPair.Split('@');
-                if (pairValues.Length == 2)
+                if (pairValues.Length == 4) // Ensure all components are present
                 {
                     Complaint complaint = new Complaint
                     {
                         Content = pairValues[0],
-                        Note = pairValues[1]
+                        PeriodTime = pairValues[1],
+                        Note = pairValues[3]
                     };
-                    ccomplaints.Add(complaint);
+                    complaint.PeriodUnit = new ComboBoxItem { Content = pairValues[2] };
+                    complaints.Add(complaint);
                 }
             }
-            return ccomplaints;
+            return complaints;
         }
+
+
+
+
         public static List<history> ExtractHistory(string combinedString)
         {
             string[] historyPairs = combinedString.Split("$$");

@@ -39,6 +39,9 @@
     <Compile Update="View\UserControls\EditComplaintControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\UserControls\EditMainComplaintControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\UserControls\ExaminationSearchWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -120,6 +123,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\EditComplaintControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserControls\EditMainComplaintControl.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\ExaminationSearchWindow.xaml">

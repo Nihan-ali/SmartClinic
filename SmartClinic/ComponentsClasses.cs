@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows;
 using System.Windows.Controls;
+using System.Runtime.CompilerServices;
 
 namespace SmartClinic
 {
@@ -79,14 +80,124 @@ namespace SmartClinic
 
 
 
-    public class Complaint
-    {
-        public string Content { get; set; }
 
-        public string Period { get; set; }
-        public string Note { get; set; }
-        public int Occurrence { get; set; }
+public class Complaint : INotifyPropertyChanged
+    {
+        private string _content;
+        public string Content
+        {
+            get { return _content; }
+            set
+            {
+                if (_content != value)
+                {
+                    _content = value;
+                    OnPropertyChanged(nameof(Content));
+                    OnPropertyChanged(nameof(FormattedComplaint));
+                }
+            }
+        }
+
+        private string _periodTime;
+        public string PeriodTime
+        {
+            get { return _periodTime; }
+            set
+            {
+                if (_periodTime != value)
+                {
+                    _periodTime = value;
+                    OnPropertyChanged(nameof(PeriodTime));
+                    OnPropertyChanged(nameof(FormattedComplaint));
+                }
+            }
+        }
+
+        private ComboBoxItem _periodUnit;
+        public ComboBoxItem PeriodUnit
+        {
+            get { return _periodUnit; }
+            set
+            {
+                if (_periodUnit != value)
+                {
+                    _periodUnit = value;
+                    OnPropertyChanged(nameof(PeriodUnit));
+                    OnPropertyChanged(nameof(SelectedComboBoxItemContent));
+                    OnPropertyChanged(nameof(FormattedComplaint));
+                }
+            }
+        }
+
+        public string SelectedComboBoxItemContent
+        {
+            get
+            {
+                return PeriodUnit != null ? PeriodUnit.Content.ToString() : null;
+            }
+        }
+
+        private string _note;
+        public string Note
+        {
+            get { return _note; }
+            set
+            {
+                if (_note != value)
+                {
+                    _note = value;
+                    OnPropertyChanged(nameof(Note));
+                    OnPropertyChanged(nameof(FormattedComplaint));
+                }
+            }
+        }
+
+        private int _occurrence;
+        public int Occurrence
+        {
+            get { return _occurrence; }
+            set
+            {
+                if (_occurrence != value)
+                {
+                    _occurrence = value;
+                    OnPropertyChanged(nameof(Occurrence));
+                }
+            }
+        }
+
+        public string FormattedComplaint
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(PeriodTime) && string.IsNullOrEmpty(Note))
+                {
+                    return Content;
+                }
+                else if (string.IsNullOrEmpty(PeriodTime) && !string.IsNullOrEmpty(Note))
+                {
+                    return $"{Content} - {Note}";
+                }
+                else if (string.IsNullOrEmpty(Note))
+                {
+                    return $"{Content} ({PeriodTime} {SelectedComboBoxItemContent})";
+                }
+                else
+                {
+                    return $"{Content} ({PeriodTime} {SelectedComboBoxItemContent})   - {Note}";
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
+
+
+
 
     public class history
     {

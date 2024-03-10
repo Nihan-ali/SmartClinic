@@ -83,13 +83,14 @@
 
                         <!-- StackPanel containing TextBox and ComboBox -->
                         <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="5" HorizontalAlignment="Right">
-                            <TextBox x:Name="period" Width="30" Height="25" Margin="0,0,5,0"/>
-                            <ComboBox x:Name="PeriodComboBox" Width="60" Height="25" Margin="0,0,5,0" Background="#ECF0F1" Foreground="#2C3E50" BorderThickness="2" BorderBrush="Azure">
+                            <TextBox x:Name="periodUnit" Text="{Binding PeriodTime}" Width="30" Height="25" Margin="0,0,5,0"/>
+                            <ComboBox x:Name="PeriodComboBox" SelectedValue="{Binding PeriodUnit, Mode=TwoWay}" Width="60" Height="25" Margin="0,0,5,0" Background="#ECF0F1" Foreground="#2C3E50" BorderThickness="2" BorderBrush="Azure">
                                 <ComboBoxItem Content="দিন" IsSelected="True"/>
                                 <ComboBoxItem Content="সপ্তাহ"/>
                                 <ComboBoxItem Content="মাস"/>
                             </ComboBox>
                         </StackPanel>
+
 
                         <!-- StackPanel containing Label and TextBox -->
                         <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="10,5,5,5">
