@@ -73,5 +73,10 @@ namespace SmartClinic.View.UserControls
             }
 
         }
+        //implementing the cancel button
+        private void CancelBUtton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

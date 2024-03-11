@@ -134,17 +134,17 @@ namespace SmartClinic.View.UserControls
             n++;
             UpdateListView(n);
         }
-        private void PatientsListBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            if(e.Delta > 0)
-            {
-                PatientListScrollviewer.LineDown();
-            }
-            else
-            {
-                PatientListScrollviewer.LineUp();
-            }
-        }
+        //private void PatientsListBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        //{
+        //    if(e.Delta > 0)
+        //    {
+        //        PatientListScrollviewer.LineDown();
+        //    }
+        //    else
+        //    {
+        //        PatientListScrollviewer.LineUp();
+        //    }
+        //}
 
         private void SearchPatient_TextChanged(object sender, TextChangedEventArgs e)
         {

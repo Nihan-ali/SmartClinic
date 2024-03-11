@@ -20,41 +20,43 @@
         <UserControls:header/>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="96*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="95*"/>
             </Grid.ColumnDefinitions>
             <Grid>
                 <Rectangle Fill="#FF332646"/>
                 <StackPanel>
                     <Button x:Name="rx" Margin="2,25,2,15" Click="RxButton_Click" Style="{StaticResource CommonButtonStyle}" >
-                        <Button.Content>
-                            <Image Source="rx.png" />
-                        </Button.Content>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Image Source="rx.png" Width="30" Height="30"  />
+                            <TextBlock Text="Prescription" Margin="0,5,0,0" Foreground="#28fc03" FontWeight="Bold"/>
+                        </StackPanel>
                     </Button>
+
 
                     <!-- Repeat the same structure for other buttons -->
 
-                    <Button Name="patients" Margin="5,15" Click="PatientButton_Click" Style="{StaticResource CommonButtonStyle}" >
-                        <Button.Content>
-                            <Image Source="patient.png"/>
-                        </Button.Content>
+                    <Button Name="patients" Margin="5,15" Click="PatientButton_Click" Style="{StaticResource CommonButtonStyle}">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Image Source="patient.png" Width="30" Height="30" />
+                            <TextBlock Text="Patients" Margin="0,5,0,0" Foreground="#fcec03" FontWeight="Bold"/>
+                        </StackPanel>
                     </Button>
-
-                    <!-- Repeat the same structure for other buttons -->
 
                     <Button Name="settings" Margin="5,15" Click="SettingsButton_Click" Style="{StaticResource CommonButtonStyle}">
-                        <Button.Content>
-                            <Image Source="settings.png"/>
-                        </Button.Content>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Image Source="settings.png" Width="30" Height="30" />
+                            <TextBlock Text="Settings" Margin="0,5,0,0" Foreground="#fc7303" FontWeight="Bold"/>
+                        </StackPanel>
                     </Button>
 
-                    <!-- Repeat the same structure for other buttons -->
-
-                    <Button Name="stat" Margin="5,15" Click="StatButton_Click" Style="{StaticResource CommonButtonStyle}" >
-                        <Button.Content>
-                            <Image Source="stat.png"/>
-                        </Button.Content>
+                    <Button Name="stat" Margin="5,15" Click="StatButton_Click" Style="{StaticResource CommonButtonStyle}">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Image Source="stat.png" Width="30" Height="30" />
+                            <TextBlock Text="Statistics" Margin="0,5,0,0" Foreground="#fc03fc" FontWeight="Bold"/>
+                        </StackPanel>
                     </Button>
+
                 </StackPanel>
 
             </Grid>

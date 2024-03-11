@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartClinic.View.UserControls"
+        WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="AddPatient" Height="450" Width="800">
-    <Grid Background="#F0F0F0">
+        Title="AddPatient" Height="380" Width="820">
+    <Grid Background="#f0f3f4">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -14,26 +15,27 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Border Grid.Row="0" Background="#3498DB">
-            <TextBlock Text="Add Patient" Foreground="White" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Border Grid.Row="0" Background="#fefeff" Margin="10,10" Padding="10">
+            <TextBlock Text="Add Patient" Foreground="Black" FontWeight="Bold" FontSize="18" VerticalAlignment="Center"/>
         </Border>
 
         <!-- Content -->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="20" VerticalAlignment="Center">
+        <Border Grid.Row="1" Background="#fefeff" Margin="10,5,10,10">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,5" VerticalAlignment="Center">
             <StackPanel Margin="0,0,20,0">
-                <TextBlock Text="Name:" Foreground="#333333" FontWeight="Bold" Margin="0,0,0,5"/>
-                <TextBox x:Name="nameTextBox" Width="200" Height="30" Background="#EAEAEA" Foreground="#333333" BorderBrush="#3498DB" BorderThickness="1" Margin="0,0,0,10"/>
+                <TextBlock Text="Name:" Foreground="Black" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TextBox x:Name="nameTextBox" Width="230" Height="30" Background="White" Foreground="#333333" BorderBrush="#3498DB" Padding="5" BorderThickness="1,1,2,2" Margin="0,0,0,10"/>
 
-                <TextBlock Text="Age:" Foreground="#333333" FontWeight="Bold" Margin="0,0,0,5"/>
-                <TextBox x:Name="ageTextBox" Width="200" Height="30" Background="#EAEAEA" Foreground="#333333" BorderBrush="#3498DB" BorderThickness="1" Margin="0,0,0,10"/>
+                <TextBlock Text="Age:" Foreground="Black" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <TextBox x:Name="ageTextBox" Width="230" Height="30" Background="White" Foreground="#333333" BorderBrush="#3498DB" Padding="5" BorderThickness="1,1,2,2"  Margin="0,0,0,10"/>
             </StackPanel>
 
             <StackPanel Margin="0,0,20,0">
-                <TextBlock Text="Phone:" Foreground="#333333" FontWeight="Bold" Margin="0,0,0,5"/>
-                <TextBox x:Name="phoneTextBox" Width="200" Height="30" Background="#EAEAEA" Foreground="#333333" BorderBrush="#3498DB" BorderThickness="1" Margin="0,0,0,10"/>
+                <TextBlock Text="Phone:" Foreground="Black" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <TextBox x:Name="phoneTextBox" Width="230" Height="30" Background="White" Foreground="#333333" BorderBrush="#3498DB" Padding="5" BorderThickness="1,1,2,2" Margin="0,0,0,10"/>
 
-                <TextBlock Text="Blood Group:" Foreground="#333333" FontWeight="Bold" Margin="0,0,0,5"/>
-                <ComboBox x:Name="bloodGroupComboBox" Width="200" Height="30" Background="#EAEAEA" Foreground="#333333" BorderBrush="#3498DB" BorderThickness="1" Margin="0,0,0,10">
+                <TextBlock Text="Blood Group:" Foreground="Black" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <ComboBox x:Name="bloodGroupComboBox" Width="230" Height="30" Background="White" Foreground="#333333" BorderBrush="#3498DB" Padding="5" BorderThickness="1,1,2,2" Margin="0,0,0,10">
                     <ComboBoxItem>O-</ComboBoxItem>
                     <ComboBoxItem>O+</ComboBoxItem>
                     <ComboBoxItem>A+</ComboBoxItem>
@@ -46,12 +48,18 @@
             </StackPanel>
 
             <StackPanel>
-                <TextBlock Text="Address:" Foreground="#333333" FontWeight="Bold" Margin="0,0,0,5"/>
-                <TextBox x:Name="addressTextBox" Width="200" Height="80" Background="#EAEAEA" Foreground="#333333" BorderBrush="#3498DB" BorderThickness="1" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Margin="0,0,0,10"/>
+                <TextBlock Text="Address:" Foreground="Black" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <TextBox x:Name="addressTextBox" Width="230" Height="90" Background="White" Foreground="#333333" BorderBrush="#3498DB" Padding="5" BorderThickness="1,1,2,2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Margin="0,0,0,10"/>
             </StackPanel>
         </StackPanel>
-
+        </Border>
         <!-- Submit Button -->
-        <Button Content="Submit" Grid.Row="2"   Click="SubmitButton_Click" Background="#3498DB" Foreground="White"/>
+        <Grid Grid.Row="2" Background="White" Margin="10,5">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,5,10" VerticalAlignment="Center">
+                <Button Content="Cancel" Background="Transparent" Foreground="OrangeRed" BorderBrush="OrangeRed" BorderThickness="2" Margin="5" Padding="15,5" FontSize="14" FontWeight="Bold" FontFamily="arial" Click="CancelBUtton_Click"/>
+                <Button Content="Submit" Click="SubmitButton_Click" Background="Blue" Foreground="White" Margin="5" Padding="15,5" FontSize="14" FontWeight="Bold" FontFamily="arial" />
+            </StackPanel>
+        </Grid>
+        <!--<Button Content="Submit" Grid.Row="2"   Click="SubmitButton_Click" Background="#3498DB" Foreground="White"/>-->
     </Grid>
 </Window>

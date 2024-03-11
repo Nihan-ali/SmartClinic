@@ -14,7 +14,7 @@
             <!-- Second row -->
             <RowDefinition Height="30*" />
             <!-- Third row -->
-            <RowDefinition Height="40*" />
+            <RowDefinition Height="38*" />
         </Grid.RowDefinitions>
 
         <!-- First row: Visit Information -->
@@ -29,26 +29,26 @@
 
                 <!-- Total Visit -->
                 <Border Grid.Column="0" Background="White" Margin="5">
-                    <TextBlock x:Name="TotalVisitTextBlock" Text="{Binding TotalVisit, StringFormat='Total Visit: {0}'}"
-                       FontSize="15" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="TotalVisitTextBlock" Text="{Binding TotalVisit, StringFormat='Total Visit:    {0}'}"
+                       FontSize="15" Padding="10" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
 
                 <!-- Today's Visit -->
                 <Border Grid.Column="1" Background="White" Margin="5">
-                    <TextBlock x:Name="TodaysVisitTextBlock" Text="{Binding TodaysVisit, StringFormat='Todays Visit: {0}'}"
-                       FontSize="15" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="TodaysVisitTextBlock" Text="{Binding TodaysVisit, StringFormat='Todays Visit:     {0}'}"
+                       FontSize="15" Padding="10" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
 
                 <!-- Months Visit -->
                 <Border Grid.Column="2" Background="White" Margin="5">
-                    <TextBlock x:Name="MonthsVisitTextBlock" Text="{Binding MonthsVisit, StringFormat='This Month Visit: {0}'}"
-                       FontSize="15" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="MonthsVisitTextBlock" Text="{Binding MonthsVisit, StringFormat='This Month Visit:     {0}'}"
+                       FontSize="15" Padding="10" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
 
                 <!-- Last Months Visit -->
                 <Border Grid.Column="3" Background="White" Margin="5">
-                    <TextBlock x:Name="LastMonthsVisitTextBlock" Text="{Binding LastMonthsVisit, StringFormat='Last Months Visit: {0}'}"
-                       FontSize="15" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="LastMonthsVisitTextBlock" Text="{Binding LastMonthsVisit, StringFormat='Last Months Visit:    {0}'}"
+                       FontSize="15" Padding="10" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
             </Grid>
         </Border>
@@ -65,56 +65,87 @@
 
                 <!-- Total Patient -->
                 <Border Grid.Column="0" Background="White" Margin="5">
-                    <TextBlock x:Name="TotalPatientTextBlock" Text="{Binding TotalPatient, StringFormat='Total Patient: {0}'}" 
-                       TextWrapping="Wrap" FontSize="15" Padding="10" 
+                    <TextBlock x:Name="TotalPatientTextBlock" Text="{Binding TotalPatient, StringFormat='Total Patient:     {0}'}" 
+                       TextWrapping="Wrap" FontSize="15" Padding="10" FontWeight="Bold" 
                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
 
                 <!-- Today's Patient -->
                 <Border Grid.Column="1" Background="White" Margin="5">
-                    <TextBlock x:Name="TodaysPatientTextBlock" Text="{Binding TodaysPatient, StringFormat='Todays Patient: {0}'}" 
-                       TextWrapping="Wrap" FontSize="15" Padding="10" 
+                    <TextBlock x:Name="TodaysPatientTextBlock" Text="{Binding TodaysPatient, StringFormat='Todays Patient:      {0}'}" 
+                       TextWrapping="Wrap" FontSize="15" Padding="10" FontWeight="Bold" 
                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
 
                 <!-- This Month's Patient -->
                 <Border Grid.Column="2" Background="White" Margin="5">
-                    <TextBlock x:Name="ThisMonthsPatientTextBlock" Text="{Binding ThisMonthsPatient, StringFormat='This Months Patient: {0}'}" 
-                       TextWrapping="Wrap" FontSize="15" Padding="10" 
+                    <TextBlock x:Name="ThisMonthsPatientTextBlock" Text="{Binding ThisMonthsPatient, StringFormat='This Months Patient:      {0}'}" 
+                       TextWrapping="Wrap" FontSize="15" Padding="10" FontWeight="Bold" 
                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
 
                 <!-- Last Month's Patient -->
                 <Border Grid.Column="3" Background="White" Margin="5">
-                    <TextBlock x:Name="LastMonthsPatientTextBlock" Text="{Binding LastMonthsPatient, StringFormat='Last Months Patient: {0}'}" 
-                       TextWrapping="Wrap" FontSize="15" Padding="10" 
+                    <TextBlock x:Name="LastMonthsPatientTextBlock" Text="{Binding LastMonthsPatient, StringFormat='Last Months Patient:     {0}'}" 
+                       TextWrapping="Wrap" FontSize="15" Padding="10" FontWeight="Bold" 
                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
             </Grid>
         </Border>
-
         <!-- Third row: Date Pickers -->
         <Grid Grid.Row="2" Margin="10">
-            <Grid.ColumnDefinitions>
-                <!-- First column -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Background="White" >
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Pick Start Date" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"  FontSize="14" FontWeight="Bold"/>
+                    <DatePicker x:Name="StartDatePicker" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="40,10"
+                SelectedDate="{Binding StartDate, Mode=TwoWay}" 
+                DisplayDateEnd="{Binding EndDate, Mode=OneWay}"/>
+                </StackPanel>
+                <!--give a border between two date pickers-->
+                <Border BorderThickness="1" BorderBrush="Blue" Margin="20"/>
+                <StackPanel Margin="5,0">
+                    <TextBlock Text="Pick End Date" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" FontSize="14" FontWeight="Bold"/>
+                    <DatePicker x:Name="EndDatePicker" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="40,10"
+                SelectedDate="{Binding EndDate, Mode=TwoWay}" 
+                DisplayDateStart="{Binding StartDate, Mode=OneWay}"/>
+
+                </StackPanel>
+            </StackPanel>
+            <!--<Grid.ColumnDefinitions>
+                --><!-- First column --><!--
                 <ColumnDefinition Width="*" />
-                <!-- Second column -->
+                --><!-- Second column --><!--
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <!-- Start Date Picker -->
-            <Border Grid.Column="0" BorderThickness="0" BorderBrush="AntiqueWhite" Margin="5" Padding="5">
-                <DatePicker x:Name="StartDatePicker" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                SelectedDate="{Binding StartDate, Mode=TwoWay}" 
-                DisplayDateEnd="{Binding EndDate, Mode=OneWay}"/>
-            </Border>
+            <Grid Background="White" Margin="50,20" MinHeight="100">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Pick Start Date" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,5,50,5"  FontSize="14" FontWeight="Bold"/>
+                    <DatePicker x:Name="StartDatePicker" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,5,50,5"
+                                SelectedDate="{Binding StartDate, Mode=TwoWay}" 
+                                DisplayDateEnd="{Binding EndDate, Mode=OneWay}"/>
+                </StackPanel>
+               
 
-            <!-- End Date Picker -->
-            <Border Grid.Column="1" BorderThickness="0" BorderBrush="AntiqueWhite" Margin="5" Padding="5">
+            </Grid>
+            --><!-- Start Date Picker --><!--
+            <Grid Grid.Column="1" Background="White" Margin="50,20" MinHeight="100">
+                --><!--do the same for end date--><!--
+                <StackPanel>
+                    <TextBlock Text="Pick End Date" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"/>
+                    <DatePicker x:Name="EndDatePicker" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                SelectedDate="{Binding EndDate, Mode=TwoWay}" 
+                                DisplayDateStart="{Binding StartDate, Mode=OneWay}"/>
+                    
+                </StackPanel>
+            </Grid>
+
+            --><!-- End Date Picker -->
+            <!--<Border Grid.Column="1" BorderThickness="0" BorderBrush="AntiqueWhite" Margin="5" Padding="5">
                 <DatePicker x:Name="EndDatePicker" HorizontalAlignment="Left" VerticalAlignment="Center" 
                 SelectedDate="{Binding EndDate, Mode=TwoWay}" 
                 DisplayDateStart="{Binding StartDate, Mode=OneWay}"/>
-            </Border>
+            </Border>-->
         </Grid>
     </Grid>
 </UserControl>
