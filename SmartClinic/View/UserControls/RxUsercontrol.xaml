@@ -11,7 +11,9 @@
         <local:IsNullOrEmptyConverter x:Key="IsNullOrEmptyConverter"/>
     </UserControl.Resources>
     <!--<Border  Background="White" BorderBrush="Black" BorderThickness="2">-->
-        <Grid Background="White" Margin="2">
+    <Grid Background="White">
+        <Border BorderBrush="DarkGray" BorderThickness="1" Margin="15"/>
+        <Grid Background="#fefffe" Margin="15">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition x:Name="name" Height="7*"/>
@@ -776,5 +778,7 @@
                 </StackPanel>
             </Grid>
         </Grid>
+        <Border/>
+    </Grid>
     <!--</Border>-->
 </UserControl>

@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="1000">
 
     <!--<ScrollViewer x:Name="PatientListScrollviewer" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">-->
-        <Grid  Margin="50,2,50,2" Background="#eeeeee">
+        <Grid  Margin="50,20,50,2" Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -25,15 +25,21 @@
                 <TextBlock Text="Patient List" Grid.Column="0" FontWeight="Bold" FontSize="24" Margin="10"/>
                 <Button x:Name="AddPatient" Content="Add Patient" Grid.Column="1" FontSize="14" Padding="5" Background="Blue" Foreground="White" FontWeight="Bold" Click="AddPatientButton_Click" HorizontalAlignment="Right" Margin="10"/>
             </Grid>
-
-            <!-- Search Section -->
-        <Grid Grid.Row="1" Background="White" Margin="10,5">
-            <TextBox x:Name="SearchPatient" Text="" Loaded="PatientsUserControl_Loaded"  Margin="10" Padding="2,3,0,0" Height="25" BorderBrush="Blue" TextChanged="SearchPatient_TextChanged" Background="White" GotFocus="OnSearchTextBoxGotFocus" LostFocus="OnSearchTextBoxLostFocus"/>
+            <!--add a border here-->
+        <Border BorderBrush="DarkCyan" BorderThickness="0.2,.2,0.2,.5" Margin="10"/>
+        <!-- Search Section -->
+        <Grid Grid.Row="1" Background="White" Margin="5,5">
+            <StackPanel>
+                <TextBlock Text="Search Patient Here" FontWeight="Bold" FontSize="16" Margin="10,5"/>
+                <!--<Button x:Name="SearchButton" Content="Search" FontSize="14" Padding="5" Background="Blue" Foreground="White" FontWeight="Bold" Click="SearchButton_Click" HorizontalAlignment="Right" Margin="10"/>-->
+                <TextBox x:Name="SearchPatient" Text="" Loaded="PatientsUserControl_Loaded"  Margin="10,10" Padding="2,3,0,0" Height="30" BorderBrush="Blue" TextChanged="SearchPatient_TextChanged" Background="White" GotFocus="OnSearchTextBoxGotFocus" LostFocus="OnSearchTextBoxLostFocus"/>
+            </StackPanel>
         </Grid>
+        <Border BorderBrush="DarkCyan" BorderThickness="0.2,0.1,0.2,.5" Margin="10,5"  Grid.Row="1"/>
         <!-- Patient List -->
             <!-- Patient List -->
             <!--<ScrollViewer Grid.Row="2" Margin="50" VerticalScrollBarVisibility="Visible">-->
-        <Grid Grid.Row="2" Margin="10,5">
+        <Grid Grid.Row="2" Margin="10,10">
                 <ListView x:Name="PatientsListBox" SelectionChanged="PatientsListBox_SelectionChanged" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Patients}" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
