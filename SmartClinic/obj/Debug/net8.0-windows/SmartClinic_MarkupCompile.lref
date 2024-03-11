@@ -11,9 +11,9 @@ FE:\Web_Dev\350\SmartClinic\SmartClinic\View\UserControls\CreateMedicineGroupWin
 FE:\Web_Dev\350\SmartClinic\SmartClinic\View\UserControls\DetailsWindow.xaml;;
 FE:\Web_Dev\350\SmartClinic\SmartClinic\View\UserControls\DiagnosisSearchWindow.xaml;;
 FE:\Web_Dev\350\SmartClinic\SmartClinic\View\UserControls\EditComplaintControl.xaml;;
+FE:\Web_Dev\350\SmartClinic\SmartClinic\View\UserControls\EditMainComplaintControl.xaml;;
 FE:\Web_Dev\350\SmartClinic\SmartClinic\View\UserControls\ExaminationSearchWindow.xaml;;
 FE:\Web_Dev\350\SmartClinic\SmartClinic\View\UserControls\FollowUpSearchWindow.xaml;;
-FE:\Web_Dev\350\SmartClinic\SmartClinic\View\UserControls\header.xaml;;
 FE:\Web_Dev\350\SmartClinic\SmartClinic\View\UserControls\HistorySearchWindow.xaml;;
 FE:\Web_Dev\350\SmartClinic\SmartClinic\View\UserControls\InvestigationSearchWindow.xaml;;
 FE:\Web_Dev\350\SmartClinic\SmartClinic\View\UserControls\MedicineCreateWindow.xaml;;

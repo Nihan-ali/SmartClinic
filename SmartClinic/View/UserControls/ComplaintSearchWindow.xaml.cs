@@ -121,6 +121,7 @@ namespace SmartClinic.View.UserControls
 
         private void addToComplaint_Click(object sender, RoutedEventArgs e)
         {
+            
             this.Close();
             DatabaseHelper.IncreaseComplaintOccurrence(selectedComplaints);           
         }

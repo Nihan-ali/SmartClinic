@@ -17,16 +17,29 @@
             <RowDefinition Height="6.5*"/>
             <RowDefinition Height="94*"/>
         </Grid.RowDefinitions>
-        <UserControls:header/>
+        <Grid Name="top" MinHeight="30" Background="#222e3e">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--first column content will be a label and second column content will be a label and a log out button-->
+            <Label Content="Digital Rx" HorizontalAlignment="Left" VerticalAlignment="Center"  Foreground="#FFF5E8E8" FontSize="18" FontWeight="Bold" Grid.Column="0"/>
+            <Grid Grid.Column="1" HorizontalAlignment="Right" Margin="10,0">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Dr. Abu Noyem Mohammad" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FFF1E1E1" FontSize="14" FontWeight="Bold" Margin="5,0"/>
+                    <Button Content="Log Out" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Wheat" BorderBrush="{x:Null}" FontSize="14" FontWeight="Bold" Background="Transparent" Click="LogOut_Click"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="95*"/>
             </Grid.ColumnDefinitions>
             <Grid>
-                <Rectangle Fill="#FF332646"/>
+                <Rectangle Fill="#222e3e"/>
                 <StackPanel>
-                    <Button x:Name="rx" Margin="2,25,2,15" Click="RxButton_Click" Style="{StaticResource CommonButtonStyle}" >
+                    <Button x:Name="rx" Margin="0,25,0,15" Click="RxButton_Click" Style="{StaticResource CommonButtonStyle}" >
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="rx.png" Width="30" Height="30"  />
                             <TextBlock Text="Prescription" Margin="0,5,0,0" Foreground="#28fc03" FontWeight="Bold"/>
@@ -36,21 +49,21 @@
 
                     <!-- Repeat the same structure for other buttons -->
 
-                    <Button Name="patients" Margin="5,15" Click="PatientButton_Click" Style="{StaticResource CommonButtonStyle}">
+                    <Button Name="patients" Margin="0,15" Click="PatientButton_Click" Style="{StaticResource CommonButtonStyle}">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="patient.png" Width="30" Height="30" />
                             <TextBlock Text="Patients" Margin="0,5,0,0" Foreground="#fcec03" FontWeight="Bold"/>
                         </StackPanel>
                     </Button>
 
-                    <Button Name="settings" Margin="5,15" Click="SettingsButton_Click" Style="{StaticResource CommonButtonStyle}">
+                    <Button Name="settings" Margin="0,15" Click="SettingsButton_Click" Style="{StaticResource CommonButtonStyle}">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="settings.png" Width="30" Height="30" />
                             <TextBlock Text="Settings" Margin="0,5,0,0" Foreground="#fc7303" FontWeight="Bold"/>
                         </StackPanel>
                     </Button>
 
-                    <Button Name="stat" Margin="5,15" Click="StatButton_Click" Style="{StaticResource CommonButtonStyle}">
+                    <Button Name="stat" Margin="0,15" Click="StatButton_Click" Style="{StaticResource CommonButtonStyle}">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="stat.png" Width="30" Height="30" />
                             <TextBlock Text="Statistics" Margin="0,5,0,0" Foreground="#fc03fc" FontWeight="Bold"/>
@@ -73,7 +86,7 @@
                 </Grid.RowDefinitions>
 
                 <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <Grid Grid.Column="1" Background="AliceBlue">
+                    <Grid Grid.Column="1" Background="white">
                         <ContentControl x:Name="contentControl" />
                     </Grid>
                 </ScrollViewer>

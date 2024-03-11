@@ -112,7 +112,10 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
                         command.Parameters.AddWithValue("@Password", password);
 
                         int count = Convert.ToInt32(command.ExecuteScalar());
-
+                        if (count > 0)
+                        {
+                            SetLoginStatus(username, 1);
+                        }
                         return count > 0;
                     }
                 }
@@ -123,7 +126,76 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
                 throw;
             }
         }
-        // update password of user , if user name is present then update password else create new user and password
+
+        public static void SetLoginStatus(string username, int status)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("UPDATE Users SET status = @Status WHERE username = @Username;", connection))
+                    {
+                        command.Parameters.AddWithValue("@Username", username);
+                        command.Parameters.AddWithValue("@Status", status);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error setting login status: {ex}");
+                throw;
+            }
+        }
+
+        public static bool CheckStatus(string username)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("SELECT status FROM Users WHERE username = @Username;", connection))
+                    {
+                        command.Parameters.AddWithValue("@Username", username);
+
+                        int status = Convert.ToInt32(command.ExecuteScalar());
+                        return status == 1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error checking status: {ex}");
+                throw;
+            }
+        }
+
+        public static void ResetStatus(string username)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    using (var command = new SQLiteCommand("UPDATE Users SET status = 0 WHERE username = @Username;", connection))
+                    {
+                        command.Parameters.AddWithValue("@Username", username);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error resetting status: {ex}");
+                throw;
+            }
+        }
+
         public static void UpdatePassword(string username, string password)
         {
             try
@@ -2211,23 +2283,29 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
         {
             string[] complaintPairs = combinedString.Split("$$");
 
-            List<Complaint> ccomplaints = new List<Complaint>();
+            List<Complaint> complaints = new List<Complaint>();
 
             foreach (string complaintPair in complaintPairs)
             {
                 string[] pairValues = complaintPair.Split('@');
-                if (pairValues.Length == 2)
+                if (pairValues.Length == 4) // Ensure all components are present
                 {
                     Complaint complaint = new Complaint
                     {
                         Content = pairValues[0],
-                        Note = pairValues[1]
+                        PeriodTime = pairValues[1],
+                        Note = pairValues[3]
                     };
-                    ccomplaints.Add(complaint);
+                    complaint.PeriodUnit = new ComboBoxItem { Content = pairValues[2] };
+                    complaints.Add(complaint);
                 }
             }
-            return ccomplaints;
+            return complaints;
         }
+
+
+
+
         public static List<history> ExtractHistory(string combinedString)
         {
             string[] historyPairs = combinedString.Split("$$");

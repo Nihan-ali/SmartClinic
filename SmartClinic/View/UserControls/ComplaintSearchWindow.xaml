@@ -72,22 +72,38 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="30*"/>
-                            <ColumnDefinition Width="50*"/>
-                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock FontWeight="Bold" Text="{Binding Content}" VerticalAlignment="Center" Margin="5,5,5,5"/>
-                        <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Orientation="Horizontal">
-                            <Label Content="Note" Margin="200 1 5 1"/>
-                            <TextBox BorderThickness="2" Width="250" Text="{Binding Note, Mode=TwoWay}" VerticalAlignment="Center" Margin="5,5,80,5"/>
+                        <!-- TextBlock with bold font weight -->
+                        <TextBlock FontWeight="Bold" Text="{Binding Content}" VerticalAlignment="Center" Margin="5"/>
+
+                        <!-- StackPanel containing TextBox and ComboBox -->
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="5" HorizontalAlignment="Right">
+                            <TextBox x:Name="periodUnit" Text="{Binding PeriodTime}" Width="30" Height="25" Margin="0,0,5,0"/>
+                            <ComboBox x:Name="PeriodComboBox" SelectedValue="{Binding PeriodUnit, Mode=TwoWay}" Width="60" Height="25" Margin="0,0,5,0" Background="#ECF0F1" Foreground="#2C3E50" BorderThickness="2" BorderBrush="Azure">
+                                <ComboBoxItem Content="দিন" IsSelected="True"/>
+                                <ComboBoxItem Content="সপ্তাহ"/>
+                                <ComboBoxItem Content="মাস"/>
+                            </ComboBox>
                         </StackPanel>
 
-                        <Button BorderThickness="0" x:Name="deleteComplaintFromWindow" Grid.Column="2" VerticalAlignment="Center" Width="20" Foreground="Transparent" FontWeight="Bold" Click="RemoveComplaintFromWindow">
-                            <Image Source="../../circle.png" Height="15" Width="15" ></Image>
-                        </Button>
 
+                        <!-- StackPanel containing Label and TextBox -->
+                        <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="10,5,5,5">
+                            <Label Content="Note"/>
+                            <TextBox x:Name="noteTextBox" Width="170" Text="{Binding Note, Mode=TwoWay}" VerticalAlignment="Center" Margin="5"/>
+                        </StackPanel>
+
+                        <!-- Button to delete complaint with an image -->
+                        <Button Grid.Column="3" Height="20" Width="20" BorderBrush="White" BorderThickness="0" Click="RemoveComplaintFromWindow">
+                            <Image Source="../../circle.png" Height="15" Width="15"/>
+                        </Button>
                     </Grid>
+
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

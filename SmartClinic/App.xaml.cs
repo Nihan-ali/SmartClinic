@@ -1,17 +1,21 @@
-﻿using SmartClinic.ViewModel;
-using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
 
 namespace SmartClinic
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
-        public static SelectedItemsViewModel SelectedItemsViewModel { get; } = new SelectedItemsViewModel();
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            bool condition = DatabaseHelper.CheckStatus("Nihan"); // Change this to your actual condition
+            if (condition==false)
+            {
+                StartupUri = new System.Uri("MainWindow.xaml", System.UriKind.Relative);
+            }
+            else
+            {
+                StartupUri = new System.Uri("HomeWindow.xaml", System.UriKind.Relative);
+            }
+        }
     }
-
-
 }

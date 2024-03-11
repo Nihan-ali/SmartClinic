@@ -583,7 +583,7 @@ namespace SmartClinic.View.UserControls
         {
             if (sender is TextBlock textBlock && textBlock.DataContext is Complaint complaintData)
             {
-                EditComplaintControl editControl = new EditComplaintControl();
+                EditMainComplaintControl editControl = new EditMainComplaintControl();
 
                 Point position = PointToScreen(e.GetPosition(this));
                 editControl.Left = position.X;
@@ -835,7 +835,7 @@ namespace SmartClinic.View.UserControls
         {
             int id = newPatient.Id;
             string name = newPatient.Name;
-            string combinedComplaint = string.Join("$$", selectedComplaints.Select(c => $"{c.Content}@{c.Note}"));
+            string combinedComplaint = string.Join("$$", selectedComplaints.Select(c => $"{c.Content}@{c.PeriodTime}@{c.SelectedComboBoxItemContent}@{c.Note}"));
             string combinedHistory = string.Join("$$", selectedHistories.Select(h => $"{h.Content}@{h.Note}"));
             string combinedExamination = string.Join("$$", selectedExaminations.Select(e => $"{e.Content}@{e.Note}"));
             string combinedInvestigation = string.Join("$$", selectedInvestigations.Select(i => $"{i.Content}@{i.Note}"));

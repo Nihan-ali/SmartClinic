@@ -98,7 +98,6 @@ E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControl
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\PatientProfileUserControl.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\MainWindow.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\DetailsWindow.g.cs
-E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\header.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MedicineSearchWindow.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\PatientProfileUserControl.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\patientsUsercontrol.g.cs
@@ -113,7 +112,6 @@ E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\SmartClinic_Mark
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\App.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\MainWindow.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\DetailsWindow.baml
-E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\header.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\patientsUsercontrol.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\RxUsercontrol.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\searchMenu.baml
@@ -189,7 +187,6 @@ H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\PatientProf
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\MainWindow.g.cs
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\AdviceSearchWindow.g.cs
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\DetailsWindow.g.cs
-H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\header.g.cs
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MedicineSearchWindow.g.cs
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\PatientProfileUserControl.g.cs
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\patientsUsercontrol.g.cs
@@ -205,7 +202,6 @@ H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\App.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\MainWindow.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\AdviceSearchWindow.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\DetailsWindow.baml
-H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\header.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\patientsUsercontrol.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\RxUsercontrol.baml
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\searchMenu.baml
@@ -330,3 +326,15 @@ E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\ForgotPasswordWi
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\ForgotPasswordWindow.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\ChangePassword.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\ChangePassword.baml
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\ChangePassword.g.cs
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\ForgotPasswordWindow.g.cs
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\HomeWindow.g.cs
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\Settings.g.cs
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\ChangePassword.baml
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\ForgotPasswordWindow.baml
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\HomeWindow.baml
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\Settings.baml
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\EditMainComplaintControl.g.cs
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\EditMainComplaintControl.baml
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\EditMainComplaintControl.g.cs
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\EditMainComplaintControl.baml
