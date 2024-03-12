@@ -847,7 +847,7 @@ namespace SmartClinic.View.UserControls
 
         }
 
-        private Int64 SavePrescription_Click(object sender, RoutedEventArgs e)
+        private void SavePrescription_Click(object sender, RoutedEventArgs e)
         {
             int id = newPatient.Id;
             string name = newPatient.Name;
@@ -881,8 +881,8 @@ namespace SmartClinic.View.UserControls
                 followUp = combinedFollowUp,
                 notes = combinedSpecialNote
             };
-            Int64 prescriptionid = DatabaseHelper.SavePrescription(newpres);
-            if (prescriptionid != -1)
+            ;
+            if (DatabaseHelper.SavePrescription(newpres))
             {
                 MessageBox.Show("Prescription Stored Successfully");
                 todaydate.Text = DateTime.Now.ToString("dd-MM-yyyy");
@@ -891,14 +891,11 @@ namespace SmartClinic.View.UserControls
             {
                 MessageBox.Show("Prescription Alreadys Exists");
             }
-            return prescriptionid;
-
         }
 
         private void PrintPrescription_Click(object sender, RoutedEventArgs e)
         {
-            Int64 idd = SavePrescription_Click(null, null);
-
+            SavePrescription_Click(null, null);
             Patient pat = newPatient;
             string date = todaydate.Text;
             List<Complaint> complaints=null;

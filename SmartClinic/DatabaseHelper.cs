@@ -2505,7 +2505,8 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
             return extractedSpecialNoteList;
         }
 
-        public static Int64 SavePrescription(PatientVisit prescription)
+
+        public static bool SavePrescription(PatientVisit prescription)
         {
             try
             {
@@ -2514,7 +2515,7 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
                     connection.Open();
 
                     // Check if there are any existing prescriptions with matching attributes
-                    using (var checkCommand = new SQLiteCommand("SELECT * FROM PatientVisit WHERE ID = @ID AND NAME = @NAME AND COMPLAINT = @COMPLAINT AND HISTORY = @HISTORY AND ONEXAMINATION = @ONEXAMINATION AND INVESTIGATION = @INVESTIGATION AND DIAGNOSIS = @DIAGNOSIS AND TREATMENTPLAN = @TREATMENTPLAN AND MEDICINE = @MEDICINE AND ADVICE = @ADVICE AND FOLLOWUP = @FOLLOWUP AND NOTES = @NOTES;", connection))
+                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM PatientVisit WHERE ID = @ID AND NAME = @NAME AND COMPLAINT = @COMPLAINT AND HISTORY = @HISTORY AND ONEXAMINATION = @ONEXAMINATION AND INVESTIGATION = @INVESTIGATION AND DIAGNOSIS = @DIAGNOSIS AND TREATMENTPLAN = @TREATMENTPLAN AND MEDICINE = @MEDICINE AND ADVICE = @ADVICE AND FOLLOWUP = @FOLLOWUP AND NOTES = @NOTES;", connection))
                     {
                         checkCommand.Parameters.AddWithValue("@ID", prescription.Id);
                         checkCommand.Parameters.AddWithValue("@NAME", prescription.Name);
@@ -2529,17 +2530,8 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
                         checkCommand.Parameters.AddWithValue("@FOLLOWUP", prescription.followUp);
                         checkCommand.Parameters.AddWithValue("@NOTES", prescription.notes);
 
-                        var reader = checkCommand.ExecuteReader();
-                        if(reader.HasRows)
-                        {
-                            while (reader.Read())
-                            {
-                                //print prescriptionid
-                                MessageBox.Show(reader.GetInt64(3).ToString());
-                            }
-                            return 1;
-                        }
-                        else
+                        Int64 count = (Int64)checkCommand.ExecuteScalar();
+                        if (count == 0)
                         {
                             // If no existing prescription found, proceed to insert
                             prescription.prescriptionId = GeneratePrescriptionId(prescription.Id);
@@ -2565,7 +2557,11 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
                                 insertCommand.ExecuteNonQuery();
                             }
                             UpdatePatientLastVisit(prescription.Id, prescription.visit);
-                            return prescription.prescriptionId;
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
                         }
                     }
                 }
