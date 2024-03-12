@@ -202,7 +202,7 @@
             
             
             <!--history xaml-->
-            <Grid Background="White" Grid.Column="0">
+            <Grid Background="White" x:Name="leftgrid" Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="5*"/>
                     <RowDefinition Height="5*"/>
@@ -264,42 +264,45 @@
                                 <DataTemplate>
                                     <Grid>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="20"/>
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
 
                                         <!-- First Row -->
-                                        <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5" Grid.Row="0">
+                                        <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
 
                                                 <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
-                                                <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownHistory"/>
-                                                <Button x:Name="deleteHistory" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveHistory_Click">
+                                                <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0,5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownHistory"/>
+                                                <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownHistory">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Text" Value="{Binding Note}" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
+                                                                    <Setter Property="Text" Value="{Binding Note}" />
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
+                                                                    <Setter Property="Margin" Value="0,-30,0,0"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+
+                                                <Button x:Name="deleteHistory" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveHistory_Click">
                                                     <Image Source="../../circle.png" Width="15" Height="15"/>
                                                 </Button>
                                             </Grid>
                                         </Border>
-
-                                        <TextBlock Text="{Binding Note}" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownHistory">
-                                            <TextBlock.Style>
-                                                <Style TargetType="TextBlock">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
-                                                            <Setter Property="Margin" Value="0,-30,0,0"/>
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
-                                                            <Setter Property="Margin" Value="20 0 0 0"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </TextBlock.Style>
-                                        </TextBlock>
                                     </Grid>
+
+
                                 </DataTemplate>
                             </ListView.ItemTemplate>
 
@@ -325,42 +328,44 @@
                                 <DataTemplate>
                                     <Grid>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="20"/>
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
 
                                         <!-- First Row -->
-                                        <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5" Grid.Row="0">
+                                        <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
 
                                                 <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
-                                                <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownExamination"/>
-                                                <Button x:Name="deleteExamination" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveExamination_Click">
+                                                <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0,5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownExamination"/>
+                                                <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownExamination">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Text" Value="{Binding Note}" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
+                                                                    <Setter Property="Text" Value="{Binding Note}" />
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
+                                                                    <Setter Property="Margin" Value="0,-30,0,0"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+
+                                                <Button x:Name="deleteExamination" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveExamination_Click">
                                                     <Image Source="../../circle.png" Width="15" Height="15"/>
                                                 </Button>
                                             </Grid>
                                         </Border>
-
-                                        <TextBlock Text="{Binding Note}" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownExamination">
-                                            <TextBlock.Style>
-                                                <Style TargetType="TextBlock">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
-                                                            <Setter Property="Margin" Value="0,-30,0,0"/>
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
-                                                            <Setter Property="Margin" Value="20 0 0 0"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </TextBlock.Style>
-                                        </TextBlock>
                                     </Grid>
+
                                 </DataTemplate>
                             </ListView.ItemTemplate>
 
@@ -385,42 +390,44 @@
                                 <DataTemplate>
                                     <Grid>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="20"/>
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
 
                                         <!-- First Row -->
-                                        <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5" Grid.Row="0">
+                                        <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
 
                                                 <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
-                                                <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownInvestigation"/>
-                                                <Button x:Name="deleteInvestigationFromPrescription" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveInvestigation_Click">
+                                                <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0,5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownInvestigation"/>
+                                                <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownInvestigation">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Text" Value="{Binding Note}" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
+                                                                    <Setter Property="Text" Value="{Binding Note}" />
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
+                                                                    <Setter Property="Margin" Value="0,-30,0,0"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+
+                                                <Button x:Name="deleteInvestigation" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveInvestigation_Click">
                                                     <Image Source="../../circle.png" Width="15" Height="15"/>
                                                 </Button>
                                             </Grid>
                                         </Border>
-
-                                        <TextBlock Text="{Binding Note}" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownInvestigation">
-                                            <TextBlock.Style>
-                                                <Style TargetType="TextBlock">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
-                                                            <Setter Property="Margin" Value="0,-30,0,0"/>
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
-                                                            <Setter Property="Margin" Value="20 0 0 0"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </TextBlock.Style>
-                                        </TextBlock>
                                     </Grid>
+
                                 </DataTemplate>
                             </ListView.ItemTemplate>
 
@@ -444,42 +451,44 @@
                                 <DataTemplate>
                                     <Grid>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="20"/>
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
 
                                         <!-- First Row -->
-                                        <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5" Grid.Row="0">
+                                        <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
 
                                                 <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
-                                                <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownDiagnosis"/>
-                                                <Button x:Name="deleteDiagnosisFromPrescription" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveDiagnosis_Click">
+                                                <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0,5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownDiagnosis"/>
+                                                <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownDiagnosis">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Text" Value="{Binding Note}" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
+                                                                    <Setter Property="Text" Value="{Binding Note}" />
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
+                                                                    <Setter Property="Margin" Value="0,-30,0,0"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+
+                                                <Button x:Name="deleteDiagnosis" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveDiagnosis_Click">
                                                     <Image Source="../../circle.png" Width="15" Height="15"/>
                                                 </Button>
                                             </Grid>
                                         </Border>
-
-                                        <TextBlock Text="{Binding Note}" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownDiagnosis">
-                                            <TextBlock.Style>
-                                                <Style TargetType="TextBlock">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
-                                                            <Setter Property="Margin" Value="0,-30,0,0"/>
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
-                                                            <Setter Property="Margin" Value="20 0 0 0"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </TextBlock.Style>
-                                        </TextBlock>
                                     </Grid>
+
                                 </DataTemplate>
                             </ListView.ItemTemplate>
 
@@ -502,41 +511,44 @@
                                 <DataTemplate>
                                     <Grid>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="20"/>
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
 
-                                        <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5" Grid.Row="0">
+                                        <!-- First Row -->
+                                        <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
 
                                                 <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
-                                                <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownTreatment"/>
-                                                <Button x:Name="deleteTreatmentFromPrescription" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveTreatment_Click">
+                                                <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0,5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownTreatment"/>
+                                                <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownTreatment">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Text" Value="{Binding Note}" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
+                                                                    <Setter Property="Text" Value="{Binding Note}" />
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
+                                                                    <Setter Property="Margin" Value="0,-30,0,0"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+
+                                                <Button x:Name="deleteTreatment" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveTreatment_Click">
                                                     <Image Source="../../circle.png" Width="15" Height="15"/>
                                                 </Button>
                                             </Grid>
                                         </Border>
-
-                                        <TextBlock Text="{Binding Note}" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownTreatment">
-                                            <TextBlock.Style>
-                                                <Style TargetType="TextBlock">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
-                                                            <Setter Property="Margin" Value="0,-30,0,0"/>
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
-                                                            <Setter Property="Margin" Value="20 0 0 0"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </TextBlock.Style>
-                                        </TextBlock>
                                     </Grid>
+
                                 </DataTemplate>
                             </ListView.ItemTemplate>
 
@@ -554,7 +566,7 @@
             </Grid>
             
             <!--medicine xaml-->
-            <Grid Background="White" Grid.Column="1">
+            <Grid Background="White" x:Name="rightgrid" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40*"/>
                     <RowDefinition Height="10*"/>
@@ -564,8 +576,11 @@
                 </Grid.RowDefinitions>
                 <Grid >
                     <StackPanel Margin="10,12,10,0">
-                        <Button x:Name="Rx" Content="Rx   + " HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Margin="10" Background="Transparent" BorderBrush="{x:Null}" Click="Rx_Click"/>
-
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="Rx" Content="Rx   + " HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Margin="10" Background="Transparent" BorderBrush="{x:Null}" Click="Rx_Click"/>
+                            <Button x:Name="Translate" Content="(Translate)" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Margin="10" Background="Transparent" BorderBrush="{x:Null}" Click="Translate_Click"/>
+                        </StackPanel>
+                        
                         <ListView x:Name="selectedMedicinesListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
                             <ListView.ItemTemplate>
                                 <DataTemplate>

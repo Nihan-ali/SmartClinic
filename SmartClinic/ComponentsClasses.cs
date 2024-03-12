@@ -204,6 +204,7 @@ public class Complaint : INotifyPropertyChanged
         public string Content { get; set; }
         public string Note { get; set; }
         public int Occurrence { get; set; }
+
     }
 
     public class Examination

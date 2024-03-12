@@ -54,7 +54,6 @@ namespace SmartClinic.View.UserControls
         {
             if (Application.Current.MainWindow is HomeWindow homeWindow)
             {
-                MessageBox.Show("HomeWindow found.");
                 if (homeWindow.FindName("contentControl") is ContentControl contentControl)
                 {
                     contentControl.Content = new View.UserControls.PatientProfileUserControl(selectedPatient, homeWindow);
@@ -148,10 +147,16 @@ namespace SmartClinic.View.UserControls
 
         private void SearchPatient_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (SearchPatient.Text != "search Patient" && SearchPatient.Text != "")
+            if(SearchPatient.Text == "")
             {
+                Patients = new ObservableCollection<Patient>(DatabaseHelper.GetPatientsByLastVisitedDate(n));
+                PatientsListBox.ItemsSource = Patients;
+            }
+            else if (SearchPatient.Text != "search Patient")
+            {
+
                 Patients = new ObservableCollection<Patient>(DatabaseHelper.GetPatientsByName(SearchPatient.Text));
-                if(Patients.Count > 0)
+                if (Patients.Count > 0)
                 {
                     PatientsListBox.ItemsSource = Patients;
                 }
@@ -164,7 +169,6 @@ namespace SmartClinic.View.UserControls
                         PatientsListBox.ItemsSource = Patients;
                     }
                 }
-
             }
         }
 

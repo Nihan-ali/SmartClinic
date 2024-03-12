@@ -834,26 +834,34 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
 
                     using (var command = new SQLiteCommand("SELECT * FROM Patient WHERE Name LIKE @Name;", connection))
                     {
-                        command.Parameters.AddWithValue("@Name", $"%{name}%");
+                        command.Parameters.AddWithValue("@Name", $"%s{name}%");
 
                         using (var reader = command.ExecuteReader())
                         {
                             List<Patient> patients = new List<Patient>();
 
-                            while (reader.Read())
+                            // check if reader has any data
+                            if (reader.HasRows)
                             {
-                                Patient patient = new Patient
+                                while (reader.Read())
                                 {
-                                    Id = Convert.ToInt32(reader["ID"]),
-                                    Name = reader["Name"].ToString(),
-                                    Age = reader["Age"].ToString(),
-                                    Phone = reader["Phone"].ToString(),
-                                    Address = reader["Address"].ToString(),
-                                    Blood = reader["Blood"].ToString(),
-                                    LastVisit = Convert.ToDateTime(reader["LastVisit"])
-                                };
+                                    Patient patient = new Patient
+                                    {
+                                        Id = Convert.ToInt32(reader["ID"]),
+                                        Name = reader["Name"].ToString(),
+                                        Age = reader["Age"].ToString(),
+                                        Phone = reader["Phone"].ToString(),
+                                        Address = reader["Address"].ToString(),
+                                        Blood = reader["Blood"].ToString(),
+                                        LastVisit = Convert.ToDateTime(reader["LastVisit"])
+                                    };
 
-                                patients.Add(patient);
+                                    patients.Add(patient);
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("No rows found.");
                             }
 
                             return patients;
@@ -2497,7 +2505,7 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
             return extractedSpecialNoteList;
         }
 
-        public static bool SavePrescription(PatientVisit prescription)
+        public static Int64 SavePrescription(PatientVisit prescription)
         {
             try
             {
@@ -2506,7 +2514,7 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
                     connection.Open();
 
                     // Check if there are any existing prescriptions with matching attributes
-                    using (var checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM PatientVisit WHERE ID = @ID AND NAME = @NAME AND COMPLAINT = @COMPLAINT AND HISTORY = @HISTORY AND ONEXAMINATION = @ONEXAMINATION AND INVESTIGATION = @INVESTIGATION AND DIAGNOSIS = @DIAGNOSIS AND TREATMENTPLAN = @TREATMENTPLAN AND MEDICINE = @MEDICINE AND ADVICE = @ADVICE AND FOLLOWUP = @FOLLOWUP AND NOTES = @NOTES;", connection))
+                    using (var checkCommand = new SQLiteCommand("SELECT * FROM PatientVisit WHERE ID = @ID AND NAME = @NAME AND COMPLAINT = @COMPLAINT AND HISTORY = @HISTORY AND ONEXAMINATION = @ONEXAMINATION AND INVESTIGATION = @INVESTIGATION AND DIAGNOSIS = @DIAGNOSIS AND TREATMENTPLAN = @TREATMENTPLAN AND MEDICINE = @MEDICINE AND ADVICE = @ADVICE AND FOLLOWUP = @FOLLOWUP AND NOTES = @NOTES;", connection))
                     {
                         checkCommand.Parameters.AddWithValue("@ID", prescription.Id);
                         checkCommand.Parameters.AddWithValue("@NAME", prescription.Name);
@@ -2521,8 +2529,17 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
                         checkCommand.Parameters.AddWithValue("@FOLLOWUP", prescription.followUp);
                         checkCommand.Parameters.AddWithValue("@NOTES", prescription.notes);
 
-                        Int64 count = (Int64)checkCommand.ExecuteScalar();
-                        if (count == 0)
+                        var reader = checkCommand.ExecuteReader();
+                        if(reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                //print prescriptionid
+                                MessageBox.Show(reader.GetInt64(3).ToString());
+                            }
+                            return 1;
+                        }
+                        else
                         {
                             // If no existing prescription found, proceed to insert
                             prescription.prescriptionId = GeneratePrescriptionId(prescription.Id);
@@ -2548,11 +2565,7 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
                                 insertCommand.ExecuteNonQuery();
                             }
                             UpdatePatientLastVisit(prescription.Id, prescription.visit);
-                            return true;
-                        }
-                        else
-                        {
-                            return false;
+                            return prescription.prescriptionId;
                         }
                     }
                 }
@@ -2633,6 +2646,35 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
             }
         }
 
+
+        public static string Translate(string Note)
+        {
+            string[] note = Note.Split(" ");
+            string translatedNote = "";
+            foreach (string n in note)
+            {
+                if (n == "সকালে") translatedNote += "In Morning ";
+                else if (n == "দুপুরে") translatedNote += "At Noon ";
+                else if (n == "রাতে") translatedNote += "At Night ";
+                else if (n == "খাবার")
+                {
+                    if (note.Contains("পরে")) translatedNote += "After Meal ";
+                    if (note.Contains("আগে")) translatedNote += "Before Meal ";
+                }
+                else if (n == "পরে" || n == "আগে") continue;
+                else if (n == "দিন") translatedNote += "Days ";
+                else if (n == "বার") translatedNote += "Times ";
+                else if (n == "সপ্তাহ") translatedNote += "Week ";
+                else if (n == "মাস") translatedNote += "Month ";
+
+                else if (n == "চামচ") translatedNote += "Spoon ";
+                else if (n == "ড্রপ") translatedNote += "Drop ";
+                else if (n == "ভাইয়াল") translatedNote += "Vial ";
+                else if (n == "টুকরা") translatedNote += "Piece ";
+                else translatedNote += n;
+            }
+            return translatedNote;
+        }
 
          public static SQLiteConnection GetConnection()
         {
