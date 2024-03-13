@@ -990,54 +990,68 @@ namespace SmartClinic.View.UserControls
             {
                 complaints = selectedComplaints.Take(leftscount[0]).ToList();
                 // MessageBox.Show("here taking compaints " + complaints.Count);
-                selectedComplaints = selectedComplaints.Skip(leftscount[0]).Take(selectedComplaints.Count - leftscount[0]).ToList();
             }
+            List<Complaint> leftComplaints = selectedComplaints.Skip(leftscount[0]).Take(selectedComplaints.Count - leftscount[0]).ToList();
+
             if (leftscount[1] > 0)
             {
                 histories = selectedHistories.Take(leftscount[1]).ToList();
-                selectedHistories = selectedHistories.Skip(leftscount[1]).Take(selectedHistories.Count - leftscount[1]).ToList();
             }
+            List<history> lefthistories = selectedHistories.Skip(leftscount[1]).Take(selectedHistories.Count - leftscount[1]).ToList();
+
             if (leftscount[2] > 0)
             {
                 examinations = selectedExaminations.Take(leftscount[2]).ToList();
-                selectedExaminations = selectedExaminations.Skip(leftscount[2]).Take(selectedExaminations.Count - leftscount[2]).ToList();
             }
+            List<Examination> leftexaminations = selectedExaminations.Skip(leftscount[2]).Take(selectedExaminations.Count - leftscount[2]).ToList();
+
             if (leftscount[3] > 0)
             {
                 investigations = selectedInvestigations.Take(leftscount[3]).ToList();
-                selectedInvestigations = selectedInvestigations.Skip(leftscount[3]).Take(selectedInvestigations.Count - leftscount[3]).ToList();
+                //leftinvestigations list
+                //selectedInvestigations = selectedInvestigations.Skip(leftscount[3]).Take(selectedInvestigations.Count - leftscount[3]).ToList();
             }
+            List<Investigation> leftinvestigations = selectedInvestigations.Skip(leftscount[3]).Take(selectedInvestigations.Count - leftscount[3]).ToList();
+
             if (leftscount[4] > 0)
             {
                 diagnoses = selectedDiagnosis.Take(leftscount[4]).ToList();
-                selectedDiagnosis = selectedDiagnosis.Skip(leftscount[4]).Take(selectedDiagnosis.Count - leftscount[4]).ToList();
+                //selectedDiagnosis = selectedDiagnosis.Skip(leftscount[4]).Take(selectedDiagnosis.Count - leftscount[4]).ToList();
             }
+            List<Diagnosis> leftdiagnosis = selectedDiagnosis.Skip(leftscount[4]).Take(selectedDiagnosis.Count - leftscount[4]).ToList();
             if (leftscount[5] > 0)
             {
                 treatments = selectedTreatments.Take(leftscount[5]).ToList();
-                selectedTreatments = selectedTreatments.Skip(leftscount[5]).Take(selectedTreatments.Count - leftscount[5]).ToList();
+                //selectedTreatments = selectedTreatments.Skip(leftscount[5]).Take(selectedTreatments.Count - leftscount[5]).ToList();
             }
+            List<Treatment> lefttreatments = selectedTreatments.Skip(leftscount[5]).Take(selectedTreatments.Count - leftscount[5]).ToList();
             if (rightscount[0] > 0)
             {
                 medicines = selectedMedicines.Take(rightscount[0]).ToList();
                 // MessageBox.Show(medicines.Count.ToString());
-                selectedMedicines = selectedMedicines.Skip(rightscount[0]).Take(selectedMedicines.Count - rightscount[0]).ToList();
+                //leftmedicines list
+               // selectedMedicines = selectedMedicines.Skip(rightscount[0]).Take(selectedMedicines.Count - rightscount[0]).ToList();
             }
+            List<DummyMedicine> leftmedicines = selectedMedicines.Skip(rightscount[0]).Take(selectedMedicines.Count - rightscount[0]).ToList();
+
             if (rightscount[1] > 0)
             {
                 advices = selectedAdvices.Take(rightscount[1]).ToList();
-                selectedAdvices = selectedAdvices.Skip(rightscount[1]).Take(selectedAdvices.Count - rightscount[1]).ToList();
+                //selectedAdvices = selectedAdvices.Skip(rightscount[1]).Take(selectedAdvices.Count - rightscount[1]).ToList();
             }
+            List<Advice> leftadvices = selectedAdvices.Skip(rightscount[1]).Take(selectedAdvices.Count - rightscount[1]).ToList();
             if (rightscount[2] > 0)
             {
                 followUps = selectedFollowUps.Take(rightscount[2]).ToList();
-                selectedFollowUps = selectedFollowUps.Skip(rightscount[2]).Take(selectedFollowUps.Count - rightscount[2]).ToList();
+               // selectedFollowUps = selectedFollowUps.Skip(rightscount[2]).Take(selectedFollowUps.Count - rightscount[2]).ToList();
             }
+            List<FollowUp> leftfollowups = selectedFollowUps.Skip(rightscount[2]).Take(selectedFollowUps.Count - rightscount[2]).ToList();
             if (rightscount[3] > 0)
             {
                 specialNotes = selectedSpecialNotes.Take(rightscount[3]).ToList();
-                selectedSpecialNotes = selectedSpecialNotes.Skip(rightscount[3]).Take(selectedSpecialNotes.Count - rightscount[3]).ToList();
+               // selectedSpecialNotes = selectedSpecialNotes.Skip(rightscount[3]).Take(selectedSpecialNotes.Count - rightscount[3]).ToList();
             }
+            List<SpecialNote> leftspecialnotes = selectedSpecialNotes.Skip(rightscount[3]).Take(selectedSpecialNotes.Count - rightscount[3]).ToList();
             Printer printDialog = new Printer();
             printDialog.ContentRendered += async (s, args) =>
             {
@@ -1061,7 +1075,9 @@ namespace SmartClinic.View.UserControls
                 second.ContentRendered += (s, args) =>
                 {
                     // Call the PrintButton_Click method of the second window
-                    second.PrintButton_Click(pat, date, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes, true);
+                    //call this method with leftlists
+                    second.PrintButton_Click(pat, date, leftComplaints, lefthistories, leftexaminations, leftinvestigations, leftdiagnosis, lefttreatments, leftmedicines, leftadvices, leftfollowups, leftspecialnotes, true);
+                    //second.PrintButton_Click(pat, date, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes, true);
                     second.Close();
                 };
                 second.Visibility = Visibility.Hidden;

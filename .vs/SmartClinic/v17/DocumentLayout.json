@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "E:\\Web_Dev\\350\\SmartClinic\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\printer.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\printer.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\rxusercontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\rxusercontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\printer.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|solutionrelative:smartclinic\\view\\usercontrols\\printer.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F55E507C-A7C8-42EA-A7AE-79A6086048FE}|SmartClinic\\SmartClinic.csproj|e:\\web_dev\\350\\smartclinic\\smartclinic\\view\\usercontrols\\rxusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -109,7 +109,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -121,7 +121,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Printer.xaml",
               "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\Printer.xaml",
               "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\Printer.xaml",
@@ -156,13 +156,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "RxUsercontrol.xaml.cs",
               "DocumentMoniker": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\RxUsercontrol.xaml.cs",
               "RelativeDocumentMoniker": "SmartClinic\\View\\UserControls\\RxUsercontrol.xaml.cs",
-              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\RxUsercontrol.xaml.cs",
-              "RelativeToolTip": "SmartClinic\\View\\UserControls\\RxUsercontrol.xaml.cs",
-              "ViewState": "AQIAADoEAAAAAAAAAAAqwFAEAAABAAAA",
+              "ToolTip": "E:\\Web_Dev\\350\\SmartClinic\\SmartClinic\\View\\UserControls\\RxUsercontrol.xaml.cs*",
+              "RelativeToolTip": "SmartClinic\\View\\UserControls\\RxUsercontrol.xaml.cs*",
+              "ViewState": "AQIAACkEAAAAAAAAAAAAADUEAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-19T09:39:14.299Z",
               "EditorCaption": ""
