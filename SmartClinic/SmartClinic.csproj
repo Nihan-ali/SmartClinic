@@ -14,6 +14,7 @@
     <None Remove="create.png" />
     <None Remove="doctor.ico" />
     <None Remove="icon.ico" />
+    <None Remove="Nihan.png" />
     <None Remove="patient.png" />
     <None Remove="rx.png" />
     <None Remove="search.png" />
@@ -27,6 +28,7 @@
     <Content Include="create.png" />
     <Content Include="doctor.ico" />
     <Content Include="icon.ico" />
+    <Content Include="Nihan.png" />
     <Content Include="patient.png" />
     <Content Include="rx.png" />
     <Content Include="search.png" />

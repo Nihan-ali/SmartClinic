@@ -350,3 +350,5 @@ H:\MED\CSE350\SmartClinic\bin\Debug\net8.0-windows\runtimes\osx\native\libSkiaSh
 H:\MED\CSE350\SmartClinic\bin\Debug\net8.0-windows\runtimes\win-arm64\native\libSkiaSharp.dll
 H:\MED\CSE350\SmartClinic\bin\Debug\net8.0-windows\runtimes\win-x64\native\libSkiaSharp.dll
 H:\MED\CSE350\SmartClinic\bin\Debug\net8.0-windows\runtimes\win-x86\native\libSkiaSharp.dll
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\Developer.g.cs
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\Developer.baml

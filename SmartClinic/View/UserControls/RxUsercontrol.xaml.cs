@@ -21,6 +21,7 @@ using System.Windows.Controls.Primitives;
 using System.Printing;
 using static SmartClinic.Patient;
 using Org.BouncyCastle.Asn1.Crmf;
+using iTextSharp.text.pdf;
 
 namespace SmartClinic.View.UserControls
 {
@@ -238,7 +239,12 @@ namespace SmartClinic.View.UserControls
             // Check if the searchText is not empty or null before attempting to parse
             if (!string.IsNullOrEmpty(searchText))
             {
-                if (Int64.TryParse(searchText, out Int64 prescriptionId))
+                if(searchText == "developers")
+                {
+                    Developer devs = new Developer();
+                    devs.ShowDialog();
+                }
+                else if (Int64.TryParse(searchText, out Int64 prescriptionId))
                 {
                     
                     List<PatientVisit> filteredPrescriptions = DatabaseHelper.SearchPrescriptionByPrescriptionId(prescriptionId);
