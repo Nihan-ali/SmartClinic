@@ -916,235 +916,158 @@ namespace SmartClinic.View.UserControls
             List<SpecialNote> specialNotes = null;
             string missedleft = "";
             string missedright = "";
+
+
+            int left = 16, right = 16, remain = 16, flag = 0;
+
+            //creare a list taking all left sides list count
+            List<int> lefts = new List<int> { selectedComplaints.Count, selectedHistories.Count, selectedExaminations.Count, selectedInvestigations.Count, selectedDiagnosis.Count, selectedTreatments.Count };
+            //create a list taking all right sides list count
+            List<int> rights = new List<int> { selectedMedicines.Count, selectedAdvices.Count, selectedFollowUps.Count, selectedSpecialNotes.Count };
+
+            //another list indicating how many items will be taken from each list in the first page
+            List<int> leftscount = new List<int> { 0, 0, 0, 0, 0, 0 };
+            List<int> leftscountleft = new List<int> { 0, 0, 0, 0, 0, 0 };
+            List<int> rightscount = new List<int> { 0, 0, 0, 0 };
+            List<int> rightscountleft = new List<int> { 0, 0, 0, 0 };
+
+
+            //iterate through the list untill their sum is less than 16 and give its position
+
+            for (int i = 0; i < lefts.Count; i++)
+            {
+                if (lefts[i] == 0)
+                {
+                    continue;
+                }
+                if (remain > 1)
+                {
+                    // cantake will be the minimum of lefts[i] and remain
+                    int cantake = Math.Min(lefts[i], remain - 1);
+                    leftscount[i] = cantake;
+                    remain = remain - cantake - 1;
+                    int currentleft = lefts[i] - cantake;
+                    leftscountleft[i] = currentleft;
+                }
+                else
+                {
+                    leftscountleft[i] = lefts[i];
+                }
+                if (leftscountleft[i] > 0) flag = 1;
+            }
+            // MessageBox.Show("complaints are in first page " + leftscount[0]);
+            remain = 16;
+            for (int i = 0; i < rights.Count; i++)
+            {
+                if (rights[i] == 0)
+                {
+                    continue;
+                }
+                if (remain > 1)
+                {
+                    // cantake will be the minimum of lefts[i] and remain
+                    if (i == 0) rights[i] = rights[i] * 2;
+                    int cantake = Math.Min(rights[i], remain - 1);
+                    if (i == 0)
+                    {
+                        cantake = cantake / 2;
+                        rights[i] = rights[i] / 2;
+                    }
+                    rightscount[i] = cantake;
+                    remain = remain - cantake * 2 - 1;
+                    int currentright = rights[i] - cantake;
+                    rightscountleft[i] = currentright;
+                }
+                else
+                {
+                    rightscountleft[i] = rights[i];
+                }
+                if (rightscountleft[i] > 0)
+                    flag = 1;
+            }
+            // assign from the selected list to the complaints, histories, examinations, investigations, diagnoses, treatments according to the leftscount
+            if (leftscount[0] > 0)
+            {
+                complaints = selectedComplaints.Take(leftscount[0]).ToList();
+                // MessageBox.Show("here taking compaints " + complaints.Count);
+                selectedComplaints = selectedComplaints.Skip(leftscount[0]).Take(selectedComplaints.Count - leftscount[0]).ToList();
+            }
+            if (leftscount[1] > 0)
+            {
+                histories = selectedHistories.Take(leftscount[1]).ToList();
+                selectedHistories = selectedHistories.Skip(leftscount[1]).Take(selectedHistories.Count - leftscount[1]).ToList();
+            }
+            if (leftscount[2] > 0)
+            {
+                examinations = selectedExaminations.Take(leftscount[2]).ToList();
+                selectedExaminations = selectedExaminations.Skip(leftscount[2]).Take(selectedExaminations.Count - leftscount[2]).ToList();
+            }
+            if (leftscount[3] > 0)
+            {
+                investigations = selectedInvestigations.Take(leftscount[3]).ToList();
+                selectedInvestigations = selectedInvestigations.Skip(leftscount[3]).Take(selectedInvestigations.Count - leftscount[3]).ToList();
+            }
+            if (leftscount[4] > 0)
+            {
+                diagnoses = selectedDiagnosis.Take(leftscount[4]).ToList();
+                selectedDiagnosis = selectedDiagnosis.Skip(leftscount[4]).Take(selectedDiagnosis.Count - leftscount[4]).ToList();
+            }
+            if (leftscount[5] > 0)
+            {
+                treatments = selectedTreatments.Take(leftscount[5]).ToList();
+                selectedTreatments = selectedTreatments.Skip(leftscount[5]).Take(selectedTreatments.Count - leftscount[5]).ToList();
+            }
+            if (rightscount[0] > 0)
+            {
+                medicines = selectedMedicines.Take(rightscount[0]).ToList();
+                // MessageBox.Show(medicines.Count.ToString());
+                selectedMedicines = selectedMedicines.Skip(rightscount[0]).Take(selectedMedicines.Count - rightscount[0]).ToList();
+            }
+            if (rightscount[1] > 0)
+            {
+                advices = selectedAdvices.Take(rightscount[1]).ToList();
+                selectedAdvices = selectedAdvices.Skip(rightscount[1]).Take(selectedAdvices.Count - rightscount[1]).ToList();
+            }
+            if (rightscount[2] > 0)
+            {
+                followUps = selectedFollowUps.Take(rightscount[2]).ToList();
+                selectedFollowUps = selectedFollowUps.Skip(rightscount[2]).Take(selectedFollowUps.Count - rightscount[2]).ToList();
+            }
+            if (rightscount[3] > 0)
+            {
+                specialNotes = selectedSpecialNotes.Take(rightscount[3]).ToList();
+                selectedSpecialNotes = selectedSpecialNotes.Skip(rightscount[3]).Take(selectedSpecialNotes.Count - rightscount[3]).ToList();
+            }
             Printer printDialog = new Printer();
-
-            int left = 16, right = 16;
-
-            // all complaints taken
-            if ((left - selectedComplaints.Count) >= 0)
+            printDialog.ContentRendered += async (s, args) =>
             {
-                complaints = selectedComplaints;
-                left = left - 1 - selectedComplaints.Count;
-                if ((left - selectedHistories.Count) >= 0)
-                {
-                    histories = selectedHistories;
-                    left = left - 1 - selectedHistories.Count;
-                    if ((left - selectedExaminations.Count) >= 0)
-                    {
-                        examinations = selectedExaminations;
-                        left = left - 1 - selectedExaminations.Count;
-                        if ((left - selectedInvestigations.Count) >= 0)
-                        {
-                            investigations = selectedInvestigations;
-                            left = left - 1 - selectedInvestigations.Count;
-                            if ((left - selectedDiagnosis.Count) >= 0)
-                            {
-                                diagnoses = selectedDiagnosis;
-                                left = left - 1 - selectedDiagnosis.Count;
-                                if ((left - selectedTreatments.Count) >= 0)
-                                {
-                                    treatments = selectedTreatments;
-                                    left = left - 1 - selectedTreatments.Count;
-                                }
-                                else
-                                {
-                                    treatments = null;
-                                    treatments = selectedTreatments.Take(left).ToList();
-                                    missedleft = "treatments";
-                                }
-                            }
-                            else
-                            {
-                                diagnoses = null;
-                                diagnoses = selectedDiagnosis.Take(left).ToList();
-                                missedleft = "diagnoses";
-                            }
-                        }
-                        else
-                        {
-                            investigations = null;
-                            investigations = selectedInvestigations.Take(left).ToList();
-                            missedleft = "investigations";
-                        }
-                    }
-                    else
-                    {
-                        examinations = null;
-                        examinations = selectedExaminations.Take(left).ToList();
-                        missedleft = "examinations";
-                    }
-                }
-                else
-                {
-                    histories = null;
-                    histories = selectedHistories.Take(left).ToList();
-                    missedleft = "histories";
-                }
-            }
-            else
-            {
-                complaints = null;
-                complaints = selectedComplaints.Take(left).ToList();
-                missedleft = "complaints";
-            }
-
-            if (right - 1 - (selectedMedicines.Count * 2) >= 0)
-            {
-                medicines = selectedMedicines;
-                right = right - 1 - (selectedMedicines.Count * 2);
-                if ((right - 1 - selectedAdvices.Count) >= 0)
-                {
-                    advices = selectedAdvices;
-                    right = right - 1 - selectedAdvices.Count;
-                    if ((right - 1 - selectedFollowUps.Count) >= 0)
-                    {
-                        followUps = selectedFollowUps;
-                        right = right - 1 - selectedFollowUps.Count;
-                        if ((right - 1 - selectedSpecialNotes.Count) >= 0)
-                        {
-                            specialNotes = selectedSpecialNotes;
-                            right = right - 1 - selectedSpecialNotes.Count;
-                        }
-                        else
-                        {
-                            specialNotes = null;
-                            specialNotes = selectedSpecialNotes.Take(right).ToList();
-                            missedright = "special notes";
-                        }
-                    }
-                    else
-                    {
-                        followUps = null;
-                        followUps = selectedFollowUps.Take(right).ToList();
-                        missedright = "follow ups";
-                    }
-                }
-                else
-                {
-                    advices = null;
-                    advices = selectedAdvices.Take(right).ToList();
-                    missedright = "advices";
-                }
-            }
-            else
-            {
-                medicines = null;
-                medicines = selectedMedicines.Take(right / 2).ToList();
-                missedright = "medicines";
-            }
-            printDialog.ContentRendered += (s, args) =>
-            {
+                //MessageBox.Show("first complaint " + complaints.Count);
                 printDialog.PrintButton_Click(pat, date, complaints, histories, examinations, investigations, diagnoses, treatments, medicines, advices, followUps, specialNotes, false);
                 printDialog.Close();
+
+                // Introduce a delay before printing the second page
+                await Task.Delay(TimeSpan.FromSeconds(2)); // Adjust the delay time as needed
+
+                // Initialize and print the second page
+
             };
             printDialog.Visibility = Visibility.Hidden;
             printDialog.ShowDialog();
 
-            //// 2nd page
-            complaints = null;
-            histories = null;
-            examinations = null;
-            investigations = null;
-            diagnoses = null;
-            treatments = null;
-            medicines = null;
-            advices = null;
-            followUps = null;
-            specialNotes = null;
 
-            //take all values from position left
-            if (missedleft == "complaints")
+            if (flag == 1)
             {
-                complaints = selectedComplaints.Skip(left).Take(selectedComplaints.Count).ToList();
-                histories = selectedHistories;
-                examinations = selectedExaminations;
-                investigations = selectedInvestigations;
-                diagnoses = selectedDiagnosis;
-                treatments = selectedTreatments;
-            }
-            else if (missedleft == "histories")
-            {
-                complaints = null;
-                histories = selectedHistories.Skip(left).Take(selectedHistories.Count).ToList();
-                examinations = selectedExaminations;
-                investigations = selectedInvestigations;
-                diagnoses = selectedDiagnosis;
-                treatments = selectedTreatments;
-            }
-            else if (missedleft == "examinations")
-            {
-                complaints = null;
-                histories = null;
-                examinations = selectedExaminations.Skip(left).Take(selectedExaminations.Count).ToList();
-                investigations = selectedInvestigations;
-                diagnoses = selectedDiagnosis;
-                treatments = selectedTreatments;
-            }
-            else if (missedleft == "investigations")
-            {
-                complaints = null;
-                histories = null;
-                examinations = null;
-                investigations = selectedInvestigations.Skip(left).Take(selectedInvestigations.Count).ToList();
-                diagnoses = selectedDiagnosis;
-                treatments = selectedTreatments;
-            }
-            else if (missedleft == "diagnoses")
-            {
-                complaints = null;
-                histories = null;
-                examinations = null;
-                investigations = null;
-                diagnoses = selectedDiagnosis.Skip(left).Take(selectedDiagnosis.Count).ToList();
-                treatments = selectedTreatments;
-            }
-            else if (missedleft == "treatments")
-            {
-                complaints = null;
-                histories = null;
-                examinations = null;
-                investigations = null;
-                diagnoses = null;
-                treatments = selectedTreatments.Skip(left).Take(selectedTreatments.Count).ToList();
+                Printer second = new Printer();
+                second.ContentRendered += (s, args) =>
+                {
+                    // Call the PrintButton_Click method of the second window
+                    second.PrintButton_Click(pat, date, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes, true);
+                    second.Close();
+                };
+                second.Visibility = Visibility.Hidden;
+                second.ShowDialog();
             }
 
-            if (missedright == "medicines")
-            {
-                medicines = selectedMedicines.Skip(right / 2).Take(selectedMedicines.Count).ToList();
-                advices = selectedAdvices;
-                followUps = selectedFollowUps;
-                specialNotes = selectedSpecialNotes;
-            }
-            else if (missedright == "advices")
-            {
-                medicines = null;
-                advices = selectedAdvices.Skip(right).Take(selectedAdvices.Count).ToList();
-                followUps = selectedFollowUps;
-                specialNotes = selectedSpecialNotes;
-            }
-            else if (missedright == "follow ups")
-            {
-                medicines = null;
-                advices = null;
-                followUps = selectedFollowUps.Skip(right).Take(selectedFollowUps.Count).ToList();
-                specialNotes = selectedSpecialNotes;
-            }
-            else if (missedright == "special notes")
-            {
-                medicines = null;
-                advices = null;
-                followUps = null;
-                specialNotes = selectedSpecialNotes.Skip(right).Take(selectedSpecialNotes.Count).ToList();
-            }
-
-            Printer second = new Printer();
-            second.ContentRendered += (s, args) =>
-            {
-                second.PrintButton_Click(pat, date, complaints, histories, examinations, investigations, diagnoses, treatments, medicines, advices, followUps, specialNotes, true);
-                second.Close();
-            };
-            second.Visibility = Visibility.Hidden;
-            second.ShowDialog();
 
 
         }
