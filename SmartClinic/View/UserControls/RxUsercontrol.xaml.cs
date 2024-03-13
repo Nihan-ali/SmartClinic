@@ -197,7 +197,7 @@ namespace SmartClinic.View.UserControls
         {
             string searchterm = searchPatientTextBox.Text;
             List<Patient> searchresults = DatabaseHelper.SearchPatients(searchterm);
-            if(searchterm != "Search Patient" && searchterm != "")
+            if (searchterm != "Search Patient" && searchterm != "")
             {
                 if (searchresults.Count > 0)
                 {
@@ -235,18 +235,18 @@ namespace SmartClinic.View.UserControls
         private void PrescriptionSearchStringChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = menubarbox.Text;
-            
+
             // Check if the searchText is not empty or null before attempting to parse
             if (!string.IsNullOrEmpty(searchText))
             {
-                if(searchText == "developers")
+                if (searchText == "developers")
                 {
                     Developer devs = new Developer();
                     devs.ShowDialog();
                 }
                 else if (Int64.TryParse(searchText, out Int64 prescriptionId))
                 {
-                    
+
                     List<PatientVisit> filteredPrescriptions = DatabaseHelper.SearchPrescriptionByPrescriptionId(prescriptionId);
                     if (filteredPrescriptions.Count > 0)
                     {
@@ -837,9 +837,9 @@ namespace SmartClinic.View.UserControls
 
         private void Translate_Click(object sender, RoutedEventArgs e)
         {
-            if(selectedMedicinesListView != null)
+            if (selectedMedicinesListView != null)
             {
-                for(int i = 0; i < selectedMedicines.Count; i++)
+                for (int i = 0; i < selectedMedicines.Count; i++)
                 {
                     string note = selectedMedicines[i].MakeNote;
                     //MessageBox.Show(note);
@@ -899,24 +899,38 @@ namespace SmartClinic.View.UserControls
             }
         }
 
-        private void PrintPrescription_Click(object sender, RoutedEventArgs e)
+        private Task PrintPage(Patient pat, string date, List<Complaint> complaints, List<history> histories, List<Examination> examinations, List<Investigation> investigations, List<Diagnosis> diagnoses, List<Treatment> treatments, List<DummyMedicine> medicines, List<Advice> advices, List<FollowUp> followUps, List<SpecialNote> specialNotes)
+        {
+            Printer printDialog = new Printer();
+            printDialog.ContentRendered += (s, args) =>
+            {
+                printDialog.PrintButton_Click(pat, date, complaints, histories, examinations, investigations, diagnoses, treatments, medicines, advices, followUps, specialNotes, false);
+                printDialog.Close();
+            };
+            printDialog.Visibility = Visibility.Hidden;
+            printDialog.Show();
+
+            return Task.CompletedTask;
+        }
+
+
+        async private void PrintPrescription_Click(object sender, RoutedEventArgs e)
         {
             SavePrescription_Click(null, null);
             Patient pat = newPatient;
             string date = todaydate.Text;
-            List<Complaint> complaints=null;
-            List<history> histories=null;
-            List<Examination> examinations=null;
-            List<Investigation> investigations=null;
-            List<Diagnosis> diagnoses=null;
-            List<Treatment> treatments=null;
-            List<DummyMedicine> medicines=null;
-            List<Advice> advices=null;
-            List<FollowUp> followUps=null;
-            List<SpecialNote> specialNotes=null;
+            List<Complaint> complaints = null;
+            List<history> histories = null;
+            List<Examination> examinations = null;
+            List<Investigation> investigations = null;
+            List<Diagnosis> diagnoses = null;
+            List<Treatment> treatments = null;
+            List<DummyMedicine> medicines = null;
+            List<Advice> advices = null;
+            List<FollowUp> followUps = null;
+            List<SpecialNote> specialNotes = null;
             string missedleft = "";
             string missedright = "";
-            Printer printDialog = new Printer();
 
             int left = 16, right = 16;
 
@@ -924,27 +938,27 @@ namespace SmartClinic.View.UserControls
             if ((left - selectedComplaints.Count) >= 0)
             {
                 complaints = selectedComplaints;
-                left =  left - 1 - selectedComplaints.Count;
+                left = left - 1 - selectedComplaints.Count;
                 if ((left - selectedHistories.Count) >= 0)
                 {
                     histories = selectedHistories;
-                    left = left-1-selectedHistories.Count;
+                    left = left - 1 - selectedHistories.Count;
                     if ((left - selectedExaminations.Count) >= 0)
                     {
                         examinations = selectedExaminations;
-                        left = left-1-selectedExaminations.Count;
+                        left = left - 1 - selectedExaminations.Count;
                         if ((left - selectedInvestigations.Count) >= 0)
                         {
                             investigations = selectedInvestigations;
-                            left = left-1-selectedInvestigations.Count;
+                            left = left - 1 - selectedInvestigations.Count;
                             if ((left - selectedDiagnosis.Count) >= 0)
                             {
                                 diagnoses = selectedDiagnosis;
-                                left = left-1-selectedDiagnosis.Count;
+                                left = left - 1 - selectedDiagnosis.Count;
                                 if ((left - selectedTreatments.Count) >= 0)
                                 {
                                     treatments = selectedTreatments;
-                                    left = left-1-selectedTreatments.Count;
+                                    left = left - 1 - selectedTreatments.Count;
                                 }
                                 else
                                 {
@@ -988,19 +1002,19 @@ namespace SmartClinic.View.UserControls
                 missedleft = "complaints";
             }
 
-            if(right-1- (selectedMedicines.Count*2) >= 0)
+            if (right - 1 - (selectedMedicines.Count * 2) >= 0)
             {
                 medicines = selectedMedicines;
-                right = right - 1 - (selectedMedicines.Count*2);
-                if ((right -1- selectedAdvices.Count) >= 0)
+                right = right - 1 - (selectedMedicines.Count * 2);
+                if ((right - 1 - selectedAdvices.Count) >= 0)
                 {
                     advices = selectedAdvices;
                     right = right - 1 - selectedAdvices.Count;
-                    if ((right -1- selectedFollowUps.Count) >= 0)
+                    if ((right - 1 - selectedFollowUps.Count) >= 0)
                     {
                         followUps = selectedFollowUps;
                         right = right - 1 - selectedFollowUps.Count;
-                        if ((right -1- selectedSpecialNotes.Count) >= 0)
+                        if ((right - 1 - selectedSpecialNotes.Count) >= 0)
                         {
                             specialNotes = selectedSpecialNotes;
                             right = right - 1 - selectedSpecialNotes.Count;
@@ -1029,16 +1043,12 @@ namespace SmartClinic.View.UserControls
             else
             {
                 medicines = null;
-                medicines = selectedMedicines.Take(right/2).ToList();
+                medicines = selectedMedicines.Take(right / 2).ToList();
                 missedright = "medicines";
             }
-            printDialog.ContentRendered += (s, args) =>
-            {
-                printDialog.PrintButton_Click(pat, date, complaints, histories, examinations, investigations, diagnoses, treatments, medicines, advices, followUps, specialNotes, false);
-                printDialog.Close();
-            };
-            printDialog.Visibility = Visibility.Hidden;
-            printDialog.ShowDialog();
+
+            await PrintPage(pat, date, complaints, histories, examinations, investigations, diagnoses, treatments, medicines, advices, followUps, specialNotes);
+
 
             //// 2nd page
             complaints = null;
@@ -1137,15 +1147,10 @@ namespace SmartClinic.View.UserControls
                 specialNotes = selectedSpecialNotes.Skip(right).Take(selectedSpecialNotes.Count).ToList();
             }
 
-            Printer second = new Printer();
-            second.ContentRendered += (s, args) =>
+            if ((complaints != null && complaints.Count>0) || (histories != null && histories.Count>0) || (examinations != null && examinations.Count>0) || (investigations != null && investigations.Count>0) || (diagnoses != null && diagnoses.Count>0) || (treatments != null && treatments.Count>0) || (medicines != null && medicines.Count>0) || (advices != null && advices.Count>0) || (followUps != null && followUps.Count>0) || (specialNotes != null && specialNotes.Count>0))
             {
-                second.PrintButton_Click(pat, date, complaints, histories, examinations, investigations, diagnoses, treatments, medicines, advices, followUps, specialNotes, true);
-                second.Close();
-            };
-            second.Visibility = Visibility.Hidden;
-            second.ShowDialog();
-
+                await PrintPage(pat, date, complaints, histories, examinations, investigations, diagnoses, treatments, medicines, advices, followUps, specialNotes);
+            }
 
         }
 
