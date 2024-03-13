@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartClinic"
         mc:Ignorable="d"
-        Title="Doctor Rx"
-        Icon="icon.ico" 
+        Title="Smart Doctor"
+        Icon="Doctori.ico" 
         WindowStartupLocation="CenterScreen"
         Height="550" 
         Width="650">

@@ -10,11 +10,20 @@
 
   <ItemGroup>
     <None Remove="ABClogo.jpeg" />
+    <None Remove="add-user.png" />
     <None Remove="circle.png" />
     <None Remove="create.png" />
     <None Remove="doctor.ico" />
+    <None Remove="Doctori.ico" />
     <None Remove="icon.ico" />
+    <None Remove="iconi.ico" />
+    <None Remove="log.png" />
+    <None Remove="log1.png" />
+    <None Remove="logo.png" />
+    <None Remove="logo1.png" />
+    <None Remove="logo2.png" />
     <None Remove="patient.png" />
+    <None Remove="printer.png" />
     <None Remove="rx.png" />
     <None Remove="search.png" />
     <None Remove="Separator.png" />
@@ -24,10 +33,19 @@
 
   <ItemGroup>
     <Content Include="ABClogo.jpeg" />
+    <Content Include="add-user.png" />
     <Content Include="create.png" />
     <Content Include="doctor.ico" />
+    <Content Include="Doctori.ico" />
     <Content Include="icon.ico" />
+    <Content Include="iconi.ico" />
+    <Content Include="log.png" />
+    <Content Include="log1.png" />
+    <Content Include="logo.png" />
+    <Content Include="logo1.png" />
+    <Content Include="logo2.png" />
     <Content Include="patient.png" />
+    <Content Include="printer.png" />
     <Content Include="rx.png" />
     <Content Include="search.png" />
     <Content Include="Separator.png" />

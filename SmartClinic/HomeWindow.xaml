@@ -6,16 +6,16 @@
         xmlns:local="clr-namespace:SmartClinic"
         xmlns:UserControls="clr-namespace:SmartClinic.View.UserControls"
         mc:Ignorable="d"
-        Title="Doctor Rx"
+        Title="Smart Doctor"
         WindowState="Maximized"
-        Icon="doctor.ico" 
+        Icon="iconi.ico" 
         Height="{x:Static SystemParameters.PrimaryScreenHeight}" 
         Width="{x:Static SystemParameters.PrimaryScreenWidth}"
         >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="6.5*"/>
-            <RowDefinition Height="94*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="93*"/>
         </Grid.RowDefinitions>
         <Grid Name="top" MinHeight="30" Background="#222e3e">
             <Grid.ColumnDefinitions>
@@ -23,7 +23,11 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <!--first column content will be a label and second column content will be a label and a log out button-->
-            <Label Content="Digital Rx" HorizontalAlignment="Left" VerticalAlignment="Center"  Foreground="#FFF5E8E8" FontSize="18" FontWeight="Bold" Grid.Column="0"/>
+            <Grid Grid.Column="0">
+                <Image Source="log.png"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="190" Width="90"/>
+                
+            </Grid>
+            <!--<Label Content="Smart Doctor" HorizontalAlignment="Left" VerticalAlignment="Center"  Foreground="#FFF5E8E8" FontSize="18" FontWeight="Bold" Grid.Column="0" FontFamily="Roboto"/>-->
             <Grid Grid.Column="1" HorizontalAlignment="Right" Margin="10,0">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Dr. Abu Noyem Mohammad" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FFF1E1E1" FontSize="14" FontWeight="Bold" Margin="5,0"/>
