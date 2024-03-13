@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\
 SmartClinic
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-H:\MED\CSE350\SmartClinic\App.xaml
+E:\Web_Dev\350\SmartClinic\SmartClinic\App.xaml
 291990526981
 12211056291
 39-1609678019
-2321245235111
+2321425269159
 ChangePassword.xaml;ForgotPasswordWindow.xaml;HomeWindow.xaml;MainWindow.xaml;View\UserControls\AddPatient.xaml;View\UserControls\AdviceSearchWindow.xaml;View\UserControls\ComplaintSearchWindow.xaml;View\UserControls\CreateMedicineGroupWindow.xaml;View\UserControls\DetailsWindow.xaml;View\UserControls\Developer.xaml;View\UserControls\DiagnosisSearchWindow.xaml;View\UserControls\EditComplaintControl.xaml;View\UserControls\EditMainComplaintControl.xaml;View\UserControls\ExaminationSearchWindow.xaml;View\UserControls\FollowUpSearchWindow.xaml;View\UserControls\HistorySearchWindow.xaml;View\UserControls\InvestigationSearchWindow.xaml;View\UserControls\MedicineCreateWindow.xaml;View\UserControls\MedicineSearchWindow.xaml;View\UserControls\PatientProfileUserControl.xaml;View\UserControls\patientsUsercontrol.xaml;View\UserControls\Printer.xaml;View\UserControls\RxUsercontrol.xaml;View\UserControls\searchMenu.xaml;View\UserControls\Settings.xaml;View\UserControls\SpecialNoteSearchWindow.xaml;View\UserControls\StatUserControl.xaml;View\UserControls\treatment.xaml;View\UserControls\TreatmentSearchWindow.xaml;
 
-True
+False
 

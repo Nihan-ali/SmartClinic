@@ -98,7 +98,6 @@ E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControl
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\PatientProfileUserControl.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\MainWindow.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\DetailsWindow.g.cs
-E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\header.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\MedicineSearchWindow.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\PatientProfileUserControl.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\patientsUsercontrol.g.cs
@@ -113,7 +112,6 @@ E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\SmartClinic_Mark
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\App.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\MainWindow.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\DetailsWindow.baml
-E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\header.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\patientsUsercontrol.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\RxUsercontrol.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\searchMenu.baml
@@ -352,3 +350,19 @@ H:\MED\CSE350\SmartClinic\bin\Debug\net8.0-windows\runtimes\win-x64\native\libSk
 H:\MED\CSE350\SmartClinic\bin\Debug\net8.0-windows\runtimes\win-x86\native\libSkiaSharp.dll
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\Developer.g.cs
 H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\Developer.baml
+E:\Web_Dev\350\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\HarfBuzzSharp.dll
+E:\Web_Dev\350\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\QuestPDF.dll
+E:\Web_Dev\350\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\SkiaSharp.dll
+E:\Web_Dev\350\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\SkiaSharp.HarfBuzz.dll
+E:\Web_Dev\350\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\runtimes\osx\native\libHarfBuzzSharp.dylib
+E:\Web_Dev\350\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\runtimes\win-arm64\native\libHarfBuzzSharp.dll
+E:\Web_Dev\350\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\runtimes\win-x64\native\libHarfBuzzSharp.dll
+E:\Web_Dev\350\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\runtimes\win-x86\native\libHarfBuzzSharp.dll
+E:\Web_Dev\350\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\runtimes\osx\native\libSkiaSharp.dylib
+E:\Web_Dev\350\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\runtimes\win-arm64\native\libSkiaSharp.dll
+E:\Web_Dev\350\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\runtimes\win-x64\native\libSkiaSharp.dll
+E:\Web_Dev\350\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\runtimes\win-x86\native\libSkiaSharp.dll
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\Developer.g.cs
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\EditMainComplaintControl.g.cs
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\Developer.baml
+E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\EditMainComplaintControl.baml
