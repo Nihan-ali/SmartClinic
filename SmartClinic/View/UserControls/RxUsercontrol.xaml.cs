@@ -916,7 +916,7 @@ namespace SmartClinic.View.UserControls
             List<SpecialNote> specialNotes=null;
             string missedleft = "";
             string missedright = "";
-            Printer printDialog = new Printer();
+            
 
             int left = 16, right = 16, remain=16,flag =0;
 
@@ -955,6 +955,7 @@ namespace SmartClinic.View.UserControls
                 }
                 if (leftscountleft[i] > 0) flag = 1;
             }
+           // MessageBox.Show("complaints are in first page " + leftscount[0]);
             remain = 16;
             for (int i = 0; i < rights.Count; i++)
             {
@@ -988,7 +989,7 @@ namespace SmartClinic.View.UserControls
             if (leftscount[0] > 0)
             {
                 complaints = selectedComplaints.Take(leftscount[0]).ToList();
-                MessageBox.Show("here taking compaints " + complaints.Count);
+               // MessageBox.Show("here taking compaints " + complaints.Count);
                 selectedComplaints = selectedComplaints.Skip(leftscount[0]).Take(selectedComplaints.Count - leftscount[0]).ToList();
             }
             if (leftscount[1] > 0)
@@ -1019,7 +1020,7 @@ namespace SmartClinic.View.UserControls
             if (rightscount[0] > 0)
             {
                 medicines = selectedMedicines.Take(rightscount[0]).ToList();
-                MessageBox.Show(medicines.Count.ToString());
+               // MessageBox.Show(medicines.Count.ToString());
                 selectedMedicines = selectedMedicines.Skip(rightscount[0]).Take(selectedMedicines.Count - rightscount[0]).ToList();
             }
             if (rightscount[1] > 0)
@@ -1037,40 +1038,36 @@ namespace SmartClinic.View.UserControls
                 specialNotes = selectedSpecialNotes.Take(rightscount[3]).ToList();
                 selectedSpecialNotes = selectedSpecialNotes.Skip(rightscount[3]).Take(selectedSpecialNotes.Count - rightscount[3]).ToList();
             }
-
-            printDialog.ContentRendered += (s, args) =>
+            Printer printDialog = new Printer();
+            printDialog.ContentRendered += async (s, args) =>
             {
-                MessageBox.Show("first complint " + complaints.Count);
+                //MessageBox.Show("first complaint " + complaints.Count);
                 printDialog.PrintButton_Click(pat, date, complaints, histories, examinations, investigations, diagnoses, treatments, medicines, advices, followUps, specialNotes, false);
                 printDialog.Close();
+
+                // Introduce a delay before printing the second page
+                await Task.Delay(TimeSpan.FromSeconds(2)); // Adjust the delay time as needed
+
+                // Initialize and print the second page
+
             };
             printDialog.Visibility = Visibility.Hidden;
             printDialog.ShowDialog();
-
-            complaints = selectedComplaints;
-            histories = selectedHistories;
-            examinations = selectedExaminations;
-            investigations = selectedInvestigations;
-            diagnoses = selectedDiagnosis;
-            treatments = selectedTreatments;
-            medicines = selectedMedicines;
-            advices = selectedAdvices;
-            followUps = selectedFollowUps;
-            specialNotes = selectedSpecialNotes;
-            ////if any item is remained then second page will show also check them in a single if
+            
 
             if (flag == 1)
             {
                 Printer second = new Printer();
                 second.ContentRendered += (s, args) =>
                 {
-                    //MessageBox.Show("second" + medicines.Count);
-                    second.PrintButton_Click(pat, date, complaints, histories, examinations, investigations, diagnoses, treatments, medicines, advices, followUps, specialNotes, true);
+                    // Call the PrintButton_Click method of the second window
+                    second.PrintButton_Click(pat, date, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes, true);
                     second.Close();
                 };
                 second.Visibility = Visibility.Hidden;
                 second.ShowDialog();
             }
+
 
 
         }
