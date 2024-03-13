@@ -33,6 +33,9 @@
     <Compile Update="View\UserControls\DetailsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\UserControls\Developer.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\UserControls\DiagnosisSearchWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -117,6 +120,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\DetailsWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserControls\Developer.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\DiagnosisSearchWindow.xaml">

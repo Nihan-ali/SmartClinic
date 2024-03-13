@@ -29,7 +29,8 @@ namespace SmartClinic
         public static string visit_time = "বিকাল ৫:৩০ থেকে রাত ৮ টা পর্যন্ত";
         public static string chamber_phone = "যোগাযোগঃ 01914-478747 (সকাল ১০টা - ১২টা) রবি, বৃহস্পতি ও শুক্রবার বন্ধ";
         public static string outro = "শরীরের যত্ন নিবেন। নিয়মিত ওষুধ খাবেন। পরবর্তী সাক্ষাতের সময় বাবস্থাপত্র আনবেন। প্রয়োজনে- ০১৮১৯-৮০০৩৩৩ (দুপুর ২টা-৩টা)";
-        public variables() {
+        public variables()
+        {
             List<DoctorInfo> doctorInfos = DatabaseHelper.GetDoctorInfos();
             if (doctorInfos.Count > 0)
             {
@@ -49,7 +50,7 @@ namespace SmartClinic
             }
 
         }
-        
+
     }
 
     public class DoctorInfo
@@ -81,7 +82,7 @@ namespace SmartClinic
 
 
 
-public class Complaint : INotifyPropertyChanged
+    public class Complaint : INotifyPropertyChanged
     {
         private string _content;
         public string Content
@@ -204,6 +205,7 @@ public class Complaint : INotifyPropertyChanged
         public string Content { get; set; }
         public string Note { get; set; }
         public int Occurrence { get; set; }
+
     }
 
     public class Examination
@@ -625,7 +627,7 @@ public class Complaint : INotifyPropertyChanged
         public string MakeNote { get; set; }
     }
 
-    public class PatientVisit:INotifyPropertyChanged
+    public class PatientVisit : INotifyPropertyChanged
     {
         public string Name { get; set; }
         public int Id { get; set; }

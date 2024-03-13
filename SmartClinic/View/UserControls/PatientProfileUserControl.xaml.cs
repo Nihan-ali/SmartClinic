@@ -32,7 +32,7 @@ namespace SmartClinic.View.UserControls
                 patientCount = Patients.Count;
                 newPatient = selectedPatient;
                 PrescriptionList.ItemsSource = Patients;
-                
+
 
                 // Set the data context for the UI elements based on the selected patient
                 SetDataContext(selectedPatient);

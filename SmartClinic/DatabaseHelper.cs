@@ -71,8 +71,8 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
 
                                                     CREATE TABLE IF NOT EXISTS Patient (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Age TEXT, Address TEXT, Phone TEXT,Blood TEXT, LastVisit DATE);
                                                     CREATE TABLE IF NOT EXISTS PatientVisit ( ID INTEGER, VISIT DATE, PRESCRIPTIONID INTEGER PRIMARY KEY, MEDICINE TEXT, ADVICE TEXT, FOLLOWUP TEXT, NOTES TEXT, NAME TEXT, COMPLAINT TEXT, HISTORY TEXT, ONEXAMINATION TEXT, INVESTIGATION TEXT,DIAGNOSIS TEXT, TREATMENTPLAN TEXT);";
-                                                    
-                                    
+
+
 
                                     command.CommandText = allQueries;
 
@@ -239,7 +239,7 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
         }
 
         //implement Get doctorinfo where id = 1
-        
+
         public static List<DoctorInfo> GetDoctorInfos()
         {
             List<DoctorInfo> doctorInfos = new List<DoctorInfo>();
@@ -306,7 +306,7 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
             return questions;
         }
 
-        
+
         //implement insert doctorinfo
         public static void InsertDoctorInfo(string docname, string docdegree, string docname_bangla, string docdegree_bangla, string docdetail, string docdetail_bangla, string moredetail_bangla, string chamber, string chamber_location, string visit_date, string visit_time, string chamber_phone, string outro)
         {
@@ -834,26 +834,34 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
 
                     using (var command = new SQLiteCommand("SELECT * FROM Patient WHERE Name LIKE @Name;", connection))
                     {
-                        command.Parameters.AddWithValue("@Name", $"%{name}%");
+                        command.Parameters.AddWithValue("@Name", $"%s{name}%");
 
                         using (var reader = command.ExecuteReader())
                         {
                             List<Patient> patients = new List<Patient>();
 
-                            while (reader.Read())
+                            // check if reader has any data
+                            if (reader.HasRows)
                             {
-                                Patient patient = new Patient
+                                while (reader.Read())
                                 {
-                                    Id = Convert.ToInt32(reader["ID"]),
-                                    Name = reader["Name"].ToString(),
-                                    Age = reader["Age"].ToString(),
-                                    Phone = reader["Phone"].ToString(),
-                                    Address = reader["Address"].ToString(),
-                                    Blood = reader["Blood"].ToString(),
-                                    LastVisit = Convert.ToDateTime(reader["LastVisit"])
-                                };
+                                    Patient patient = new Patient
+                                    {
+                                        Id = Convert.ToInt32(reader["ID"]),
+                                        Name = reader["Name"].ToString(),
+                                        Age = reader["Age"].ToString(),
+                                        Phone = reader["Phone"].ToString(),
+                                        Address = reader["Address"].ToString(),
+                                        Blood = reader["Blood"].ToString(),
+                                        LastVisit = Convert.ToDateTime(reader["LastVisit"])
+                                    };
 
-                                patients.Add(patient);
+                                    patients.Add(patient);
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("No rows found.");
                             }
 
                             return patients;
@@ -2082,7 +2090,7 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
                 Console.WriteLine($"Error searching follow-ups: {ex}");
                 throw;
             }
-        }   
+        }
         public static List<SpecialNote> SearchSpecialNotes(string searchTerm)
         {
             try
@@ -2235,7 +2243,7 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
         public static bool DeletePatientByPrescriptionId(Int64 prescriptionId)
         {
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this patient?", "Delete Patient", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if(result == MessageBoxResult.Yes)
+            if (result == MessageBoxResult.Yes)
             {
                 try
                 {
@@ -2446,7 +2454,7 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
 
             foreach (string value in adviceValues)
             {
-                if(value != "")
+                if (value != "")
                 {
                     Advice advice = new Advice
                     {
@@ -2465,7 +2473,7 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
 
             foreach (string value in followUpValues)
             {
-                if(value != "")
+                if (value != "")
                 {
                     FollowUp followUp = new FollowUp
                     {
@@ -2484,7 +2492,7 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
 
             foreach (string value in specialNoteValues)
             {
-                if(value != "")
+                if (value != "")
                 {
                     SpecialNote specialNote = new SpecialNote
                     {
@@ -2496,6 +2504,7 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
             }
             return extractedSpecialNoteList;
         }
+
 
         public static bool SavePrescription(PatientVisit prescription)
         {
@@ -2587,7 +2596,7 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
         }
 
 
-         private static Int64 GeneratePrescriptionId(int id)
+        private static Int64 GeneratePrescriptionId(int id)
         {
             try
             {
@@ -2634,7 +2643,36 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
         }
 
 
-         public static SQLiteConnection GetConnection()
+        public static string Translate(string Note)
+        {
+            string[] note = Note.Split(" ");
+            string translatedNote = "";
+            foreach (string n in note)
+            {
+                if (n == "সকালে") translatedNote += "In Morning ";
+                else if (n == "দুপুরে") translatedNote += "At Noon ";
+                else if (n == "রাতে") translatedNote += "At Night ";
+                else if (n == "খাবার")
+                {
+                    if (note.Contains("পরে")) translatedNote += "After Meal ";
+                    if (note.Contains("আগে")) translatedNote += "Before Meal ";
+                }
+                else if (n == "পরে" || n == "আগে") continue;
+                else if (n == "দিন") translatedNote += "Days ";
+                else if (n == "বার") translatedNote += "Times ";
+                else if (n == "সপ্তাহ") translatedNote += "Week ";
+                else if (n == "মাস") translatedNote += "Month ";
+
+                else if (n == "চামচ") translatedNote += "Spoon ";
+                else if (n == "ড্রপ") translatedNote += "Drop ";
+                else if (n == "ভাইয়াল") translatedNote += "Vial ";
+                else if (n == "টুকরা") translatedNote += "Piece ";
+                else translatedNote += n;
+            }
+            return translatedNote;
+        }
+
+        public static SQLiteConnection GetConnection()
         {
             return new SQLiteConnection(ConnectionString);
         }
@@ -2646,7 +2684,6 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
 
     }
 
-    }
-
+}
 
 

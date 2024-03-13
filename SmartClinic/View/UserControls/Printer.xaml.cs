@@ -65,7 +65,7 @@ namespace SmartClinic.View.UserControls
         {
             InitializeComponent();
             //docname.Content = "ghochu222";
-            
+
             newPatient = patient;
             dayyt = todaydate;
             selectedComplaints = complaints;
@@ -118,7 +118,7 @@ namespace SmartClinic.View.UserControls
             UpdateMedicineListViews();
             UpdateAdviceListViews();
             UpdateFollowUpListViews();
-            UpdateSpecialNoteListViews();            
+            UpdateSpecialNoteListViews();
         }
 
         private void UpdatePatientInformation()
@@ -149,14 +149,14 @@ namespace SmartClinic.View.UserControls
         {
             if (selectedHistories != null && selectedHistories.Count > 0)
             {
-                historyListView.ItemsSource = null;
-                historyListView.ItemsSource = selectedHistories;
+                HistoryListView.ItemsSource = null;
+                HistoryListView.ItemsSource = selectedHistories;
 
             }
             else
             {
                 historygrid.Visibility = Visibility.Collapsed;
-                historyListView.ItemsSource = null;
+                HistoryListView.ItemsSource = null;
             }
         }
 
@@ -164,13 +164,13 @@ namespace SmartClinic.View.UserControls
         {
             if (selectedExaminations != null && selectedExaminations.Count > 0)
             {
-                examinationListView.ItemsSource = null;
-                examinationListView.ItemsSource = selectedExaminations;
+                ExaminationListView.ItemsSource = null;
+                ExaminationListView.ItemsSource = selectedExaminations;
             }
             else
             {
                 examinationgrid.Visibility = Visibility.Collapsed;
-                examinationListView.ItemsSource = null;
+                ExaminationListView.ItemsSource = null;
             }
         }
 
@@ -178,27 +178,27 @@ namespace SmartClinic.View.UserControls
         {
             if (selectedInvestigations != null && selectedInvestigations.Count > 0)
             {
-                selectedInvestigationsListView.ItemsSource = null;
-                selectedInvestigationsListView.ItemsSource = selectedInvestigations;
+                InvestigationsListView.ItemsSource = null;
+                InvestigationsListView.ItemsSource = selectedInvestigations;
             }
             else
             {
                 investigationgrid.Visibility = Visibility.Collapsed;
-                selectedDiagnosisListView.ItemsSource = null;
+                DiagnosisListView.ItemsSource = null;
             }
         }
 
         private void UpdateDiagnosisListViews()
         {
-            if(selectedDiagnosis != null && selectedDiagnosis.Count > 0)
+            if (selectedDiagnosis != null && selectedDiagnosis.Count > 0)
             {
-                selectedDiagnosisListView.ItemsSource = null;
-                selectedDiagnosisListView.ItemsSource = selectedDiagnosis;
+                DiagnosisListView.ItemsSource = null;
+                DiagnosisListView.ItemsSource = selectedDiagnosis;
             }
             else
             {
                 diagnosisgrid.Visibility = Visibility.Collapsed;
-                selectedDiagnosisListView.ItemsSource = null;
+                DiagnosisListView.ItemsSource = null;
             }
         }
 
@@ -206,13 +206,13 @@ namespace SmartClinic.View.UserControls
         {
             if (selectedTreatments != null && selectedTreatments.Count > 0)
             {
-                selectedTreatmentListView.ItemsSource = null;
-                selectedTreatmentListView.ItemsSource = selectedTreatments;
+                TreatmentListView.ItemsSource = null;
+                TreatmentListView.ItemsSource = selectedTreatments;
             }
             else
             {
                 treatmentgrid.Visibility = Visibility.Collapsed;
-                selectedTreatmentListView.ItemsSource = null;
+                TreatmentListView.ItemsSource = null;
             }
         }
 
@@ -273,7 +273,7 @@ namespace SmartClinic.View.UserControls
         }
 
 
-        public void PrintButton_Click(Patient patient, string todaydate, List<Complaint> complaints, List<history> histories, List<Examination> examinations, List<Investigation> investigations, List<Diagnosis> diagnoses, List<Treatment> treatments, List<DummyMedicine> medicines, List<Advice> advices, List<FollowUp> followUps, List<SpecialNote> specialNotes)
+        public void PrintButton_Click(Patient patient, string todaydate, List<Complaint> complaints, List<history> histories, List<Examination> examinations, List<Investigation> investigations, List<Diagnosis> diagnoses, List<Treatment> treatments, List<DummyMedicine> medicines, List<Advice> advices, List<FollowUp> followUps, List<SpecialNote> specialNotes, bool second)
         {
             newPatient = patient;
             dayyt = todaydate;
@@ -287,13 +287,17 @@ namespace SmartClinic.View.UserControls
             selectedAdvices = advices;
             selectedFollowUps = followUps;
             selectedSpecialNotes = specialNotes;
-
+            if (second)
+            {
+                continued.Content = "(Continued)";
+            }
             UpdateAllFields();
-
+            prescriptionscroll.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
             PrintDialog printDialog = new PrintDialog();
 
             PrintTicket printTicket = printDialog.PrintTicket;
             printTicket.PageMediaSize = new PageMediaSize(PageMediaSizeName.ISOA4);
+
 
             printDialog.PrintVisual(this, "Prescription");
         }
@@ -331,21 +335,5 @@ namespace SmartClinic.View.UserControls
 
     }
 
-    public class IsNullOrEmptyConverter1 : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is string stringValue)
-            {
-                return string.IsNullOrEmpty(stringValue);
-            }
 
-            return true; // Default to true if not a string
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
 }

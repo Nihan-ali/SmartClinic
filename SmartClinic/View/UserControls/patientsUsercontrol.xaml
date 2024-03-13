@@ -7,8 +7,8 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="1000">
 
-    <!--<ScrollViewer x:Name="PatientListScrollviewer" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">-->
-        <Grid  Margin="50,20,50,2" Background="White">
+    <ScrollViewer x:Name="PatientListScrollviewer" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
+        <Grid Background="White" Margin="50,2,50,2" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -17,7 +17,7 @@
             </Grid.RowDefinitions>
 
             <!-- Header Section -->
-            <Grid Background="White" Margin="10">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -25,85 +25,75 @@
                 <TextBlock Text="Patient List" Grid.Column="0" FontWeight="Bold" FontSize="24" Margin="10"/>
                 <Button x:Name="AddPatient" Content="Add Patient" Grid.Column="1" FontSize="14" Padding="5" Background="Blue" Foreground="White" FontWeight="Bold" Click="AddPatientButton_Click" HorizontalAlignment="Right" Margin="10"/>
             </Grid>
-            <!--add a border here-->
-        <Border BorderBrush="DarkCyan" BorderThickness="0.2,.2,0.2,.5" Margin="10"/>
-        <!-- Search Section -->
-        <Grid Grid.Row="1" Background="White" Margin="5,5">
-            <StackPanel>
-                <TextBlock Text="Search Patient Here" FontWeight="Bold" FontSize="16" Margin="10,5"/>
-                <!--<Button x:Name="SearchButton" Content="Search" FontSize="14" Padding="5" Background="Blue" Foreground="White" FontWeight="Bold" Click="SearchButton_Click" HorizontalAlignment="Right" Margin="10"/>-->
-                <TextBox x:Name="SearchPatient" Text="" Loaded="PatientsUserControl_Loaded"  Margin="10,10" Padding="2,3,0,0" Height="30" BorderBrush="Blue" TextChanged="SearchPatient_TextChanged" Background="White" GotFocus="OnSearchTextBoxGotFocus" LostFocus="OnSearchTextBoxLostFocus"/>
-            </StackPanel>
-        </Grid>
-        <Border BorderBrush="DarkCyan" BorderThickness="0.2,0.1,0.2,.5" Margin="10,5"  Grid.Row="1"/>
-        <!-- Patient List -->
+
+            <!-- Search Section -->
+            <TextBox x:Name="SearchPatient" Text="" Loaded="PatientsUserControl_Loaded" Grid.Row="1" Margin="10" Padding="2,3,0,0" Height="25" BorderBrush="Blue" TextChanged="SearchPatient_TextChanged" GotFocus="OnSearchTextBoxGotFocus" LostFocus="OnSearchTextBoxLostFocus"/>
+
             <!-- Patient List -->
-            <!--<ScrollViewer Grid.Row="2" Margin="50" VerticalScrollBarVisibility="Visible">-->
-        <Grid Grid.Row="2" Margin="10,10">
-                <ListView x:Name="PatientsListBox" SelectionChanged="PatientsListBox_SelectionChanged" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Patients}" >
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderBrush="DarkGray" BorderThickness="1" CornerRadius="5" Margin="5" Background="White" HorizontalAlignment="Stretch">
-                                <Grid MinHeight="80">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
+            <!-- Patient List -->
+            <ListView x:Name="PatientsListBox" Grid.Row="2" Margin="10" SelectionChanged="PatientsListBox_SelectionChanged" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Patients}" PreviewMouseWheel="PatientsListBox_PreviewMouseWheel">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="DarkGray" BorderThickness="1" CornerRadius="5" Margin="5" Background="White" HorizontalAlignment="Stretch">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
 
-                                    <!-- First Row: Patient Name and Last Visited Date -->
-                                    <Border Background="#FF3C5A7D" Padding="10" HorizontalAlignment="Stretch">
-                                        <TextBlock FontSize="16" Foreground="White">
+                                <!-- First Row: Patient Name and Last Visited Date -->
+                                <Border Background="#FF3C5A7D" Padding="10" HorizontalAlignment="Stretch">
+                                    <TextBlock FontSize="16" Foreground="White">
                             <Run Text="{Binding Name}" FontWeight="Bold"/>
-                            <Run Text="Last Visited Date" FontWeight="SemiBold" FontSize="11"/>
-                            <Run Text="{Binding LastVisit}" FontSize="11" FontStyle="Italic"/>
-                                        </TextBlock>
-                                    </Border>
+                            <Run Text="{Binding LastVisit}" FontSize="12" FontStyle="Italic"/>
+                                    </TextBlock>
+                                </Border>
 
-                                    <!-- Second Row: Phone, Address, Age, Serial No, Delete Button -->
-                                    <Grid Grid.Row="1" HorizontalAlignment="Stretch">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
+                                <!-- Second Row: Phone, Address, Age, Serial No, Delete Button -->
+                                <Grid Grid.Row="1" HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
 
-                                        <!-- Phone -->
-                                        <TextBlock Grid.Column="0" Margin="10,5" VerticalAlignment="Center">
+                                    <!-- Phone -->
+                                    <TextBlock Grid.Column="0" Margin="10,5" VerticalAlignment="Center">
                                         <Run Text="Phone: " FontWeight="Bold"/>
                                         <Run Text="{Binding Phone}"/>
-                                        </TextBlock>
+                                    </TextBlock>
 
-                                        <!-- Address -->
-                                        <TextBlock Grid.Column="1" Margin="10,5" VerticalAlignment="Center">
+                                    <!-- Address -->
+                                    <TextBlock Grid.Column="1" Margin="10,5" VerticalAlignment="Center">
                                         <Run Text="Address: " FontWeight="Bold"/>
                                         <Run Text="{Binding Address}"/>
-                                        </TextBlock>
+                                    </TextBlock>
 
-                                        <!-- Age -->
-                                        <TextBlock Grid.Column="2" Margin="10,5" VerticalAlignment="Center">
+                                    <!-- Age -->
+                                    <TextBlock Grid.Column="2" Margin="10,5" VerticalAlignment="Center">
                                         <Run Text="Age: "/>
                                         <Run Text="{Binding Age}" FontWeight="Bold"/>
-                                        </TextBlock>
+                                    </TextBlock>
 
-                                        <!-- Serial No -->
-                                        <TextBlock Grid.Column="3" Margin="10,5" VerticalAlignment="Center">
+                                    <!-- Serial No -->
+                                    <TextBlock Grid.Column="3" Margin="10,5" VerticalAlignment="Center">
                                         <Run Text="Serial No: " FontWeight="Bold"/>
                                         <Run Text="{Binding Id}"/>
-                                        </TextBlock>
+                                    </TextBlock>
 
-                                        <!-- Delete Button -->
-                                        <Button x:Name="Delete" Content="Delete" Margin="10,5,40,5" Background="Transparent" BorderBrush="{x:Null}" FontWeight="Bold" Foreground="Red" HorizontalAlignment="Center" Grid.Column="4" Focusable="False" Click="Delete_Click"/>
-                                    </Grid>
+                                    <!-- Delete Button -->
+                                    <Button x:Name="Delete" Content="Delete" Margin="10,5" Background="#FF3C5A7D" BorderBrush="{x:Null}" FontWeight="Bold" Foreground="White" Grid.Column="4" Focusable="False" Click="Delete_Click"/>
                                 </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            <!--</ScrollViewer>-->
-        </Grid>
-        <Popup x:Name="PatientPopup" StaysOpen="False" Placement="Center" Height="100" Width="500">
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+            <Popup x:Name="PatientPopup" StaysOpen="False" Placement="Center" Height="100" Width="500">
                 <Border Background="DarkGray" CornerRadius="5" Padding="10">
                     <TextBlock x:Name="PopupText" Foreground="White" />
                 </Border>
@@ -144,6 +134,6 @@
             </StackPanel>
 
         </Grid>
-    <!--</ScrollViewer>-->
-    
+    </ScrollViewer>
+
 </UserControl>
