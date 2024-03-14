@@ -22,7 +22,6 @@ namespace SmartClinic.View.UserControls
 
             // Store the instance of MainWindow
             mainWindowInstance = mainWindow;
-            MessageBox.Show("PatientProfileUserControl constructor called." + selectedPatient.Name);
 
             if (selectedPatient != null)
             {

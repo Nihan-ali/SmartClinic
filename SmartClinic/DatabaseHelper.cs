@@ -6,6 +6,7 @@ using System.Data.SQLite;
 using System.IO;
 using System.IO.Packaging;
 using System.Net;
+using System.Reflection.Metadata;
 using System.Windows;
 using System.Windows.Controls;
 using System.Xml.Linq;
@@ -694,7 +695,8 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
                 {
                     connection.Open();
 
-                    using (var command = new SQLiteCommand("SELECT * FROM PatientVisit WHERE ID = @PatientId;", connection))
+                    // order by descending datee
+                    using (var command = new SQLiteCommand("SELECT * FROM PatientVisit WHERE ID = @PatientId ORDER BY VISIT DESC;", connection))
                     {
                         command.Parameters.AddWithValue("@PatientId", patientId);
 
@@ -2649,7 +2651,11 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
             string translatedNote = "";
             foreach (string n in note)
             {
-                if (n == "সকালে") translatedNote += "In Morning ";
+                //                                        < ComboBoxItem Content = "Piece" />
+                //                        < ComboBoxItem Content = "Drop" />
+                //                        < ComboBoxItem Content = "Spoon" />
+                //                        < ComboBoxItem Content = "Spray" />
+                if (n == "সকালে") translatedNote += "At Morning ";
                 else if (n == "দুপুরে") translatedNote += "At Noon ";
                 else if (n == "রাতে") translatedNote += "At Night ";
                 else if (n == "খাবার")
@@ -2657,17 +2663,25 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
                     if (note.Contains("পরে")) translatedNote += "After Meal ";
                     if (note.Contains("আগে")) translatedNote += "Before Meal ";
                 }
+                else if (n == "চলবে") translatedNote += "Continue";
+                else if (n == "করে") translatedNote += " ";
                 else if (n == "পরে" || n == "আগে") continue;
                 else if (n == "দিন") translatedNote += "Days ";
                 else if (n == "বার") translatedNote += "Times ";
                 else if (n == "সপ্তাহ") translatedNote += "Week ";
                 else if (n == "মাস") translatedNote += "Month ";
-
+                else if (n == "টি") translatedNote += "Piece ";
                 else if (n == "চামচ") translatedNote += "Spoon ";
-                else if (n == "ড্রপ") translatedNote += "Drop ";
-                else if (n == "ভাইয়াল") translatedNote += "Vial ";
-                else if (n == "টুকরা") translatedNote += "Piece ";
-                else translatedNote += n;
+                else if (n == "ফোঁটা") translatedNote += "Drop ";
+                else if (n == "স্প্রে") translatedNote += "Spray ";
+                else if (n == "স্টিক") translatedNote += "Stick ";
+
+                else if (n == "বার") translatedNote += "Times ";
+                else if (n == "দিন") translatedNote += "Days ";
+                else if (n == "সপ্তাহ") translatedNote += "Week ";
+                else if (n == "মাস") translatedNote += "Month ";
+                else if (n == "পরে" || n == "আগে") continue;
+                else translatedNote += n+" ";
             }
             return translatedNote;
         }

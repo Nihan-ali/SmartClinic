@@ -1,7 +1,7 @@
 ﻿<Window x:Class="SmartClinic.MedicineSearchWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        WindowStartupLocation="CenterScreen" Loaded="rx_loaded"
+        WindowStartupLocation="CenterScreen"
         Title="Medicine Search" Height="480" Width="680">
 
     <Grid Background="White">
@@ -19,7 +19,7 @@
             <Border BorderBrush="Blue" BorderThickness="1" CornerRadius="15" Margin="50,2,20,3">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <Image Source="../../search.png" Width="15" Height="15" Margin="5,2,0,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <TextBox x:Name="searchTextBox" Loaded="MedicineSearchWindow_Loaded" Width="350" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center" Background="White" BorderThickness="0" TextChanged="SearchTextBox_TextChanged">
+                    <TextBox x:Name="searchTextBox" Loaded="MedicineSearchWindow_Loaded" KeyDown="EnterPressed" Width="350" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center" Background="White" BorderThickness="0" TextChanged="SearchTextBox_TextChanged">
                         <TextBox.Style>
                             <Style TargetType="TextBox">
                                 <Setter Property="Padding" Value="8,2"/>
@@ -264,13 +264,14 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="Unit" FontWeight="Bold" Grid.Row="0"  HorizontalAlignment="Center" FontSize="14" Foreground="Black"/>
                                 <!-- ComboBox for Different Types of Units -->
-                                <ComboBox x:Name="unitComboBox" SelectedItem="{Binding SelectedUnitItem}" FontWeight="SemiBold" Grid.Row="1" Margin="10,10,5,0" HorizontalAlignment="Center" VerticalAlignment="Top" Background="White" Width="50" Height="25"  Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1">
+                                <ComboBox x:Name="unitComboBox" SelectedItem="{Binding SelectedUnitItem}" Width="80" FontWeight="SemiBold" Grid.Row="1" Margin="10,10,5,0" HorizontalAlignment="Center" VerticalAlignment="Top" Background="White" Height="25"  Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1">
                                     <ComboBoxItem Content="টি" IsSelected="True"/>
                                     <ComboBoxItem Content="ফোঁটা"/>
                                     <ComboBoxItem Content="চামচ"/>
                                     <ComboBoxItem Content="স্প্রে"/>
-                                    <ComboBoxItem Content="পিস"/>
                                     <ComboBoxItem Content="স্টিক"/>
+                                    <ComboBoxItem Content="Vial"/>
+                                    <ComboBoxItem Content="Ampoule"/>
                                     <!-- Add more unit options as needed -->
                                 </ComboBox>
                             </Grid>
@@ -295,6 +296,7 @@
                                             <ComboBoxItem Content="দিন" IsSelected="True"/>
                                             <ComboBoxItem Content="সপ্তাহ"/>
                                             <ComboBoxItem Content="মাস"/>
+                                            <ComboBoxItem Content="চলবে"/>
                                         </ComboBox>
                                     </StackPanel>
                                 </Border>

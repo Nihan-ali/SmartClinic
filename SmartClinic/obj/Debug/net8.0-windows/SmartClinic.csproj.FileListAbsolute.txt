@@ -340,3 +340,5 @@ E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControl
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\EditMainComplaintControl.baml
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\Developer.g.cs
 E:\Web_Dev\350\SmartClinic\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\Developer.baml
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\Developer.g.cs
+H:\MED\CSE350\SmartClinic\obj\Debug\net8.0-windows\View\UserControls\Developer.baml

@@ -68,7 +68,6 @@ H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\Diagnosis
 H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\EditComplaintControl.g.cs
 H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\ExaminationSearchWindow.g.cs
 H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\FollowUpSearchWindow.g.cs
-H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\header.g.cs
 H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\HistorySearchWindow.g.cs
 H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\InvestigationSearchWindow.g.cs
 H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\MedicineCreateWindow.g.cs
@@ -98,7 +97,6 @@ H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\Diagnosis
 H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\EditComplaintControl.baml
 H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\ExaminationSearchWindow.baml
 H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\FollowUpSearchWindow.baml
-H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\header.baml
 H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\HistorySearchWindow.baml
 H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\InvestigationSearchWindow.baml
 H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\MedicineCreateWindow.baml
@@ -122,6 +120,18 @@ H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\refint\SmartClinic.dll
 H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\SmartClinic.pdb
 H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\SmartClinic.genruntimeconfig.cache
 H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\ref\SmartClinic.dll
+H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\ChangePassword.g.cs
+H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\ForgotPasswordWindow.g.cs
+H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\HomeWindow.g.cs
+H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\Developer.g.cs
+H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\EditMainComplaintControl.g.cs
+H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\Settings.g.cs
+H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\ChangePassword.baml
+H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\ForgotPasswordWindow.baml
+H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\HomeWindow.baml
+H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\Developer.baml
+H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\EditMainComplaintControl.baml
+H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\View\UserControls\Settings.baml
 H:\MED\CSE350\SmartClinic\bin\Release\net8.0-windows\SmartClinic.dll.manifest
 H:\MED\CSE350\SmartClinic\bin\Release\net8.0-windows\SmartClinic.application
 H:\MED\CSE350\SmartClinic\obj\Release\net8.0-windows\SmartClinic.dll.manifest

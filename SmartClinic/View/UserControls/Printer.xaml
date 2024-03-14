@@ -11,12 +11,13 @@
     </Window.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*" MinHeight="400"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="65*"/>
+            <RowDefinition Height="10*"/>
+
         </Grid.RowDefinitions>
 
         <!-- Assuming title, patientInfo, History, medicine, savePrint, and Footer are UserControl classes -->
@@ -651,15 +652,15 @@
                 <Border Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,1,0" VerticalAlignment="Bottom"/>
                 <!--public static string outro = "শরীরের যত্ন নিবেন। নিয়মিত ওষুধ খাবেন। পরবর্তী সাক্ষাতের সময় বাবস্থাপত্র আনবেন। প্রয়োজনে- ০১৮১৯-৮০০৩৩৩ (দুপুর ২টা-৩টা)";-->
             </Grid>
-            <Border Grid.Row="0" BorderBrush="Black" VerticalAlignment="Bottom" BorderThickness="0,1,0,0"/>
+            <Border Grid.Row="0" BorderBrush="Black" Margin="0" VerticalAlignment="Bottom" BorderThickness="0,1,0,0"/>
             <Grid Grid.Row="1" Background="White">
 
                 <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
-                    <Label x:Name="outro" FontSize="10" HorizontalAlignment="Center" Content=" ● শরীরের যত্ন নিবেন। নিয়মিত ওষুধ খাবেন।  ● পরবর্তী সাক্ষাতের সময় বাবস্থাপত্র আনবেন। ● প্রয়োজনে- 01914-478747" FontWeight="DemiBold" Foreground="Black" Margin="0,0,0,0" />
+                    <Label x:Name="outro" FontSize="10" Content=" ● শরীরের যত্ন নিবেন। নিয়মিত ওষুধ খাবেন।  ● পরবর্তী সাক্ষাতের সময় বাবস্থাপত্র আনবেন। ● প্রয়োজনে- 01914-478747" FontWeight="DemiBold" Foreground="Black" Margin="0,0,0,0"/>
                     <Label x:Name="outro2" FontSize="10" HorizontalAlignment="Center" Content=" (সকাল ১০টা - ১২টা)" Foreground="red"/>
                 </StackPanel>
             </Grid>
-            <Border Grid.Row="1" BorderBrush="Black" VerticalAlignment="Bottom" BorderThickness="0,1,0,0"/>
+            <Border Grid.Row="1" BorderBrush="Black" VerticalAlignment="Bottom" Margin="0" BorderThickness="0,1,0,0"/>
 
         </Grid>
     </Grid>

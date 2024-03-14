@@ -31,7 +31,6 @@ namespace SmartClinic.View.UserControls
             UpdateExaminationItems();
             Loaded += ExaminationSearchWindow_Loaded;
         }
-
         private void ExaminationSearchWindow_Loaded(object sender, RoutedEventArgs e)
         {
             searchTextBox.Focus();
@@ -94,9 +93,40 @@ namespace SmartClinic.View.UserControls
             }
         }
 
+        private bool isFirstCharacterProcessed = false;
+
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            SearchExamination(searchTextBox.Text);
+            searchTextBox.TextChanged -= SearchTextBox_TextChanged; // Unsubscribe from the event
+
+            string search = searchTextBox.Text;
+            if (search == "")
+            {
+                isFirstCharacterProcessed = false;
+            }
+
+            if (!isFirstCharacterProcessed && search != "")
+            {
+                if (char.IsUpper(search[0]))
+                {
+                    search = char.ToLower(search[0]) + search.Substring(1);
+                    isFirstCharacterProcessed = true; // Mark as processed
+                }
+                else if (char.IsLower(search[0]))
+                {
+                    search = char.ToUpper(search[0]) + search.Substring(1);
+                    isFirstCharacterProcessed = true; // Mark as processed
+                }
+            }
+
+            searchTextBox.Text = search;
+
+            // Restore the cursor position
+            searchTextBox.SelectionStart = searchTextBox.Text.Length;
+
+            SearchExamination(search);
+
+            searchTextBox.TextChanged += SearchTextBox_TextChanged; // Subscribe back to the event
         }
 
         private void ToggleButton_Click(object sender, RoutedEventArgs e)

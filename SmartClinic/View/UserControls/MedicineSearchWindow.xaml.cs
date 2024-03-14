@@ -392,6 +392,58 @@ namespace SmartClinic
         {
             searchTextBox.Focus();
         }
+
+        private void EnterPressed(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                MessageBox.Show(searchTextBox.Text);
+                Medicine newMed = new Medicine();
+                string searchText = searchTextBox.Text;
+
+                // Split the text using '.' as the delimiter
+                string[] parts = searchText.Split('.');
+
+                if (parts.Length >= 2)
+                {
+                    string type = parts[0].Trim(); // Type is the first part before the '.'
+
+                    // Find the index of the first occurrence of a non-numeric character in the second part
+                    int endIndex = parts[1].IndexOfAny("0123456789".ToCharArray());
+
+                    string brandName, strength;
+                    if (endIndex != -1)
+                    {
+                        // BrandName is the substring from the start to the first non-numeric character
+                        brandName = parts[1].Substring(0, endIndex).Trim();
+
+                        // Strength is the substring from the first non-numeric character to the end
+                        strength = parts[1].Substring(endIndex).Trim();
+                    }
+                    else
+                    {
+                        // If no non-numeric character is found, assume the entire second part is BrandName
+                        brandName = parts[1].Trim();
+                        strength = ""; // No strength specified
+                    }
+
+                    // Now you can assign these values to your newMed object
+                    newMed.MedicineType = type;
+                    newMed.BrandName = brandName;
+                    newMed.Strength = strength;
+                }
+                else
+                {
+                    // Handle the case where the text doesn't contain a '.'
+                    // Maybe show an error message or handle it as needed
+                }
+                MessageBox.Show(newMed.MedicineType+ newMed.BrandName+ newMed.Strength);
+                selectedMedicines.Add(newMed);
+                UpdateSelectedMedicinesListView();
+                DatabaseHelper.AddMedicine(newMed.BrandName, "","",newMed.Strength,newMed.Type);
+            }
+        }
+
         private void createMedicine_Click(object sender, RoutedEventArgs e)
         {
             if (medicinerx.Background == Brushes.LightBlue)

@@ -10,218 +10,66 @@
     <UserControl.Resources>
         <local:IsNullOrEmptyConverter x:Key="IsNullOrEmptyConverter"/>
     </UserControl.Resources>
-    <!--<Border  Background="White" BorderBrush="Black" BorderThickness="2">-->
+
     <Grid Background="White">
-        <Border BorderBrush="DarkGray" BorderThickness="1" Margin="15"/>
-        <Grid Background="#fefffe" Margin="15,5">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition x:Name="name" Height="7*"/>
-                <RowDefinition x:Name="patient" Height="4*"/>
-                <RowDefinition Height="80*"/>
-                <RowDefinition Height="4*"/>
-                <RowDefinition Height="5*"/>
-            </Grid.RowDefinitions>
-            
-            <!-- Assuming title, patientInfo, History, medicine, savePrint, and Footer are UserControl classes -->
-            <Border Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="gray">
-                <Grid Grid.Row="0" Margin="5">
-                    <Rectangle Fill="White"/>
-                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                        <Button x:Name="prescription1"  Margin="0,0,10,0" BorderBrush="{x:Null}" Background="Transparent"  Click="RefreshWholeWindow_Click">
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <Image Source="../../add-user.png" Width="20" Height="15" />
-                                <TextBlock Text="New Prescription" Margin="2,0,0,0" Foreground="Green" FontWeight="Bold"/>
-                            </StackPanel>
-                        </Button>
-                        <!--<Button x:Name="prescription1" Content="New Prescription" Margin="0,0,10,0" BorderBrush="{x:Null}" Foreground="#FF1A1840" FontWeight="Bold" Background="{x:Null}" Click="RefreshWholeWindow_Click"/>-->
-                        <!-- Add margin to create space between buttons -->
-                        <!--make the printpriview button like newprescription button with a image and text-->
-                        <Button x:Name="printpreview"  Margin="0,0,10,0" BorderBrush="{x:Null}" Background="Transparent"  Click="PrintPreview_Click">
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <Image Source="../../printer.png" Width="20" Height="15" />
-                                <TextBlock Text="Print Preview" Margin="2,0,0,0" Foreground="Blue" FontWeight="Bold"/>
-                            </StackPanel>
-                        </Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition x:Name="name" Height="7*"/>
+            <RowDefinition x:Name="patient" Height="4*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
 
-                        <!--<Button Content="Print Preview" Margin="0,0,10,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF5556C1" FontSize="12" FontWeight="Bold" Click="PrintPreview_Click"/>-->
-                        <Image x:Name="print" Source="../../search.png" Width="15" Height="15"  HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        <TextBox x:Name="menubarbox" Text="Search Prescription" GotFocus="textBox_GotFocus" LostFocus="textBox_LostFocus" Padding="2" BorderBrush="LightGray" MinHeight="20" Background="White" Width="150" Opacity="0.5" SelectionOpacity="-6" VerticalAlignment="Center" SelectionBrush="#FF7E94A5" TextChanged="PrescriptionSearchStringChanged" FontSize="12"/>
-                    </StackPanel>
-                    <Popup x:Name="PrescriptionSearchResultsPopup" PlacementTarget="{Binding ElementName=menubarbox}" Placement="Bottom" StaysOpen="False" Width="300" Margin="15" MaxHeight="350" Opened="PrescriptionSearchResultsPopup_Opened">
-                        <Border BorderThickness="1,1,2,2" Background="White" BorderBrush="LightGray">
-                            <ListView x:Name="PrescriptionSearchResultsListBox" Margin="5" BorderThickness="0" SelectionMode="Single" SelectionChanged="PrescriptionSearchResultsListBox_SelectionChanged">
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem">
-                                        <Setter Property="Margin" Value="0"/>
-                                        <Setter Property="Padding" Value="5"/>
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="ListViewItem">
-                                                    <Border x:Name="Border" BorderThickness="0,0.2,1,1" BorderBrush="LightGray" Padding="10" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" Margin="2">
-                                                        <Grid>
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="50*"/>
-                                                                <ColumnDefinition Width="50*"/>
-                                                            </Grid.ColumnDefinitions>
+        <!-- Assuming title, patientInfo, History, medicine, savePrint, and Footer are UserControl classes -->
 
-                                                            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Name}" FontWeight="Bold" Foreground="#2D2727"/>
-                                                            </StackPanel>
-
-                                                            <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding prescriptionId}" FontStyle="Italic" FontWeight="SemiBold" Foreground="#2D2727"/>
-                                                            </StackPanel>
-                                                        </Grid>
-                                                    </Border>
-
-                                                    <ControlTemplate.Triggers>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter TargetName="Border" Property="Background" Value="#E8F0FE"/>
-                                                        </Trigger>
-                                                        <Trigger Property="IsSelected" Value="True">
-                                                            <Setter TargetName="Border" Property="Background" Value="#0078D7"/>
-                                                            <Setter Property="Foreground" Value="White"/>
-                                                        </Trigger>
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-                            </ListView>
-                        </Border>
-                    </Popup>
-
-
-
-                </Grid>
-            </Border>
-            <!--title xaml-->
-            <Grid Grid.Row="1" Background="White">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50*"/>
-                    <ColumnDefinition Width="50*"/>
-                </Grid.ColumnDefinitions>
-                <Grid>
-                    <StackPanel>
-                        <Label x:Name="docname" Content="DR. ABU NOYEM MOHAMMAD" FontWeight="DemiBold" Foreground="#FF4FB14F" FontSize="25" Margin="0,0,0,-10" />
-                        <Label x:Name="docdegree" Content="MBBS, (Endocrinology &amp; Metabolism)" Margin="0,-5,0,0" FontStyle="Italic" FontWeight="DemiBold" />
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Column="1">
-                    <StackPanel HorizontalAlignment="Right">
-                        <Label x:Name="docname_bangla" Content="ডা.আবু নঈম মোহাম্মাদ" FontWeight="DemiBold" Foreground="#FF4FB14F" FontSize="25" Margin="0,0,0,-8" />
-                        <Label x:Name="docdegree_bangla" Content="এমবিবিএস, (এন্ডোক্রাইনোলজি &amp; মেটাবোলিজম)" HorizontalAlignment="Right" Margin="0,-5,0,0" FontWeight="Bold" />
-                    </StackPanel>
-                </Grid>
-            </Grid>
-
-            <!--patientInfo xaml-->
-            <Grid Background="White" Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-
-                <!-- Name Label and Add Patient Button -->
-                <StackPanel x:Name="addPatientPanel" Grid.Column="0" Orientation="Horizontal" Margin="10">
-                    <Label Content="Name :" VerticalAlignment="Center" FontWeight="Bold"/>
-                    <Button x:Name="AddPatientButton" Content="+ Add Patient" Foreground="Blue" FontWeight="Bold" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center" Click="AddPatientButton_Click"/>
-                </StackPanel>
-
-                <!-- Today's Date -->
-                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                    <Label Content="Date : " VerticalAlignment="Center" FontWeight="Bold"/>
-                    <TextBlock x:Name="todaydate" Grid.Column="1" Text="" VerticalAlignment="Center"/>
-                </StackPanel>
-
-                <!-- Patient's Age -->
-                <StackPanel x:Name="patientDetailsPanel" Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
-                    <Label Content="Age : " VerticalAlignment="Center" FontWeight="Bold"/>
-                    <TextBlock x:Name="age" Grid.Column="2" Text="" VerticalAlignment="Center"/>
-                </StackPanel>
-
-                <StackPanel x:Name="PatientIdPanel" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center">
-                    <Label Content="Id : " VerticalAlignment="Center" FontWeight="Bold"/>
-                    <TextBlock x:Name="PatientId" Grid.Column="3" Text="" VerticalAlignment="Center"/>
-                </StackPanel>
-
-                <!-- Search Patient TextBox and Button -->
-                <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                    <Button Name="search" Background="{x:Null}" BorderBrush="{x:Null}">
-                        <Image Source="../../search.png" Height="15" Width="15"/>
-                    </Button>
-                    <TextBox x:Name="searchPatientTextBox" Text="Search Patient" GotFocus="PatientTextBoxGotFocus" LostFocus="PatientTextBoxLostFocus" Width="200" Margin="0,0,10,0" Foreground="Gray" TextChanged="PatientSearchStringChanged" />
-                </StackPanel>
-            </Grid>
-
-            <Popup x:Name="searchResultsPopup" PlacementTarget="{Binding ElementName=searchPatientTextBox}" Placement="Bottom" StaysOpen="False" MinWidth="250" Margin="15" MaxHeight="350" Opened="searchResultsPopup_Opened">
-                <Border BorderThickness="0"  Background="White" BorderBrush="Wheat">
-                    <ListView x:Name="searchResultsListBox" Margin="5" BorderThickness="0" SelectionMode="Single" SelectionChanged="searchResultsListBox_SelectionChanged">
+        <Grid Grid.Row="0">
+            <Rectangle Fill="AliceBlue"/>
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button x:Name="prescription1" Content="New Prescription" Margin="0,0,10,0" BorderBrush="{x:Null}" Foreground="#FF1A1840" FontWeight="Bold" Background="{x:Null}" Click="RefreshWholeWindow_Click"/>
+                <!-- Add margin to create space between buttons -->
+                <Button Content="Print Preview" Margin="0,0,10,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF5556C1" FontSize="10" FontWeight="Bold" Click="PrintPreview_Click"/>
+                <TextBox x:Name="menubarbox" Text="Search Prescription" GotFocus="textBox_GotFocus" LostFocus="textBox_LostFocus" Padding="0,3,0,0" Height="25" Background="#FFCADAE4" Width="150" Opacity="0.5" SelectionOpacity="-6" VerticalAlignment="Center" SelectionBrush="#FF7E94A5" TextChanged="PrescriptionSearchStringChanged"/>
+            </StackPanel>
+            <Popup x:Name="PrescriptionSearchResultsPopup" PlacementTarget="{Binding ElementName=menubarbox}" Placement="Bottom" StaysOpen="False" Width="365" Margin="15" MaxHeight="350" Opened="PrescriptionSearchResultsPopup_Opened">
+                <Border BorderThickness="1" Background="White" BorderBrush="LightGray">
+                    <ListView x:Name="PrescriptionSearchResultsListBox" Margin="5" BorderThickness="0" SelectionMode="Single" SelectionChanged="PrescriptionSearchResultsListBox_SelectionChanged">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
-                                <Setter Property="Margin" Value="0,0,0,2"/>
+                                <Setter Property="Margin" Value="0"/>
+                                <Setter Property="Padding" Value="5"/>
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="ListViewItem">
-                                            <Border x:Name="Border" BorderBrush="LightGray" BorderThickness="0,.2,1,1" Padding="5" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                            <Border x:Name="Border" BorderThickness="0,0,0,1" Padding="5" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
                                                 <Grid>
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="Auto"/>
-                                                        <RowDefinition Height="Auto"/>
-                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="50*"/>
+                                                        <ColumnDefinition Width="50*"/>
+                                                    </Grid.ColumnDefinitions>
 
+                                                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Name}" FontWeight="Bold" Foreground="#2D2727"/>
+                                                    </StackPanel>
 
-                                                    <Grid>
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="*"/>
-                                                            <ColumnDefinition Width="*"/>
-                                                        </Grid.ColumnDefinitions>
-                                                        <TextBlock Text="{Binding Name}"  Margin="2" FontWeight="Bold" Foreground="#DA2D2727" HorizontalAlignment="Stretch"/>
-                                                        <!--<TextBlock Text="{Binding Age}"  Grid.Column="1" FontWeight="Bold" Foreground="#DA2D2727" HorizontalAlignment="Right" Margin="2"/>-->
-                                                        <TextBlock Grid.Column="1" HorizontalAlignment="Right" Margin="5,0">
-                                                            <Run Text="Age : " FontWeight="Bold" Foreground="#DA2D2727"/>
-                                                            <Run Text="{Binding Age}" FontWeight="Bold" Foreground="#DA2D2727"/>
-                                                        </TextBlock>
-
-                                                        <!--<TextBlock Text="{Binding Blood}" Grid.Column="2" Margin="2,20,0,0" FontWeight="Bold" Foreground="#DA2D2727"/>-->
-
-                                                    </Grid>
-                                                    <Grid Grid.Row="1">
-                                                        <!--show phone number and blood group-->
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="*"/>
-                                                            <ColumnDefinition Width="*"/>
-                                                        </Grid.ColumnDefinitions>
-                                                        <TextBlock Grid.Column="0">
-                                                            <Run Text="Phone : " FontWeight="Bold" Foreground="#DA2D2727"/>
-                                                            <Run Text="{Binding Phone}" FontWeight="Bold" Foreground="#DA2D2727"/>
-                                                        </TextBlock>
-                                                        <!--<TextBlock Text="{Binding Phone}"   FontStyle="Italic" Grid.Row="1" FontWeight="SemiBold" Foreground="#AA2D2727"/>-->
-                                                        <!--<TextBlock Text="{Binding Blood}" Grid.Column="1" FontWeight="Bold" Foreground="#DA2D2727" HorizontalAlignment="Right" Margin="2"/>-->
-                                                        <TextBlock Grid.Column="1" HorizontalAlignment="Right">
-                                                            <Run Text="Blood : " FontWeight="Bold" Foreground="#DA2D2727"/>
-                                                            <Run Text="{Binding Blood}" FontWeight="Bold" Foreground="#DA2D2727"/>
-                                                        </TextBlock>
-
-                                                    </Grid>
-
-                                                    <!--<TextBlock Text="{Binding Phone}" Margin="2,-15,0,0" FontStyle="Italic" Grid.Row="1" FontWeight="SemiBold" Foreground="#AA2D2727"/>-->
+                                                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding prescriptionId}" FontStyle="Italic" FontWeight="SemiBold" Foreground="#2D2727"/>
+                                                    </StackPanel>
                                                 </Grid>
                                             </Border>
+
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="True">
                                                     <Setter TargetName="Border" Property="Background" Value="#E8F0FE"/>
+                                                </Trigger>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter TargetName="Border" Property="Background" Value="#0078D7"/>
+                                                    <Setter Property="Foreground" Value="White"/>
                                                 </Trigger>
                                             </ControlTemplate.Triggers>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
-                                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
                             </Style>
                         </ListView.ItemContainerStyle>
                     </ListView>
@@ -229,36 +77,613 @@
             </Popup>
 
 
-            <Border Grid.Row="2" BorderBrush="Black" BorderThickness="0,1,0,0"/>
+
+        </Grid>
+
+        <!--title xaml-->
+        <Grid Grid.Row="1" Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <StackPanel>
+                    <Label x:Name="docname" Content="DR. ABU NOYEM MOHAMMAD" FontWeight="DemiBold" Foreground="#FF4FB14F" FontSize="25" Margin="0,0,0,-10" />
+                    <Label x:Name="docdegree" Content="MBBS, (Endocrinology &amp; Metabolism)" Margin="0,-5,0,0" FontStyle="Italic" FontWeight="DemiBold" />
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="1">
+                <StackPanel HorizontalAlignment="Right">
+                    <Label x:Name="docname_bangla" Content="ডা.আবু নঈম মোহাম্মাদ" FontWeight="DemiBold" Foreground="#FF4FB14F" FontSize="25" Margin="0,0,0,-8" />
+                    <Label x:Name="docdegree_bangla" Content="এমবিবিএস, (এন্ডোক্রাইনোলজি &amp; মেটাবোলিজম)" HorizontalAlignment="Right" Margin="0,-5,0,0" FontWeight="Bold" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <!--patientInfo xaml-->
+        <Grid Background="White" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Name Label and Add Patient Button -->
+            <StackPanel x:Name="addPatientPanel" Grid.Column="0" Orientation="Horizontal" Margin="10">
+                <Label Content="Name :" VerticalAlignment="Center" FontWeight="Bold"/>
+                <Button x:Name="AddPatientButton" Content="+ Add Patient" Foreground="Blue" FontWeight="Bold" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center" Click="AddPatientButton_Click"/>
+            </StackPanel>
+
+            <!-- Today's Date -->
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <Label Content="Date : " VerticalAlignment="Center" FontWeight="Bold"/>
+                <TextBlock x:Name="todaydate" Grid.Column="1" Text="" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Patient's Age -->
+            <StackPanel x:Name="patientDetailsPanel" Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                <Label Content="Age : " VerticalAlignment="Center" FontWeight="Bold"/>
+                <TextBlock x:Name="age" Grid.Column="2" Text="" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel x:Name="PatientIdPanel" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center">
+                <Label Content="Id : " VerticalAlignment="Center" FontWeight="Bold"/>
+                <TextBlock x:Name="PatientId" Grid.Column="3" Text="" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Search Patient TextBox and Button -->
+            <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Button Name="search" Background="{x:Null}" BorderBrush="{x:Null}">
+                    <Image Source="../../search.png" Height="15" Width="15"/>
+                </Button>
+                <TextBox x:Name="searchPatientTextBox" Text="Search Patient" GotFocus="PatientTextBoxGotFocus" LostFocus="PatientTextBoxLostFocus" Width="200" Margin="0,0,10,0" Foreground="Gray" TextChanged="PatientSearchStringChanged" />
+            </StackPanel>
+        </Grid>
+
+        <Popup x:Name="searchResultsPopup" PlacementTarget="{Binding ElementName=searchPatientTextBox}" Placement="Bottom" StaysOpen="False" Width="350" Margin="15" MaxHeight="350" Opened="searchResultsPopup_Opened">
+            <Border BorderThickness="0"  Background="White" BorderBrush="Wheat">
+                <ListView x:Name="searchResultsListBox" Margin="5" BorderThickness="0" SelectionMode="Single" SelectionChanged="searchResultsListBox_SelectionChanged">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Margin" Value="0,0,0,2"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <Border x:Name="Border" BorderBrush="LightGray" BorderThickness="0,0,0,1" Padding="2" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
 
 
-            <Grid x:Name="prescription" Grid.Row="3">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="80*"/>
-                </Grid.ColumnDefinitions>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Text="{Binding Name}"  Margin="2" FontWeight="Bold" Foreground="#DA2D2727" HorizontalAlignment="Stretch"/>
+                                                    <TextBlock Text="{Binding Age}" Margin="2" Grid.Column="1" FontWeight="Bold" Foreground="#DA2D2727" HorizontalAlignment="Stretch"/>
+
+                                                    <TextBlock Text="{Binding Blood}" Grid.Column="2" Margin="2,20,0,0" FontWeight="Bold" Foreground="#DA2D2727"/>
+
+                                                </Grid>
 
 
-                <!--history xaml-->
-                <Grid Background="White" x:Name="leftgrid" Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="5*"/>
-                        <RowDefinition Height="5*"/>
-                        <RowDefinition Height="5*"/>
-                        <RowDefinition Height="5*"/>
-                        <RowDefinition Height="5*"/>
-                        <RowDefinition Height="15*"/>
-                    </Grid.RowDefinitions>
+                                                <TextBlock Text="{Binding Phone}" Margin="2,-15,0,0" FontStyle="Italic" Grid.Row="1" FontWeight="SemiBold" Foreground="#AA2D2727"/>
+                                            </Grid>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Border" Property="Background" Value="#E8F0FE"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </Border>
+        </Popup>
 
-                    <!-- ChiefComplaint -->
-                    <Grid>
-                        <StackPanel Margin="10,12,10,0">
-                            <Button x:Name="AddComplaintButton" Content="Chief Complaint +" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,0" Background="Transparent" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="AddComplaint_Click"/>
 
-                            <ListView x:Name="selectedComplaintsListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
+        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="0,1,0,0"/>
+
+
+        <Grid x:Name="prescription" Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="80*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <!--history xaml-->
+            <Grid Background="White" x:Name="leftgrid" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="15*"/>
+                </Grid.RowDefinitions>
+
+                <!-- ChiefComplaint -->
+                <Grid>
+                    <StackPanel Margin="10,12,10,0">
+                        <Button x:Name="AddComplaintButton" Content="Chief Complaint +" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,0" Background="Transparent" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="AddComplaint_Click"/>
+
+                        <ListView x:Name="selectedComplaintsListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
+                                            <TextBlock Text="{Binding FormattedComplaint}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownComplaint"/>
+
+                                            <Button x:Name="deleteComplaintFromPrescription" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveComplaint_Click">
+                                                <Image Source="../../circle.png" Width="15" Height="15"/>
+                                            </Button>
+                                        </Grid>
+                                    </Border>
+
+
+
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Margin" Value="0,0,0,1"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="0 0 0 0">
+                    <StackPanel Margin="10,0">
+                        <!-- Add History Button -->
+                        <Button x:Name="AddHistoryButton" Content="History +" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,0" Background="Transparent" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="AddHistory_Click"/>
+
+                        <!-- History ListView -->
+                        <ListView x:Name="historyListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!-- First Row -->
                                         <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
+                                                <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0,5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownHistory"/>
+                                                <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownHistory">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Text" Value="{Binding Note}" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
+                                                                    <Setter Property="Text" Value="{Binding Note}" />
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
+                                                                    <Setter Property="Margin" Value="0,-30,0,0"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+
+                                                <Button x:Name="deleteHistory" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveHistory_Click">
+                                                    <Image Source="../../circle.png" Width="15" Height="15"/>
+                                                </Button>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+
+
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Margin" Value="0,0,0,1"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <StackPanel Margin="10,0">
+                        <!-- Add Examination Button -->
+                        <Button x:Name="AddExaminationButton" Content="On Examination +" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,0" Background="Transparent" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="AddExamination_Click"/>
+
+                        <!-- Examination ListView -->
+                        <ListView x:Name="examinationListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!-- First Row -->
+                                        <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
+                                                <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0,5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownExamination"/>
+                                                <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownExamination">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Text" Value="{Binding Note}" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
+                                                                    <Setter Property="Text" Value="{Binding Note}" />
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
+                                                                    <Setter Property="Margin" Value="0,-30,0,0"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+
+                                                <Button x:Name="deleteExamination" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveExamination_Click">
+                                                    <Image Source="../../circle.png" Width="15" Height="15"/>
+                                                </Button>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Margin" Value="0,0,0,1"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </StackPanel>
+
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <StackPanel Margin="10,0">
+                        <Button x:Name="AddInvestigationButton" Content="Investigation +" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,0" Background="Transparent" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="AddInvestigation_Click"/>
+
+                        <ListView x:Name="selectedInvestigationsListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!-- First Row -->
+                                        <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
+                                                <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0,5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownInvestigation"/>
+                                                <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownInvestigation">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Text" Value="{Binding Note}" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
+                                                                    <Setter Property="Text" Value="{Binding Note}" />
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
+                                                                    <Setter Property="Margin" Value="0,-30,0,0"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+
+                                                <Button x:Name="deleteInvestigation" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveInvestigation_Click">
+                                                    <Image Source="../../circle.png" Width="15" Height="15"/>
+                                                </Button>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Margin" Value="0,0,0,1"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="4">
+                    <StackPanel Margin="10,0">
+                        <Button x:Name="AddDiagnosisButton" Content="Diagnosis +" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,0" Background="Transparent" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="AddDiagnosis_Click"/>
+
+                        <ListView x:Name="selectedDiagnosisListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!-- First Row -->
+                                        <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
+                                                <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0,5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownDiagnosis"/>
+                                                <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownDiagnosis">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Text" Value="{Binding Note}" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
+                                                                    <Setter Property="Text" Value="{Binding Note}" />
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
+                                                                    <Setter Property="Margin" Value="0,-30,0,0"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+
+                                                <Button x:Name="deleteDiagnosis" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveDiagnosis_Click">
+                                                    <Image Source="../../circle.png" Width="15" Height="15"/>
+                                                </Button>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Margin" Value="0,0,0,1"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="5">
+                    <StackPanel Margin="10,0">
+                        <Button x:Name="AddTreatmentButton" Content="Treatment Plan +" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,0" Background="Transparent" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="AddTreatment_Click"/>
+
+                        <ListView x:Name="selectedTreatmentListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!-- First Row -->
+                                        <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
+                                                <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0,5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownTreatment"/>
+                                                <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownTreatment">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Text" Value="{Binding Note}" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
+                                                                    <Setter Property="Text" Value="{Binding Note}" />
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
+                                                                    <Setter Property="Margin" Value="0,-30,0,0"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+
+                                                <Button x:Name="deleteTreatment" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveTreatment_Click">
+                                                    <Image Source="../../circle.png" Width="15" Height="15"/>
+                                                </Button>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Margin" Value="0,0,0,1"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </StackPanel>
+                </Grid>
+
+            </Grid>
+
+            <!--medicine xaml-->
+            <Grid Background="White" x:Name="rightgrid" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+                <Grid >
+                    <StackPanel Margin="10,12,10,0">
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="Rx" Content="Rx   + " HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Margin="10" Background="Transparent" BorderBrush="{x:Null}" Click="Rx_Click"/>
+                            <Button x:Name="Translate" Content="(Translate)" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Margin="10" Background="Transparent" BorderBrush="{x:Null}" Click="Translate_Click"/>
+                        </StackPanel>
+
+                        <ListView x:Name="selectedMedicinesListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="LightGray" Margin="0,2" Padding="1" CornerRadius="5">
+                                        <Grid>
+                                            <!-- Serial Number and DisplayText in the same line -->
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock x:Name="serialNumberTextBlock" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Medium"  FontSize="14"/>
+                                                <TextBlock x:Name="dotdot" Grid.Column="1" Text=". " HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Medium"  FontSize="14"/>
+                                                <TextBlock Text="{Binding MedicineName}" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Medium" FontSize="14" Margin="10,0"/>
+                                                <Button BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveButton_Click">
+                                                    <Image Source="../../circle.png" Width="15" Height="15"/>
+                                                </Button>
+                                            </Grid>
+
+                                            <TextBlock Grid.Row="1" Margin="25,5,0,0" FontWeight="Medium" FontSize="10">
+                                                    <Run Text="{Binding formatedDose, Mode=OneWay}" FontWeight="Bold" FontSize="12"/>
+                                                    <Run Text="                 " FontWeight="Bold" FontSize="12"/>
+                                                    <Run Text="{Binding MakeNote, Mode=OneWay}"/>
+                                            </TextBlock>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Margin" Value="0,0,0,5"/>
+                                    <EventSetter Event="Loaded" Handler="ListViewItem_Loaded"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <StackPanel Margin="10,0">
+                        <Button x:Name="Advices" Content="Advices +" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" Background="Transparent" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="Advices_Click"/>
+
+                        <ListView x:Name="selectedAdvicesListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="LightGray" Margin="0,1" Padding="1" CornerRadius="5">
+                                        <Grid>
+                                            <Grid Height="20">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock x:Name="dot" Text="." Margin="0,-24,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
+                                                <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Medium" FontSize="14" Margin="5,0" />
+                                                <Button BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveButton_Click">
+                                                    <Image Source="../../circle.png" Width="15" Height="15"/>
+                                                </Button>
+                                            </Grid>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Margin" Value="0,0,0,1"/>
+                                    <EventSetter Event="Loaded" Handler="ListViewItem_Loaded"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </StackPanel>
+                </Grid>
+
+
+
+                <Grid Grid.Row="2">
+                    <StackPanel Margin="10,0">
+                        <Button x:Name="AddFollowUpButton" Content="Follow Up +" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,0" Background="Transparent" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="AddFollowUp_Click"/>
+
+                        <ListView x:Name="selectedFollowUpListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5" Grid.Row="0">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
@@ -267,570 +692,103 @@
                                                 </Grid.ColumnDefinitions>
 
                                                 <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
-                                                <TextBlock Text="{Binding FormattedComplaint}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownComplaint"/>
-
-                                                <Button x:Name="deleteComplaintFromPrescription" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveComplaint_Click">
+                                                <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0" />
+                                                <Button x:Name="deleteFollowUpFromPrescription" BorderThickness="0" Background="Transparent" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveButton_Click">
                                                     <Image Source="../../circle.png" Width="15" Height="15"/>
                                                 </Button>
                                             </Grid>
                                         </Border>
-
-
-
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem">
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="Margin" Value="0,0,0,1"/>
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-                            </ListView>
-                        </StackPanel>
-                    </Grid>
-
-                    <Grid Grid.Row="1" Margin="0 0 0 0">
-                        <StackPanel Margin="10,0">
-                            <!-- Add History Button -->
-                            <Button x:Name="AddHistoryButton" Content="History +" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,0" Background="Transparent" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="AddHistory_Click"/>
-
-                            <!-- History ListView -->
-                            <ListView x:Name="historyListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
-
-                                            <!-- First Row -->
-                                            <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
-                                                    <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0,5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownHistory"/>
-                                                    <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownHistory">
-                                                        <TextBlock.Style>
-                                                            <Style TargetType="TextBlock">
-                                                                <Setter Property="Text" Value="{Binding Note}" />
-                                                                <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
-                                                                        <Setter Property="Text" Value="{Binding Note}" />
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
-                                                                        <Setter Property="Margin" Value="0,-30,0,0"/>
-                                                                    </DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </TextBlock.Style>
-                                                    </TextBlock>
-
-                                                    <Button x:Name="deleteHistory" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveHistory_Click">
-                                                        <Image Source="../../circle.png" Width="15" Height="15"/>
-                                                    </Button>
-                                                </Grid>
-                                            </Border>
-                                        </Grid>
-
-
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem">
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="Margin" Value="0,0,0,1"/>
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-                            </ListView>
-                        </StackPanel>
-                    </Grid>
-
-                    <Grid Grid.Row="2">
-                        <StackPanel Margin="10,0">
-                            <!-- Add Examination Button -->
-                            <Button x:Name="AddExaminationButton" Content="On Examination +" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,0" Background="Transparent" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="AddExamination_Click"/>
-
-                            <!-- Examination ListView -->
-                            <ListView x:Name="examinationListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
-
-                                            <!-- First Row -->
-                                            <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
-                                                    <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0,5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownExamination"/>
-                                                    <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownExamination">
-                                                        <TextBlock.Style>
-                                                            <Style TargetType="TextBlock">
-                                                                <Setter Property="Text" Value="{Binding Note}" />
-                                                                <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
-                                                                        <Setter Property="Text" Value="{Binding Note}" />
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
-                                                                        <Setter Property="Margin" Value="0,-30,0,0"/>
-                                                                    </DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </TextBlock.Style>
-                                                    </TextBlock>
-
-                                                    <Button x:Name="deleteExamination" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveExamination_Click">
-                                                        <Image Source="../../circle.png" Width="15" Height="15"/>
-                                                    </Button>
-                                                </Grid>
-                                            </Border>
-                                        </Grid>
-
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem">
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="Margin" Value="0,0,0,1"/>
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-                            </ListView>
-                        </StackPanel>
-
-                    </Grid>
-
-                    <Grid Grid.Row="3">
-                        <StackPanel Margin="10,0">
-                            <Button x:Name="AddInvestigationButton" Content="Investigation +" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,0" Background="Transparent" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="AddInvestigation_Click"/>
-
-                            <ListView x:Name="selectedInvestigationsListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
-
-                                            <!-- First Row -->
-                                            <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
-                                                    <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0,5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownInvestigation"/>
-                                                    <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownInvestigation">
-                                                        <TextBlock.Style>
-                                                            <Style TargetType="TextBlock">
-                                                                <Setter Property="Text" Value="{Binding Note}" />
-                                                                <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
-                                                                        <Setter Property="Text" Value="{Binding Note}" />
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
-                                                                        <Setter Property="Margin" Value="0,-30,0,0"/>
-                                                                    </DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </TextBlock.Style>
-                                                    </TextBlock>
-
-                                                    <Button x:Name="deleteInvestigation" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveInvestigation_Click">
-                                                        <Image Source="../../circle.png" Width="15" Height="15"/>
-                                                    </Button>
-                                                </Grid>
-                                            </Border>
-                                        </Grid>
-
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem">
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="Margin" Value="0,0,0,1"/>
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-                            </ListView>
-                        </StackPanel>
-                    </Grid>
-
-                    <Grid Grid.Row="4">
-                        <StackPanel Margin="10,0">
-                            <Button x:Name="AddDiagnosisButton" Content="Diagnosis +" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,0" Background="Transparent" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="AddDiagnosis_Click"/>
-
-                            <ListView x:Name="selectedDiagnosisListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
-
-                                            <!-- First Row -->
-                                            <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
-                                                    <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0,5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownDiagnosis"/>
-                                                    <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownDiagnosis">
-                                                        <TextBlock.Style>
-                                                            <Style TargetType="TextBlock">
-                                                                <Setter Property="Text" Value="{Binding Note}" />
-                                                                <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
-                                                                        <Setter Property="Text" Value="{Binding Note}" />
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
-                                                                        <Setter Property="Margin" Value="0,-30,0,0"/>
-                                                                    </DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </TextBlock.Style>
-                                                    </TextBlock>
-
-                                                    <Button x:Name="deleteDiagnosis" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveDiagnosis_Click">
-                                                        <Image Source="../../circle.png" Width="15" Height="15"/>
-                                                    </Button>
-                                                </Grid>
-                                            </Border>
-                                        </Grid>
-
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem">
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="Margin" Value="0,0,0,1"/>
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-                            </ListView>
-                        </StackPanel>
-                    </Grid>
-                    <Grid Grid.Row="5">
-                        <StackPanel Margin="10,0">
-                            <Button x:Name="AddTreatmentButton" Content="Treatment Plan +" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,0" Background="Transparent" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="AddTreatment_Click"/>
-
-                            <ListView x:Name="selectedTreatmentListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
-
-                                            <!-- First Row -->
-                                            <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
-                                                    <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0,5,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownTreatment"/>
-                                                    <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownTreatment">
-                                                        <TextBlock.Style>
-                                                            <Style TargetType="TextBlock">
-                                                                <Setter Property="Text" Value="{Binding Note}" />
-                                                                <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
-                                                                        <Setter Property="Text" Value="{Binding Note}" />
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Note, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
-                                                                        <Setter Property="Margin" Value="0,-30,0,0"/>
-                                                                    </DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </TextBlock.Style>
-                                                    </TextBlock>
-
-                                                    <Button x:Name="deleteTreatment" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveTreatment_Click">
-                                                        <Image Source="../../circle.png" Width="15" Height="15"/>
-                                                    </Button>
-                                                </Grid>
-                                            </Border>
-                                        </Grid>
-
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem">
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="Margin" Value="0,0,0,1"/>
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-                            </ListView>
-                        </StackPanel>
-                    </Grid>
-
-                </Grid>
-
-                <!--medicine xaml-->
-                <Grid Background="White" x:Name="rightgrid" Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40*"/>
-                        <RowDefinition Height="10*"/>
-                        <RowDefinition Height="10*"/>
-                        <RowDefinition Height="10*"/>
-                        <RowDefinition Height="10*"/>
-                    </Grid.RowDefinitions>
-                    <Grid >
-                        <StackPanel Margin="10,12,10,0">
-                            <StackPanel Orientation="Horizontal">
-                                <Button x:Name="Rx" Content="Rx   + " HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Margin="10" Background="Transparent" BorderBrush="{x:Null}" Click="Rx_Click"/>
-                                <Button x:Name="Translate" Content="(Translate)" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Margin="10" Background="Transparent" BorderBrush="{x:Null}" Click="Translate_Click"/>
-                            </StackPanel>
-
-                            <ListView x:Name="selectedMedicinesListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Border BorderBrush="LightGray" Margin="0,2" Padding="1" CornerRadius="5">
-                                            <Grid>
-                                                <!-- Serial Number and DisplayText in the same line -->
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto"/>
-                                                    <RowDefinition Height="Auto"/>
-                                                </Grid.RowDefinitions>
-
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <TextBlock x:Name="serialNumberTextBlock" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Medium"  FontSize="14"/>
-                                                    <TextBlock x:Name="dotdot" Grid.Column="1" Text=". " HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Medium"  FontSize="14"/>
-                                                    <TextBlock Text="{Binding MedicineName}" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Medium" FontSize="14" Margin="10,0"/>
-                                                    <Button BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveButton_Click">
-                                                        <Image Source="../../circle.png" Width="15" Height="15"/>
-                                                    </Button>
-                                                </Grid>
-
-                                                <TextBlock Grid.Row="1" Margin="25,5,0,0" FontWeight="Medium" FontSize="10">
-                                                    <Run Text="{Binding formatedDose, Mode=OneWay}" FontWeight="Bold" FontSize="12"/>
-                                                    <Run Text="                 " FontWeight="Bold" FontSize="12"/>
-                                                    <Run Text="{Binding MakeNote, Mode=OneWay}"/>
-                                                </TextBlock>
-                                            </Grid>
-                                        </Border>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem">
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="Margin" Value="0,0,0,5"/>
-                                        <EventSetter Event="Loaded" Handler="ListViewItem_Loaded"/>
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-                            </ListView>
-                        </StackPanel>
-                    </Grid>
-
-                    <Grid Grid.Row="1">
-                        <StackPanel Margin="10,0">
-                            <Button x:Name="Advices" Content="Advices +" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" Background="Transparent" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="Advices_Click"/>
-
-                            <ListView x:Name="selectedAdvicesListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Border BorderBrush="LightGray" Margin="0,1" Padding="1" CornerRadius="5">
-                                            <Grid>
-                                                <Grid Height="20">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <TextBlock x:Name="dot" Text="." Margin="0,-24,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
-                                                    <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Medium" FontSize="14" Margin="5,0" />
-                                                    <Button BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveButton_Click">
-                                                        <Image Source="../../circle.png" Width="15" Height="15"/>
-                                                    </Button>
-                                                </Grid>
-                                            </Grid>
-                                        </Border>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem">
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="Margin" Value="0,0,0,1"/>
-                                        <EventSetter Event="Loaded" Handler="ListViewItem_Loaded"/>
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-                            </ListView>
-                        </StackPanel>
-                    </Grid>
-
-
-
-                    <Grid Grid.Row="2">
-                        <StackPanel Margin="10,0">
-                            <Button x:Name="AddFollowUpButton" Content="Follow Up +" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,0" Background="Transparent" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="AddFollowUp_Click"/>
-
-                            <ListView x:Name="selectedFollowUpListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
-
-                                            <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5" Grid.Row="0">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
-                                                    <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0" />
-                                                    <Button x:Name="deleteFollowUpFromPrescription" BorderThickness="0" Background="Transparent" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveButton_Click">
-                                                        <Image Source="../../circle.png" Width="15" Height="15"/>
-                                                    </Button>
-                                                </Grid>
-                                            </Border>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem">
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="Margin" Value="0,0,0,1"/>
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-                            </ListView>
-                        </StackPanel>
-                    </Grid>
-                    <Grid Grid.Row="3">
-                        <StackPanel Margin="10,0">
-                            <Button x:Name="AddSpecialNoteButton" Content="Special Note +" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,0" Background="Transparent" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="AddSpecialNote_Click"/>
-
-                            <ListView x:Name="selectedSpecialNoteListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
-
-                                            <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5" Grid.Row="0">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
-                                                    <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0" />
-                                                    <Button x:Name="deleteSpecialNoteFromPrescription" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveButton_Click">
-                                                        <Image Source="../../circle.png" Width="15" Height="15"/>
-                                                    </Button>
-                                                </Grid>
-                                            </Border>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem">
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="Margin" Value="0,0,0,1"/>
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-                            </ListView>
-                        </StackPanel>
-                    </Grid>
-                </Grid>
-
-                <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,0,0"/>
-            </Grid>
-
-            <Border Grid.Row="3" BorderBrush="Black" BorderThickness="0,1,0,0"/>
-
-            <!--savePrint xaml-->
-            <Grid x:Name="save" Grid.Row="4" Height="25">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50*"/>
-
-                    <ColumnDefinition Width="50*"/>
-                </Grid.ColumnDefinitions>
-                <Grid>
-                    <Button Content="Save" Style="{StaticResource SaveButtonStyle}" Click="SavePrescription_Click"/>
-                </Grid>
-                <Grid Grid.Column="1">
-                    <Rectangle Fill="LightGreen"/>
-                    <Button Content="Save &amp; Print" Style="{StaticResource SaveButtonStyle}" Click="PrintPrescription_Click" />
-                </Grid>
-
-            </Grid>
-
-            <!--footer xaml-->
-            <Grid x:Name="footer" Grid.Row="5">
-                <StackPanel>
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        <Label Content="Registered To " FontWeight="DemiBold"/>
-                        <Label x:Name="DoctorsName" Content="Dr. Abu Noyem Mohammad" FontWeight="Bold"/>
-                        <Label x:Name="Mobile" Content="+8801619800333" FontWeight="Bold"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Margin" Value="0,0,0,1"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
                     </StackPanel>
-                    <TextBlock FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">
+                </Grid>
+                <Grid Grid.Row="3">
+                    <StackPanel Margin="10,0">
+                        <Button x:Name="AddSpecialNoteButton" Content="Special Note +" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,0" Background="Transparent" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Click="AddSpecialNote_Click"/>
+
+                        <ListView x:Name="selectedSpecialNoteListView" Background="White" Margin="20,1,1,0" BorderBrush="{x:Null}" BorderThickness="1">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Border BorderBrush="White" Margin="0,1" Padding="1" CornerRadius="5" Grid.Row="0">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock x:Name="dot" Text="." Margin="0,-26,1,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
+                                                <TextBlock Text="{Binding Content}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0" />
+                                                <Button x:Name="deleteSpecialNoteFromPrescription" BorderThickness="0" Background="Transparent" Foreground="Red" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="{x:Null}" Click="RemoveButton_Click">
+                                                    <Image Source="../../circle.png" Width="15" Height="15"/>
+                                                </Button>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Margin" Value="0,0,0,1"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+
+            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,0,0"/>
+        </Grid>
+
+        <Border Grid.Row="3" BorderBrush="Black" BorderThickness="0,1,0,0"/>
+
+        <!--savePrint xaml-->
+        <Grid x:Name="save" Grid.Row="4" Height="25">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Button Content="Save" Style="{StaticResource SaveButtonStyle}" Click="SavePrescription_Click"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Rectangle Fill="LightGreen"/>
+                <Button Content="Save &amp; Print" Style="{StaticResource SaveButtonStyle}" Click="PrintPrescription_Click" />
+            </Grid>
+
+        </Grid>
+
+        <!--footer xaml-->
+        <Grid x:Name="footer" Grid.Row="5">
+            <StackPanel>
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Label Content="Registered To " FontWeight="DemiBold"/>
+                    <Label x:Name="DoctorsName" Content="Dr. Abu Noyem Mohammad" FontWeight="Bold"/>
+                    <Label x:Name="Mobile" Content="+8801619800333" FontWeight="Bold"/>
+                </StackPanel>
+                <TextBlock FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Run Text=" &#169;"/>
         <Run Text="All rights reserved to SmartClinic"/>
-                    </TextBlock>
-                </StackPanel>
-            </Grid>
+                </TextBlock>
+            </StackPanel>
         </Grid>
-        <Border/>
     </Grid>
-    <!--</Border>-->
 </UserControl>

@@ -344,7 +344,7 @@ namespace SmartClinic
         public string Note { get; set; }
         public string Schedule { get; set; }
         public string Unit { get; set; }
-        public int Duration { get; set; }
+        public string Duration { get; set; }
         public string Details { get; set; }
 
 
@@ -495,7 +495,7 @@ namespace SmartClinic
                 string morningDosage = MorningDose > 0 ? $"সকালে  {FormatDosage(MorningDose)} {selectedUnit}" : "";
                 string noonDosage = NoonDose > 0 ? $"দুপুরে  {FormatDosage(NoonDose)} {selectedUnit}" : "";
                 string nightDosage = NightDose > 0 ? $"রাতে  {FormatDosage(NightDose)} {selectedUnit}" : "";
-                string duration = Duration > 0 ? $"{Duration} {selectedDuration} " : "";
+                string duration = (Duration != "") ? $"{Duration} {selectedDuration} " : "";
                 string secheduleText = $"{morningDosage} {noonDosage} {nightDosage}";
 
                 // Check if "After Eating" is selected
@@ -507,7 +507,7 @@ namespace SmartClinic
 
 
                 // Combine all dosages and notes
-                return $"{(MorningDose + NoonDose + NightDose > 0 ? secheduleText + " করে " : "")}{afterEatingNote}{beforeEatingNote}{duration}{Note}";
+                return $"{(MorningDose + NoonDose + NightDose > 0 ? secheduleText + " করে " : "")}{afterEatingNote}{beforeEatingNote}{(duration=="" ? "": "("+duration+")")}{Note}";
             }
             set
             {
@@ -530,7 +530,7 @@ namespace SmartClinic
                 fractionalPartString = fractionalPart.ToString();
 
             // Combine the whole part and formatted fractional part
-            string wholePartString = wholePart == 0 ? "0" : wholePart.ToString();
+            string wholePartString = (wholePart == 0 && fractionalPart !=0) ? "" : wholePart.ToString();
 
             // Adjust formatting based on the value of fractionalPart
             string formattedDosage = fractionalPart == 0 ? wholePartString : $"{wholePartString}{fractionalPartString}";
