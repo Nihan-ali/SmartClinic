@@ -20,6 +20,7 @@
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("logo.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("logo1.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("logo2.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("patienicon.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("patient.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("printer.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("rx.png")]
