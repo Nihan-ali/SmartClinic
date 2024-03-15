@@ -1690,6 +1690,7 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
                 throw;
             }
         }
+
         public static List<PatientVisit> SearchPrescriptionByPrescriptionId(Int64 prescriptionid)
         {
             try
@@ -2508,7 +2509,7 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
         }
 
 
-        public static bool SavePrescription(PatientVisit prescription)
+        public static Int64 SavePrescription(PatientVisit prescription)
         {
             try
             {
@@ -2559,11 +2560,11 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
                                 insertCommand.ExecuteNonQuery();
                             }
                             UpdatePatientLastVisit(prescription.Id, prescription.visit);
-                            return true;
+                            return prescription.prescriptionId;
                         }
                         else
                         {
-                            return false;
+                            return -1;
                         }
                     }
                 }

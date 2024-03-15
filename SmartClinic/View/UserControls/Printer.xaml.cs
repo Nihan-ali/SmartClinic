@@ -127,7 +127,7 @@ namespace SmartClinic.View.UserControls
             {
                 PatientName.Text = newPatient.Name;
                 age.Text = newPatient.Age;
-                PrescriptionId.Text = newPatient.Id.ToString();
+                PrescriptionId.Text = prescriptionId;
             }
         }
         private void UpdateComplaintListViews()
@@ -272,11 +272,12 @@ namespace SmartClinic.View.UserControls
             }
         }
         public int offsett=0;
-
-        public void PrintButton_Click(Patient patient, string todaydate, List<Complaint> complaints, List<history> histories, List<Examination> examinations, List<Investigation> investigations, List<Diagnosis> diagnoses, List<Treatment> treatments, List<DummyMedicine> medicines, List<Advice> advices, List<FollowUp> followUps, List<SpecialNote> specialNotes, bool second, int offset)
+        public string prescriptionId;
+        public void PrintButton_Click(Int64 presid, Patient patient, string todaydate, List<Complaint> complaints, List<history> histories, List<Examination> examinations, List<Investigation> investigations, List<Diagnosis> diagnoses, List<Treatment> treatments, List<DummyMedicine> medicines, List<Advice> advices, List<FollowUp> followUps, List<SpecialNote> specialNotes, bool second, int offset)
         {
             newPatient = patient;
             dayyt = todaydate;
+            prescriptionId = presid.ToString();
             selectedComplaints = complaints;
             selectedHistories = histories;
             selectedExaminations = examinations;
@@ -297,9 +298,6 @@ namespace SmartClinic.View.UserControls
             PrintDialog printDialog = new PrintDialog();
 
             PrintTicket printTicket = printDialog.PrintTicket;
-            printTicket.PageMediaSize = new PageMediaSize(PageMediaSizeName.ISOA4);
-
-
             printDialog.PrintVisual(this, "Prescription");
         }
 
