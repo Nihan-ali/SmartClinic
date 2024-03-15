@@ -1,27 +1,45 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace SmartClinic.View.UserControls
 {
-    /// <summary>
-    /// Interaction logic for Developer.xaml
-    /// </summary>
     public partial class Developer : Window
     {
         public Developer()
         {
             InitializeComponent();
         }
+
+       /* private void DeveloperButton1_Click(object sender, RoutedEventArgs e)
+        {
+            // Open the LinkedIn page for Md. Nihan Ali
+            OpenLinkedInPage("https://www.linkedin.com/in/md-nihan-ali-7476732b0/");
+        }
+
+        private void DeveloperButton2_Click(object sender, RoutedEventArgs e)
+        {
+            // Open the LinkedIn page for Shohanurzaman
+            OpenLinkedInPage("https://www.linkedin.com/in/shohanuzzaman-shishir-ba55892b5/");
+        }
+
+        private void DeveloperButton3_Click(object sender, RoutedEventArgs e)
+        {
+            // Open the LinkedIn page for Mostahid Hasan Fahim
+            OpenLinkedInPage("https://www.linkedin.com/in/mostahid-fahim-55873720b/");
+        }
+
+        private void OpenLinkedInPage(string url)
+        {
+            try
+            {
+                // Open the specified URL in the default web browser
+                Process.Start(url);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while opening the LinkedIn page: " + ex.Message);
+            }
+        }*/
     }
 }

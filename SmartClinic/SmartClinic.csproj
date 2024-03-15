@@ -22,13 +22,19 @@
     <None Remove="logo.png" />
     <None Remove="logo1.png" />
     <None Remove="logo2.png" />
+    <None Remove="nihan.png" />
+    <None Remove="PatienIcon.png" />
+    <None Remove="patient%281%29.png" />
     <None Remove="patient.png" />
     <None Remove="printer.png" />
     <None Remove="rx.png" />
     <None Remove="search.png" />
     <None Remove="Separator.png" />
     <None Remove="settings.png" />
+    <None Remove="Shishir.png" />
+    <None Remove="shishir2.png" />
     <None Remove="stat.png" />
+    <None Remove="web-developer.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,13 +50,19 @@
     <Content Include="logo.png" />
     <Content Include="logo1.png" />
     <Content Include="logo2.png" />
+    <Content Include="nihan.png" />
+    <Content Include="PatienIcon.png" />
+    <Content Include="patient(1).png" />
     <Content Include="patient.png" />
     <Content Include="printer.png" />
     <Content Include="rx.png" />
     <Content Include="search.png" />
     <Content Include="Separator.png" />
     <Content Include="settings.png" />
+    <Content Include="Shishir.png" />
+    <Content Include="shishir2.png" />
     <Content Include="stat.png" />
+    <Content Include="web-developer.png" />
   </ItemGroup>
 
   <ItemGroup>

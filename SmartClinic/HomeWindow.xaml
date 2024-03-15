@@ -55,22 +55,22 @@
 
                     <Button Name="patients" Margin="0,15" Click="PatientButton_Click" Style="{StaticResource CommonButtonStyle}">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Image Source="patient.png" Width="30" Height="30" />
-                            <TextBlock Text="Patients" Margin="0,5,0,0" Foreground="#fcec03" FontWeight="Bold"/>
+                            <Image Source="patient(1).png" Width="30" Height="30" />
+                            <TextBlock Text="Patients" Margin="0,5,0,0" Foreground="#28fc03" FontWeight="Bold"/>
                         </StackPanel>
                     </Button>
 
                     <Button Name="settings" Margin="0,15" Click="SettingsButton_Click" Style="{StaticResource CommonButtonStyle}">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="settings.png" Width="30" Height="30" />
-                            <TextBlock Text="Settings" Margin="0,5,0,0" Foreground="#fc7303" FontWeight="Bold"/>
+                            <TextBlock Text="Settings" Margin="0,5,0,0" Foreground="#28fc03" FontWeight="Bold"/>
                         </StackPanel>
                     </Button>
 
                     <Button Name="stat" Margin="0,15" Click="StatButton_Click" Style="{StaticResource CommonButtonStyle}">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="stat.png" Width="30" Height="30" />
-                            <TextBlock Text="Statistics" Margin="0,5,0,0" Foreground="#fc03fc" FontWeight="Bold"/>
+                            <TextBlock Text="Statistics" Margin="0,5,0,0" Foreground="#28fc03" FontWeight="Bold"/>
                         </StackPanel>
                     </Button>
 

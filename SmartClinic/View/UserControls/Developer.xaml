@@ -5,23 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartClinic.View.UserControls"
         mc:Ignorable="d"
-        Title="Developer" Height="1080" Width="1920">
+        Title="Developers" Height="720" Width="1280">
+
+    <!-- Define resources -->
+    <Window.Resources>
+        <!-- Style for common buttons -->
+        <Style x:Key="CommonButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <!-- Main Grid layout -->
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <!-- Label in the first column -->
-        <Label Grid.Row="0" Grid.Column="0" Content="Developers" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold"/>
-        <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1">
-            <Button x:Name="LeadDeveloper" HorizontalAlignment="Left">
-                <Image Source="../../patient.png"/>
-            </Button>
-        </Border>
-        <!-- Your content goes here -->
+        <!-- Title Section -->
+        <Label Grid.Row="0" Content="Meet Our Developers" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontWeight="Bold"/>
 
+        <!-- Developer Profiles Section -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
+            <!-- Developer 1 -->
+            <Button Name="DeveloperButton1"   Width="250" Height="350" BorderBrush="Black" BorderThickness="1"  Style="{StaticResource CommonButtonStyle}">
+                <StackPanel>
+                    <Image Source="/../../nihan.png" Width="250" Height="310"/>
+                    <TextBlock Text="Md. Nihan Ali" Margin="5,5,5,5" Foreground="Black" FontWeight="Bold"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Developer 2 -->
+            <Button Name="DeveloperButton2"   Width="250" Height="350" BorderBrush="Black" BorderThickness="1" Style="{StaticResource CommonButtonStyle}">
+                <StackPanel>
+                    <Image Source="/../../shishir2.png" Width="270" Height="250" Margin="0,30,0,0"/>
+                    <TextBlock Text="Shohanuzzaman Shishir" Margin="5,35,5,5" Foreground="Black" FontWeight="Bold"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Developer 3 -->
+            <Button Name="DeveloperButton3"  Width="250" Height="350" BorderBrush="Black" BorderThickness="1" Style="{StaticResource CommonButtonStyle}">
+                <StackPanel>
+                    <Image Source="/../../web-developer.png" Width="250" Height="310" />
+                    <TextBlock Text="Mostahid Hasan Fahim" Margin="5" Foreground="black" FontWeight="Bold"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
     </Grid>
 </Window>
