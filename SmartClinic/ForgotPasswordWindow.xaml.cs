@@ -91,7 +91,7 @@ namespace SmartClinic
             {
                 if (correctAnswer >=2)
                 {
-                    MessageBox.Show("You are ready to set your password");
+                    //MessageBox.Show("You are ready to set your password");
                     // Navigate to the password reset window
                     //PasswordResetWindow passwordResetWindow = new PasswordResetWindow();
                     //passwordResetWindow.Show();

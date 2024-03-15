@@ -50,7 +50,7 @@ namespace SmartClinic
             {
                 //error textblock will be visible
                 Error.Visibility = Visibility.Visible;
-                MessageBox.Show("Invalid Username or Password");
+                //MessageBox.Show("Invalid Username or Password");
             }
 
         }

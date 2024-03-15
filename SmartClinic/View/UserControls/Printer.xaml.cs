@@ -96,12 +96,12 @@ namespace SmartClinic.View.UserControls
                 docdetail.Content = doctorInfo.docdetail;
                 docdetail_bangla.Content = doctorInfo.docdetail_bangla;
                 moredetail_bangla.Content = doctorInfo.moredetail_bangla;
-                //chambername.Content = doctorInfo.chamber;
-                //chamberlocation.Content = doctorInfo.chamber_location;
-                //chamberphone.Content = doctorInfo.chamber_phone;
-                //visit_date.Content = doctorInfo.visit_date;
-                //visit_time.Content = doctorInfo.visit_time;
-                //outro.Content = doctorInfo.outro;
+                chambername.Content = doctorInfo.chamber;
+                chamberlocation.Content = doctorInfo.chamber_location;
+                chamberphone.Content = doctorInfo.chamber_phone;
+                visit_date.Content = doctorInfo.visit_date;
+                visit_time.Content = doctorInfo.visit_time;
+                outro.Content = doctorInfo.outro;
             }
         }
 
@@ -127,7 +127,7 @@ namespace SmartClinic.View.UserControls
             {
                 PatientName.Text = newPatient.Name;
                 age.Text = newPatient.Age;
-                PrescriptionId.Text = newPatient.Id.ToString();
+                PrescriptionId.Text = prescriptionId;
             }
         }
         private void UpdateComplaintListViews()
@@ -271,12 +271,13 @@ namespace SmartClinic.View.UserControls
                 selectedSpecialNoteListView.ItemsSource = null;
             }
         }
-
-
-        public void PrintButton_Click(Patient patient, string todaydate, List<Complaint> complaints, List<history> histories, List<Examination> examinations, List<Investigation> investigations, List<Diagnosis> diagnoses, List<Treatment> treatments, List<DummyMedicine> medicines, List<Advice> advices, List<FollowUp> followUps, List<SpecialNote> specialNotes, bool second)
+        public int offsett = 0;
+        public string prescriptionId;
+        public void PrintButton_Click(Int64 presid, Patient patient, string todaydate, List<Complaint> complaints, List<history> histories, List<Examination> examinations, List<Investigation> investigations, List<Diagnosis> diagnoses, List<Treatment> treatments, List<DummyMedicine> medicines, List<Advice> advices, List<FollowUp> followUps, List<SpecialNote> specialNotes, bool second, int offset)
         {
             newPatient = patient;
             dayyt = todaydate;
+            prescriptionId = presid.ToString();
             selectedComplaints = complaints;
             selectedHistories = histories;
             selectedExaminations = examinations;
@@ -287,6 +288,7 @@ namespace SmartClinic.View.UserControls
             selectedAdvices = advices;
             selectedFollowUps = followUps;
             selectedSpecialNotes = specialNotes;
+            offsett = offset;
             if (second)
             {
                 continued.Content = "(Continued)";
@@ -296,9 +298,6 @@ namespace SmartClinic.View.UserControls
             PrintDialog printDialog = new PrintDialog();
 
             PrintTicket printTicket = printDialog.PrintTicket;
-           // printTicket.PageMediaSize = new PageMediaSize(PageMediaSizeName.ISOA4);
-
-
             printDialog.PrintVisual(this, "Prescription");
         }
 
@@ -307,7 +306,7 @@ namespace SmartClinic.View.UserControls
             ListViewItem item = sender as ListViewItem;
             if (item != null)
             {
-                int index = selectedMedicinesListView.Items.IndexOf(item.DataContext) + 1;
+                int index = selectedMedicinesListView.Items.IndexOf(item.DataContext) + 1 + offsett;
                 TextBlock serialNumberTextBlock = FindVisualChild<TextBlock>(item, "serialNumberTextBlock");
                 if (serialNumberTextBlock != null)
                 {

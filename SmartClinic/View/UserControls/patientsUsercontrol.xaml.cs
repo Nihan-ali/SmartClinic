@@ -62,7 +62,7 @@ namespace SmartClinic.View.UserControls
             else
             {
                 // Handle the case where the main window is not of type HomeWindow
-                MessageBox.Show("Unexpected main window type.");
+                //MessageBox.Show("Unexpected main window type.");
             }
         }
 
@@ -114,7 +114,7 @@ namespace SmartClinic.View.UserControls
                 }
                 else
                 {
-                    MessageBox.Show("Failed to delete the patient.");
+                   // MessageBox.Show("Failed to delete the patient.");
                 }
             }
         }

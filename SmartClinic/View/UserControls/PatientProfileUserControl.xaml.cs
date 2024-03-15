@@ -40,7 +40,7 @@ namespace SmartClinic.View.UserControls
             else
             {
                 // Handle the case where selectedPatient is null, log an error, or show a message.
-                MessageBox.Show("Error: selectedPatient is null.");
+               // MessageBox.Show("Error: selectedPatient is null.");
             }
 
             // Subscribe to the event when the control is created
@@ -100,18 +100,18 @@ namespace SmartClinic.View.UserControls
                         else
                         {
                             // Log an error or display a message indicating an issue with RxUsercontrol or its Content
-                            MessageBox.Show("Error: RxUsercontrol or its Content is null.");
+                            //MessageBox.Show("Error: RxUsercontrol or its Content is null.");
                         }
                     }
                     else
                     {
                         // Log an error or display a message indicating an issue with MainWindow
-                        MessageBox.Show("Error: MainWindow is null.");
+                        //MessageBox.Show("Error: MainWindow is null.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Error: Unable to retrieve PatientVisit from the button's DataContext.");
+                    //MessageBox.Show("Error: Unable to retrieve PatientVisit from the button's DataContext.");
                 }
             }
         }
@@ -127,7 +127,7 @@ namespace SmartClinic.View.UserControls
             }
             else
             {
-                MessageBox.Show("Error: newPatient is null.");
+                //MessageBox.Show("Error: newPatient is null.");
             }
 
            
@@ -158,12 +158,12 @@ namespace SmartClinic.View.UserControls
                     }
                     else
                     {
-                        MessageBox.Show("Failed to delete the visit.");
+                        //MessageBox.Show("Failed to delete the visit.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Error: Unable to retrieve PatientVisit from the button's DataContext.");
+                    //MessageBox.Show("Error: Unable to retrieve PatientVisit from the button's DataContext.");
                 }
             }
            
@@ -192,13 +192,13 @@ namespace SmartClinic.View.UserControls
                 else
                 {
                     // Log an error or display a message indicating an issue with RxUsercontrol or its Content
-                    MessageBox.Show("Error: RxUsercontrol or its Content is null.");
+                    //MessageBox.Show("Error: RxUsercontrol or its Content is null.");
                 }
             }
             else
             {
                 // Log an error or display a message indicating an issue with MainWindow
-                MessageBox.Show("Error: MainWindow is null.");
+                //MessageBox.Show("Error: MainWindow is null.");
             }
         }
     }
