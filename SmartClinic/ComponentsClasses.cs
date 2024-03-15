@@ -52,6 +52,16 @@ namespace SmartClinic
         }
 
     }
+    public class  QuesAns
+    {
+        public string qus1 { get; set; }
+        public string ans1 { get; set; }
+        public string qus2 { get; set; }
+        public string ans2 { get; set; }
+        public string qus3 { get; set; }
+        public string ans3 { get; set; }
+
+    }
 
     public class DoctorInfo
     {

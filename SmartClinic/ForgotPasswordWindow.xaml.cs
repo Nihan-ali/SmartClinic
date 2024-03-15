@@ -91,7 +91,7 @@ namespace SmartClinic
             {
                 if (correctAnswer >=2)
                 {
-                    MessageBox.Show("Your answer is correct. You can now reset your password." + correctAnswer);
+                    MessageBox.Show("You are ready to set your password");
                     // Navigate to the password reset window
                     //PasswordResetWindow passwordResetWindow = new PasswordResetWindow();
                     //passwordResetWindow.Show();
@@ -117,6 +117,15 @@ namespace SmartClinic
             // Replace this with your database logic
             string correctAnswer = questions[questionNumber-1].Answer; // Replace with your actual database query
             return userAnswer.Equals(correctAnswer, StringComparison.OrdinalIgnoreCase);
+        }
+        //implement homeClick button
+        private void home_Click(object sender, RoutedEventArgs e)
+        {
+            // Handle home button click
+            //open login window
+            MainWindow loginWindow = new MainWindow();
+            loginWindow.Show();
+            this.Close();
         }
     }
 }

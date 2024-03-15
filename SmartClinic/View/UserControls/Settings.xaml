@@ -8,7 +8,20 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="AliceBlue">
         <StackPanel Margin="20" Background="White">
-            <TextBlock Text="Doctor Information" FontWeight="Bold" FontSize="24" Margin="20,20,20,20"/>
+            <!--a grid with two colums one with doctor info textblock and another with privacy setting button-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Doctor Information" FontWeight="Bold" FontSize="24" Margin="20,20,20,20"/>
+                <Button Content="Privacy Settings" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,0" Width="150" Height="30" Background="Blue" Foreground="White" FontSize="14" FontWeight="Bold" Click="PrivacyButton_Click"/>
+            </Grid>
+            <!--<StackPanel>
+                <TextBlock Text="Doctor Information" FontWeight="Bold" FontSize="24" Margin="20,20,20,20"/>
+                --><!--make a button for privacy setting--><!--
+                <Button Content="Privacy Settings" HorizontalAlignment="Right" Margin="0,0,20,0" Width="150" Height="40" Background="Blue" Foreground="White" FontSize="14" FontWeight="Bold"/>
+            </StackPanel>-->
             <!--make 10 rows-->
             <Grid>
                 <Grid.RowDefinitions>

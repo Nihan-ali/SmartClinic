@@ -918,7 +918,7 @@ namespace SmartClinic.View.UserControls
             string missedright = "";
 
 
-            int left = 16, right = 16, remain = 16, flag = 0;
+            int left = 16, right = 16, remain = 15, flag = 0;
 
             //creare a list taking all left sides list count
             List<int> lefts = new List<int> { selectedComplaints.Count, selectedHistories.Count, selectedExaminations.Count, selectedInvestigations.Count, selectedDiagnosis.Count, selectedTreatments.Count };

@@ -4,19 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartClinic.View.UserControls"
-        mc:Ignorable="d"
-        Title="Printer" Width="8.5in" Height="11in">
+        mc:Ignorable="d" Height="13in" Width="8.5in"
+        Title="Printer">
     <Window.Resources>
         <local:IsNullOrEmptyConverter x:Key="IsNullOrEmptyConverter" />
     </Window.Resources>
-    <Grid Background="White">
+    <Grid Background="Blue">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*" MinHeight="400"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <!--<RowDefinition Height="20"/>-->
         </Grid.RowDefinitions>
 
         <!-- Assuming title, patientInfo, History, medicine, savePrint, and Footer are UserControl classes -->
@@ -97,7 +99,7 @@
         <Border Grid.Row="3" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="0,1,0,0" />
 
         <ScrollViewer x:Name="prescriptionscroll" Grid.Row="4">
-            <Grid Background="Blue">
+            <Grid Background="Blue" Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="35*"/>
                     <ColumnDefinition Width="65*"/>
@@ -121,7 +123,7 @@
                             <ListView x:Name="ComplaintsListView" Background="White" Margin="20,0,0,0" BorderBrush="{x:Null}" BorderThickness="1">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <Border BorderBrush="White" Margin="0" Padding="0" CornerRadius="5">
+                                        <!--<Border BorderBrush="White" Margin="0" Padding="0" CornerRadius="5">-->
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
@@ -132,7 +134,7 @@
                                                 <TextBlock x:Name="dot" Text="." Margin="0,-26,0,0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" FontSize="35"/>
                                                 <TextBlock Text="{Binding FormattedComplaint}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Medium" FontSize="12" Margin="5,0"/>
                                             </Grid>
-                                        </Border>
+                                        <!--</Border>-->
 
 
 
@@ -266,7 +268,7 @@
 
                     </Grid>
 
-                    <Grid Grid.Row="3" x:Name="investigationgrid">
+                    <Grid Grid.Row="3" x:Name="investigationgrid" Margin="5">
                         <StackPanel Margin="10,0">
                             <Button x:Name="AddInvestigationButton" Content="Investigation +" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,0" Background="Transparent" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}"/>
 
@@ -623,44 +625,51 @@
         <Border Grid.Row="3" BorderBrush="Black" VerticalAlignment="Bottom" BorderThickness="0,1,0,0"/>
         <Border Grid.Row="4" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="0,1,0,0"/>
 
-        <Grid x:Name="footer" Grid.Row="5">
+        <!--<Grid x:Name="footer" Grid.Row="6" Background="Green">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Grid Background="White"  Grid.Row="0">
+
+            <Grid   Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10*"/>
                     <ColumnDefinition Width="40*"/>
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition Width="50*"/>
                 </Grid.ColumnDefinitions>
+
                 <Image VerticalAlignment="Center" Source="../../ABClogo.jpeg"/>
+
                 <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
-                    <Label x:Name="chambername" Content="চেম্বারঃ এবিসি ডায়াগনস্টিক সেন্টার" FontWeight="DemiBold" Foreground="ForestGreen" FontSize="15" />
-                    <Label x:Name="chamberlocation" Content="চৌহাট্টা পয়েট, সদর, সিলেট" Margin="0,-5,0,0" FontWeight="DemiBold" />
+                    <Label x:Name="chambername" Content="চেম্বারঃ এবিসি ডায়াগনস্টিক সেন্টার" FontWeight="DemiBold" Foreground="ForestGreen" FontSize="15"/>
+                    <Label x:Name="chamberlocation" Content="চৌহাট্টা পয়েট, সদর, সিলেট" FontWeight="DemiBold"/>
                 </StackPanel>
-                <Image Grid.Column="2" Height="55" Width="55" VerticalAlignment="Center" Source="../../Separator.png"/>
+
+                <Image Grid.Column="2" Height="40" Width="40" VerticalAlignment="Center" Source="../../Separator.png"/>
 
                 <StackPanel Orientation="Vertical" Grid.Column="3" Margin="0,0,20,0">
-                    <Label x:Name="visit_date" Content="রোগী দেখার সময়ঃ প্রতি শনি, সোম, মঙ্গল ও বুধবার" FontWeight="DemiBold" HorizontalAlignment="Left" Foreground="Purple" FontSize="15" Margin="0,0,0,0" />
-                    <Label x:Name="visit_time" Content="বিকাল ৫:৩০ থেকে রাত ৮ টা পর্যন্ত" Foreground="ForestGreen" HorizontalAlignment="Left" Margin="0,-5,0,0" FontWeight="Bold" />
-                    <Label x:Name="chamberphone" Content="যোগাযোগঃ 01914-478747 (সকাল ১০টা - ১২টা) রবি, বৃহস্পতি ও শুক্রবার বন্ধ" HorizontalAlignment="Left" Foreground="DarkRed" />
+                    <Label x:Name="visit_date" Content="রোগী দেখার সময়ঃ প্রতি শনি, সোম, মঙ্গল ও বুধবার" FontWeight="DemiBold" HorizontalAlignment="Left" Foreground="Purple" FontSize="15"/>
+                    <Label x:Name="visit_time" Content="বিকাল ৫:৩০ থেকে রাত ৮ টা পর্যন্ত" Foreground="ForestGreen" HorizontalAlignment="Left" FontWeight="Bold"/>
+                    <Label x:Name="chamberphone" Content="যোগাযোগঃ 01914-478747 (সকাল ১০টা - ১২টা) রবি, বৃহস্পতি ও শুক্রবার বন্ধ" HorizontalAlignment="Left" Foreground="DarkRed"/>
                 </StackPanel>
 
                 <Border Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,1,0" VerticalAlignment="Bottom"/>
-                <!--public static string outro = "শরীরের যত্ন নিবেন। নিয়মিত ওষুধ খাবেন। পরবর্তী সাক্ষাতের সময় বাবস্থাপত্র আনবেন। প্রয়োজনে- ০১৮১৯-৮০০৩৩৩ (দুপুর ২টা-৩টা)";-->
             </Grid>
-            <Border Grid.Row="0" BorderBrush="Black" VerticalAlignment="Bottom" BorderThickness="0,1,0,0"/>
-            <Grid Grid.Row="1" Background="White">
 
-                <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
-                    <Label x:Name="outro" FontSize="10" HorizontalAlignment="Center" Content=" ● শরীরের যত্ন নিবেন। নিয়মিত ওষুধ খাবেন।  ● পরবর্তী সাক্ষাতের সময় বাবস্থাপত্র আনবেন। ● প্রয়োজনে- 01914-478747" FontWeight="DemiBold" Foreground="Black" Margin="0,0,0,0" />
-                    <Label x:Name="outro2" FontSize="10" HorizontalAlignment="Center" Content=" (সকাল ১০টা - ১২টা)" Foreground="red"/>
-                </StackPanel>
-            </Grid>
-            <Border Grid.Row="1" BorderBrush="Black" VerticalAlignment="Bottom" BorderThickness="0,1,0,0"/>
-
+            
         </Grid>
+        <Grid Grid.Row="5" Background="blue">
+            <StackPanel Orientation="Horizontal" Margin="20,0">
+                <Label x:Name="outro" FontSize="10" HorizontalAlignment="Center" Content=" ● শরীরের যত্ন নিবেন। নিয়মিত ওষুধ খাবেন।  ● পরবর্তী সাক্ষাতের সময় বাবস্থাপত্র আনবেন। ● প্রয়োজনে- 01914-478747" FontWeight="DemiBold" Foreground="Black"/>
+                <Label x:Name="outro2" FontSize="10" HorizontalAlignment="Center" Content=" (সকাল ১০টা - ১২টা)" Foreground="Red"/>
+            </StackPanel>
+        </Grid>-->
+        <Grid Grid.Row="5" Background="Yellow">
+            <Label Content="Hello " FontWeight="Bold" FontSize="34"/>
+        </Grid>
+        <Grid Grid.Row="6" Background="Green">
+            <Label Content="Hello " FontWeight="Bold" FontSize="34"/>
+        </Grid>
+
     </Grid>
 </Window>

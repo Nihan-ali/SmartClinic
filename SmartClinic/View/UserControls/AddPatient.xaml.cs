@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.Eventing.Reader;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using static SmartClinic.Patient;
@@ -26,7 +27,14 @@ namespace SmartClinic.View.UserControls
 
             if (nameTextBox.Text != null)
             {
+
                 name = nameTextBox.Text;
+
+                // Create a TextInfo object for the current culture
+                TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+
+                // Capitalize the first letter of each word
+                name = textInfo.ToTitleCase(name);
             }
             if(ageTextBox.Text != null)
             {

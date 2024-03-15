@@ -305,6 +305,79 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
             }
             return questions;
         }
+        //update question and answer according to id , funtion will take id ,question and answer
+        public static void UpdateQuestion(int id, string question, string answer)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+                    using (var updateCommand = new SQLiteCommand("UPDATE Questions SET Question = @Question, Answer = @Answer WHERE ID = @Id;", connection))
+                    {
+                        updateCommand.Parameters.AddWithValue("@Id", id);
+                        updateCommand.Parameters.AddWithValue("@Question", question);
+                        updateCommand.Parameters.AddWithValue("@Answer", answer);
+                        updateCommand.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating question: {ex}");
+                throw;
+            }
+        }
+        //update patient info it will take patient object and will update name age blood address phone according to id
+        public static void UpdatePatientInfo(Patient patient)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+                    using (var updateCommand = new SQLiteCommand("UPDATE Patient SET Name = @Name, Age = @Age, Address = @Address, Phone = @Phone, Blood = @Blood WHERE ID = @Id;", connection))
+                    {
+                        updateCommand.Parameters.AddWithValue("@Id", patient.Id);
+                        updateCommand.Parameters.AddWithValue("@Name", patient.Name);
+                        updateCommand.Parameters.AddWithValue("@Age", patient.Age);
+                        updateCommand.Parameters.AddWithValue("@Address", patient.Address);
+                        updateCommand.Parameters.AddWithValue("@Phone", patient.Phone);
+                        updateCommand.Parameters.AddWithValue("@Blood", patient.Blood);
+                        updateCommand.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating patient info: {ex}");
+                throw;
+            }
+        }
+        //public static void UpdatePatientInfo(Patient patient)
+        //{
+        //    try
+        //    {
+        //        using (var connection = GetConnection())
+        //        {
+        //            connection.Open();
+        //            using (var updateCommand = new SQLiteCommand("UPDATE Patient SET Name = @Name, Age = @Age, Address = @Address, Phone = @Phone WHERE ID = @Id;", connection))
+        //            {
+        //                updateCommand.Parameters.AddWithValue("@Id", patient.Id);
+        //                updateCommand.Parameters.AddWithValue("@Name", patient.Name);
+        //                updateCommand.Parameters.AddWithValue("@Age", patient.Age);
+        //                updateCommand.Parameters.AddWithValue("@Address", patient.Address);
+        //                updateCommand.Parameters.AddWithValue("@Phone", patient.Phone);
+        //                updateCommand.ExecuteNonQuery();
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error updating patient info: {ex}");
+        //        throw;
+        //    }
+        //}
 
 
         //implement insert doctorinfo

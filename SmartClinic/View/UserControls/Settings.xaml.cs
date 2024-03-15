@@ -49,5 +49,11 @@ namespace SmartClinic.View.UserControls
             };
             DatabaseHelper.UpdateDoctorInfo(updatedDoctorInfo);
         }
+        //privacy button function
+        private void PrivacyButton_Click(object sender, RoutedEventArgs e)
+        {
+            PrivacyQA privacy = new PrivacyQA();
+            privacy.ShowDialog();
+        }
     }
 }

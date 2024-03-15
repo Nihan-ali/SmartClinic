@@ -45,6 +45,9 @@
     <Compile Update="View\UserControls\EditMainComplaintControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\UserControls\editPatient.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\UserControls\ExaminationSearchWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -70,6 +73,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\Printer.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\UserControls\PrivacyQA.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UserControls\RxUsercontrol.xaml.cs">
@@ -134,6 +140,9 @@
     <Page Update="View\UserControls\EditMainComplaintControl.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\UserControls\editPatient.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\UserControls\ExaminationSearchWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -159,6 +168,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\Printer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserControls\PrivacyQA.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserControls\RxUsercontrol.xaml">

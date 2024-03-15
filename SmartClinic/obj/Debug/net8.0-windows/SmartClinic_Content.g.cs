@@ -27,6 +27,7 @@
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("separator.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("settings.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("stat.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("user-edit.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("circle.png")]
 
 

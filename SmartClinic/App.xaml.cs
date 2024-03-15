@@ -7,7 +7,7 @@ namespace SmartClinic
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            bool condition = DatabaseHelper.CheckStatus("Nihan"); // Change this to your actual condition
+            bool condition = DatabaseHelper.CheckStatus("AbuNoyim"); // Change this to your actual condition
             if (condition==false)
             {
                 StartupUri = new System.Uri("MainWindow.xaml", System.UriKind.Relative);

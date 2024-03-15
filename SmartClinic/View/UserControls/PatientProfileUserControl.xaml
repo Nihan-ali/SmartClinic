@@ -24,7 +24,30 @@
 
             <!-- Borders for each information section -->
             <Border Grid.Row="0" Background="White" Margin="1" BorderThickness="0,0,1,2" BorderBrush="Gray" Height="40">
-                <TextBlock x:Name="PatientNameTextBlock" FontWeight="Bold" FontSize="16" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <!--a grid with name and edit button-->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="PatientNameTextBlock" FontWeight="Bold" FontSize="16"  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0" />
+                    <!--button with user-edit image-->
+                    <Button x:Name="edit"  FontWeight="Bold" VerticalAlignment="Center" Margin="10,0" Grid.Column="1" Foreground="Green" Padding="5"  Background="White" BorderBrush="{x:Null}" Click="edit_Click">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Image Source="../../user-edit.png" Width="20" Height="15" />
+                            <TextBlock Text="Edit" Margin="2,0,0,0" Foreground="Green" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Button>
+
+
+                    <!--<Button x:Name="edit" Content="Edit" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0" Grid.Column="1" Foreground="Green" Padding="5"  Background="White" BorderBrush="{x:Null}" Click="edit_Click"/>-->
+                </Grid>
+                <!--<StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="PatientNameTextBlock" FontWeight="Bold" FontSize="16" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    
+                    <Button x:Name="edit" Content="Edit" FontWeight="Bold" VerticalAlignment="Center" Height="30" Grid.Row="0" Foreground="Black"  Background="White" BorderBrush="{x:Null}" Click="edit_Click"/>
+                </StackPanel>-->
+                
             </Border>
 
             <Border Grid.Row="1" Background="White"  Margin="1" BorderThickness="0,0,1,2" BorderBrush="Gray" Height="30" VerticalAlignment="Top">
@@ -41,7 +64,7 @@
         <!-- Second Column (80*), Sub-rows with sizes: 10*, 15*, Auto -->
         <Grid Grid.Column="1" Margin="10" Background="White">
             <Grid.RowDefinitions>
-                <RowDefinition Height="10*"/>
+                <RowDefinition Height="10*" MinHeight="50"/>
                 <RowDefinition Height="90*"/>
             </Grid.RowDefinitions>
 
@@ -55,6 +78,7 @@
             </Border>
 
             <!-- ListBox for prescriptions -->
+            
             <ListBox x:Name="PrescriptionList" Grid.Row="1" Margin="5" SelectionChanged="PrescriptionList_SelectionChanged" HorizontalContentAlignment="Stretch" SelectedItem="{Binding Patients}" Background="#eeeeee">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -72,7 +96,6 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
                                     <!-- Date -->
@@ -81,19 +104,19 @@
                                         <Run Text="{Binding FormattedVisit, Mode=OneWay}" FontWeight="SemiBold"/>
                                     </TextBlock>
                                     <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <Label Content="Prescription ID: " FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        <TextBlock Text="{Binding prescriptionId}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
+                                        <Label Content="Prescription ID: " FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="50,0,5,0"/>
+                                        <TextBlock Text="{Binding prescriptionId}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="DemiBold"/>
                                     </StackPanel>
 
 
                                     <!-- Show Prescription Button -->
-                                    <Button Grid.Column="2" Content="Show Prescription" Margin="50,10,50,10" Background="White" Foreground="Blue" FontWeight="Bold" BorderBrush="{x:Null}" Click="ShowPrescription_Click"/>
+                                    <Button Grid.Column="2" Content="Show Prescription" Margin="70,10,80,10" Background="White" Foreground="Blue" FontWeight="Bold" BorderBrush="{x:Null}" Click="ShowPrescription_Click"/>
 
                                     <!-- Print Button -->
-                                    <Button Grid.Column="3" Content="Print" Margin="10,5" Background="White" Foreground="Green" FontWeight="Bold" BorderBrush="{x:Null}" Click="Print_Click"/>
+                                    <!--<Button Grid.Column="3" Content="Print" Margin="10,5" Background="White" Foreground="Green" FontWeight="Bold" BorderBrush="{x:Null}" Click="Print_Click"/>-->
 
                                     <!-- Delete Button -->
-                                    <Button Grid.Column="4" x:Name="DeleteButton" Content="Delete" Margin="10,5" Background="White" Foreground="Red" FontWeight="Bold" BorderBrush="{x:Null}" Click="Delete_Click"/>
+                                    <Button Grid.Column="3" x:Name="DeleteButton" Content="Delete" Margin="10,5" Background="White" Foreground="Red" FontWeight="Bold" BorderBrush="{x:Null}" Click="Delete_Click"/>
                                 </Grid>
                             </Grid>
                         </Border>

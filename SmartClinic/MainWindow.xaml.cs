@@ -25,6 +25,7 @@ namespace SmartClinic
             DatabaseHelper init = new DatabaseHelper();
             Password.GotFocus += Password_GotFocus;
             Password.LostFocus += Password_LostFocus;
+
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
@@ -55,10 +56,13 @@ namespace SmartClinic
         }
         private void ForgotPassword_Click(object sender, RoutedEventArgs e)
         {
+            this.Hide();
             ForgotPasswordWindow forgotPasswordWindow = new ForgotPasswordWindow();
             forgotPasswordWindow.Owner = this;
             forgotPasswordWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             forgotPasswordWindow.ShowDialog();
+            //close mainwindow
+            this.Close();
         }
 
         private void Password_GotFocus(object sender, RoutedEventArgs e)

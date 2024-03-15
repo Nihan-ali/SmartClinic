@@ -96,12 +96,12 @@ namespace SmartClinic.View.UserControls
                 docdetail.Content = doctorInfo.docdetail;
                 docdetail_bangla.Content = doctorInfo.docdetail_bangla;
                 moredetail_bangla.Content = doctorInfo.moredetail_bangla;
-                chambername.Content = doctorInfo.chamber;
-                chamberlocation.Content = doctorInfo.chamber_location;
-                chamberphone.Content = doctorInfo.chamber_phone;
-                visit_date.Content = doctorInfo.visit_date;
-                visit_time.Content = doctorInfo.visit_time;
-                outro.Content = doctorInfo.outro;
+                //chambername.Content = doctorInfo.chamber;
+                //chamberlocation.Content = doctorInfo.chamber_location;
+                //chamberphone.Content = doctorInfo.chamber_phone;
+                //visit_date.Content = doctorInfo.visit_date;
+                //visit_time.Content = doctorInfo.visit_time;
+                //outro.Content = doctorInfo.outro;
             }
         }
 
@@ -296,7 +296,7 @@ namespace SmartClinic.View.UserControls
             PrintDialog printDialog = new PrintDialog();
 
             PrintTicket printTicket = printDialog.PrintTicket;
-            printTicket.PageMediaSize = new PageMediaSize(PageMediaSizeName.ISOA4);
+           // printTicket.PageMediaSize = new PageMediaSize(PageMediaSizeName.ISOA4);
 
 
             printDialog.PrintVisual(this, "Prescription");

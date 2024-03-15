@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 E:\Web_Dev\350\SmartClinic\SmartClinic\App.xaml
-291990526981
-20-1222375539
-37-394380034
+31-1166068938
+21-1732165328
+391977573086
 228-2041189666
-ChangePassword.xaml;ForgotPasswordWindow.xaml;HomeWindow.xaml;MainWindow.xaml;View\UserControls\AddPatient.xaml;View\UserControls\AdviceSearchWindow.xaml;View\UserControls\ComplaintSearchWindow.xaml;View\UserControls\CreateMedicineGroupWindow.xaml;View\UserControls\DetailsWindow.xaml;View\UserControls\Developer.xaml;View\UserControls\DiagnosisSearchWindow.xaml;View\UserControls\EditComplaintControl.xaml;View\UserControls\EditMainComplaintControl.xaml;View\UserControls\ExaminationSearchWindow.xaml;View\UserControls\FollowUpSearchWindow.xaml;View\UserControls\HistorySearchWindow.xaml;View\UserControls\InvestigationSearchWindow.xaml;View\UserControls\MedicineCreateWindow.xaml;View\UserControls\MedicineSearchWindow.xaml;View\UserControls\PatientProfileUserControl.xaml;View\UserControls\patientsUsercontrol.xaml;View\UserControls\Printer.xaml;View\UserControls\RxUsercontrol.xaml;View\UserControls\searchMenu.xaml;View\UserControls\Settings.xaml;View\UserControls\SpecialNoteSearchWindow.xaml;View\UserControls\StatUserControl.xaml;View\UserControls\treatment.xaml;View\UserControls\TreatmentSearchWindow.xaml;
+ChangePassword.xaml;ForgotPasswordWindow.xaml;HomeWindow.xaml;MainWindow.xaml;View\UserControls\AddPatient.xaml;View\UserControls\AdviceSearchWindow.xaml;View\UserControls\ComplaintSearchWindow.xaml;View\UserControls\CreateMedicineGroupWindow.xaml;View\UserControls\DetailsWindow.xaml;View\UserControls\Developer.xaml;View\UserControls\DiagnosisSearchWindow.xaml;View\UserControls\EditComplaintControl.xaml;View\UserControls\EditMainComplaintControl.xaml;View\UserControls\editPatient.xaml;View\UserControls\ExaminationSearchWindow.xaml;View\UserControls\FollowUpSearchWindow.xaml;View\UserControls\HistorySearchWindow.xaml;View\UserControls\InvestigationSearchWindow.xaml;View\UserControls\MedicineCreateWindow.xaml;View\UserControls\MedicineSearchWindow.xaml;View\UserControls\PatientProfileUserControl.xaml;View\UserControls\patientsUsercontrol.xaml;View\UserControls\Printer.xaml;View\UserControls\PrivacyQA.xaml;View\UserControls\RxUsercontrol.xaml;View\UserControls\searchMenu.xaml;View\UserControls\Settings.xaml;View\UserControls\SpecialNoteSearchWindow.xaml;View\UserControls\StatUserControl.xaml;View\UserControls\treatment.xaml;View\UserControls\TreatmentSearchWindow.xaml;
 
 False
 

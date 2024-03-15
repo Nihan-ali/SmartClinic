@@ -22,7 +22,7 @@ namespace SmartClinic.View.UserControls
 
             // Store the instance of MainWindow
             mainWindowInstance = mainWindow;
-            MessageBox.Show("PatientProfileUserControl constructor called." + selectedPatient.Name);
+            //MessageBox.Show("PatientProfileUserControl constructor called." + selectedPatient.Name);
 
             if (selectedPatient != null)
             {
@@ -115,32 +115,46 @@ namespace SmartClinic.View.UserControls
                 }
             }
         }
-
-
-
-
-        private void Print_Click(object sender, RoutedEventArgs e)
+        //implement editClick button
+        private void edit_Click(object sender, RoutedEventArgs e)
         {
-            // Handle print button click
+            // Handle edit button click
+            //if patient is not null open editPatient window with newPatient
+            if (newPatient != null)
+            {
+                editPatient editPatient = new editPatient(newPatient);
+                editPatient.Show();
+            }
+            else
+            {
+                MessageBox.Show("Error: newPatient is null.");
+            }
+
+           
         }
+
+
+
+
+        
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            try
+            Button deleteButton = sender as Button;
+            if (deleteButton != null)
             {
-                // Use the SelectedPatientVisit property instead of PrescriptionList.SelectedItem
-                if (SelectedPatientVisit != null)
+                // Retrieve the DataContext of the button, which should be a PatientVisit
+                PatientVisit patientVisit = deleteButton.DataContext as PatientVisit;
+
+                if (patientVisit != null)
                 {
                     // Perform the deletion from the database based on ID
-                    bool deleted = DatabaseHelper.DeletePatientByPrescriptionId(SelectedPatientVisit.prescriptionId);
+                    bool deleted = DatabaseHelper.DeletePatientByPrescriptionId(patientVisit.prescriptionId);
 
                     if (deleted)
                     {
                         // Remove the item from the ObservableCollection
-                        Patients.Remove(SelectedPatientVisit);
-
-                        // Set the SelectedItem to null to clear the selection
-                        PrescriptionList.SelectedItem = null;
+                        Patients.Remove(patientVisit);
                     }
                     else
                     {
@@ -149,13 +163,10 @@ namespace SmartClinic.View.UserControls
                 }
                 else
                 {
-                    MessageBox.Show("Please select a visit to delete.");
+                    MessageBox.Show("Error: Unable to retrieve PatientVisit from the button's DataContext.");
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error deleting visit: {ex.Message}");
-            }
+           
         }
 
         private void PrescriptionList_SelectionChanged(object sender, SelectionChangedEventArgs e)

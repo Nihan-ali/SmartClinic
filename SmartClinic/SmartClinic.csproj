@@ -29,6 +29,7 @@
     <None Remove="Separator.png" />
     <None Remove="settings.png" />
     <None Remove="stat.png" />
+    <None Remove="user-edit.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,6 +52,7 @@
     <Content Include="Separator.png" />
     <Content Include="settings.png" />
     <Content Include="stat.png" />
+    <Content Include="user-edit.png" />
   </ItemGroup>
 
   <ItemGroup>
