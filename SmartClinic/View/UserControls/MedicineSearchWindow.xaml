@@ -264,7 +264,7 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="Unit" FontWeight="Bold" Grid.Row="0"  HorizontalAlignment="Center" FontSize="14" Foreground="Black"/>
                                 <!-- ComboBox for Different Types of Units -->
-                                <ComboBox x:Name="unitComboBox" SelectedItem="{Binding SelectedUnitItem}" FontWeight="SemiBold" Grid.Row="1" Margin="10,10,5,0" HorizontalAlignment="Center" VerticalAlignment="Top" Background="White" Width="50" Height="25"  Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1" IsEditable="True">
+                                <ComboBox x:Name="unitComboBox" SelectedItem="{Binding SelectedUnitItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="SemiBold" Grid.Row="1" Margin="10,10,5,0" HorizontalAlignment="Center" VerticalAlignment="Top" Background="White" Width="50" Height="25"  Foreground="#2C3E50" BorderBrush="#3498DB" BorderThickness="1" IsEditable="True">
                                     <ComboBoxItem Content="টি" IsSelected="True"/>
                                     <ComboBoxItem Content="ফোঁটা"/>
                                     <ComboBoxItem Content="চামচ"/>
@@ -293,8 +293,7 @@
                                         <TextBox x:Name="durationTextBox" Text="{Binding Duration}" Width="40" Height="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="White" Foreground="#2C3E50" BorderThickness="0"/>
 
                                         <!-- Duration ComboBox -->
-                                        <ComboBox x:Name="DurationComboBox" FontWeight="SemiBold" IsEditable="True" ShouldPreserveUserEnteredPrefix="True" 
-          SelectedItem="{Binding SelectedDurationItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <ComboBox x:Name="DurationComboBox" FontWeight="SemiBold" IsEditable="True" ShouldPreserveUserEnteredPrefix="True" SelectedItem="{Binding SelectedDurationItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
           Width="60" Height="25" Background="#ECF0F1" Foreground="#2C3E50" BorderThickness="2" BorderBrush="Azure" Margin="5"
           LostFocus="DurationComboBox_LostFocus">
                                             <ComboBoxItem Content="দিন" IsSelected="True"/>

@@ -964,7 +964,6 @@ namespace SmartClinic.View.UserControls
             // MessageBox.Show("complaints are in first page " + leftscount[0]);
 
             int rightremain = variables.rightremain;
-            MessageBox.Show(leftremain + " <--> " + rightremain);
             for (int i = 0; i < rights.Count; i++)
             {
                 if (rights[i] == 0)

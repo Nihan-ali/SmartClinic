@@ -481,6 +481,7 @@ namespace SmartClinic
 
         public string SelectedUnit
         {
+            
             get { return (SelectedUnitItem?.Content)?.ToString() ?? "piece"; }
         }
 
