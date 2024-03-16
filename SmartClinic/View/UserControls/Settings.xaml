@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SmartClinic.View.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="750" d:DesignWidth="800">
     <Grid Background="AliceBlue">
         <StackPanel Margin="20" Background="White">
             <!--a grid with two colums one with doctor info textblock and another with privacy setting button-->
@@ -139,6 +139,22 @@
                 </StackPanel>
 
             </Grid>
+            <Grid Grid.Row="3" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock Text="LeftGrid:" VerticalAlignment="Center" FontWeight="Bold" Margin="10" MinWidth="65" />
+                    <TextBox x:Name="leftGridTextBox" Text="{Binding Path=leftremain, UpdateSourceTrigger=PropertyChanged}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="2" Padding="5" MinWidth="500" FontFamily="Arial" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock Text="RightGrid:" VerticalAlignment="Center" FontWeight="Bold" Margin="10" MinWidth="65" />
+                    <TextBox x:Name="rightGridTextBox" Text="{Binding Path=rightremain, UpdateSourceTrigger=PropertyChanged}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="2" Padding="5" MinWidth="500" FontFamily="Arial" />
+                </StackPanel>
+            </Grid>
+
+            <!-- Existing content -->
             <Button Content="Update" Grid.ColumnSpan="2" Grid.Row="3" Click="UpdateButton_Click" HorizontalAlignment="Center" Margin="0,20,0,0" Width="300" Height="40" Background="Blue" Foreground="White" FontSize="14" FontWeight="Bold"/>
         </StackPanel>
        

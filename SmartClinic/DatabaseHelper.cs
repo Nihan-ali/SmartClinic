@@ -48,9 +48,9 @@ namespace SmartClinic
                                 {
                                     // Concatenate all the queries into a single string
                                     string allQueries = @"
-                                                    CREATE TABLE IF NOT EXISTS DoctorInformation (ID INTEGER PRIMARY KEY AUTOINCREMENT, docname TEXT, docdegree TEXT, docname_bangla TEXT, docdegree_bangla TEXT, docdetail TEXT, docdetail_bangla TEXT, moredetail_bangla TEXT, chamber TEXT, chamber_location TEXT, visit_date TEXT, visit_time TEXT, chamber_phone TEXT, outro TEXT);
-                                                    INSERT INTO DoctorInformation (docname, docdegree, docname_bangla, docdegree_bangla, docdetail, docdetail_bangla, moredetail_bangla, chamber, chamber_location, visit_date, visit_time, chamber_phone, outro)
-VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.আবু নঈম মোহাম্মাদ', 'এমবিবিএস, (এন্ডোক্রাইনোলজি ও মেটাবোলিজম)', 'Consultant-Diabetologist, Endocrionologist & Metabolic Disorder Specialist', 'ডায়াবেটিস, হরমোন ও মেডিসিন বিশেষজ্ঞ', 'আবাসিক চিকিৎসক - আর.পি (মেডিসিন), এম.এ.জি ওসমানী মেডিকেল কলেজ হাসপাতাল, সিলেট', 'চেম্বারঃ এবিসি ডায়াগনস্টিক সেন্টার', 'চৌহাট্টা পয়েট, সদর, সিলেট', 'রোগী দেখার সময়ঃ প্রতি শনি, সোম, মঙ্গল ও বুধবার', 'বিকাল ৫:৩০ থেকে রাত ৮ টা পর্যন্ত', 'যোগাযোগঃ 01914-478747 (সকাল ১০টা - ১২টা) রবি, বৃহস্পতি ও শুক্রবার বন্ধ', 'শরীরের যত্ন নিবেন। নিয়মিত ওষুধ খাবেন। পরবর্তী সাক্ষাতের সময় বাবস্থাপত্র আনবেন। প্রয়োজনে- ০১৮১৯-৮০০৩৩৩ (দুপুর ২টা-৩টা)');
+                                                    CREATE TABLE IF NOT EXISTS DoctorInformation (ID INTEGER PRIMARY KEY AUTOINCREMENT, docname TEXT, docdegree TEXT, docname_bangla TEXT, docdegree_bangla TEXT, docdetail TEXT, docdetail_bangla TEXT, moredetail_bangla TEXT, chamber TEXT, chamber_location TEXT, visit_date TEXT, visit_time TEXT, chamber_phone TEXT, outro TEXT, leftremain INTEGER, rightremain INTEGER);
+                                                    INSERT INTO DoctorInformation (docname, docdegree, docname_bangla, docdegree_bangla, docdetail, docdetail_bangla, moredetail_bangla, chamber, chamber_location, visit_date, visit_time, chamber_phone, outro, leftremain, rightremain)
+VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.আবু নঈম মোহাম্মাদ', 'এমবিবিএস, (এন্ডোক্রাইনোলজি ও মেটাবোলিজম)', 'Consultant-Diabetologist, Endocrionologist & Metabolic Disorder Specialist', 'ডায়াবেটিস, হরমোন ও মেডিসিন বিশেষজ্ঞ', 'আবাসিক চিকিৎসক - আর.পি (মেডিসিন), এম.এ.জি ওসমানী মেডিকেল কলেজ হাসপাতাল, সিলেট', 'চেম্বারঃ এবিসি ডায়াগনস্টিক সেন্টার', 'চৌহাট্টা পয়েট, সদর, সিলেট', 'রোগী দেখার সময়ঃ প্রতি শনি, সোম, মঙ্গল ও বুধবার', 'বিকাল ৫:৩০ থেকে রাত ৮ টা পর্যন্ত', 'যোগাযোগঃ 01914-478747 (সকাল ১০টা - ১২টা) রবি, বৃহস্পতি ও শুক্রবার বন্ধ', 'শরীরের যত্ন নিবেন। নিয়মিত ওষুধ খাবেন। পরবর্তী সাক্ষাতের সময় বাবস্থাপত্র আনবেন। প্রয়োজনে- ০১৮১৯-৮০০৩৩৩ (দুপুর ২টা-৩টা)', 24, 27);
                                                     CREATE TABLE IF NOT EXISTS Users (ID INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, status INT NOT NULL DEFAULT 0);
                                                     
                                                     CREATE TABLE IF NOT EXISTS Questions(ID INTEGER PRIMARY KEY AUTOINCREMENT, Question TEXT, Answer TEXT);
@@ -267,7 +267,9 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
                                 visit_date = reader["visit_date"].ToString(),
                                 visit_time = reader["visit_time"].ToString(),
                                 chamber_phone = reader["chamber_phone"].ToString(),
-                                outro = reader["outro"].ToString()
+                                outro = reader["outro"].ToString(),
+                                leftremain = Convert.ToInt32(reader["leftremain"]),
+                                rightremain = Convert.ToInt32(reader["rightremain"])
                             };
 
 
@@ -421,7 +423,7 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
                 using (var connection = GetConnection())
                 {
                     connection.Open();
-                    using (var updateCommand = new SQLiteCommand("UPDATE DoctorInformation SET docname = @docname, docdegree = @docdegree, docname_bangla = @docname_bangla, docdegree_bangla = @docdegree_bangla, docdetail = @docdetail, docdetail_bangla = @docdetail_bangla, moredetail_bangla = @moredetail_bangla, chamber = @chamber, chamber_location = @chamber_location, visit_date = @visit_date, visit_time = @visit_time, chamber_phone = @chamber_phone, outro = @outro WHERE ID = 1;", connection))
+                    using (var updateCommand = new SQLiteCommand("UPDATE DoctorInformation SET docname = @docname, docdegree = @docdegree, docname_bangla = @docname_bangla, docdegree_bangla = @docdegree_bangla, docdetail = @docdetail, docdetail_bangla = @docdetail_bangla, moredetail_bangla = @moredetail_bangla, chamber = @chamber, chamber_location = @chamber_location, visit_date = @visit_date, visit_time = @visit_time, chamber_phone = @chamber_phone, outro = @outro, leftremain = @leftremain, rightremain = @rightremain WHERE ID = 1;", connection))
                     {
                         updateCommand.Parameters.AddWithValue("@docname", doctorInfo.docname);
                         updateCommand.Parameters.AddWithValue("@docdegree", doctorInfo.docdegree);
@@ -436,6 +438,8 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
                         updateCommand.Parameters.AddWithValue("@visit_time", doctorInfo.visit_time);
                         updateCommand.Parameters.AddWithValue("@chamber_phone", doctorInfo.chamber_phone);
                         updateCommand.Parameters.AddWithValue("@outro", doctorInfo.outro);
+                        updateCommand.Parameters.AddWithValue("@leftremain", doctorInfo.leftremain);
+                        updateCommand.Parameters.AddWithValue("@rightremain", doctorInfo.rightremain);
                         updateCommand.ExecuteNonQuery();
                     }
                 }
@@ -767,7 +771,8 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
                 {
                     connection.Open();
 
-                    using (var command = new SQLiteCommand("SELECT * FROM PatientVisit WHERE ID = @PatientId;", connection))
+                    // return by descending
+                    using (var command = new SQLiteCommand("SELECT * FROM PatientVisit WHERE ID = @PatientId ORDER BY VISIT DESC;", connection))
                     {
                         command.Parameters.AddWithValue("@PatientId", patientId);
 
@@ -1351,6 +1356,15 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
                 throw;
             }
         }
+
+        public static void AddMedicine(Medicine med)
+        {
+            string type = med.MedicineType;
+            string brand = med.BrandName;
+            string strength = med.Strength;
+
+        }
+
         public static void AddAdvice(string advice)
         {
             try
@@ -1768,8 +1782,8 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
                 using (var connection = GetConnection())
                 {
                     connection.Open();
-
-                    using (var command = new SQLiteCommand("SELECT * FROM PatientVisit WHERE PRESCRIPTIONID LIKE @PrescriptionId;", connection))
+                    // descending order
+                    using (var command = new SQLiteCommand("SELECT * FROM PatientVisit WHERE PRESCRIPTIONID LIKE @PrescriptionId ORDER BY VISIT DESC;", connection))
                     {
                         // Constructing the search pattern to match partially
                         command.Parameters.AddWithValue("@PrescriptionId", "%" + prescriptionid + "%");

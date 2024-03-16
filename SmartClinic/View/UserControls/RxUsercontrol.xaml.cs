@@ -924,7 +924,7 @@ namespace SmartClinic.View.UserControls
             string missedright = "";
 
 
-            int left = 16, right = 16, remain = 25, flag = 0;
+            int  leftremain = variables.leftremain, flag = 0;
 
             //creare a list taking all left sides list count
             List<int> lefts = new List<int> { selectedComplaints.Count, selectedHistories.Count, selectedExaminations.Count, selectedInvestigations.Count, selectedDiagnosis.Count, selectedTreatments.Count };
@@ -946,12 +946,12 @@ namespace SmartClinic.View.UserControls
                 {
                     continue;
                 }
-                if (remain > 1)
+                if (leftremain > 1)
                 {
                     // cantake will be the minimum of lefts[i] and remain
-                    int cantake = Math.Min(lefts[i], remain - 1);
+                    int cantake = Math.Min(lefts[i], leftremain - 1);
                     leftscount[i] = cantake;
-                    remain = remain - cantake - 1;
+                    leftremain = leftremain - cantake - 1;
                     int currentleft = lefts[i] - cantake;
                     leftscountleft[i] = currentleft;
                 }
@@ -962,25 +962,27 @@ namespace SmartClinic.View.UserControls
                 if (leftscountleft[i] > 0) flag = 1;
             }
             // MessageBox.Show("complaints are in first page " + leftscount[0]);
-            remain = 25;
+
+            int rightremain = variables.rightremain;
+            MessageBox.Show(leftremain + " <--> " + rightremain);
             for (int i = 0; i < rights.Count; i++)
             {
                 if (rights[i] == 0)
                 {
                     continue;
                 }
-                if (remain > 1)
+                if (rightremain > 1)
                 {
                     // cantake will be the minimum of lefts[i] and remain
                     if (i == 0) rights[i] = rights[i] * 2;
-                    int cantake = Math.Min(rights[i], remain - 1);
+                    int cantake = Math.Min(rights[i], rightremain - 1);
                     if (i == 0)
                     {
                         cantake = cantake / 2;
                         rights[i] = rights[i] / 2;
                     }
                     rightscount[i] = cantake;
-                    remain = remain - cantake * 2 - 1;
+                    rightremain = rightremain - cantake * 2 - 1;
                     int currentright = rights[i] - cantake;
                     rightscountleft[i] = currentright;
                 }

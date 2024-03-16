@@ -93,7 +93,7 @@ namespace SmartClinic.View.UserControls {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SmartClinic;V1.0.0.0;component/view/usercontrols/editpatient.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SmartClinic;component/view/usercontrols/editpatient.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\View\UserControls\editPatient.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

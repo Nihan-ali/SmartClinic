@@ -410,5 +410,74 @@ namespace SmartClinic
             }
         }
 
+        private void EnterPressed(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter && searchTextBox.Text != "")
+            {
+                string searchText = searchTextBox.Text;
+                Medicine newMed = new Medicine(); // Initialize the Medicine object here
+
+                string[] parts = searchText.Split('.');
+
+                if (parts.Length >= 2)
+                {
+                    string type = parts[0].Trim();
+
+                    int endIndex = parts[1].IndexOfAny("0123456789".ToCharArray());
+
+                    string brandName, strength;
+                    if (endIndex != -1)
+                    {
+                        brandName = parts[1].Substring(0, endIndex).Trim();
+                        strength = parts[1].Substring(endIndex).Trim();
+                    }
+                    else
+                    {
+                        // If no non-numeric character is found, assume the entire second part is BrandName
+                        brandName = parts[1].Trim();
+                        strength = ""; // No strength specified
+                    }
+
+                    newMed.BrandName = brandName;
+                    newMed.Strength = strength;
+                    newMed.MedicineType = type;
+                    selectedMedicines.Add(newMed);
+                    UpdateSelectedMedicinesListView();
+                    DatabaseHelper.AddMedicine(newMed);
+                }
+                else
+                {
+                    // Handle the case where the text doesn't contain a '.'
+                    // Maybe show an error message or handle it as needed
+                }
+            }
+        }
+        private void DurationComboBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            string userEnteredText = comboBox.Text;
+
+            // Update the SelectedItem with the user-entered text
+            if (!string.IsNullOrEmpty(userEnteredText))
+            {
+                // Check if the entered text matches any existing item
+                ComboBoxItem selectedItem = comboBox.Items.Cast<ComboBoxItem>()
+                                                          .FirstOrDefault(item => item.Content.ToString() == userEnteredText);
+                if (selectedItem != null)
+                {
+                    comboBox.SelectedItem = selectedItem;
+                }
+                else
+                {
+                    // If the entered text does not match any existing item, create a new ComboBoxItem
+                    ComboBoxItem newItem = new ComboBoxItem() { Content = userEnteredText };
+                    comboBox.Items.Add(newItem);
+                    comboBox.SelectedItem = newItem;
+                }
+            }
+        }
+
+
+
     }
 }

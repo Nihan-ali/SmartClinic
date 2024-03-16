@@ -45,6 +45,9 @@ namespace SmartClinic.View.UserControls
                 visit_time = visit_time.Text,
                 outro = outro.Text,
                 moredetail_bangla = moredetail_bangla.Text,
+                leftremain = int.Parse(leftGridTextBox.Text),
+                rightremain = int.Parse(rightGridTextBox.Text),
+                
                 // Set other properties accordingly
             };
             DatabaseHelper.UpdateDoctorInfo(updatedDoctorInfo);
