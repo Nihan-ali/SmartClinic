@@ -36,6 +36,7 @@ namespace SmartClinic.View.UserControls
             UpdateComplaintItems();
             Loaded += ComplaintSearchWindow_Loaded;
         }
+
         public void UpdateComplaintItems()
         {
             complaintItemsControl.ItemsSource = displayedComplaints;

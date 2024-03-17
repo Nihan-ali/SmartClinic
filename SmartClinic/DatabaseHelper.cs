@@ -2736,10 +2736,6 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
             string translatedNote = "";
             foreach (string n in note)
             {
-                //                                        < ComboBoxItem Content = "Piece" />
-                //                        < ComboBoxItem Content = "Drop" />
-                //                        < ComboBoxItem Content = "Spoon" />
-                //                        < ComboBoxItem Content = "Spray" />
                 if (n == "সকালে") translatedNote += "At Morning ";
                 else if (n == "দুপুরে") translatedNote += "At Noon ";
                 else if (n == "রাতে") translatedNote += "At Night ";
