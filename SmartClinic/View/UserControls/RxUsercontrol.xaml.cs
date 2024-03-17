@@ -65,6 +65,7 @@ namespace SmartClinic.View.UserControls
         public List<FollowUp> SelectedFollowUps => selectedFollowUps;
         public List<SpecialNote> SelectedSpecialNotes => selectedSpecialNotes;
         public event EventHandler<PatientEventArgs> PrescriptionDataAvailable;
+        int leftremain, rightremain;
 
 
 
@@ -101,13 +102,15 @@ namespace SmartClinic.View.UserControls
             docdegree_bangla.Content = doctorInfos[0].docdegree_bangla;
             DoctorsName.Content = doctorInfos[0].docname;
             Mobile.Content = doctorInfos[0].chamber_phone;
+            leftremain = doctorInfos[0].leftremain;
+            rightremain = doctorInfos[0].rightremain;
         }
 
         private void UpdateUI(Patient newPatient, PatientVisit selectedPatientVisit)
         {
             this.newPatient = newPatient;
             presid = selectedPatientVisit.prescriptionId;
-           // MessageBox.Show(presid.ToString());
+            // MessageBox.Show(presid.ToString());
             todaydate.Text = selectedPatientVisit.visit.ToString("dd-MM-yyyy");
             selectedComplaints = DatabaseHelper.ExtractComplaint(selectedPatientVisit.complaint);
             selectedHistories = DatabaseHelper.ExtractHistory(selectedPatientVisit.hhistory);
@@ -134,22 +137,10 @@ namespace SmartClinic.View.UserControls
 
         private void RefreshWholeWindow_Click(object sender, RoutedEventArgs e)
         {
-            AddPatientButton.Content = "+ Add Patient";
-            AddPatientButton.Foreground = Brushes.Blue;
-            age.Text = "";
-            selectedComplaintsListView.ItemsSource = null;
-            historyListView.ItemsSource = null;
-            examinationListView.ItemsSource = null;
-            selectedInvestigationsListView.ItemsSource = null;
-            selectedDiagnosisListView.ItemsSource = null;
-            selectedTreatmentListView.ItemsSource = null;
-            selectedMedicinesListView.ItemsSource = null;
-            selectedAdvicesListView.ItemsSource = null;
-            selectedFollowUpListView.ItemsSource = null;
-            selectedSpecialNoteListView.ItemsSource = null;
-            searchPatientTextBox.Text = "Search Patient";
-            searchPatientTextBox.Foreground = Brushes.Gray;
-            isPatientAdded = false;
+            //initialize this window again
+            RxUsercontrol rxUserControl = new RxUsercontrol();
+            this.Content = rxUserControl;
+
         }
 
         private void textBox_GotFocus(object sender, RoutedEventArgs e)
@@ -190,9 +181,12 @@ namespace SmartClinic.View.UserControls
             {
                 if (listBox.SelectedItem is Patient selectedPatient)
                 {
-                    this.newPatient = selectedPatient;
                     RefreshWholeWindow_Click(null, null);
+                    this.newPatient = selectedPatient;
+                    MessageBox.Show("Patient Found" + newPatient.Name);
                     UpdatePatientInfo(selectedPatient);
+                    //update ui
+
                     OnPrescriptionDataAvailable(new PatientEventArgs { NewPatient = selectedPatient });
                 }
             }
@@ -318,6 +312,7 @@ namespace SmartClinic.View.UserControls
                     this.selectedPatientVisit = selectedPatientVisit;
                     this.newPatient = DatabaseHelper.GetPatientById(selectedPatientVisit.Id);
                     PrescriptionSearchResultsPopup.IsOpen = false;
+                    MessageBox.Show("Prescription Found"+ newPatient.Name);
                     UpdateUI(newPatient, selectedPatientVisit);
                     textBox_LostFocus(null, null);
                 }
@@ -350,6 +345,7 @@ namespace SmartClinic.View.UserControls
         {
             if (patient != null)
             {
+                MessageBox.Show("Patient Found in ui" + patient.Name);
                 AddPatientButton.Content = patient.Name;
                 AddPatientButton.Foreground = Brushes.Black;
                 age.Text = patient.Age;
@@ -852,7 +848,7 @@ namespace SmartClinic.View.UserControls
                 }
                 UpdateSelectedMedicinesListView();
             }
-        
+
 
         }
 
@@ -898,7 +894,7 @@ namespace SmartClinic.View.UserControls
                 MessageBox.Show("Prescription Stored Successfully");
                 todaydate.Text = DateTime.Now.ToString("dd-MM-yyyy");
             }
-            else if (e!=null)
+            else if (e != null)
             {
                 MessageBox.Show("Prescription Alreadys Exists");
             }
@@ -924,8 +920,8 @@ namespace SmartClinic.View.UserControls
             string missedright = "";
 
 
-            int  leftremain = variables.leftremain, flag = 0;
 
+            int flag = 0;
             //creare a list taking all left sides list count
             List<int> lefts = new List<int> { selectedComplaints.Count, selectedHistories.Count, selectedExaminations.Count, selectedInvestigations.Count, selectedDiagnosis.Count, selectedTreatments.Count };
             //create a list taking all right sides list count
@@ -937,7 +933,7 @@ namespace SmartClinic.View.UserControls
             List<int> rightscount = new List<int> { 0, 0, 0, 0 };
             List<int> rightscountleft = new List<int> { 0, 0, 0, 0 };
 
-
+            //MessageBox.Show(leftremain.ToString());
             //iterate through the list untill their sum is less than 16 and give its position
 
             for (int i = 0; i < lefts.Count; i++)
@@ -963,7 +959,7 @@ namespace SmartClinic.View.UserControls
             }
             // MessageBox.Show("complaints are in first page " + leftscount[0]);
 
-            int rightremain = variables.rightremain;
+
             for (int i = 0; i < rights.Count; i++)
             {
                 if (rights[i] == 0)

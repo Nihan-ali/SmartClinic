@@ -12,12 +12,12 @@
     </Window.Resources>
     <Grid Background="White" Margin="2,0,0,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="6*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="65*"/>
-            <RowDefinition Height="15*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- Assuming title, patientInfo, History, medicine, savePrint, and Footer are UserControl classes -->
@@ -116,8 +116,8 @@
         <ScrollViewer x:Name="prescriptionscroll" Grid.Row="4">
             <Grid Background="Blue">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="35*"/>
-                    <ColumnDefinition Width="65*"/>
+                    <ColumnDefinition Width="Auto" MinWidth="180"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
 
