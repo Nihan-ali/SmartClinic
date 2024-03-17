@@ -924,7 +924,7 @@ namespace SmartClinic.View.UserControls
             string missedright = "";
 
 
-            int left = 16, right = 16, remain = 25, flag = 0;
+            int left = 16, right = 16, remain = 24, flag = 0;
 
             //creare a list taking all left sides list count
             List<int> lefts = new List<int> { selectedComplaints.Count, selectedHistories.Count, selectedExaminations.Count, selectedInvestigations.Count, selectedDiagnosis.Count, selectedTreatments.Count };
@@ -962,7 +962,7 @@ namespace SmartClinic.View.UserControls
                 if (leftscountleft[i] > 0) flag = 1;
             }
             // MessageBox.Show("complaints are in first page " + leftscount[0]);
-            remain = 25;
+            remain = 24;
             for (int i = 0; i < rights.Count; i++)
             {
                 if (rights[i] == 0)
