@@ -137,6 +137,17 @@ namespace SmartClinic.View.UserControls
             AddPatientButton.Content = "+ Add Patient";
             AddPatientButton.Foreground = Brushes.Blue;
             age.Text = "";
+            selectedComplaints.Clear();
+            selectedHistories.Clear();
+            selectedExaminations.Clear();
+            selectedInvestigations.Clear();
+            selectedDiagnosis.Clear();
+            selectedTreatments.Clear();
+            selectedMedicines.Clear();
+            selectedAdvices.Clear();
+            selectedFollowUps.Clear();
+            selectedSpecialNotes.Clear();
+
             selectedComplaintsListView.ItemsSource = null;
             historyListView.ItemsSource = null;
             examinationListView.ItemsSource = null;

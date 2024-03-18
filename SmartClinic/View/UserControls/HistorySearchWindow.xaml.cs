@@ -110,6 +110,10 @@ namespace SmartClinic.View.UserControls
                     isFirstCharacterProcessed = true; // Mark as processed
                 }
             }
+            else if (search == "")
+            {
+                isFirstCharacterProcessed = false;
+            }
 
             searchTextBox.Text = search;
 
