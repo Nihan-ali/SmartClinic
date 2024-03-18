@@ -934,12 +934,13 @@ namespace SmartClinic.View.UserControls
             string missedleft = "";
             string missedright = "";
 
-
+            
             int  leftremain = variables.leftremain, flag = 0;
+            int rightremain = variables.rightremain;
+            MessageBox.Show(leftremain + "-->" + rightremain);
 
-            //creare a list taking all left sides list count
             List<int> lefts = new List<int> { selectedComplaints.Count, selectedHistories.Count, selectedExaminations.Count, selectedInvestigations.Count, selectedDiagnosis.Count, selectedTreatments.Count };
-            //create a list taking all right sides list count
+
             List<int> rights = new List<int> { selectedMedicines.Count, selectedAdvices.Count, selectedFollowUps.Count, selectedSpecialNotes.Count };
 
             //another list indicating how many items will be taken from each list in the first page
@@ -974,7 +975,6 @@ namespace SmartClinic.View.UserControls
             }
             // MessageBox.Show("complaints are in first page " + leftscount[0]);
 
-            int rightremain = variables.rightremain;
             for (int i = 0; i < rights.Count; i++)
             {
                 if (rights[i] == 0)

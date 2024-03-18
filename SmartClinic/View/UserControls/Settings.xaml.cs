@@ -50,6 +50,8 @@ namespace SmartClinic.View.UserControls
                 
                 // Set other properties accordingly
             };
+            variables.leftremain = updatedDoctorInfo.leftremain;
+            variables.rightremain = updatedDoctorInfo.rightremain;
             DatabaseHelper.UpdateDoctorInfo(updatedDoctorInfo);
         }
         //privacy button function
