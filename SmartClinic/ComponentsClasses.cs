@@ -545,7 +545,7 @@ namespace SmartClinic
 
 
                 // Combine all dosages and notes
-                return $"{(MorningDose + NoonDose + NightDose > 0 ? "( "+secheduleText + " করে " : "")}{afterEatingNote}{beforeEatingNote}{(MorningDose + NoonDose + NightDose > 0? " ) " :"")}{duration}{Note}";
+                return $"{(MorningDose + NoonDose + NightDose > 0 ? "( " +secheduleText + " করে " : "")}{afterEatingNote}{beforeEatingNote}{(MorningDose + NoonDose + NightDose > 0? " ) " :"")}{duration}{Note}";
             }
             set
             {

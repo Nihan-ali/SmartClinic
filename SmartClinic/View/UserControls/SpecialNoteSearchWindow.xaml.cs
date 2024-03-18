@@ -27,14 +27,19 @@ namespace SmartClinic.View.UserControls
             selectedSpecialNotes = new ObservableCollection<SpecialNote>();
 
             UpdateSpecialNoteItems();
+            Loaded += SpecialNoteSearchWindow_Loaded;
+        }
+
+        private void SpecialNoteSearchWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            searchTextBox.Focus();
+            Keyboard.Focus(searchTextBox);
         }
 
         private void UpdateSpecialNoteItems()
         {
             specialNoteItemsControl.ItemsSource = displayedSpecialNotes;
         }
-
-
 
         private void SearchSpecialNotes(string Content)
         {

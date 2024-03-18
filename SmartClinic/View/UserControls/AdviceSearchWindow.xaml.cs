@@ -65,9 +65,40 @@ namespace SmartClinic.View.UserControls
             }
 
         }
+        private bool isFirstCharacterProcessed = false;
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            SearchAdvices(searchTextBox.Text);
+            searchTextBox.TextChanged -= SearchTextBox_TextChanged; // Unsubscribe from the event
+
+            string search = searchTextBox.Text;
+
+            // Process the 0th index value only if it hasn't been processed before
+            if (!isFirstCharacterProcessed && search != "")
+            {
+                if (char.IsUpper(search[0]))
+                {
+                    search = char.ToLower(search[0]) + search.Substring(1);
+                    isFirstCharacterProcessed = true;
+                }
+                else if (char.IsLower(search[0]))
+                {
+                    search = char.ToUpper(search[0]) + search.Substring(1);
+                    isFirstCharacterProcessed = true;
+                }
+            }
+            else if (search == "")
+            {
+                isFirstCharacterProcessed = false;
+            }
+
+            searchTextBox.Text = search;
+
+            // Restore the cursor position
+            searchTextBox.SelectionStart = searchTextBox.Text.Length;
+
+            SearchAdvices(search);
+
+            searchTextBox.TextChanged += SearchTextBox_TextChanged; // Subscribe back to the event
         }
 
         private void EnterPressed(object sender, KeyEventArgs e)
