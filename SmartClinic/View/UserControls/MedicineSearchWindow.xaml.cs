@@ -224,8 +224,10 @@ namespace SmartClinic
             Button button = (Button)sender;
 
             var dataObject = button.DataContext as Medicine;
-
-            dataObject.MorningDose = dataObject.MorningDose - 0.5;
+            if (dataObject.MorningDose - 0.5 >= 0)
+            {
+                dataObject.MorningDose = dataObject.MorningDose - 0.5;
+            }
 
             button.GetBindingExpression(Button.ContentProperty)?.UpdateTarget();
         }
@@ -246,7 +248,10 @@ namespace SmartClinic
 
             var dataObject = button.DataContext as Medicine;
 
-            dataObject.NoonDose = dataObject.NoonDose - 0.5;
+            if (dataObject.NoonDose - 0.5 >= 0)
+            {
+                dataObject.NoonDose = dataObject.NoonDose - 0.5;
+            }
 
             button.GetBindingExpression(Button.ContentProperty)?.UpdateTarget();
         }
@@ -268,7 +273,10 @@ namespace SmartClinic
 
             var dataObject = button.DataContext as Medicine;
 
-            dataObject.NightDose = dataObject.NightDose - 0.5;
+            if (dataObject.NightDose - 0.5 >= 0)
+            {
+                dataObject.NightDose = dataObject.NightDose - 0.5;
+            }
 
             button.GetBindingExpression(Button.ContentProperty)?.UpdateTarget();
         }
