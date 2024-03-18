@@ -26,7 +26,8 @@ namespace SmartClinic.View.UserControls
 
         public ObservableCollection<Complaint> SelectedComplaints => selectedComplaints;
 
-        
+
+
         public ComplaintSearchWindow()
         {
             InitializeComponent();
@@ -36,6 +37,7 @@ namespace SmartClinic.View.UserControls
             UpdateComplaintItems();
             Loaded += ComplaintSearchWindow_Loaded;
         }
+
 
         public void UpdateComplaintItems()
         {

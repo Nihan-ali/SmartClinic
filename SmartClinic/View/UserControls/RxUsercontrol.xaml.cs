@@ -937,13 +937,11 @@ namespace SmartClinic.View.UserControls
             
             int  leftremain = variables.leftremain, flag = 0;
             int rightremain = variables.rightremain;
-            MessageBox.Show(leftremain + "-->" + rightremain);
 
             List<int> lefts = new List<int> { selectedComplaints.Count, selectedHistories.Count, selectedExaminations.Count, selectedInvestigations.Count, selectedDiagnosis.Count, selectedTreatments.Count };
 
             List<int> rights = new List<int> { selectedMedicines.Count, selectedAdvices.Count, selectedFollowUps.Count, selectedSpecialNotes.Count };
 
-            //another list indicating how many items will be taken from each list in the first page
             List<int> leftscount = new List<int> { 0, 0, 0, 0, 0, 0 };
             List<int> leftscountleft = new List<int> { 0, 0, 0, 0, 0, 0 };
             List<int> rightscount = new List<int> { 0, 0, 0, 0 };
@@ -1095,10 +1093,7 @@ namespace SmartClinic.View.UserControls
                 Printer second = new Printer();
                 second.ContentRendered += (s, args) =>
                 {
-                    // Call the PrintButton_Click method of the second window
-                    //call this method with leftlists
                     second.PrintButton_Click(presid, pat, date, leftComplaints, lefthistories, leftexaminations, leftinvestigations, leftdiagnosis, lefttreatments, leftmedicines, leftadvices, leftfollowups, leftspecialnotes, true, offsett);
-                    //second.PrintButton_Click(pat, date, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes, true);
                     second.Close();
                 };
                 second.Visibility = Visibility.Hidden;

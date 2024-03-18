@@ -334,9 +334,7 @@ namespace SmartClinic
             if(e.Key == Key.Enter)
             {
                 MedicineGroupNamePopup.IsOpen = false;
-                //return GroupNameBox.Text;
             }
-            //return "lol";
         }
 
         private void DeleteMedicineFromListview_Click(object sender, RoutedEventArgs e)

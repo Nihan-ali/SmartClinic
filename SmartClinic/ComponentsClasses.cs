@@ -444,6 +444,22 @@ namespace SmartClinic
             }
         }
 
+        private string selectedUnitText;
+        public string SelectedUnitText
+        {
+            get { return selectedUnitText; }
+            set
+            {
+                if (selectedUnitText != value)
+                {
+                    selectedUnitText = value;
+                    OnPropertyChanged(nameof(SelectedUnitText));
+
+                    // Set SelectedUnitItem based on user input
+                    SelectedUnitItem = new ComboBoxItem() { Content = value };
+                }
+            }
+        }
 
 
         private ComboBoxItem selectedUnitItem;

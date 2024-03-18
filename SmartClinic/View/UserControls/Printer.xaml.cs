@@ -333,6 +333,23 @@ namespace SmartClinic.View.UserControls
         }
 
     }
+    public class WrapInParenthesesConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value != null && !string.IsNullOrEmpty(value.ToString()))
+            {
+                return $" ({value})";
+            }
+            return string.Empty;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 
 
 }
