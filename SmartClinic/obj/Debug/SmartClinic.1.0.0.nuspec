@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>SmartClinic</id>
+    <version>1.0.0</version>
+    <authors>SmartClinic</authors>
+    <description>Package Description</description>
+    <repository type="git" commit="c1c9a45d64341a0b1d9ed547f6ada8f022017e1e" />
+    <dependencies>
+      <group targetFramework="net8.0-windows7.0">
+        <dependency id="MvvmLightLibs" version="5.4.1.1" exclude="Build,Analyzers" />
+        <dependency id="PDFsharp" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Data.SQLite" version="1.0.118" exclude="Build,Analyzers" />
+        <dependency id="iTextSharp" version="5.5.13.3" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net8.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
+      </group>
+    </frameworkReferences>
+    <contentFiles>
+      <files include="any/net8.0-windows7.0/ABClogo.jpeg" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/add-user.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/create.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/doctor.ico" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/Doctori.ico" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/icon.ico" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/iconi.ico" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/log.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/log1.ico" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/log1.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/logo.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/logo1.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/logo2.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/nihan.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/patient.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/printer.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/rx.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/save.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/search.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/Separator.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/settings.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/shishir3.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/stat.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/user-edit.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/web-developer.png" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/circle.png" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\SmartClinic.runtimeconfig.json" target="lib\net8.0-windows7.0\SmartClinic.runtimeconfig.json" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\bin\Debug\net8.0-windows\SmartClinic.dll" target="lib\net8.0-windows7.0\SmartClinic.dll" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\ABClogo.jpeg" target="content\ABClogo.jpeg" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\ABClogo.jpeg" target="contentFiles\any\net8.0-windows7.0\ABClogo.jpeg" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\add-user.png" target="content\add-user.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\add-user.png" target="contentFiles\any\net8.0-windows7.0\add-user.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\create.png" target="content\create.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\create.png" target="contentFiles\any\net8.0-windows7.0\create.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\doctor.ico" target="content\doctor.ico" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\doctor.ico" target="contentFiles\any\net8.0-windows7.0\doctor.ico" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\Doctori.ico" target="content\Doctori.ico" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\Doctori.ico" target="contentFiles\any\net8.0-windows7.0\Doctori.ico" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\icon.ico" target="content\icon.ico" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\icon.ico" target="contentFiles\any\net8.0-windows7.0\icon.ico" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\iconi.ico" target="content\iconi.ico" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\iconi.ico" target="contentFiles\any\net8.0-windows7.0\iconi.ico" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\log.png" target="content\log.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\log.png" target="contentFiles\any\net8.0-windows7.0\log.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\log1.ico" target="content\log1.ico" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\log1.ico" target="contentFiles\any\net8.0-windows7.0\log1.ico" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\log1.png" target="content\log1.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\log1.png" target="contentFiles\any\net8.0-windows7.0\log1.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\logo.png" target="content\logo.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\logo.png" target="contentFiles\any\net8.0-windows7.0\logo.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\logo1.png" target="content\logo1.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\logo1.png" target="contentFiles\any\net8.0-windows7.0\logo1.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\logo2.png" target="content\logo2.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\logo2.png" target="contentFiles\any\net8.0-windows7.0\logo2.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\nihan.png" target="content\nihan.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\nihan.png" target="contentFiles\any\net8.0-windows7.0\nihan.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\patient.png" target="content\patient.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\patient.png" target="contentFiles\any\net8.0-windows7.0\patient.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\printer.png" target="content\printer.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\printer.png" target="contentFiles\any\net8.0-windows7.0\printer.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\rx.png" target="content\rx.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\rx.png" target="contentFiles\any\net8.0-windows7.0\rx.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\save.png" target="content\save.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\save.png" target="contentFiles\any\net8.0-windows7.0\save.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\search.png" target="content\search.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\search.png" target="contentFiles\any\net8.0-windows7.0\search.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\Separator.png" target="content\Separator.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\Separator.png" target="contentFiles\any\net8.0-windows7.0\Separator.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\settings.png" target="content\settings.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\settings.png" target="contentFiles\any\net8.0-windows7.0\settings.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\shishir3.png" target="content\shishir3.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\shishir3.png" target="contentFiles\any\net8.0-windows7.0\shishir3.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\stat.png" target="content\stat.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\stat.png" target="contentFiles\any\net8.0-windows7.0\stat.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\user-edit.png" target="content\user-edit.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\user-edit.png" target="contentFiles\any\net8.0-windows7.0\user-edit.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\web-developer.png" target="content\web-developer.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\web-developer.png" target="contentFiles\any\net8.0-windows7.0\web-developer.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\circle.png" target="content\circle.png" />
+    <file src="E:\Web_Dev\350\SmartClinic\SmartClinic\circle.png" target="contentFiles\any\net8.0-windows7.0\circle.png" />
+  </files>
+</package>

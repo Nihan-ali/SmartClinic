@@ -46,5 +46,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <BitmapImage x:Key="AppIcon" UriSource="log1.ico"/>
+
     </Application.Resources>
 </Application>

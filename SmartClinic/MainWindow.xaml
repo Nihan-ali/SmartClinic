@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SmartClinic"
         mc:Ignorable="d"
         Title="Smart Doctor"
-        Icon="Doctori.ico" 
+        Icon="log1.ico" 
         WindowStartupLocation="CenterScreen"
         Height="550" 
         Width="650">

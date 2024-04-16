@@ -16,6 +16,7 @@
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icon.ico")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("iconi.ico")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("log.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("log1.ico")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("log1.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("logo.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("logo1.png")]

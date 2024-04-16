@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="SmartClinic.exe" version="1.0.0.2" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="SmartClinic.exe" version="1.0.0.3" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="log1.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
     <assemblyIdentity name="Launcher" version="8.0.0.0" language="neutral" processorArchitecture="msil" />
@@ -62,6 +63,15 @@
       <dsig:DigestValue>aGFLieecnzGakTU3dBByUd9nOQxv/9S2djr30pIl07Q=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="add-user.png" size="4639">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>H85BZ2uTHetbeZ1beufjd2COW/8qIph2tutzM0HZrSI=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="BouncyCastle.Crypto.dll" size="2609152">
     <hash>
       <dsig:Transforms>
@@ -116,13 +126,22 @@
       <dsig:DigestValue>QqK7coSAcEntB8U7c8+/o9juUDsYpN0uLVjtmUMI/Og=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="doctor.ico" size="4286">
+  <file name="doctor.ico" size="270398">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>M69yE7H+oauTQEiSxkYiOXxQoLbjkhmcPzXJ6ECgvxA=</dsig:DigestValue>
+      <dsig:DigestValue>NiJxehMKGH2PA6X5z2+vyyvXg3I1KfV6fmfCnz6e1QQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Doctori.ico" size="4286">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>bo4XgA4/eIl19+EafyvfOoqNBTdsPIiZvm+5mGaLhVo=</dsig:DigestValue>
     </hash>
   </file>
   <file name="EntityFramework.dll" size="4977744">
@@ -170,6 +189,24 @@
       <dsig:DigestValue>KhEUyZUzqudEKymDNiRzULVcqhk8BkVOpgbWo5RlZXM=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="icon.ico" size="270398">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>NiJxehMKGH2PA6X5z2+vyyvXg3I1KfV6fmfCnz6e1QQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="iconi.ico" size="4154">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>FFoOpcTWPTAb4CYbBiycEWRMH8OkFr41fyJc7dfVdnM=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="itextsharp.dll" size="2592768">
     <hash>
       <dsig:Transforms>
@@ -177,6 +214,60 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>zloQfa1DpBAe6z/oT/bRc6bVXzTwv/cltTY2bxDplBA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="log.png" size="7759">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>uRlfRjBjxSx88V6F00pkyCK00tpJ6WLwFcsFJTeCyYw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="log1.ico" size="4154">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>d44JXwJIJMExXQqlCqqJWKfRMOCszv0MrBPm/I1BZSc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="log1.png" size="30615">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>d0yE5Ml6u0CAjwRvZnVmcA6RpZOSQbM8vIYj9nUSwlg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="logo.png" size="28146">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>8IxxexARWlGDpNvWE+Ky2JHKwOI0n/Mb+knpkRi3B3E=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="logo1.png" size="35075">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>CRI5Mly/FHkqKfpmfuTtf2x7XDg4WQ2dCL2SnWjDUKk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="logo2.png" size="87550">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>P+8pIKTTs1HydMV79I/iWwhf8ddjUsKzX7oRqtZBi5M=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Microsoft.CodeAnalysis.CSharp.dll" size="4211112">
@@ -314,6 +405,15 @@
       <dsig:DigestValue>jOmoWSfsdQexH/6QCA56gR1RMEqeix2iDDUBWbpAOQI=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="nihan.png" size="804295">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>paKN8zmF8LqSh8t0PqYOzY9T62lp/uDTgHjM2C1NoQU=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="patient.png" size="43597">
     <hash>
       <dsig:Transforms>
@@ -375,6 +475,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>GATlZN/ZVF/B6nYLfvI7ZjqHy8v9OX0vXWiBl5sdVBA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="printer.png" size="9288">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>T6kjtbqfMWqoH6iGEcU20y+xPpe8lrrWZJ26xTkMlzM=</dsig:DigestValue>
     </hash>
   </file>
   <file name="runtimes\debian-x64\native\libuv.so" size="499051">
@@ -539,6 +648,15 @@
       <dsig:DigestValue>0drnV7o5OXhKImGN1R9qu5VGNKGu4E475KeVhkjtOyA=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="save.png" size="7652">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>624nlGo9H1napChPVtWO+TJIg22smDAVcJwu2JTo+jQ=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="search.png" size="50980">
     <hash>
       <dsig:Transforms>
@@ -566,6 +684,15 @@
       <dsig:DigestValue>t+3vpWQir0knI1mKxfBXqcsG+YzmrBXyU2g4+rYvRnk=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="shishir3.png" size="15150074">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>evciIaCwFJBstgwyCjbd2Gth6Gl7v6G9iSyWd/IyqP4=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="SmartClinic.deps.json" size="116026">
     <hash>
       <dsig:Transforms>
@@ -575,22 +702,22 @@
       <dsig:DigestValue>XZb58LvXcqeseXPaVHI1UDKpW4Wl0oPCr9usZ88m41g=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="SmartClinic.dll" size="252416">
+  <file name="SmartClinic.dll" size="318976">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>VhH9/MLIDgeAZKfpzcygRqYIOlGxPXjYVyesFv1rbD4=</dsig:DigestValue>
+      <dsig:DigestValue>SyMl73KT9q/1dsYX5Zw6BUo0Y7mG/zuAKNwQuBBMB5U=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="SmartClinic.exe" size="142848">
+  <file name="SmartClinic.exe" size="145408">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>0FgsKUSJjV9p1861zA1m7ttHdO3pAXz1FwWUbToMIFs=</dsig:DigestValue>
+      <dsig:DigestValue>zB68KleASaRYwZhnDBsCfVTtLjnXlAXOyqIBXi1RXVI=</dsig:DigestValue>
     </hash>
   </file>
   <file name="SmartClinic.runtimeconfig.json" size="458">
@@ -645,6 +772,24 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>k/vFnkiAr8nxNsOsCXatp/P6p8rO3OXIJLM3y8qdLr8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="user-edit.png" size="7557">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>iPEWoGYM3zWMwcH9Vd2tt/WwV1OHgDlrowGy4qCflvM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="web-developer.png" size="11752">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>pB9DbprjLIGJlCxyqSnAjUvUVf+fk1ac1ncKu3fK3OU=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

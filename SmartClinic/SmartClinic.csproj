@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>log1.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +19,7 @@
     <None Remove="icon.ico" />
     <None Remove="iconi.ico" />
     <None Remove="log.png" />
+    <None Remove="log1.ico" />
     <None Remove="log1.png" />
     <None Remove="logo.png" />
     <None Remove="logo1.png" />
@@ -45,6 +47,7 @@
     <Content Include="icon.ico" />
     <Content Include="iconi.ico" />
     <Content Include="log.png" />
+    <Content Include="log1.ico" />
     <Content Include="log1.png" />
     <Content Include="logo.png" />
     <Content Include="logo1.png" />
