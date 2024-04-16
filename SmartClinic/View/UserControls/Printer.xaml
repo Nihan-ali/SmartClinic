@@ -116,8 +116,8 @@
         <ScrollViewer x:Name="prescriptionscroll" Grid.Row="4">
             <Grid Background="Blue">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="35*"/>
-                    <ColumnDefinition Width="65*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
 

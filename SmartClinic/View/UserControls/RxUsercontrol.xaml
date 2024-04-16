@@ -797,18 +797,27 @@
             <Border Grid.Row="3" BorderBrush="Black" BorderThickness="0,1,0,0"/>
 
             <!--savePrint xaml-->
-            <Grid x:Name="save" Grid.Row="4" Height="25">
+            <Grid x:Name="save" Grid.Row="4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50*"/>
 
                     <ColumnDefinition Width="50*"/>
                 </Grid.ColumnDefinitions>
-                <Grid>
-                    <Button Content="Save" Style="{StaticResource SaveButtonStyle}" Click="SavePrescription_Click"/>
+                <Grid Margin="0,0,1,0">
+                    <Button Style="{StaticResource SaveButtonStyle}" Click="SavePrescription_Click" BorderBrush="black" BorderThickness="2,0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Image Source="../../save.png" Height="22" Margin="0,3" />
+                            <TextBlock Text="Save" Margin="5,2,0,0" VerticalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
+                        </StackPanel>
+                        </Button>
                 </Grid>
                 <Grid Grid.Column="1">
-                    <Rectangle Fill="LightGreen"/>
-                    <Button Content="Save &amp; Print" Style="{StaticResource SaveButtonStyle}" Click="PrintPrescription_Click" />
+                    <Button Style="{StaticResource SaveButtonStyle}" Click="PrintPrescription_Click">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Image Source="../../printer.png" Height="22" Margin="0,3"/>
+                            <TextBlock Text="Save &amp; Print" Margin="5,2,0,0" VerticalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Button>
                 </Grid>
 
             </Grid>

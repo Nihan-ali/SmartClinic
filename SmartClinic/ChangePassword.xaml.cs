@@ -44,23 +44,23 @@ namespace SmartClinic
                 MessageBox.Show("Passwords do not match");
                 return;
             }
-            foreach (Window window in Application.Current.Windows)
-            {
-                if (window != Application.Current.MainWindow)
-                {
-                    window.Close();
-                }
-            }
+            //foreach (Window window in Application.Current.Windows)
+            //{
+            //    if (window != Application.Current.MainWindow)
+            //    {
+            //        window.Close();
+            //    }
+            //}
             //update the password
             DatabaseHelper.UpdatePassword(Username.Text,NewPassword.Password);
+            DatabaseHelper.SetLoginStatus(Username.Text, 1);
             MessageBox.Show("Password updated successfully");
-            this.Close();
-            //open home window
             HomeWindow homeWindow = new HomeWindow();
             Application.Current.MainWindow = homeWindow;
-            //close main window
+            
 
             homeWindow.Show();
+            this.Close();
 
         }
     }

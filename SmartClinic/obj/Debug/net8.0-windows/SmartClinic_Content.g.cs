@@ -24,6 +24,7 @@
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("patient.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("printer.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("rx.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("save.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("search.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("separator.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("settings.png")]

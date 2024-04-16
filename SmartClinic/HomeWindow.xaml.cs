@@ -54,7 +54,7 @@ namespace SmartClinic
 
             // Close the current window
             Window.GetWindow(this).Close();
-            DatabaseHelper.ResetStatus("Nihan");
+            DatabaseHelper.ResetStatus("AbuNoyim");
         }
         private void RxButton_Click(object sender, RoutedEventArgs e)
         {

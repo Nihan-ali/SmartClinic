@@ -106,6 +106,9 @@ namespace SmartClinic
                     // message to show that the user has failed to answer the security questions
                     MessageBox.Show("You have failed to answer the security questions correctly. Please try again.");
                     this.Close();
+                    //open main window
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.Show();
                 }
             }
         }

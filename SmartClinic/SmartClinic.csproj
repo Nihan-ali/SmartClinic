@@ -26,6 +26,7 @@
     <None Remove="patient.png" />
     <None Remove="printer.png" />
     <None Remove="rx.png" />
+    <None Remove="save.png" />
     <None Remove="search.png" />
     <None Remove="Separator.png" />
     <None Remove="settings.png" />
@@ -52,6 +53,7 @@
     <Content Include="patient.png" />
     <Content Include="printer.png" />
     <Content Include="rx.png" />
+    <Content Include="save.png" />
     <Content Include="search.png" />
     <Content Include="Separator.png" />
     <Content Include="settings.png" />
