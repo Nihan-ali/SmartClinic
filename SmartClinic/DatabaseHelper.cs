@@ -880,11 +880,11 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
                                 {
                                     Id = Convert.ToInt32(reader["ID"]),
                                     Name = reader["Name"].ToString(),
-                                    Age = reader["Age"].ToString(),
-                                    Phone = reader["Phone"].ToString(),
-                                    Address = reader["Address"].ToString(),
-                                    Blood = reader["Blood"].ToString(),
-                                    LastVisit = Convert.ToDateTime(reader["LastVisit"])
+                                    Age = reader["Age"] != DBNull.Value ? reader["Age"].ToString() : null,
+                                    Phone = reader["Phone"] != DBNull.Value ? reader["Phone"].ToString() : null,
+                                    Address = reader["Address"] != DBNull.Value ? reader["Address"].ToString() : null,
+                                    Blood = reader["Blood"] != DBNull.Value ? reader["Blood"].ToString() : null,
+                                    LastVisit = reader["LastVisit"] != DBNull.Value ? Convert.ToDateTime(reader["LastVisit"]) : DateTime.MinValue
                                 };
 
                                 patients.Add(patient);
