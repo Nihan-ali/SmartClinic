@@ -902,6 +902,24 @@ VALUES ('DR. ABU NOYEM MOHAMMAD', 'MBBS, (Endocrinology & Metabolism)', 'ডা.
             }
         }
 
+        public static string getfirstUsername() {             
+            string username = "";
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                using (var command = new SQLiteCommand("SELECT username FROM Users LIMIT 1;", connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            username = reader["username"].ToString();
+                        }
+                    }
+                }
+            }
+            return username;
+        }
         public static List<Patient> GetPatientsByName(string name)
         {
             try

@@ -38,6 +38,31 @@ namespace SmartClinic
 
             contentControl.Content = rxUserControl;
             // Set the selectedButton to RxButton
+            string docname = variables.docname;
+            if (!string.IsNullOrEmpty(docname))
+            {
+                // Convert the string to lowercase
+                docname = docname.ToLower();
+
+                // Split the string into words
+                string[] words = docname.Split(' ');
+
+                // Capitalize the first letter of each word
+                for (int i = 0; i < words.Length; i++)
+                {
+                    if (!string.IsNullOrEmpty(words[i]))
+                    {
+                        char[] letters = words[i].ToCharArray();
+                        letters[0] = char.ToUpper(letters[0]);
+                        words[i] = new string(letters);
+                    }
+                }
+
+                // Join the words back into a single string
+                docname = string.Join(" ", words);
+            }
+
+            DrName.Content = docname;
             selectedButton = rx;
             selectedButton.Background = Brushes.White;
         }

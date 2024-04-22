@@ -29,7 +29,7 @@
             <!--<Label Content="Smart Doctor" HorizontalAlignment="Left" VerticalAlignment="Center"  Foreground="#FFF5E8E8" FontSize="18" FontWeight="Bold" Grid.Column="0" FontFamily="Roboto"/>-->
             <Grid Grid.Column="1" HorizontalAlignment="Right" Margin="10,0">
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Dr. Abu Noyim Mohammad" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FFF1E1E1" FontSize="14" FontWeight="Bold" Margin="5,0"/>
+                    <Label x:Name="DrName" Content="" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FFF1E1E1" FontSize="14" FontWeight="Bold" Margin="5,0"/>
                     <Button Content="Log Out" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Wheat" BorderBrush="{x:Null}" FontSize="14" FontWeight="Bold" Background="Transparent" Click="LogOut_Click"/>
                 </StackPanel>
             </Grid>

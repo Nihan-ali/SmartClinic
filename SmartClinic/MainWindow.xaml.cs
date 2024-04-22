@@ -23,6 +23,11 @@ namespace SmartClinic
 
             InitializeComponent();
             DatabaseHelper init = new DatabaseHelper();
+            string username = DatabaseHelper.getfirstUsername();
+            if (username != null)
+            {
+                Username.Text = username;
+            }
             Password.GotFocus += Password_GotFocus;
             Password.LostFocus += Password_LostFocus;
 
@@ -100,6 +105,9 @@ namespace SmartClinic
             }
         }
 
+        private void Username_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
+        }
     }
 }
