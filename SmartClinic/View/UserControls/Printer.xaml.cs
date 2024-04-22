@@ -52,6 +52,7 @@ namespace SmartClinic.View.UserControls
         public List<SpecialNote> SelectedSpecialNotes => selectedSpecialNotes;
 
         //public event EventHandler<PatientEventArgs> PrescriptionDataAvailable;
+        public string prescriptionId;
 
 
         public Printer()
@@ -59,13 +60,12 @@ namespace SmartClinic.View.UserControls
             InitializeComponent();
             UpdateDoctorInfo();
 
-
         }
-        public Printer(Patient patient, string todaydate, List<Complaint> complaints, List<history> histories, List<Examination> examinations, List<Investigation> investigations, List<Diagnosis> diagnoses, List<Treatment> treatments, List<DummyMedicine> medicines, List<Advice> advices, List<FollowUp> followUps, List<SpecialNote> specialNotes)
+        public Printer(Patient patient, Int64 presid, string todaydate, List<Complaint> complaints, List<history> histories, List<Examination> examinations, List<Investigation> investigations, List<Diagnosis> diagnoses, List<Treatment> treatments, List<DummyMedicine> medicines, List<Advice> advices, List<FollowUp> followUps, List<SpecialNote> specialNotes)
         {
             InitializeComponent();
             //docname.Content = "ghochu222";
-
+            prescriptionId = presid.ToString();
             newPatient = patient;
             dayyt = todaydate;
             selectedComplaints = complaints;
@@ -272,7 +272,6 @@ namespace SmartClinic.View.UserControls
             }
         }
         public int offsett = 0;
-        public string prescriptionId;
         public void PrintButton_Click(Int64 presid, Patient patient, string todaydate, List<Complaint> complaints, List<history> histories, List<Examination> examinations, List<Investigation> investigations, List<Diagnosis> diagnoses, List<Treatment> treatments, List<DummyMedicine> medicines, List<Advice> advices, List<FollowUp> followUps, List<SpecialNote> specialNotes, bool second, int offset)
         {
             newPatient = patient;

@@ -1106,7 +1106,7 @@ namespace SmartClinic.View.UserControls
 
         private void PrintPreview_Click(object sender, RoutedEventArgs e)
         {
-            Printer printDialog = new Printer(newPatient, todaydate.Text, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes);
+            Printer printDialog = new Printer(newPatient, presid, todaydate.Text, selectedComplaints, selectedHistories, selectedExaminations, selectedInvestigations, selectedDiagnosis, selectedTreatments, selectedMedicines, selectedAdvices, selectedFollowUps, selectedSpecialNotes);
             printDialog.ShowDialog();
         }
 

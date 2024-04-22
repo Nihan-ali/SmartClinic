@@ -32,8 +32,8 @@ namespace SmartClinic.View.UserControls
 
         private void UpdateListView(int n)
         {
-            Patients = new ObservableCollection<Patient>(DatabaseHelper.GetPatientsByLastVisitedDate(n));
-            PatientsListBox.ItemsSource = Patients;
+            //Patients = new ObservableCollection<Patient>(DatabaseHelper.GetPatientsByLastVisitedDate(n));
+            //PatientsListBox.ItemsSource = Patients;
 
         }
         private void PatientsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -158,6 +158,7 @@ namespace SmartClinic.View.UserControls
                 Patients = new ObservableCollection<Patient>(DatabaseHelper.GetPatientsByName(SearchPatient.Text));
                 if (Patients.Count > 0)
                 {
+                    PatientsListBox.ItemsSource = null;
                     PatientsListBox.ItemsSource = Patients;
                 }
                 else if (Patients.Count == 0)
